@@ -1,0 +1,213 @@
+"""
+Authentication Module — Login UI and session management for Streamlit.
+"""
+import streamlit as st
+from jwt_handler import create_token, validate_token
+from utils.auth import authenticate_user, log_activity
+from config import PAGE_ACCESS, ROLES, DEMO_USERS
+
+
+def login_page():
+    """Render the login page with banking-themed UI and demo credentials panel."""
+
+    # Center the login form
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.markdown(
+            '<div style="text-align: center; padding: 2rem 0 1rem 0;">'
+            '<div style="font-size: 4rem; margin-bottom: 0.5rem;">🏦</div>'
+            '<h1 style="color: #1B2A4A; margin-bottom: 0.25rem; font-size: 1.8rem;">AI Banking Insights</h1>'
+            '<p style="color: #6C757D; font-size: 1rem;">Customer Insights Platform v1.0</p>'
+            '</div>',
+            unsafe_allow_html=True
+        )
+
+        st.markdown("---")
+
+        with st.form("login_form", clear_on_submit=False):
+            st.markdown("##### 🔐 Sign In")
+            username = st.text_input("Username", placeholder="Enter your username")
+            password = st.text_input("Password", type="password", placeholder="Enter your password")
+            submitted = st.form_submit_button("🔓 Login", use_container_width=True, type="primary")
+
+            if submitted:
+                if not username or not password:
+                    st.error("⚠️ Please enter both username and password.")
+                else:
+                    user = authenticate_user(username, password)
+                    if user:
+                        token = create_token(
+                            user_id=user["user_id"],
+                            username=user["username"],
+                            role=user["role"],
+                            full_name=user["full_name"],
+                        )
+                        st.session_state["jwt_token"] = token
+                        st.session_state["user"] = user
+                        log_activity(user["user_id"], user["username"], "LOGIN", "User logged in successfully")
+                        st.success(f"✅ Welcome back, {user['full_name']}!")
+                        st.rerun()
+                    else:
+                        st.error("❌ Invalid username or password.")
+
+        # ── Demo Credentials Panel ──
+        st.markdown("---")
+        st.markdown("##### 🎯 Demo Login Credentials")
+        st.markdown(
+            '<style>'
+            '.demo-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 10px; }'
+            '.demo-table th { background: #1B2A4A; color: #D4AF37; padding: 8px 12px; text-align: left; }'
+            '.demo-table td { padding: 6px 12px; border-bottom: 1px solid #E9ECEF; color: #1B2A4A !important; }'
+            '.demo-table code { background: #E2E8F0 !important; color: #1B2A4A !important; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 0.85rem; }'
+            '.demo-table tr:hover { background: #F0F4F8; }'
+            '.role-badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; color: white; }'
+            '</style>',
+            unsafe_allow_html=True
+        )
+
+        role_colors = {
+            "admin": "#DC3545",
+            "bank_manager": "#2E86AB",
+            "relationship_manager": "#28A745",
+            "loan_officer": "#FD7E14",
+            "data_analyst": "#6F42C1",
+            "auditor": "#17A2B8",
+        }
+
+        table_rows = ""
+        for u in DEMO_USERS:
+            color = role_colors.get(u["role"], "#6C757D")
+            role_label = ROLES.get(u["role"], u["role"])
+            table_rows += f"<tr><td><code>{u['username']}</code></td><td><code>{u['password']}</code></td><td><span class=\"role-badge\" style=\"background:{color};\">{role_label}</span></td></tr>"
+
+        st.markdown(
+            f'<table class="demo-table"><thead><tr><th>Username</th><th>Password</th><th>Role</th></tr></thead><tbody>{table_rows}</tbody></table>',
+            unsafe_allow_html=True
+        )
+
+        st.markdown(
+            '<div style="margin-top: 1rem; padding: 0.75rem; background: #FFF3CD; border-radius: 8px; border-left: 4px solid #FFC107; font-size: 0.85rem; color: #856404;">'
+            '💡 <strong>Tip:</strong> Each role has different page access. Try logging in with different roles to see the difference.'
+            '</div>',
+            unsafe_allow_html=True
+        )
+
+
+def check_auth() -> dict | None:
+    """
+    Check if the current session is authenticated.
+    Call this at the top of every page.
+
+    Returns:
+        User dict if authenticated, None otherwise (also calls st.stop())
+    """
+def render_sidebar():
+    """Render the user profile and logout button in the sidebar (shared across all pages)."""
+    user = st.session_state.get("user")
+    if not user:
+        return
+    with st.sidebar:
+        st.markdown(
+            f'<div style="text-align: center; padding: 0.5rem 0;">'
+            f'<div style="font-size: 2.2rem; margin-bottom: 0.2rem;">🏦</div>'
+            f'<h3 style="margin: 0; color: #1B2A4A; font-size: 1.1rem; font-weight: 700;">AI Banking Insights</h3>'
+            f'<p style="margin: 0.2rem 0; color: #6C757D; font-size: 0.8rem; font-weight: 500;">Customer Insights Platform</p>'
+            f'</div>',
+            unsafe_allow_html=True
+        )
+        st.markdown("---")
+        
+        # User details card
+        st.markdown(
+            f'<div style="padding: 0.75rem; background: #F1F5F9; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #E2E8F0;">'
+            f'<p style="margin: 0; font-size: 0.85rem; color: #6C757D; font-weight: 500;">LOGGED IN AS</p>'
+            f'<p style="margin: 0.2rem 0; font-size: 0.95rem; color: #1B2A4A; font-weight: 700;">{user["full_name"]}</p>'
+            f'<div style="margin-top: 0.4rem;">{get_role_badge_html(user["role"])}</div>'
+            f'</div>',
+            unsafe_allow_html=True
+        )
+        
+        # Logout button
+        if st.button("🚪 Logout", use_container_width=True, key="shared_sidebar_logout_btn"):
+            logout()
+            st.rerun()
+        st.markdown("---")
+
+
+def check_auth() -> dict | None:
+    """
+    Check if the current session is authenticated.
+    Call this at the top of every page.
+
+    Returns:
+        User dict if authenticated, None otherwise (also calls st.stop())
+    """
+    token = st.session_state.get("jwt_token")
+    if not token:
+        return None
+
+    payload = validate_token(token)
+    if not payload:
+        # Token expired or invalid
+        st.session_state.pop("jwt_token", None)
+        st.session_state.pop("user", None)
+        return None
+
+    return st.session_state.get("user")
+
+
+def require_role(page_name: str):
+    """
+    Check if the current user has access to the specified page.
+    Shows an access denied message and stops execution if unauthorized.
+
+    Args:
+        page_name: The page name key from PAGE_ACCESS config
+    """
+    user = st.session_state.get("user")
+    if not user:
+        st.error("🔒 Please log in to access this page.")
+        st.stop()
+
+    allowed_roles = PAGE_ACCESS.get(page_name, [])
+    if user["role"] not in allowed_roles:
+        render_sidebar()
+        st.error("🚫 **Access Denied**")
+        st.markdown(f"""
+        <div style="padding: 1.5rem; background: #F8D7DA; border-radius: 8px; border-left: 4px solid #DC3545; margin-top: 1rem;">
+            <p style="margin: 0; color: #721C24;">
+                Your role <strong>({ROLES.get(user['role'], user['role'])})</strong> does not have permission to access <strong>{page_name}</strong>.
+            </p>
+            <p style="margin: 0.5rem 0 0 0; color: #721C24; font-size: 0.9rem;">
+                Contact your administrator if you need access.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        st.stop()
+
+    render_sidebar()
+
+
+def logout():
+    """Clear session state and log the user out."""
+    user = st.session_state.get("user")
+    if user:
+        log_activity(user.get("user_id", 0), user.get("username", ""), "LOGOUT", "User logged out")
+
+    for key in ["jwt_token", "user"]:
+        st.session_state.pop(key, None)
+
+
+def get_role_badge_html(role: str) -> str:
+    """Get an HTML badge for a user role."""
+    role_colors = {
+        "admin": "#DC3545",
+        "bank_manager": "#2E86AB",
+        "relationship_manager": "#28A745",
+        "loan_officer": "#FD7E14",
+        "data_analyst": "#6F42C1",
+        "auditor": "#17A2B8",
+    }
+    color = role_colors.get(role, "#6C757D")
+    label = ROLES.get(role, role)
+    return f'<span style="display:inline-block;padding:3px 10px;border-radius:12px;background:{color};color:white;font-size:0.8rem;font-weight:600;">{label}</span>'

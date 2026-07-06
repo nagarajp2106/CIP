@@ -1,0 +1,1001 @@
+customer_id,name,gender,age,occupation,income,region,branch,balance,credit_score,customer_since,email,phone,is_active,risk_level,churn_score,clv_score,segment
+CUST00001,Robert Moore,Male,47,Professional,76700.0,South,Airport Road,47917.03,801,2019-02-24,robert.moore_1@email.com,+1-892-858-9935,1,Low,0.0,0.0,Regular
+CUST00002,Jennifer Johnson,Female,39,Self-Employed,60400.0,South,Tech Park,146540.24,741,2023-09-01,jennifer.johnson_2@email.com,+1-816-127-4257,1,Medium,0.0,0.0,Regular
+CUST00003,Sandra Lewis,Female,36,Government,58100.0,North,Airport Road,12630.87,642,2022-09-28,sandra.lewis_3@email.com,+1-548-384-3547,1,High,0.0,0.0,Regular
+CUST00004,Susan Garcia,Female,44,Retired,14900.0,North,Station Area,2779.7,635,2021-11-09,susan.garcia_4@email.com,+1-818-370-1711,1,High,0.0,0.0,Regular
+CUST00005,Jason Garcia,Male,29,Government,54700.0,Central,Station Area,7408.41,567,2020-02-27,jason.garcia_5@email.com,+1-921-171-1750,1,High,0.0,0.0,Regular
+CUST00006,Elizabeth Anderson,Female,59,Self-Employed,60600.0,West,Mall Road,23885.67,566,2023-02-01,elizabeth.anderson_6@email.com,+1-850-954-6977,1,High,0.0,0.0,Regular
+CUST00007,Margaret Moore,Female,35,Self-Employed,67200.0,Central,Airport Road,5534.78,710,2023-12-28,margaret.moore_7@email.com,+1-946-350-3677,1,Medium,0.0,0.0,Regular
+CUST00008,Brenda Anderson,Female,34,Student,13700.0,North,Tech Park,10699.5,828,2018-05-12,brenda.anderson_8@email.com,+1-523-510-5386,0,Low,0.0,0.0,Regular
+CUST00009,Margaret Young,Female,41,Retired,23900.0,West,Airport Road,59104.0,582,2020-12-20,margaret.young_9@email.com,+1-342-352-9830,1,High,0.0,0.0,Regular
+CUST00010,Emma Sanchez,Female,44,Student,10000.0,South,Airport Road,4474.62,695,2023-09-19,emma.sanchez_10@email.com,+1-705-193-1771,1,Medium,0.0,0.0,Regular
+CUST00011,Matthew Ramirez,Male,50,Self-Employed,68300.0,West,University,19172.3,655,2023-04-02,matthew.ramirez_11@email.com,+1-741-357-1188,1,Medium,0.0,0.0,Regular
+CUST00012,Justin Moore,Male,24,Student,11800.0,North,Mall Road,12673.06,764,2022-11-16,justin.moore_12@email.com,+1-361-564-1053,1,Low,0.0,0.0,Regular
+CUST00013,Angela Lopez,Female,46,Self-Employed,30600.0,East,Suburb,32496.93,649,2020-03-25,angela.lopez_13@email.com,+1-356-482-3646,1,High,0.0,0.0,Regular
+CUST00014,Samuel Lee,Male,33,Freelancer,53300.0,North,Downtown,75902.08,754,2022-01-26,samuel.lee_14@email.com,+1-514-345-1949,1,Low,0.0,0.0,Regular
+CUST00015,Richard Young,Male,31,Self-Employed,59000.0,Central,Airport Road,32778.11,758,2019-06-10,richard.young_15@email.com,+1-875-586-3705,1,Low,0.0,0.0,Regular
+CUST00016,Margaret Wright,Female,36,Professional,75500.0,East,University,5839.49,584,2022-03-10,margaret.wright_16@email.com,+1-648-629-8397,1,High,0.0,0.0,Regular
+CUST00017,David Perez,Male,51,Salaried,77400.0,Central,Suburb,20203.03,760,2020-07-31,david.perez_17@email.com,+1-802-325-1117,0,Low,0.0,0.0,Regular
+CUST00018,Andrew Jones,Male,46,Salaried,44400.0,East,Downtown,33985.01,803,2023-10-07,andrew.jones_18@email.com,+1-443-385-8953,1,Low,0.0,0.0,Regular
+CUST00019,Brandon Torres,Male,41,Freelancer,66100.0,South,Industrial Area,949.85,745,2022-07-26,brandon.torres_19@email.com,+1-394-196-2588,1,Medium,0.0,0.0,Regular
+CUST00020,Sharon Clark,Female,43,Freelancer,41000.0,North,Downtown,24590.44,520,2018-09-06,sharon.clark_20@email.com,+1-612-845-6559,1,High,0.0,0.0,Regular
+CUST00021,Paul Gonzalez,Male,39,Professional,88600.0,Central,Industrial Area,129764.02,638,2019-07-29,paul.gonzalez_21@email.com,+1-632-287-5563,1,High,0.0,0.0,Regular
+CUST00022,Gary Scott,Male,32,Self-Employed,55200.0,North,Suburb,66070.82,706,2018-03-02,gary.scott_22@email.com,+1-295-871-4872,1,Medium,0.0,0.0,Regular
+CUST00023,Kathleen Wilson,Female,35,Retired,40400.0,North,Airport Road,24747.83,757,2022-04-02,kathleen.wilson_23@email.com,+1-202-499-5345,1,Low,0.0,0.0,Regular
+CUST00024,Emily Ramirez,Female,33,Freelancer,40600.0,South,Tech Park,13759.3,562,2021-04-30,emily.ramirez_24@email.com,+1-422-159-9883,0,High,0.0,0.0,Regular
+CUST00025,Linda Brown,Female,45,Freelancer,48500.0,Central,Suburb,22162.04,661,2019-10-07,linda.brown_25@email.com,+1-258-620-2312,1,Medium,0.0,0.0,Regular
+CUST00026,Samuel Jones,Male,25,Professional,69900.0,West,Downtown,14599.5,615,2020-10-05,samuel.jones_26@email.com,+1-792-708-1651,1,High,0.0,0.0,Regular
+CUST00027,Emma Torres,Female,40,Student,16800.0,East,Tech Park,211805.37,693,2021-07-10,emma.torres_27@email.com,+1-444-371-7484,1,Medium,0.0,0.0,Regular
+CUST00028,Cynthia Lee,Female,45,Self-Employed,63500.0,North,Industrial Area,2202.78,677,2019-02-14,cynthia.lee_28@email.com,+1-275-650-4492,1,Medium,0.0,0.0,Regular
+CUST00029,Ronald Jones,Male,42,Professional,139100.0,East,Mall Road,17486.19,704,2019-10-09,ronald.jones_29@email.com,+1-648-953-9900,1,Medium,0.0,0.0,Regular
+CUST00030,Scott Martin,Male,41,Self-Employed,42200.0,South,Mall Road,86802.21,740,2019-04-18,scott.martin_30@email.com,+1-309-860-3546,1,Medium,0.0,0.0,Regular
+CUST00031,Timothy Wilson,Male,51,Government,36400.0,Central,Industrial Area,118581.19,567,2020-10-25,timothy.wilson_31@email.com,+1-252-194-7939,1,High,0.0,0.0,Regular
+CUST00032,James Perez,Male,49,Business Owner,149100.0,East,Airport Road,6710.01,634,2022-12-15,james.perez_32@email.com,+1-764-822-8007,1,High,0.0,0.0,Regular
+CUST00033,David Martinez,Male,43,Salaried,46700.0,East,Highway,3426.19,685,2019-08-30,david.martinez_33@email.com,+1-640-230-1685,1,Medium,0.0,0.0,Regular
+CUST00034,Ronald Wilson,Male,29,Professional,91400.0,North,Station Area,7307.75,803,2022-07-23,ronald.wilson_34@email.com,+1-835-867-3532,1,Low,0.0,0.0,Regular
+CUST00035,Matthew Lopez,Male,32,Retired,31600.0,North,Airport Road,58467.17,581,2021-09-22,matthew.lopez_35@email.com,+1-621-921-5065,1,High,0.0,0.0,Regular
+CUST00036,Jason Williams,Male,44,Freelancer,62600.0,South,Tech Park,3200.36,694,2023-03-01,jason.williams_36@email.com,+1-558-412-4728,1,Medium,0.0,0.0,Regular
+CUST00037,Jeffrey Perez,Male,45,Government,61700.0,North,Mall Road,4992.34,574,2021-12-09,jeffrey.perez_37@email.com,+1-856-621-7548,1,High,0.0,0.0,Regular
+CUST00038,Patricia Davis,Female,48,Government,54500.0,South,Highway,29750.21,707,2020-12-23,patricia.davis_38@email.com,+1-239-211-8119,1,Medium,0.0,0.0,Regular
+CUST00039,Sharon Hill,Female,33,Self-Employed,69500.0,West,Highway,31309.82,622,2020-02-18,sharon.hill_39@email.com,+1-460-145-8144,0,High,0.0,0.0,Regular
+CUST00040,Edward Ramirez,Male,64,Self-Employed,74200.0,East,Highway,5273.43,732,2021-07-09,edward.ramirez_40@email.com,+1-879-968-3041,1,Medium,0.0,0.0,Regular
+CUST00041,Angela Martin,Female,30,Retired,43300.0,East,University,88460.79,614,2021-04-26,angela.martin_41@email.com,+1-767-230-4143,1,High,0.0,0.0,Regular
+CUST00042,Nancy Flores,Female,53,Government,56200.0,West,Suburb,59069.63,831,2018-01-02,nancy.flores_42@email.com,+1-511-393-4443,1,Low,0.0,0.0,Regular
+CUST00043,Cynthia Lewis,Female,39,Freelancer,34800.0,South,Suburb,7574.8,614,2023-04-23,cynthia.lewis_43@email.com,+1-953-273-2389,1,High,0.0,0.0,Regular
+CUST00044,Elizabeth Thomas,Female,41,Government,55100.0,South,Tech Park,30700.34,746,2019-08-27,elizabeth.thomas_44@email.com,+1-225-147-5011,1,Medium,0.0,0.0,Regular
+CUST00045,Nicholas Clark,Male,42,Professional,114900.0,West,Industrial Area,16033.12,850,2022-06-25,nicholas.clark_45@email.com,+1-449-251-1090,1,Low,0.0,0.0,Regular
+CUST00046,Jacob Anderson,Male,49,Business Owner,66900.0,Central,Industrial Area,6093.2,718,2018-07-25,jacob.anderson_46@email.com,+1-770-355-2988,1,Medium,0.0,0.0,Regular
+CUST00047,Shirley Scott,Female,39,Student,18200.0,West,Highway,38866.39,674,2023-08-30,shirley.scott_47@email.com,+1-636-950-9976,1,Medium,0.0,0.0,Regular
+CUST00048,Eric Lewis,Male,31,Government,27300.0,South,Mall Road,12889.68,748,2023-11-06,eric.lewis_48@email.com,+1-696-741-4919,1,Medium,0.0,0.0,Regular
+CUST00049,Kevin Thomas,Male,44,Government,31300.0,East,Station Area,27114.32,710,2018-11-27,kevin.thomas_49@email.com,+1-341-254-4788,1,Medium,0.0,0.0,Regular
+CUST00050,Steven Jones,Male,31,Retired,36600.0,West,Station Area,23620.03,588,2023-03-24,steven.jones_50@email.com,+1-625-163-4388,1,High,0.0,0.0,Regular
+CUST00051,Emma Johnson,Female,46,Retired,40900.0,West,Main Branch,80794.28,764,2021-12-11,emma.johnson_51@email.com,+1-505-871-7389,1,Low,0.0,0.0,Regular
+CUST00052,Anna Wright,Female,25,Professional,57500.0,West,Tech Park,40865.53,721,2021-01-22,anna.wright_52@email.com,+1-646-597-1475,1,Medium,0.0,0.0,Regular
+CUST00053,Lisa Robinson,Female,48,Business Owner,194000.0,Central,Suburb,43698.48,770,2018-04-21,lisa.robinson_53@email.com,+1-603-706-1444,1,Low,0.0,0.0,Regular
+CUST00054,Sarah Robinson,Female,53,Business Owner,107600.0,North,Mall Road,15088.33,740,2022-04-02,sarah.robinson_54@email.com,+1-535-316-8449,1,Medium,0.0,0.0,Regular
+CUST00055,Kimberly Clark,Female,32,Government,46400.0,North,Industrial Area,12302.57,686,2018-03-21,kimberly.clark_55@email.com,+1-967-652-1853,1,Medium,0.0,0.0,Regular
+CUST00056,Sandra Jones,Female,69,Salaried,24200.0,North,Tech Park,50187.05,550,2020-03-27,sandra.jones_56@email.com,+1-220-736-3496,1,High,0.0,0.0,Regular
+CUST00057,Jessica Torres,Female,36,Professional,106100.0,West,Mall Road,23792.75,593,2022-02-19,jessica.torres_57@email.com,+1-371-720-2876,1,High,0.0,0.0,Regular
+CUST00058,Brian Miller,Male,33,Salaried,66200.0,East,Highway,9168.78,697,2022-03-18,brian.miller_58@email.com,+1-606-832-4249,0,Medium,0.0,0.0,Regular
+CUST00059,Joseph Martin,Male,42,Self-Employed,52300.0,Central,Main Branch,288581.52,730,2021-11-23,joseph.martin_59@email.com,+1-745-538-7071,0,Medium,0.0,0.0,Regular
+CUST00060,Mary Clark,Female,18,Freelancer,47500.0,North,University,9955.26,748,2022-01-23,mary.clark_60@email.com,+1-850-948-8532,1,Medium,0.0,0.0,Regular
+CUST00061,Nancy King,Female,32,Government,48300.0,Central,Suburb,40375.75,749,2023-06-04,nancy.king_61@email.com,+1-676-546-5397,1,Medium,0.0,0.0,Regular
+CUST00062,Richard Moore,Male,27,Freelancer,40500.0,South,Industrial Area,12457.34,627,2022-04-02,richard.moore_62@email.com,+1-544-129-9098,1,High,0.0,0.0,Regular
+CUST00063,Jonathan Wilson,Male,63,Student,16800.0,East,Station Area,4851.0,753,2021-02-19,jonathan.wilson_63@email.com,+1-810-818-5526,1,Low,0.0,0.0,Regular
+CUST00064,Richard Thomas,Male,67,Retired,45800.0,West,Suburb,3557.3,641,2020-09-11,richard.thomas_64@email.com,+1-907-587-9041,1,High,0.0,0.0,Regular
+CUST00065,Richard Jackson,Male,57,Professional,63000.0,West,Tech Park,37518.27,741,2021-06-08,richard.jackson_65@email.com,+1-879-695-7046,1,Medium,0.0,0.0,Regular
+CUST00066,Sharon Scott,Female,30,Student,14700.0,East,Industrial Area,450.55,598,2021-01-14,sharon.scott_66@email.com,+1-513-357-4777,1,High,0.0,0.0,Regular
+CUST00067,George Davis,Male,38,Business Owner,56300.0,South,Tech Park,156200.16,565,2023-06-07,george.davis_67@email.com,+1-483-841-9595,1,High,0.0,0.0,Regular
+CUST00068,Mark Jackson,Male,36,Professional,83100.0,East,Airport Road,124185.03,565,2021-05-23,mark.jackson_68@email.com,+1-214-825-9751,1,High,0.0,0.0,Regular
+CUST00069,William Scott,Male,55,Government,50200.0,South,Industrial Area,6783.1,716,2019-02-25,william.scott_69@email.com,+1-212-687-5658,1,Medium,0.0,0.0,Regular
+CUST00070,Carol Lopez,Female,44,Salaried,45100.0,East,Industrial Area,23950.93,649,2019-04-13,carol.lopez_70@email.com,+1-266-510-9056,0,High,0.0,0.0,Regular
+CUST00071,Daniel Martinez,Male,43,Government,59900.0,North,Tech Park,147741.61,580,2019-05-01,daniel.martinez_71@email.com,+1-771-882-7818,1,High,0.0,0.0,Regular
+CUST00072,Larry Harris,Male,67,Freelancer,18600.0,West,Mall Road,18358.68,727,2022-10-23,larry.harris_72@email.com,+1-512-682-1986,1,Medium,0.0,0.0,Regular
+CUST00073,Steven Wilson,Male,45,Government,40700.0,North,Airport Road,17158.57,640,2020-09-09,steven.wilson_73@email.com,+1-377-665-2229,1,High,0.0,0.0,Regular
+CUST00074,Laura Hill,Female,34,Freelancer,56500.0,East,Main Branch,33806.85,624,2020-08-06,laura.hill_74@email.com,+1-495-823-5632,1,High,0.0,0.0,Regular
+CUST00075,Barbara Anderson,Female,52,Government,54600.0,Central,Tech Park,58421.22,730,2022-10-08,barbara.anderson_75@email.com,+1-317-657-4683,1,Medium,0.0,0.0,Regular
+CUST00076,Karen Jones,Female,32,Salaried,45800.0,South,Mall Road,54000.7,728,2021-03-28,karen.jones_76@email.com,+1-649-227-8679,1,Medium,0.0,0.0,Regular
+CUST00077,Kimberly Allen,Female,41,Freelancer,46600.0,West,Downtown,102047.93,632,2018-06-13,kimberly.allen_77@email.com,+1-642-852-6280,1,High,0.0,0.0,Regular
+CUST00078,Richard Anderson,Male,48,Salaried,51700.0,East,Highway,16962.88,767,2018-06-14,richard.anderson_78@email.com,+1-981-874-3870,1,Low,0.0,0.0,Regular
+CUST00079,Kimberly Lopez,Female,51,Retired,43500.0,West,Downtown,105511.43,681,2023-04-10,kimberly.lopez_79@email.com,+1-556-518-6460,1,Medium,0.0,0.0,Regular
+CUST00080,Matthew Perez,Male,50,Retired,31700.0,West,Mall Road,32500.14,669,2022-06-29,matthew.perez_80@email.com,+1-978-663-1601,1,Medium,0.0,0.0,Regular
+CUST00081,Dorothy Lee,Female,43,Self-Employed,76600.0,West,Suburb,8251.38,847,2018-01-05,dorothy.lee_81@email.com,+1-873-990-9889,1,Low,0.0,0.0,Regular
+CUST00082,Mark King,Male,29,Student,10000.0,Central,Industrial Area,88409.35,743,2022-12-16,mark.king_82@email.com,+1-978-152-4335,1,Medium,0.0,0.0,Regular
+CUST00083,Kevin Lewis,Male,49,Freelancer,53500.0,North,Main Branch,21705.13,608,2020-09-07,kevin.lewis_83@email.com,+1-926-262-6091,1,High,0.0,0.0,Regular
+CUST00084,Elizabeth Anderson,Female,42,Self-Employed,51800.0,West,Downtown,70979.31,668,2019-09-23,elizabeth.anderson_84@email.com,+1-710-833-5781,1,Medium,0.0,0.0,Regular
+CUST00085,Rebecca Walker,Female,32,Freelancer,40700.0,South,Industrial Area,36153.09,634,2019-08-16,rebecca.walker_85@email.com,+1-592-295-9327,1,High,0.0,0.0,Regular
+CUST00086,David Moore,Male,32,Retired,37600.0,East,Suburb,29553.57,639,2020-12-30,david.moore_86@email.com,+1-202-389-5891,1,High,0.0,0.0,Regular
+CUST00087,Karen Lewis,Female,36,Freelancer,48100.0,East,Station Area,3874.99,567,2022-03-26,karen.lewis_87@email.com,+1-666-429-4090,1,High,0.0,0.0,Regular
+CUST00088,Brandon Harris,Male,33,Professional,74900.0,West,Main Branch,31987.14,798,2021-07-27,brandon.harris_88@email.com,+1-962-584-7246,1,Low,0.0,0.0,Regular
+CUST00089,Jonathan Williams,Male,52,Business Owner,85700.0,Central,Highway,21529.53,599,2021-09-21,jonathan.williams_89@email.com,+1-302-995-8213,1,High,0.0,0.0,Regular
+CUST00090,Mary Martinez,Female,41,Retired,32000.0,South,Downtown,32443.72,613,2023-04-08,mary.martinez_90@email.com,+1-471-446-7512,1,High,0.0,0.0,Regular
+CUST00091,Anna Harris,Female,48,Student,21900.0,West,Suburb,19331.44,712,2018-05-28,anna.harris_91@email.com,+1-832-170-4846,1,Medium,0.0,0.0,Regular
+CUST00092,Sandra Garcia,Female,50,Retired,30800.0,North,Downtown,28822.48,681,2022-12-23,sandra.garcia_92@email.com,+1-370-810-5906,1,Medium,0.0,0.0,Regular
+CUST00093,George Brown,Male,43,Government,38400.0,East,Station Area,22683.93,719,2022-10-31,george.brown_93@email.com,+1-349-350-9702,1,Medium,0.0,0.0,Regular
+CUST00094,Matthew Lopez,Male,59,Self-Employed,83700.0,Central,University,291798.55,618,2020-09-13,matthew.lopez_94@email.com,+1-709-697-3344,1,High,0.0,0.0,Regular
+CUST00095,Cynthia Taylor,Female,52,Salaried,58000.0,West,Mall Road,304907.44,615,2019-10-10,cynthia.taylor_95@email.com,+1-275-552-6661,1,High,0.0,0.0,Regular
+CUST00096,Sharon Taylor,Female,31,Freelancer,36900.0,East,Tech Park,1722.14,637,2022-04-25,sharon.taylor_96@email.com,+1-694-209-4886,1,High,0.0,0.0,Regular
+CUST00097,Pamela Jackson,Female,32,Government,52300.0,North,University,33193.43,830,2021-01-29,pamela.jackson_97@email.com,+1-208-679-1803,1,Low,0.0,0.0,Regular
+CUST00098,Emily Anderson,Female,53,Student,12400.0,South,Tech Park,7494.33,719,2020-10-23,emily.anderson_98@email.com,+1-894-873-3240,1,Medium,0.0,0.0,Regular
+CUST00099,Brian Lewis,Male,26,Salaried,85200.0,Central,Station Area,90701.41,642,2019-06-23,brian.lewis_99@email.com,+1-292-402-6352,1,High,0.0,0.0,Regular
+CUST00100,Mark Rodriguez,Male,21,Student,21100.0,Central,Suburb,19197.82,779,2021-01-21,mark.rodriguez_100@email.com,+1-368-363-8894,1,Low,0.0,0.0,Regular
+CUST00101,Carol Davis,Female,22,Freelancer,36900.0,North,Airport Road,22165.5,683,2020-07-13,carol.davis_101@email.com,+1-892-841-7511,1,Medium,0.0,0.0,Regular
+CUST00102,Elizabeth Sanchez,Female,36,Salaried,65300.0,East,Suburb,6117.17,668,2019-05-22,elizabeth.sanchez_102@email.com,+1-665-477-5295,1,Medium,0.0,0.0,Regular
+CUST00103,Susan Anderson,Female,43,Freelancer,51900.0,North,Highway,51737.49,590,2021-09-05,susan.anderson_103@email.com,+1-824-326-2035,1,High,0.0,0.0,Regular
+CUST00104,Donna Clark,Female,23,Self-Employed,89900.0,South,Main Branch,32819.46,620,2018-06-02,donna.clark_104@email.com,+1-511-604-2902,1,High,0.0,0.0,Regular
+CUST00105,Jason Robinson,Male,60,Student,15500.0,Central,University,90685.85,685,2019-09-25,jason.robinson_105@email.com,+1-624-770-2622,1,Medium,0.0,0.0,Regular
+CUST00106,Kimberly Williams,Female,66,Student,22900.0,South,Industrial Area,16337.9,757,2022-12-27,kimberly.williams_106@email.com,+1-441-975-6942,1,Low,0.0,0.0,Regular
+CUST00107,Anna Thompson,Female,49,Salaried,77600.0,West,Mall Road,6919.45,734,2020-02-17,anna.thompson_107@email.com,+1-325-968-8450,1,Medium,0.0,0.0,Regular
+CUST00108,Samuel Johnson,Male,54,Salaried,26000.0,East,Tech Park,5324.58,516,2019-05-31,samuel.johnson_108@email.com,+1-778-310-2124,1,High,0.0,0.0,Regular
+CUST00109,Benjamin Wilson,Male,38,Professional,97200.0,East,Airport Road,133629.79,685,2018-01-12,benjamin.wilson_109@email.com,+1-483-979-3370,1,Medium,0.0,0.0,Regular
+CUST00110,Nancy Davis,Female,61,Salaried,32200.0,South,Main Branch,2852.47,675,2022-01-07,nancy.davis_110@email.com,+1-443-702-6304,0,Medium,0.0,0.0,Regular
+CUST00111,Linda Rodriguez,Female,46,Retired,34700.0,Central,Downtown,1842.85,672,2018-09-18,linda.rodriguez_111@email.com,+1-687-559-6931,1,Medium,0.0,0.0,Regular
+CUST00112,Gary Allen,Male,26,Professional,96100.0,Central,Main Branch,34197.84,604,2023-11-06,gary.allen_112@email.com,+1-508-569-1510,0,High,0.0,0.0,Regular
+CUST00113,Stephanie Ramirez,Female,35,Self-Employed,44300.0,West,Industrial Area,20430.52,756,2018-10-29,stephanie.ramirez_113@email.com,+1-282-429-3430,0,Low,0.0,0.0,Regular
+CUST00114,Helen Nguyen,Female,30,Student,17300.0,West,Highway,11657.33,616,2023-12-14,helen.nguyen_114@email.com,+1-501-564-9282,1,High,0.0,0.0,Regular
+CUST00115,Thomas Scott,Male,40,Professional,55200.0,West,Industrial Area,11334.66,584,2020-07-24,thomas.scott_115@email.com,+1-623-447-8430,1,High,0.0,0.0,Regular
+CUST00116,George Ramirez,Male,65,Student,15200.0,East,Station Area,9512.19,697,2019-09-18,george.ramirez_116@email.com,+1-903-585-2099,1,Medium,0.0,0.0,Regular
+CUST00117,Richard Ramirez,Male,40,Self-Employed,60700.0,East,Airport Road,46027.76,740,2018-09-03,richard.ramirez_117@email.com,+1-800-675-6400,1,Medium,0.0,0.0,Regular
+CUST00118,Amanda Ramirez,Female,35,Salaried,45500.0,East,Highway,15834.37,495,2021-07-03,amanda.ramirez_118@email.com,+1-560-206-9313,1,High,0.0,0.0,Regular
+CUST00119,Sandra Miller,Female,23,Student,21200.0,Central,Station Area,158571.56,660,2019-04-16,sandra.miller_119@email.com,+1-980-385-4705,1,Medium,0.0,0.0,Regular
+CUST00120,Samuel Moore,Male,48,Salaried,60100.0,South,Mall Road,500000.0,769,2021-06-19,samuel.moore_120@email.com,+1-547-459-1100,1,Low,0.0,0.0,Regular
+CUST00121,Brandon Sanchez,Male,40,Self-Employed,46400.0,South,Main Branch,3204.35,696,2019-01-11,brandon.sanchez_121@email.com,+1-964-643-4524,1,Medium,0.0,0.0,Regular
+CUST00122,Carol Hernandez,Female,32,Student,10000.0,East,Station Area,10138.67,593,2018-12-14,carol.hernandez_122@email.com,+1-253-259-3579,1,High,0.0,0.0,Regular
+CUST00123,Richard Moore,Male,62,Freelancer,56900.0,West,Industrial Area,21816.74,798,2022-12-16,richard.moore_123@email.com,+1-624-379-4531,1,Low,0.0,0.0,Regular
+CUST00124,Ronald Ramirez,Male,42,Self-Employed,48200.0,East,Highway,137001.74,723,2023-06-17,ronald.ramirez_124@email.com,+1-739-783-6053,0,Medium,0.0,0.0,Regular
+CUST00125,Nicole Brown,Female,29,Salaried,51900.0,South,Mall Road,7702.18,569,2020-05-15,nicole.brown_125@email.com,+1-985-240-5186,1,High,0.0,0.0,Regular
+CUST00126,James Young,Male,53,Retired,55000.0,South,Airport Road,4112.22,725,2022-04-07,james.young_126@email.com,+1-745-820-4770,1,Medium,0.0,0.0,Regular
+CUST00127,Barbara Sanchez,Female,34,Salaried,47000.0,West,Main Branch,10819.74,610,2023-02-27,barbara.sanchez_127@email.com,+1-279-982-6129,1,High,0.0,0.0,Regular
+CUST00128,Rebecca Jackson,Female,42,Self-Employed,48800.0,West,Main Branch,30471.53,675,2021-08-23,rebecca.jackson_128@email.com,+1-375-920-8538,1,Medium,0.0,0.0,Regular
+CUST00129,Elizabeth Ramirez,Female,39,Self-Employed,47300.0,South,University,11024.49,740,2022-06-29,elizabeth.ramirez_129@email.com,+1-736-180-7484,1,Medium,0.0,0.0,Regular
+CUST00130,Sandra Perez,Female,48,Business Owner,63600.0,North,Suburb,24814.88,740,2019-04-13,sandra.perez_130@email.com,+1-743-622-4176,1,Medium,0.0,0.0,Regular
+CUST00131,Amanda Martinez,Female,21,Professional,93000.0,North,Airport Road,9945.26,725,2020-11-14,amanda.martinez_131@email.com,+1-402-277-3504,1,Medium,0.0,0.0,Regular
+CUST00132,Anthony Young,Male,32,Freelancer,20600.0,Central,Highway,3124.25,683,2023-01-13,anthony.young_132@email.com,+1-897-678-6295,1,Medium,0.0,0.0,Regular
+CUST00133,Karen Lewis,Female,45,Self-Employed,47400.0,West,Industrial Area,47396.85,547,2021-05-25,karen.lewis_133@email.com,+1-481-705-1920,1,High,0.0,0.0,Regular
+CUST00134,Brian Robinson,Male,41,Freelancer,28700.0,North,Main Branch,10074.84,683,2022-02-19,brian.robinson_134@email.com,+1-493-178-2479,1,Medium,0.0,0.0,Regular
+CUST00135,Cynthia Nguyen,Female,31,Salaried,48700.0,West,Highway,73684.77,633,2020-02-11,cynthia.nguyen_135@email.com,+1-529-719-8792,1,High,0.0,0.0,Regular
+CUST00136,Gary Miller,Male,52,Student,10000.0,North,Suburb,41596.24,795,2019-12-08,gary.miller_136@email.com,+1-240-353-8172,1,Low,0.0,0.0,Regular
+CUST00137,Edward White,Male,18,Government,38000.0,West,University,44023.84,663,2021-10-17,edward.white_137@email.com,+1-895-712-1857,1,Medium,0.0,0.0,Regular
+CUST00138,Barbara Perez,Female,46,Self-Employed,53200.0,Central,University,24438.32,667,2021-03-09,barbara.perez_138@email.com,+1-458-841-3463,1,Medium,0.0,0.0,Regular
+CUST00139,Ronald Martin,Male,56,Retired,37700.0,South,Highway,33028.4,647,2018-12-14,ronald.martin_139@email.com,+1-517-672-7171,1,High,0.0,0.0,Regular
+CUST00140,Sarah King,Female,36,Self-Employed,56600.0,West,Suburb,35360.21,646,2022-01-22,sarah.king_140@email.com,+1-218-471-6060,1,High,0.0,0.0,Regular
+CUST00141,Timothy Young,Male,45,Professional,129800.0,South,Airport Road,62651.92,653,2019-09-27,timothy.young_141@email.com,+1-279-402-2657,1,Medium,0.0,0.0,Regular
+CUST00142,Timothy Flores,Male,56,Business Owner,79000.0,Central,University,1908.84,599,2019-09-24,timothy.flores_142@email.com,+1-366-285-3712,1,High,0.0,0.0,Regular
+CUST00143,Ryan White,Male,19,Professional,71600.0,West,Highway,22518.72,814,2021-03-13,ryan.white_143@email.com,+1-970-866-8355,1,Low,0.0,0.0,Regular
+CUST00144,Brian Walker,Male,45,Professional,74700.0,East,Highway,59592.6,503,2022-12-10,brian.walker_144@email.com,+1-672-887-5616,1,High,0.0,0.0,Regular
+CUST00145,Lisa Gonzalez,Female,44,Business Owner,110800.0,East,Main Branch,3735.72,771,2023-05-23,lisa.gonzalez_145@email.com,+1-580-667-2680,1,Low,0.0,0.0,Regular
+CUST00146,Kevin Garcia,Male,46,Business Owner,78800.0,East,Industrial Area,47067.51,850,2023-10-04,kevin.garcia_146@email.com,+1-350-950-8167,1,Low,0.0,0.0,Regular
+CUST00147,Gary Thompson,Male,44,Salaried,59100.0,West,Main Branch,12692.5,612,2022-06-12,gary.thompson_147@email.com,+1-714-482-4862,1,High,0.0,0.0,Regular
+CUST00148,Edward Anderson,Male,51,Salaried,40900.0,East,Downtown,24001.69,641,2021-10-05,edward.anderson_148@email.com,+1-349-240-1627,1,High,0.0,0.0,Regular
+CUST00149,Sarah Walker,Female,47,Freelancer,49500.0,Central,Main Branch,76500.15,639,2018-11-21,sarah.walker_149@email.com,+1-219-362-4533,1,High,0.0,0.0,Regular
+CUST00150,Jessica Jackson,Female,38,Professional,56500.0,East,Downtown,12924.09,710,2018-07-15,jessica.jackson_150@email.com,+1-444-529-8489,0,Medium,0.0,0.0,Regular
+CUST00151,Nicole Wright,Female,51,Salaried,39800.0,Central,Highway,62537.84,788,2020-09-17,nicole.wright_151@email.com,+1-935-247-5772,1,Low,0.0,0.0,Regular
+CUST00152,Ashley Torres,Female,46,Retired,54700.0,South,Downtown,8703.26,580,2023-11-15,ashley.torres_152@email.com,+1-569-169-9618,1,High,0.0,0.0,Regular
+CUST00153,Jason Walker,Male,20,Salaried,79700.0,West,Station Area,48302.51,675,2020-11-04,jason.walker_153@email.com,+1-965-116-6850,1,Medium,0.0,0.0,Regular
+CUST00154,Ashley Miller,Female,45,Student,10000.0,South,Main Branch,414530.72,690,2021-12-14,ashley.miller_154@email.com,+1-759-446-3868,1,Medium,0.0,0.0,Regular
+CUST00155,Kathleen Lopez,Female,43,Business Owner,109600.0,North,Industrial Area,39230.55,697,2018-06-01,kathleen.lopez_155@email.com,+1-500-306-1717,1,Medium,0.0,0.0,Regular
+CUST00156,George Martin,Male,32,Retired,40000.0,Central,Industrial Area,210750.32,787,2020-11-03,george.martin_156@email.com,+1-237-871-4131,1,Low,0.0,0.0,Regular
+CUST00157,Timothy Moore,Male,61,Self-Employed,55000.0,East,University,6717.52,669,2022-06-27,timothy.moore_157@email.com,+1-961-550-7334,1,Medium,0.0,0.0,Regular
+CUST00158,Jonathan Young,Male,42,Student,19900.0,Central,Mall Road,2890.09,802,2018-12-05,jonathan.young_158@email.com,+1-944-534-2293,1,Low,0.0,0.0,Regular
+CUST00159,Justin Jackson,Male,40,Student,13100.0,North,Downtown,6538.58,547,2021-09-05,justin.jackson_159@email.com,+1-876-402-6021,1,High,0.0,0.0,Regular
+CUST00160,Lisa Lewis,Female,51,Student,15300.0,West,Main Branch,4684.65,576,2021-12-15,lisa.lewis_160@email.com,+1-829-545-5498,1,High,0.0,0.0,Regular
+CUST00161,David Sanchez,Male,37,Student,22500.0,Central,Airport Road,16130.87,559,2018-05-08,david.sanchez_161@email.com,+1-346-969-8179,0,High,0.0,0.0,Regular
+CUST00162,Paul White,Male,39,Student,13800.0,West,Highway,865.87,675,2018-05-13,paul.white_162@email.com,+1-819-257-8371,1,Medium,0.0,0.0,Regular
+CUST00163,Laura Jones,Female,39,Business Owner,108800.0,Central,Station Area,202551.07,770,2022-06-19,laura.jones_163@email.com,+1-521-765-5566,1,Low,0.0,0.0,Regular
+CUST00164,Robert Lopez,Male,38,Freelancer,30100.0,Central,University,483125.51,684,2019-04-28,robert.lopez_164@email.com,+1-468-893-5264,1,Medium,0.0,0.0,Regular
+CUST00165,Raymond Jackson,Male,42,Freelancer,44700.0,South,Downtown,27936.85,668,2019-07-10,raymond.jackson_165@email.com,+1-275-562-3828,1,Medium,0.0,0.0,Regular
+CUST00166,Elizabeth Lee,Female,35,Student,12500.0,North,Suburb,21177.53,636,2021-04-04,elizabeth.lee_166@email.com,+1-507-971-3580,1,High,0.0,0.0,Regular
+CUST00167,Edward Allen,Male,33,Professional,82600.0,North,Tech Park,16220.44,800,2019-07-23,edward.allen_167@email.com,+1-442-909-9094,0,Low,0.0,0.0,Regular
+CUST00168,Cynthia Scott,Female,18,Business Owner,119500.0,Central,Downtown,98253.11,514,2018-09-27,cynthia.scott_168@email.com,+1-516-507-8842,1,High,0.0,0.0,Regular
+CUST00169,Pamela Jones,Female,37,Business Owner,80000.0,East,Downtown,4068.32,617,2023-01-18,pamela.jones_169@email.com,+1-677-796-9476,1,High,0.0,0.0,Regular
+CUST00170,Charles Ramirez,Male,28,Salaried,83900.0,North,Suburb,67698.15,781,2019-09-19,charles.ramirez_170@email.com,+1-511-268-3653,1,Low,0.0,0.0,Regular
+CUST00171,Ronald King,Male,50,Government,33100.0,North,Mall Road,11737.87,719,2020-03-15,ronald.king_171@email.com,+1-850-664-5496,1,Medium,0.0,0.0,Regular
+CUST00172,Helen Wright,Female,27,Self-Employed,78900.0,Central,Airport Road,16508.15,650,2019-09-24,helen.wright_172@email.com,+1-375-774-6531,1,Medium,0.0,0.0,Regular
+CUST00173,Robert Garcia,Male,50,Salaried,62300.0,Central,Mall Road,14283.22,772,2020-05-13,robert.garcia_173@email.com,+1-985-685-7825,1,Low,0.0,0.0,Regular
+CUST00174,Jonathan Wright,Male,29,Government,59200.0,East,Industrial Area,44878.83,655,2020-09-30,jonathan.wright_174@email.com,+1-901-515-5873,1,Medium,0.0,0.0,Regular
+CUST00175,Matthew Lewis,Male,45,Retired,21900.0,West,Industrial Area,66758.2,665,2020-04-15,matthew.lewis_175@email.com,+1-548-721-3353,1,Medium,0.0,0.0,Regular
+CUST00176,Amanda Sanchez,Female,35,Business Owner,118300.0,East,Suburb,9459.62,567,2019-03-11,amanda.sanchez_176@email.com,+1-526-347-8642,1,High,0.0,0.0,Regular
+CUST00177,Ashley Martinez,Female,23,Self-Employed,76800.0,North,Mall Road,4738.54,820,2022-04-23,ashley.martinez_177@email.com,+1-830-528-5067,1,Low,0.0,0.0,Regular
+CUST00178,George Torres,Male,18,Student,22600.0,South,Airport Road,28373.79,672,2023-08-03,george.torres_178@email.com,+1-727-578-9171,1,Medium,0.0,0.0,Regular
+CUST00179,Patricia Garcia,Female,35,Retired,39200.0,Central,Industrial Area,21053.84,768,2020-09-13,patricia.garcia_179@email.com,+1-420-697-6781,0,Low,0.0,0.0,Regular
+CUST00180,Amy Hill,Female,43,Freelancer,47000.0,East,Suburb,14237.94,675,2018-02-03,amy.hill_180@email.com,+1-310-541-3194,1,Medium,0.0,0.0,Regular
+CUST00181,Stephanie White,Female,45,Salaried,26800.0,West,Main Branch,4368.51,739,2020-03-08,stephanie.white_181@email.com,+1-571-666-5728,0,Medium,0.0,0.0,Regular
+CUST00182,Brenda Moore,Female,44,Self-Employed,61400.0,South,Downtown,22519.14,707,2022-06-02,brenda.moore_182@email.com,+1-582-913-6555,1,Medium,0.0,0.0,Regular
+CUST00183,Karen Gonzalez,Female,35,Retired,26800.0,Central,Main Branch,27861.87,601,2018-07-05,karen.gonzalez_183@email.com,+1-239-240-6456,1,High,0.0,0.0,Regular
+CUST00184,Karen Hill,Female,46,Business Owner,44000.0,East,Highway,75734.32,717,2021-07-28,karen.hill_184@email.com,+1-366-502-5902,1,Medium,0.0,0.0,Regular
+CUST00185,Pamela Martin,Female,45,Freelancer,58300.0,North,Station Area,162522.11,761,2021-09-18,pamela.martin_185@email.com,+1-889-212-7824,1,Low,0.0,0.0,Regular
+CUST00186,Samuel Walker,Male,19,Government,30800.0,Central,Highway,10406.83,682,2020-07-21,samuel.walker_186@email.com,+1-938-152-8871,1,Medium,0.0,0.0,Regular
+CUST00187,Karen Thomas,Female,48,Salaried,43000.0,Central,Downtown,27559.98,619,2020-02-21,karen.thomas_187@email.com,+1-219-551-6139,1,High,0.0,0.0,Regular
+CUST00188,Margaret Clark,Female,34,Freelancer,26000.0,North,Airport Road,7274.43,571,2023-10-26,margaret.clark_188@email.com,+1-412-674-6325,1,High,0.0,0.0,Regular
+CUST00189,Shirley Harris,Female,30,Student,19700.0,South,Industrial Area,7049.57,850,2023-12-24,shirley.harris_189@email.com,+1-550-659-6804,1,Low,0.0,0.0,Regular
+CUST00190,Helen Walker,Female,47,Professional,84400.0,South,Mall Road,7863.37,736,2021-05-07,helen.walker_190@email.com,+1-430-404-5735,1,Medium,0.0,0.0,Regular
+CUST00191,Michelle Walker,Female,35,Student,15500.0,Central,Mall Road,475490.15,672,2021-03-24,michelle.walker_191@email.com,+1-324-687-9899,1,Medium,0.0,0.0,Regular
+CUST00192,Amanda Martinez,Female,55,Government,39500.0,North,Mall Road,21120.8,821,2018-11-20,amanda.martinez_192@email.com,+1-554-552-5201,1,Low,0.0,0.0,Regular
+CUST00193,Mark Wright,Male,34,Government,77200.0,Central,Mall Road,51498.21,635,2019-07-17,mark.wright_193@email.com,+1-311-730-4920,1,High,0.0,0.0,Regular
+CUST00194,Andrew Brown,Male,49,Self-Employed,84000.0,West,Station Area,46451.87,554,2023-04-19,andrew.brown_194@email.com,+1-302-797-3252,0,High,0.0,0.0,Regular
+CUST00195,Ryan Walker,Male,33,Freelancer,41700.0,South,Mall Road,20144.37,729,2021-08-08,ryan.walker_195@email.com,+1-492-761-1969,1,Medium,0.0,0.0,Regular
+CUST00196,Brandon Anderson,Male,44,Salaried,33000.0,South,University,34760.52,728,2019-12-22,brandon.anderson_196@email.com,+1-237-956-7504,1,Medium,0.0,0.0,Regular
+CUST00197,Kevin Williams,Male,48,Salaried,72800.0,East,Highway,59916.46,716,2019-03-16,kevin.williams_197@email.com,+1-543-391-8444,1,Medium,0.0,0.0,Regular
+CUST00198,Sarah Allen,Female,41,Freelancer,22600.0,East,Tech Park,36884.32,696,2019-04-07,sarah.allen_198@email.com,+1-538-266-8518,1,Medium,0.0,0.0,Regular
+CUST00199,James Perez,Male,45,Government,30800.0,Central,Tech Park,6019.34,764,2019-12-20,james.perez_199@email.com,+1-825-976-7643,1,Low,0.0,0.0,Regular
+CUST00200,Elizabeth Sanchez,Female,41,Self-Employed,78300.0,South,Airport Road,22787.83,682,2023-05-10,elizabeth.sanchez_200@email.com,+1-531-354-1111,1,Medium,0.0,0.0,Regular
+CUST00201,Gary Moore,Male,53,Student,12700.0,East,Highway,24719.43,643,2018-02-16,gary.moore_201@email.com,+1-467-769-6890,1,High,0.0,0.0,Regular
+CUST00202,Thomas Robinson,Male,36,Government,45400.0,South,University,28754.82,641,2023-08-21,thomas.robinson_202@email.com,+1-920-888-6095,1,High,0.0,0.0,Regular
+CUST00203,Melissa Flores,Female,57,Professional,58500.0,South,Airport Road,17601.76,644,2023-05-13,melissa.flores_203@email.com,+1-356-565-7121,1,High,0.0,0.0,Regular
+CUST00204,Anna Wilson,Female,59,Professional,84700.0,Central,Downtown,75979.09,561,2023-11-23,anna.wilson_204@email.com,+1-657-640-6927,0,High,0.0,0.0,Regular
+CUST00205,William Scott,Male,45,Professional,101400.0,Central,Suburb,24312.38,765,2019-09-06,william.scott_205@email.com,+1-368-435-9525,1,Low,0.0,0.0,Regular
+CUST00206,Benjamin Young,Male,35,Self-Employed,92500.0,Central,Industrial Area,347554.84,650,2018-08-16,benjamin.young_206@email.com,+1-664-235-9409,1,Medium,0.0,0.0,Regular
+CUST00207,Scott Robinson,Male,36,Government,71800.0,North,University,146603.45,638,2020-11-08,scott.robinson_207@email.com,+1-203-863-4570,1,High,0.0,0.0,Regular
+CUST00208,Jacob Thompson,Male,36,Self-Employed,59500.0,Central,Main Branch,4388.13,606,2018-10-10,jacob.thompson_208@email.com,+1-683-132-5703,1,High,0.0,0.0,Regular
+CUST00209,Ryan White,Male,29,Retired,26900.0,West,University,21128.5,698,2022-03-19,ryan.white_209@email.com,+1-282-799-9835,1,Medium,0.0,0.0,Regular
+CUST00210,Jessica Lopez,Female,60,Retired,24500.0,Central,Airport Road,71767.49,662,2020-07-01,jessica.lopez_210@email.com,+1-203-874-1372,1,Medium,0.0,0.0,Regular
+CUST00211,Anna Ramirez,Female,41,Retired,42100.0,South,Tech Park,5725.78,710,2023-03-02,anna.ramirez_211@email.com,+1-554-258-5516,1,Medium,0.0,0.0,Regular
+CUST00212,Michael Clark,Male,43,Salaried,63100.0,South,Tech Park,31163.49,850,2018-10-03,michael.clark_212@email.com,+1-303-708-1550,1,Low,0.0,0.0,Regular
+CUST00213,Paul Williams,Male,34,Retired,29400.0,West,Tech Park,10427.81,635,2020-06-08,paul.williams_213@email.com,+1-972-984-1924,1,High,0.0,0.0,Regular
+CUST00214,Sandra Torres,Female,34,Student,20400.0,Central,Highway,121128.24,634,2021-08-06,sandra.torres_214@email.com,+1-442-409-3347,1,High,0.0,0.0,Regular
+CUST00215,Ryan Martin,Male,32,Government,57100.0,North,Suburb,11354.08,730,2019-12-19,ryan.martin_215@email.com,+1-841-795-7999,1,Medium,0.0,0.0,Regular
+CUST00216,Ronald Harris,Male,44,Student,10000.0,West,University,141069.26,823,2019-09-04,ronald.harris_216@email.com,+1-507-485-4012,1,Low,0.0,0.0,Regular
+CUST00217,Ashley Anderson,Female,34,Government,44200.0,South,Industrial Area,31040.2,706,2018-08-25,ashley.anderson_217@email.com,+1-775-522-7824,1,Medium,0.0,0.0,Regular
+CUST00218,Jason Thomas,Male,49,Government,80200.0,South,Station Area,17812.64,616,2018-11-20,jason.thomas_218@email.com,+1-660-967-7079,1,High,0.0,0.0,Regular
+CUST00219,William Moore,Male,25,Retired,27300.0,Central,Highway,21168.04,823,2018-06-11,william.moore_219@email.com,+1-274-292-4555,1,Low,0.0,0.0,Regular
+CUST00220,Donna Smith,Female,35,Professional,85400.0,South,Downtown,21596.63,775,2023-05-16,donna.smith_220@email.com,+1-448-812-4350,1,Low,0.0,0.0,Regular
+CUST00221,Scott Lee,Male,72,Government,42000.0,West,Industrial Area,12242.55,763,2023-12-26,scott.lee_221@email.com,+1-864-467-6053,1,Low,0.0,0.0,Regular
+CUST00222,Cynthia Miller,Female,50,Freelancer,69900.0,East,Tech Park,44387.53,651,2022-02-27,cynthia.miller_222@email.com,+1-520-523-1749,1,Medium,0.0,0.0,Regular
+CUST00223,Daniel Johnson,Male,49,Government,66600.0,Central,Highway,58957.88,720,2022-09-07,daniel.johnson_223@email.com,+1-502-256-4214,1,Medium,0.0,0.0,Regular
+CUST00224,Pamela Thomas,Female,54,Freelancer,60800.0,Central,Station Area,115680.9,731,2020-11-20,pamela.thomas_224@email.com,+1-981-941-9005,1,Medium,0.0,0.0,Regular
+CUST00225,Cynthia Hernandez,Female,39,Student,15700.0,South,Airport Road,93696.0,614,2023-06-24,cynthia.hernandez_225@email.com,+1-388-655-1962,1,High,0.0,0.0,Regular
+CUST00226,William Smith,Male,46,Retired,30900.0,South,Tech Park,22799.5,782,2018-10-06,william.smith_226@email.com,+1-924-254-1149,1,Low,0.0,0.0,Regular
+CUST00227,Melissa Brown,Female,44,Freelancer,45600.0,West,Main Branch,4307.76,739,2018-01-28,melissa.brown_227@email.com,+1-744-664-7739,0,Medium,0.0,0.0,Regular
+CUST00228,Anna Jackson,Female,49,Salaried,90700.0,Central,University,15224.57,697,2020-01-05,anna.jackson_228@email.com,+1-309-198-9591,1,Medium,0.0,0.0,Regular
+CUST00229,Raymond King,Male,44,Government,73700.0,East,Mall Road,19646.32,702,2022-06-14,raymond.king_229@email.com,+1-280-482-7652,1,Medium,0.0,0.0,Regular
+CUST00230,Andrew Martin,Male,49,Self-Employed,68600.0,North,Downtown,12890.94,695,2022-07-19,andrew.martin_230@email.com,+1-588-486-8798,0,Medium,0.0,0.0,Regular
+CUST00231,Matthew Garcia,Male,54,Freelancer,31100.0,West,Station Area,25837.02,623,2019-01-26,matthew.garcia_231@email.com,+1-740-143-4764,1,High,0.0,0.0,Regular
+CUST00232,Kimberly Williams,Female,56,Self-Employed,35300.0,East,Suburb,11263.17,710,2018-05-15,kimberly.williams_232@email.com,+1-383-970-6152,0,Medium,0.0,0.0,Regular
+CUST00233,Benjamin Martinez,Male,60,Retired,34300.0,North,Mall Road,11313.6,830,2019-10-28,benjamin.martinez_233@email.com,+1-777-346-7375,1,Low,0.0,0.0,Regular
+CUST00234,Deborah Rodriguez,Female,24,Self-Employed,22100.0,Central,Station Area,37347.35,639,2018-08-08,deborah.rodriguez_234@email.com,+1-300-547-4803,1,High,0.0,0.0,Regular
+CUST00235,Nicole Flores,Female,29,Retired,42400.0,East,Main Branch,29512.25,634,2021-01-24,nicole.flores_235@email.com,+1-661-602-4737,1,High,0.0,0.0,Regular
+CUST00236,Sharon Lopez,Female,26,Retired,44200.0,North,Highway,48061.73,672,2021-04-24,sharon.lopez_236@email.com,+1-452-830-2204,1,Medium,0.0,0.0,Regular
+CUST00237,Jason Martinez,Male,64,Retired,23800.0,East,Station Area,3531.12,624,2019-03-13,jason.martinez_237@email.com,+1-293-105-6050,1,High,0.0,0.0,Regular
+CUST00238,Susan Rodriguez,Female,41,Self-Employed,69700.0,South,University,16490.12,708,2023-01-13,susan.rodriguez_238@email.com,+1-770-668-9395,1,Medium,0.0,0.0,Regular
+CUST00239,Richard Thompson,Male,26,Self-Employed,93200.0,Central,Highway,19958.66,769,2021-08-21,richard.thompson_239@email.com,+1-594-112-5781,1,Low,0.0,0.0,Regular
+CUST00240,Scott Thomas,Male,46,Business Owner,102300.0,West,Airport Road,43639.62,715,2019-07-23,scott.thomas_240@email.com,+1-475-408-5397,1,Medium,0.0,0.0,Regular
+CUST00241,Matthew Ramirez,Male,49,Government,69900.0,West,Mall Road,27884.48,736,2023-06-07,matthew.ramirez_241@email.com,+1-278-469-5123,1,Medium,0.0,0.0,Regular
+CUST00242,Nicole Flores,Female,40,Professional,114600.0,West,Downtown,9782.29,824,2019-07-09,nicole.flores_242@email.com,+1-511-106-7483,1,Low,0.0,0.0,Regular
+CUST00243,Carol Lewis,Female,41,Student,10000.0,West,Highway,25686.61,625,2019-07-12,carol.lewis_243@email.com,+1-507-428-4290,1,High,0.0,0.0,Regular
+CUST00244,Jeffrey Lee,Male,52,Government,40200.0,West,Highway,12894.81,528,2020-09-19,jeffrey.lee_244@email.com,+1-533-485-5592,1,High,0.0,0.0,Regular
+CUST00245,Melissa Davis,Female,36,Professional,21800.0,Central,Suburb,3292.22,740,2020-01-07,melissa.davis_245@email.com,+1-898-886-1440,1,Medium,0.0,0.0,Regular
+CUST00246,Margaret Lewis,Female,51,Government,56400.0,North,University,6902.43,676,2023-08-08,margaret.lewis_246@email.com,+1-342-748-5961,1,Medium,0.0,0.0,Regular
+CUST00247,Jacob Harris,Male,41,Self-Employed,42400.0,West,Highway,133796.86,750,2023-05-17,jacob.harris_247@email.com,+1-796-510-9755,1,Low,0.0,0.0,Regular
+CUST00248,Anna Williams,Female,39,Student,15100.0,Central,Highway,28284.22,516,2018-12-15,anna.williams_248@email.com,+1-311-887-5067,1,High,0.0,0.0,Regular
+CUST00249,Lisa Flores,Female,39,Salaried,43700.0,Central,University,6621.36,657,2021-09-20,lisa.flores_249@email.com,+1-640-208-1172,1,Medium,0.0,0.0,Regular
+CUST00250,Stephen King,Male,63,Professional,95400.0,West,Station Area,11098.72,725,2022-05-22,stephen.king_250@email.com,+1-674-890-9199,1,Medium,0.0,0.0,Regular
+CUST00251,Eric Miller,Male,58,Government,63900.0,West,Downtown,23660.36,628,2019-04-21,eric.miller_251@email.com,+1-947-245-6707,1,High,0.0,0.0,Regular
+CUST00252,Margaret King,Female,50,Freelancer,50300.0,East,Industrial Area,64487.83,730,2019-02-04,margaret.king_252@email.com,+1-648-839-8412,1,Medium,0.0,0.0,Regular
+CUST00253,Jennifer Davis,Female,54,Salaried,46200.0,East,Downtown,107030.9,695,2019-11-05,jennifer.davis_253@email.com,+1-958-349-9454,1,Medium,0.0,0.0,Regular
+CUST00254,Timothy Scott,Male,66,Retired,27800.0,West,Tech Park,176867.57,695,2022-07-18,timothy.scott_254@email.com,+1-844-288-4053,1,Medium,0.0,0.0,Regular
+CUST00255,Stephanie Johnson,Female,34,Professional,68400.0,West,Highway,14996.67,713,2022-10-26,stephanie.johnson_255@email.com,+1-598-104-4519,1,Medium,0.0,0.0,Regular
+CUST00256,Brandon Miller,Male,48,Business Owner,74500.0,East,Station Area,21392.05,850,2020-03-18,brandon.miller_256@email.com,+1-668-216-5298,1,Low,0.0,0.0,Regular
+CUST00257,Shirley Lee,Female,62,Retired,39600.0,Central,University,23054.22,689,2019-04-13,shirley.lee_257@email.com,+1-556-460-8501,1,Medium,0.0,0.0,Regular
+CUST00258,Helen Nguyen,Female,49,Self-Employed,45100.0,South,Station Area,16173.8,546,2019-04-28,helen.nguyen_258@email.com,+1-444-412-2916,1,High,0.0,0.0,Regular
+CUST00259,Stephen Harris,Male,46,Retired,41800.0,Central,Airport Road,12334.76,805,2022-04-21,stephen.harris_259@email.com,+1-633-290-8973,1,Low,0.0,0.0,Regular
+CUST00260,Scott Hernandez,Male,27,Freelancer,25200.0,East,Airport Road,28834.91,763,2020-02-06,scott.hernandez_260@email.com,+1-522-962-8389,1,Low,0.0,0.0,Regular
+CUST00261,Mary Young,Female,62,Business Owner,77600.0,South,University,80371.67,676,2023-09-02,mary.young_261@email.com,+1-868-606-7703,1,Medium,0.0,0.0,Regular
+CUST00262,Laura Young,Female,39,Business Owner,113900.0,North,Highway,48184.25,553,2018-05-07,laura.young_262@email.com,+1-979-325-5785,0,High,0.0,0.0,Regular
+CUST00263,Justin Jackson,Male,59,Business Owner,127300.0,West,Highway,10397.54,711,2023-07-22,justin.jackson_263@email.com,+1-762-623-2854,1,Medium,0.0,0.0,Regular
+CUST00264,Anna White,Female,47,Salaried,59300.0,West,Suburb,11380.24,626,2020-06-14,anna.white_264@email.com,+1-635-204-5055,1,High,0.0,0.0,Regular
+CUST00265,Gary Taylor,Male,41,Student,20300.0,North,Industrial Area,42290.6,650,2019-04-26,gary.taylor_265@email.com,+1-994-931-4882,1,Medium,0.0,0.0,Regular
+CUST00266,Helen Ramirez,Female,51,Business Owner,13100.0,Central,Airport Road,87423.45,540,2020-04-26,helen.ramirez_266@email.com,+1-411-924-1972,1,High,0.0,0.0,Regular
+CUST00267,Nicole Wright,Female,37,Business Owner,59800.0,East,Mall Road,4658.19,772,2021-03-31,nicole.wright_267@email.com,+1-786-373-9428,1,Low,0.0,0.0,Regular
+CUST00268,Charles Clark,Male,36,Salaried,60700.0,East,Airport Road,20820.54,718,2019-06-28,charles.clark_268@email.com,+1-455-249-6277,1,Medium,0.0,0.0,Regular
+CUST00269,Amy Martinez,Female,42,Government,30800.0,West,University,72803.56,640,2023-01-26,amy.martinez_269@email.com,+1-277-748-2525,1,High,0.0,0.0,Regular
+CUST00270,Melissa Robinson,Female,23,Freelancer,39200.0,East,Highway,133373.9,748,2018-01-11,melissa.robinson_270@email.com,+1-992-967-2526,1,Medium,0.0,0.0,Regular
+CUST00271,Amanda Jones,Female,37,Retired,31300.0,South,University,14973.51,846,2020-05-17,amanda.jones_271@email.com,+1-706-374-6289,1,Low,0.0,0.0,Regular
+CUST00272,Brenda Torres,Female,46,Business Owner,101600.0,Central,Industrial Area,75836.89,699,2021-11-08,brenda.torres_272@email.com,+1-898-880-1793,0,Medium,0.0,0.0,Regular
+CUST00273,Patricia Davis,Female,38,Business Owner,84700.0,West,Industrial Area,20212.94,677,2018-01-03,patricia.davis_273@email.com,+1-638-307-3161,1,Medium,0.0,0.0,Regular
+CUST00274,Lisa Moore,Female,50,Self-Employed,66000.0,East,Mall Road,53059.44,673,2018-12-04,lisa.moore_274@email.com,+1-580-780-3711,0,Medium,0.0,0.0,Regular
+CUST00275,Sandra Ramirez,Female,42,Self-Employed,26000.0,North,Main Branch,66144.25,707,2020-05-24,sandra.ramirez_275@email.com,+1-688-179-3174,1,Medium,0.0,0.0,Regular
+CUST00276,Mary Smith,Female,53,Student,10000.0,North,University,269965.55,668,2019-06-26,mary.smith_276@email.com,+1-689-172-4751,1,Medium,0.0,0.0,Regular
+CUST00277,Joseph Lee,Male,55,Student,10300.0,East,Airport Road,45950.9,595,2022-04-17,joseph.lee_277@email.com,+1-992-932-3181,1,High,0.0,0.0,Regular
+CUST00278,David King,Male,34,Salaried,86600.0,Central,Airport Road,17521.45,697,2022-12-08,david.king_278@email.com,+1-559-839-4490,1,Medium,0.0,0.0,Regular
+CUST00279,Ryan Flores,Male,52,Freelancer,51700.0,South,Downtown,26383.73,709,2019-02-16,ryan.flores_279@email.com,+1-343-870-3017,1,Medium,0.0,0.0,Regular
+CUST00280,Amanda Ramirez,Female,70,Student,14700.0,South,Tech Park,28038.08,764,2021-02-08,amanda.ramirez_280@email.com,+1-860-186-5065,1,Low,0.0,0.0,Regular
+CUST00281,Patricia Martin,Female,55,Professional,108500.0,Central,Highway,47404.68,588,2023-09-19,patricia.martin_281@email.com,+1-393-865-7418,1,High,0.0,0.0,Regular
+CUST00282,Paul Young,Male,61,Retired,23000.0,North,Tech Park,31671.19,619,2023-08-09,paul.young_282@email.com,+1-853-708-2163,1,High,0.0,0.0,Regular
+CUST00283,Edward Lee,Male,41,Business Owner,98900.0,West,Highway,32390.77,713,2022-09-20,edward.lee_283@email.com,+1-574-659-3830,1,Medium,0.0,0.0,Regular
+CUST00284,Robert Nguyen,Male,61,Self-Employed,73800.0,North,Mall Road,16432.43,757,2020-06-02,robert.nguyen_284@email.com,+1-240-161-7520,1,Low,0.0,0.0,Regular
+CUST00285,Sharon Sanchez,Female,56,Self-Employed,41100.0,Central,Suburb,45110.94,736,2019-09-18,sharon.sanchez_285@email.com,+1-484-185-6077,0,Medium,0.0,0.0,Regular
+CUST00286,Daniel Wright,Male,38,Student,21200.0,West,Highway,18396.82,690,2018-09-28,daniel.wright_286@email.com,+1-517-815-8167,1,Medium,0.0,0.0,Regular
+CUST00287,William Thomas,Male,39,Self-Employed,65300.0,West,Downtown,5910.41,564,2023-02-01,william.thomas_287@email.com,+1-826-723-1901,1,High,0.0,0.0,Regular
+CUST00288,Thomas Smith,Male,61,Business Owner,67100.0,North,Airport Road,6703.13,507,2023-07-27,thomas.smith_288@email.com,+1-555-635-9474,1,High,0.0,0.0,Regular
+CUST00289,Lisa White,Female,34,Business Owner,54300.0,East,Downtown,158010.73,760,2018-05-01,lisa.white_289@email.com,+1-543-926-8034,1,Low,0.0,0.0,Regular
+CUST00290,Joshua Torres,Male,33,Self-Employed,108900.0,West,Industrial Area,71547.62,654,2023-09-24,joshua.torres_290@email.com,+1-568-156-9185,1,Medium,0.0,0.0,Regular
+CUST00291,Edward Hernandez,Male,18,Government,84400.0,North,Highway,4156.85,548,2019-04-18,edward.hernandez_291@email.com,+1-433-858-9336,0,High,0.0,0.0,Regular
+CUST00292,Paul Williams,Male,54,Freelancer,77900.0,East,University,115974.7,725,2019-09-07,paul.williams_292@email.com,+1-383-978-1579,1,Medium,0.0,0.0,Regular
+CUST00293,Sandra Lee,Female,49,Professional,100500.0,West,Station Area,54759.95,702,2021-01-16,sandra.lee_293@email.com,+1-279-685-7108,1,Medium,0.0,0.0,Regular
+CUST00294,Anthony Anderson,Male,43,Salaried,54000.0,West,Downtown,8912.79,657,2023-03-21,anthony.anderson_294@email.com,+1-489-892-6090,1,Medium,0.0,0.0,Regular
+CUST00295,Mary White,Female,21,Professional,77600.0,East,Highway,6725.7,591,2021-05-29,mary.white_295@email.com,+1-957-737-4974,1,High,0.0,0.0,Regular
+CUST00296,Betty Wright,Female,44,Professional,113400.0,South,Main Branch,66302.3,554,2022-08-07,betty.wright_296@email.com,+1-224-338-9872,1,High,0.0,0.0,Regular
+CUST00297,Timothy Smith,Male,30,Retired,44900.0,East,Downtown,6775.14,662,2020-04-20,timothy.smith_297@email.com,+1-742-343-7878,1,Medium,0.0,0.0,Regular
+CUST00298,Daniel Moore,Male,48,Self-Employed,46100.0,North,Tech Park,24995.49,573,2023-10-30,daniel.moore_298@email.com,+1-622-817-7102,1,High,0.0,0.0,Regular
+CUST00299,Benjamin Miller,Male,34,Business Owner,98600.0,West,Downtown,3256.5,715,2018-09-13,benjamin.miller_299@email.com,+1-645-778-3141,1,Medium,0.0,0.0,Regular
+CUST00300,Michelle Sanchez,Female,41,Student,17500.0,East,Industrial Area,28816.31,789,2021-01-18,michelle.sanchez_300@email.com,+1-439-176-4321,1,Low,0.0,0.0,Regular
+CUST00301,Daniel Miller,Male,43,Business Owner,78400.0,West,Industrial Area,25508.24,723,2021-07-10,daniel.miller_301@email.com,+1-616-223-9780,1,Medium,0.0,0.0,Regular
+CUST00302,Gary Martin,Male,42,Freelancer,45500.0,East,Downtown,9486.36,626,2019-01-06,gary.martin_302@email.com,+1-361-926-5984,1,High,0.0,0.0,Regular
+CUST00303,Steven Lee,Male,25,Business Owner,137200.0,North,Tech Park,4951.1,624,2021-12-28,steven.lee_303@email.com,+1-605-625-1802,1,High,0.0,0.0,Regular
+CUST00304,Nancy Johnson,Female,33,Retired,44400.0,West,Suburb,15460.76,779,2020-10-20,nancy.johnson_304@email.com,+1-296-573-2669,1,Low,0.0,0.0,Regular
+CUST00305,Thomas Smith,Male,33,Salaried,59600.0,South,Airport Road,8083.53,850,2020-03-22,thomas.smith_305@email.com,+1-610-481-2376,1,Low,0.0,0.0,Regular
+CUST00306,Barbara Johnson,Female,27,Self-Employed,71000.0,South,Industrial Area,47123.74,713,2019-06-12,barbara.johnson_306@email.com,+1-294-967-6432,1,Medium,0.0,0.0,Regular
+CUST00307,Linda Hernandez,Female,39,Retired,33600.0,West,Industrial Area,23215.46,668,2018-05-01,linda.hernandez_307@email.com,+1-591-799-7990,1,Medium,0.0,0.0,Regular
+CUST00308,Anthony Moore,Male,53,Government,83200.0,West,Airport Road,11282.52,570,2018-05-22,anthony.moore_308@email.com,+1-828-734-5026,1,High,0.0,0.0,Regular
+CUST00309,Rebecca Scott,Female,40,Freelancer,79800.0,North,Downtown,8396.67,811,2021-02-19,rebecca.scott_309@email.com,+1-592-240-7868,1,Low,0.0,0.0,Regular
+CUST00310,Justin Johnson,Male,62,Retired,29200.0,East,Industrial Area,43598.57,810,2023-06-09,justin.johnson_310@email.com,+1-552-679-9231,1,Low,0.0,0.0,Regular
+CUST00311,Nancy Johnson,Female,37,Student,14100.0,Central,Tech Park,10959.73,598,2018-05-01,nancy.johnson_311@email.com,+1-997-387-1959,1,High,0.0,0.0,Regular
+CUST00312,Shirley Thompson,Female,34,Professional,50600.0,South,Downtown,22946.03,618,2020-10-12,shirley.thompson_312@email.com,+1-872-346-5366,1,High,0.0,0.0,Regular
+CUST00313,Andrew Torres,Male,44,Retired,18700.0,East,Airport Road,32763.04,746,2019-12-23,andrew.torres_313@email.com,+1-442-706-6210,1,Medium,0.0,0.0,Regular
+CUST00314,Emma Johnson,Female,18,Student,16700.0,Central,Highway,96105.59,583,2019-08-06,emma.johnson_314@email.com,+1-776-292-9064,1,High,0.0,0.0,Regular
+CUST00315,Jonathan Williams,Male,62,Self-Employed,73200.0,North,Tech Park,9452.04,675,2020-06-15,jonathan.williams_315@email.com,+1-220-639-8831,0,Medium,0.0,0.0,Regular
+CUST00316,Charles Perez,Male,48,Business Owner,92100.0,East,Main Branch,42045.48,606,2018-03-31,charles.perez_316@email.com,+1-351-700-3320,1,High,0.0,0.0,Regular
+CUST00317,Barbara White,Female,44,Retired,20200.0,Central,Downtown,19274.32,607,2021-10-10,barbara.white_317@email.com,+1-509-430-3235,1,High,0.0,0.0,Regular
+CUST00318,Amy Lee,Female,33,Business Owner,123400.0,Central,Highway,81598.99,728,2022-01-01,amy.lee_318@email.com,+1-428-781-3872,1,Medium,0.0,0.0,Regular
+CUST00319,Sarah Lopez,Female,28,Salaried,49800.0,Central,University,94439.74,691,2018-05-13,sarah.lopez_319@email.com,+1-386-716-6213,1,Medium,0.0,0.0,Regular
+CUST00320,Brandon Miller,Male,69,Freelancer,50300.0,South,Station Area,27735.24,655,2018-11-15,brandon.miller_320@email.com,+1-443-455-6234,1,Medium,0.0,0.0,Regular
+CUST00321,Timothy Lewis,Male,43,Salaried,52500.0,East,Tech Park,51520.26,756,2020-10-19,timothy.lewis_321@email.com,+1-909-169-6742,1,Low,0.0,0.0,Regular
+CUST00322,James Brown,Male,32,Retired,21000.0,West,University,2432.21,720,2019-11-13,james.brown_322@email.com,+1-623-604-7204,1,Medium,0.0,0.0,Regular
+CUST00323,Susan Walker,Female,28,Professional,28300.0,South,Industrial Area,35111.86,850,2018-10-29,susan.walker_323@email.com,+1-234-401-1328,1,Low,0.0,0.0,Regular
+CUST00324,David Perez,Male,41,Business Owner,112600.0,West,Airport Road,24299.12,672,2018-11-04,david.perez_324@email.com,+1-760-195-6536,1,Medium,0.0,0.0,Regular
+CUST00325,Patricia Ramirez,Female,53,Business Owner,82200.0,Central,University,30359.68,705,2019-10-06,patricia.ramirez_325@email.com,+1-254-203-6424,1,Medium,0.0,0.0,Regular
+CUST00326,Ryan Scott,Male,33,Government,64900.0,East,Mall Road,17855.17,619,2020-08-30,ryan.scott_326@email.com,+1-298-150-7437,1,High,0.0,0.0,Regular
+CUST00327,Karen Brown,Female,48,Student,11000.0,North,University,22784.08,679,2018-12-25,karen.brown_327@email.com,+1-501-943-8869,1,Medium,0.0,0.0,Regular
+CUST00328,Steven Hernandez,Male,55,Government,57100.0,North,Industrial Area,21374.79,745,2019-04-19,steven.hernandez_328@email.com,+1-515-903-7512,1,Medium,0.0,0.0,Regular
+CUST00329,Elizabeth Wright,Female,58,Retired,40900.0,South,Station Area,22301.81,575,2022-04-12,elizabeth.wright_329@email.com,+1-578-291-8303,0,High,0.0,0.0,Regular
+CUST00330,Cynthia Taylor,Female,29,Professional,72700.0,East,Highway,10599.75,665,2018-09-10,cynthia.taylor_330@email.com,+1-354-870-2584,1,Medium,0.0,0.0,Regular
+CUST00331,Anna Clark,Female,42,Professional,92700.0,Central,Main Branch,20239.7,718,2022-05-05,anna.clark_331@email.com,+1-735-528-9773,1,Medium,0.0,0.0,Regular
+CUST00332,Pamela Thomas,Female,42,Freelancer,18300.0,East,Downtown,7135.21,668,2022-06-06,pamela.thomas_332@email.com,+1-931-135-9226,1,Medium,0.0,0.0,Regular
+CUST00333,Thomas Lewis,Male,27,Business Owner,106200.0,South,Tech Park,138261.35,777,2020-02-29,thomas.lewis_333@email.com,+1-329-143-7936,0,Low,0.0,0.0,Regular
+CUST00334,Betty Martinez,Female,39,Government,72400.0,East,Downtown,26328.33,653,2018-12-23,betty.martinez_334@email.com,+1-597-669-7510,1,Medium,0.0,0.0,Regular
+CUST00335,Shirley Robinson,Female,34,Salaried,50000.0,Central,Highway,13824.36,693,2023-11-11,shirley.robinson_335@email.com,+1-629-215-7790,1,Medium,0.0,0.0,Regular
+CUST00336,Joseph Torres,Male,43,Self-Employed,65100.0,East,Suburb,37209.74,775,2021-11-09,joseph.torres_336@email.com,+1-620-370-7275,1,Low,0.0,0.0,Regular
+CUST00337,Jennifer Lopez,Female,53,Government,27700.0,West,Airport Road,1027.92,754,2022-07-04,jennifer.lopez_337@email.com,+1-239-505-6431,1,Low,0.0,0.0,Regular
+CUST00338,Eric Moore,Male,25,Student,14000.0,North,Station Area,5409.24,535,2021-05-26,eric.moore_338@email.com,+1-518-387-9054,1,High,0.0,0.0,Regular
+CUST00339,Andrew Rodriguez,Male,48,Government,61400.0,West,Station Area,11027.94,472,2021-01-08,andrew.rodriguez_339@email.com,+1-946-526-2462,1,High,0.0,0.0,Regular
+CUST00340,Ryan Young,Male,35,Student,16800.0,North,Suburb,3734.26,694,2019-10-14,ryan.young_340@email.com,+1-267-418-9303,1,Medium,0.0,0.0,Regular
+CUST00341,Anthony Gonzalez,Male,41,Professional,93900.0,North,Tech Park,25425.21,602,2018-05-16,anthony.gonzalez_341@email.com,+1-667-151-6904,1,High,0.0,0.0,Regular
+CUST00342,Melissa Robinson,Female,56,Retired,33300.0,North,Main Branch,21316.45,605,2020-09-17,melissa.robinson_342@email.com,+1-581-600-8308,1,High,0.0,0.0,Regular
+CUST00343,Emma Scott,Female,36,Student,11000.0,East,Airport Road,17898.37,816,2020-11-25,emma.scott_343@email.com,+1-966-950-2480,1,Low,0.0,0.0,Regular
+CUST00344,Linda Hernandez,Female,25,Professional,41300.0,South,Tech Park,128721.24,663,2020-04-26,linda.hernandez_344@email.com,+1-475-767-7709,1,Medium,0.0,0.0,Regular
+CUST00345,Eric Rodriguez,Male,33,Business Owner,118100.0,Central,Main Branch,10649.43,826,2020-07-05,eric.rodriguez_345@email.com,+1-458-722-6004,1,Low,0.0,0.0,Regular
+CUST00346,Sharon Harris,Female,50,Student,12800.0,West,Mall Road,293246.8,631,2020-06-12,sharon.harris_346@email.com,+1-677-409-9530,1,High,0.0,0.0,Regular
+CUST00347,Emma Miller,Female,50,Salaried,59900.0,Central,Station Area,105039.27,804,2021-03-03,emma.miller_347@email.com,+1-505-800-2771,1,Low,0.0,0.0,Regular
+CUST00348,Kimberly Lee,Female,42,Government,38700.0,East,Mall Road,38252.59,625,2020-02-11,kimberly.lee_348@email.com,+1-353-629-4937,1,High,0.0,0.0,Regular
+CUST00349,Michelle Rodriguez,Female,66,Salaried,57300.0,West,Mall Road,14208.76,694,2020-11-28,michelle.rodriguez_349@email.com,+1-628-514-7361,1,Medium,0.0,0.0,Regular
+CUST00350,Timothy Anderson,Male,25,Freelancer,31900.0,East,Suburb,93013.2,627,2021-05-14,timothy.anderson_350@email.com,+1-374-960-3967,1,High,0.0,0.0,Regular
+CUST00351,Sarah Taylor,Female,29,Business Owner,104500.0,East,Downtown,91385.76,737,2020-06-29,sarah.taylor_351@email.com,+1-563-328-6031,1,Medium,0.0,0.0,Regular
+CUST00352,Melissa Taylor,Female,53,Government,38600.0,West,Downtown,3999.11,800,2023-04-12,melissa.taylor_352@email.com,+1-254-987-2166,1,Low,0.0,0.0,Regular
+CUST00353,Stephen Davis,Male,38,Retired,32400.0,Central,Mall Road,108427.06,724,2022-08-20,stephen.davis_353@email.com,+1-255-991-3470,1,Medium,0.0,0.0,Regular
+CUST00354,Timothy Clark,Male,47,Freelancer,74200.0,South,Station Area,10175.91,754,2020-01-09,timothy.clark_354@email.com,+1-997-182-8988,1,Low,0.0,0.0,Regular
+CUST00355,George Brown,Male,42,Salaried,59400.0,West,Mall Road,137883.18,720,2020-05-07,george.brown_355@email.com,+1-979-892-3762,1,Medium,0.0,0.0,Regular
+CUST00356,Jonathan Garcia,Male,48,Business Owner,119000.0,Central,University,14215.05,612,2022-10-25,jonathan.garcia_356@email.com,+1-613-539-8821,1,High,0.0,0.0,Regular
+CUST00357,Justin Gonzalez,Male,29,Student,10000.0,North,Station Area,259743.15,591,2023-12-16,justin.gonzalez_357@email.com,+1-395-118-1067,1,High,0.0,0.0,Regular
+CUST00358,Andrew Thompson,Male,39,Government,45800.0,South,Downtown,31853.04,745,2022-04-21,andrew.thompson_358@email.com,+1-715-702-6015,1,Medium,0.0,0.0,Regular
+CUST00359,Brian Jackson,Male,52,Freelancer,37100.0,Central,Highway,18023.9,702,2023-11-17,brian.jackson_359@email.com,+1-545-544-3192,1,Medium,0.0,0.0,Regular
+CUST00360,Amanda Gonzalez,Female,39,Business Owner,133400.0,West,Main Branch,39702.52,738,2020-07-24,amanda.gonzalez_360@email.com,+1-429-844-3149,1,Medium,0.0,0.0,Regular
+CUST00361,Benjamin Allen,Male,49,Business Owner,121700.0,North,Station Area,27370.63,576,2018-06-03,benjamin.allen_361@email.com,+1-584-997-5190,1,High,0.0,0.0,Regular
+CUST00362,Samuel Brown,Male,46,Self-Employed,52300.0,North,Main Branch,11680.31,726,2019-04-20,samuel.brown_362@email.com,+1-626-554-7230,1,Medium,0.0,0.0,Regular
+CUST00363,Kathleen Martinez,Female,56,Professional,80500.0,North,Mall Road,31907.6,816,2022-09-20,kathleen.martinez_363@email.com,+1-877-203-9524,1,Low,0.0,0.0,Regular
+CUST00364,Ryan Miller,Male,44,Self-Employed,115700.0,East,Downtown,43417.23,539,2019-03-12,ryan.miller_364@email.com,+1-709-303-4272,1,High,0.0,0.0,Regular
+CUST00365,Ronald Clark,Male,51,Government,55700.0,South,Main Branch,103538.97,733,2023-07-27,ronald.clark_365@email.com,+1-412-804-8875,1,Medium,0.0,0.0,Regular
+CUST00366,James Garcia,Male,40,Self-Employed,41100.0,Central,Industrial Area,17140.03,611,2019-09-03,james.garcia_366@email.com,+1-292-898-9383,0,High,0.0,0.0,Regular
+CUST00367,Joshua Anderson,Male,35,Freelancer,52900.0,East,Mall Road,163388.39,711,2023-03-17,joshua.anderson_367@email.com,+1-251-202-3862,1,Medium,0.0,0.0,Regular
+CUST00368,Melissa Lee,Female,27,Retired,39700.0,North,Downtown,92591.98,631,2018-07-07,melissa.lee_368@email.com,+1-209-972-3267,1,High,0.0,0.0,Regular
+CUST00369,Timothy Thompson,Male,40,Freelancer,45200.0,Central,Mall Road,8588.01,731,2019-01-16,timothy.thompson_369@email.com,+1-581-934-6615,1,Medium,0.0,0.0,Regular
+CUST00370,Stephanie Robinson,Female,40,Government,56300.0,West,Industrial Area,7593.21,645,2022-09-24,stephanie.robinson_370@email.com,+1-864-916-3732,1,High,0.0,0.0,Regular
+CUST00371,Matthew Miller,Male,50,Retired,31100.0,Central,Industrial Area,174967.69,648,2022-11-30,matthew.miller_371@email.com,+1-385-725-7221,1,High,0.0,0.0,Regular
+CUST00372,Charles Walker,Male,44,Freelancer,57600.0,North,University,4015.68,539,2022-12-11,charles.walker_372@email.com,+1-247-164-5286,1,High,0.0,0.0,Regular
+CUST00373,Larry Torres,Male,23,Professional,110300.0,East,Suburb,11359.05,850,2023-11-13,larry.torres_373@email.com,+1-904-817-2560,1,Low,0.0,0.0,Regular
+CUST00374,Eric Thompson,Male,35,Retired,36900.0,South,Suburb,140158.88,840,2018-08-12,eric.thompson_374@email.com,+1-211-758-3571,1,Low,0.0,0.0,Regular
+CUST00375,Amy Hernandez,Female,66,Self-Employed,88600.0,West,Station Area,75272.87,727,2020-09-13,amy.hernandez_375@email.com,+1-538-384-1824,1,Medium,0.0,0.0,Regular
+CUST00376,Stephanie Thomas,Female,51,Self-Employed,54300.0,West,Industrial Area,8251.59,679,2023-01-10,stephanie.thomas_376@email.com,+1-290-977-9166,1,Medium,0.0,0.0,Regular
+CUST00377,Jonathan Johnson,Male,39,Self-Employed,56200.0,West,University,50800.68,756,2018-05-27,jonathan.johnson_377@email.com,+1-770-662-1002,1,Low,0.0,0.0,Regular
+CUST00378,Angela Scott,Female,43,Professional,115500.0,West,Station Area,5596.93,664,2022-01-28,angela.scott_378@email.com,+1-255-936-4652,1,Medium,0.0,0.0,Regular
+CUST00379,Brenda Flores,Female,33,Freelancer,19800.0,East,Industrial Area,19945.99,670,2019-04-13,brenda.flores_379@email.com,+1-299-877-4633,0,Medium,0.0,0.0,Regular
+CUST00380,Emily Scott,Female,60,Student,17800.0,North,Main Branch,6444.46,828,2019-11-04,emily.scott_380@email.com,+1-704-243-7704,1,Low,0.0,0.0,Regular
+CUST00381,Mark Davis,Male,56,Retired,41100.0,South,Industrial Area,16784.63,603,2020-02-20,mark.davis_381@email.com,+1-933-446-2765,1,High,0.0,0.0,Regular
+CUST00382,Benjamin Davis,Male,37,Freelancer,59700.0,West,Highway,211399.2,803,2023-08-28,benjamin.davis_382@email.com,+1-337-610-1071,1,Low,0.0,0.0,Regular
+CUST00383,Scott Ramirez,Male,36,Freelancer,29900.0,Central,Airport Road,26083.64,538,2019-12-13,scott.ramirez_383@email.com,+1-948-934-3103,1,High,0.0,0.0,Regular
+CUST00384,Angela Harris,Female,45,Retired,33400.0,Central,Tech Park,12591.23,552,2021-01-25,angela.harris_384@email.com,+1-607-451-5819,1,High,0.0,0.0,Regular
+CUST00385,Charles Clark,Male,48,Government,42000.0,Central,Station Area,5410.52,450,2020-06-09,charles.clark_385@email.com,+1-405-314-5760,1,High,0.0,0.0,Regular
+CUST00386,Anthony Allen,Male,41,Student,23000.0,North,Station Area,161702.1,643,2023-05-22,anthony.allen_386@email.com,+1-796-684-7839,1,High,0.0,0.0,Regular
+CUST00387,Sharon Smith,Female,34,Self-Employed,74100.0,North,University,6647.11,704,2019-08-19,sharon.smith_387@email.com,+1-254-786-1927,1,Medium,0.0,0.0,Regular
+CUST00388,Kevin Taylor,Male,51,Business Owner,123100.0,North,Mall Road,19532.11,663,2020-04-15,kevin.taylor_388@email.com,+1-971-654-1529,1,Medium,0.0,0.0,Regular
+CUST00389,Susan Flores,Female,31,Professional,60200.0,Central,University,16784.74,709,2020-08-31,susan.flores_389@email.com,+1-723-903-5712,1,Medium,0.0,0.0,Regular
+CUST00390,Jason Harris,Male,52,Retired,26600.0,East,Suburb,132088.35,658,2018-08-09,jason.harris_390@email.com,+1-213-861-5117,1,Medium,0.0,0.0,Regular
+CUST00391,Sandra White,Female,41,Professional,62100.0,South,Mall Road,1201.0,750,2023-01-13,sandra.white_391@email.com,+1-381-799-2220,1,Low,0.0,0.0,Regular
+CUST00392,Stephen Davis,Male,50,Retired,32000.0,North,University,23870.27,721,2021-02-17,stephen.davis_392@email.com,+1-769-370-3131,1,Medium,0.0,0.0,Regular
+CUST00393,Mary Perez,Female,23,Freelancer,37900.0,South,Main Branch,57131.88,579,2019-09-22,mary.perez_393@email.com,+1-530-711-1833,1,High,0.0,0.0,Regular
+CUST00394,Amy Torres,Female,45,Student,10000.0,North,Station Area,38550.18,677,2023-11-23,amy.torres_394@email.com,+1-425-288-9529,0,Medium,0.0,0.0,Regular
+CUST00395,Ryan Wright,Male,22,Retired,47200.0,North,Station Area,9122.42,615,2020-06-25,ryan.wright_395@email.com,+1-418-779-6437,1,High,0.0,0.0,Regular
+CUST00396,Margaret Flores,Female,44,Freelancer,60500.0,Central,Main Branch,6509.47,684,2019-04-15,margaret.flores_396@email.com,+1-884-454-8301,1,Medium,0.0,0.0,Regular
+CUST00397,Michael Lee,Male,47,Retired,42300.0,North,University,27220.61,650,2020-11-16,michael.lee_397@email.com,+1-753-841-5633,0,Medium,0.0,0.0,Regular
+CUST00398,Angela Allen,Female,32,Freelancer,46200.0,West,Main Branch,6084.09,446,2021-04-29,angela.allen_398@email.com,+1-867-297-6248,1,High,0.0,0.0,Regular
+CUST00399,Matthew Wright,Male,47,Salaried,69900.0,North,Tech Park,1292.69,599,2020-05-23,matthew.wright_399@email.com,+1-901-534-2702,1,High,0.0,0.0,Regular
+CUST00400,Barbara Martinez,Female,49,Salaried,88900.0,West,Station Area,22582.99,621,2018-06-05,barbara.martinez_400@email.com,+1-289-175-1889,1,High,0.0,0.0,Regular
+CUST00401,Brenda Jones,Female,39,Professional,113000.0,East,University,10146.08,616,2022-05-09,brenda.jones_401@email.com,+1-661-745-7626,1,High,0.0,0.0,Regular
+CUST00402,Jason Davis,Male,36,Salaried,39300.0,Central,Downtown,25519.66,809,2018-07-06,jason.davis_402@email.com,+1-917-968-2189,1,Low,0.0,0.0,Regular
+CUST00403,Kevin Martin,Male,45,Self-Employed,60100.0,East,Industrial Area,15519.09,554,2022-04-12,kevin.martin_403@email.com,+1-604-941-1504,1,High,0.0,0.0,Regular
+CUST00404,Charles Sanchez,Male,52,Government,48800.0,South,Mall Road,17737.28,850,2022-03-09,charles.sanchez_404@email.com,+1-211-666-3316,1,Low,0.0,0.0,Regular
+CUST00405,Brandon Hill,Male,45,Retired,27100.0,Central,Suburb,13205.26,771,2018-12-15,brandon.hill_405@email.com,+1-512-315-6633,1,Low,0.0,0.0,Regular
+CUST00406,Matthew Lopez,Male,43,Professional,45500.0,Central,Mall Road,66374.93,626,2020-03-06,matthew.lopez_406@email.com,+1-317-285-1891,1,High,0.0,0.0,Regular
+CUST00407,Brenda Jones,Female,64,Government,66200.0,North,Mall Road,12877.2,782,2019-02-07,brenda.jones_407@email.com,+1-402-843-8982,1,Low,0.0,0.0,Regular
+CUST00408,Sarah Thomas,Female,42,Self-Employed,81600.0,East,Highway,39406.24,612,2018-10-13,sarah.thomas_408@email.com,+1-398-425-8960,1,High,0.0,0.0,Regular
+CUST00409,Emma Martinez,Female,34,Student,19600.0,East,University,14739.25,647,2019-11-22,emma.martinez_409@email.com,+1-204-420-5033,1,High,0.0,0.0,Regular
+CUST00410,Kimberly White,Female,30,Business Owner,101400.0,East,Industrial Area,261719.84,594,2023-03-11,kimberly.white_410@email.com,+1-656-467-6004,1,High,0.0,0.0,Regular
+CUST00411,Anthony Hill,Male,42,Self-Employed,92500.0,East,Airport Road,20018.86,716,2020-03-15,anthony.hill_411@email.com,+1-469-851-2252,1,Medium,0.0,0.0,Regular
+CUST00412,Stephen Johnson,Male,29,Retired,39500.0,Central,Tech Park,17596.0,758,2018-05-31,stephen.johnson_412@email.com,+1-764-366-9904,1,Low,0.0,0.0,Regular
+CUST00413,Karen White,Female,56,Retired,62200.0,South,Highway,44159.34,706,2021-04-06,karen.white_413@email.com,+1-337-575-9210,1,Medium,0.0,0.0,Regular
+CUST00414,Melissa Allen,Female,44,Salaried,49200.0,South,Highway,33063.35,656,2019-11-11,melissa.allen_414@email.com,+1-975-626-3299,1,Medium,0.0,0.0,Regular
+CUST00415,Brandon Torres,Male,44,Business Owner,125600.0,West,Station Area,6582.36,771,2018-06-15,brandon.torres_415@email.com,+1-424-879-8989,1,Low,0.0,0.0,Regular
+CUST00416,Melissa Anderson,Female,57,Salaried,53100.0,South,Suburb,1726.37,631,2022-01-19,melissa.anderson_416@email.com,+1-597-580-8448,1,High,0.0,0.0,Regular
+CUST00417,George Miller,Male,57,Government,49700.0,East,Highway,6639.8,639,2019-12-14,george.miller_417@email.com,+1-585-769-7201,1,High,0.0,0.0,Regular
+CUST00418,Larry Taylor,Male,52,Retired,40700.0,South,Suburb,16535.77,650,2022-07-21,larry.taylor_418@email.com,+1-561-936-6653,1,Medium,0.0,0.0,Regular
+CUST00419,Nicole Smith,Female,37,Business Owner,65100.0,West,Airport Road,153039.42,654,2020-07-31,nicole.smith_419@email.com,+1-278-626-5600,1,Medium,0.0,0.0,Regular
+CUST00420,Matthew White,Male,56,Self-Employed,94700.0,South,University,72982.36,645,2021-09-14,matthew.white_420@email.com,+1-937-216-8889,1,High,0.0,0.0,Regular
+CUST00421,Margaret Nguyen,Female,46,Business Owner,89300.0,West,Main Branch,7446.93,705,2020-09-25,margaret.nguyen_421@email.com,+1-244-230-3639,1,Medium,0.0,0.0,Regular
+CUST00422,Brandon Martinez,Male,27,Salaried,74600.0,South,Mall Road,12612.7,696,2020-01-08,brandon.martinez_422@email.com,+1-729-515-1305,1,Medium,0.0,0.0,Regular
+CUST00423,Elizabeth Wilson,Female,45,Freelancer,41500.0,Central,Industrial Area,44535.08,642,2023-05-27,elizabeth.wilson_423@email.com,+1-374-324-7730,1,High,0.0,0.0,Regular
+CUST00424,Raymond Allen,Male,52,Government,29800.0,South,Station Area,25633.5,835,2023-02-01,raymond.allen_424@email.com,+1-810-704-2127,1,Low,0.0,0.0,Regular
+CUST00425,Sarah Miller,Female,29,Salaried,43800.0,South,Suburb,40810.29,694,2023-08-28,sarah.miller_425@email.com,+1-900-529-3450,1,Medium,0.0,0.0,Regular
+CUST00426,Eric Flores,Male,46,Salaried,63100.0,Central,Suburb,47177.19,768,2019-04-27,eric.flores_426@email.com,+1-295-593-3135,1,Low,0.0,0.0,Regular
+CUST00427,Jacob King,Male,46,Retired,32500.0,East,Main Branch,49369.52,831,2023-12-11,jacob.king_427@email.com,+1-639-334-8899,1,Low,0.0,0.0,Regular
+CUST00428,Amanda Nguyen,Female,40,Self-Employed,46000.0,West,Airport Road,83157.93,670,2020-11-08,amanda.nguyen_428@email.com,+1-688-884-4809,1,Medium,0.0,0.0,Regular
+CUST00429,Kevin Hill,Male,18,Retired,43900.0,East,Tech Park,11586.62,672,2018-01-23,kevin.hill_429@email.com,+1-926-861-1116,1,Medium,0.0,0.0,Regular
+CUST00430,Larry Smith,Male,45,Retired,37000.0,South,Station Area,51603.37,645,2022-08-02,larry.smith_430@email.com,+1-570-209-3535,1,High,0.0,0.0,Regular
+CUST00431,Dorothy Wright,Female,48,Retired,32300.0,Central,Station Area,53453.78,729,2021-02-02,dorothy.wright_431@email.com,+1-896-506-4337,1,Medium,0.0,0.0,Regular
+CUST00432,Nancy White,Female,30,Freelancer,59700.0,East,Mall Road,11577.79,744,2021-11-11,nancy.white_432@email.com,+1-992-822-7522,1,Medium,0.0,0.0,Regular
+CUST00433,Andrew Lewis,Male,46,Business Owner,139600.0,North,Tech Park,16845.53,652,2023-09-14,andrew.lewis_433@email.com,+1-610-904-6544,1,Medium,0.0,0.0,Regular
+CUST00434,Matthew Harris,Male,41,Salaried,50000.0,North,Airport Road,57522.43,550,2023-04-16,matthew.harris_434@email.com,+1-814-545-2444,0,High,0.0,0.0,Regular
+CUST00435,Edward Garcia,Male,29,Salaried,37400.0,West,University,68897.08,816,2023-11-05,edward.garcia_435@email.com,+1-493-828-1941,1,Low,0.0,0.0,Regular
+CUST00436,Jonathan Lewis,Male,40,Salaried,52200.0,South,Suburb,23958.12,772,2021-03-17,jonathan.lewis_436@email.com,+1-399-134-9364,1,Low,0.0,0.0,Regular
+CUST00437,Raymond Hernandez,Male,30,Salaried,58900.0,East,Tech Park,70985.94,720,2018-01-02,raymond.hernandez_437@email.com,+1-361-188-5520,1,Medium,0.0,0.0,Regular
+CUST00438,Stephanie Sanchez,Female,44,Professional,104000.0,Central,Main Branch,859.3,734,2018-10-09,stephanie.sanchez_438@email.com,+1-292-662-5661,1,Medium,0.0,0.0,Regular
+CUST00439,Amanda Moore,Female,34,Professional,36100.0,Central,Tech Park,40678.02,789,2023-02-06,amanda.moore_439@email.com,+1-613-688-1076,1,Low,0.0,0.0,Regular
+CUST00440,Angela Miller,Female,40,Self-Employed,83600.0,Central,Mall Road,152471.64,785,2021-10-24,angela.miller_440@email.com,+1-319-922-9409,1,Low,0.0,0.0,Regular
+CUST00441,Laura Harris,Female,61,Freelancer,55000.0,South,Station Area,24113.34,551,2023-02-23,laura.harris_441@email.com,+1-897-571-1448,1,High,0.0,0.0,Regular
+CUST00442,Barbara Harris,Female,39,Professional,59800.0,South,Station Area,298084.2,665,2022-08-17,barbara.harris_442@email.com,+1-561-628-9776,0,Medium,0.0,0.0,Regular
+CUST00443,Ashley Jackson,Female,43,Self-Employed,75800.0,West,Station Area,23209.64,815,2018-11-08,ashley.jackson_443@email.com,+1-767-282-8807,1,Low,0.0,0.0,Regular
+CUST00444,Brandon Moore,Male,34,Business Owner,95300.0,South,Industrial Area,9036.57,574,2020-03-28,brandon.moore_444@email.com,+1-440-853-4965,1,High,0.0,0.0,Regular
+CUST00445,Andrew Gonzalez,Male,34,Professional,79100.0,Central,Station Area,13158.69,624,2019-10-01,andrew.gonzalez_445@email.com,+1-997-209-2964,1,High,0.0,0.0,Regular
+CUST00446,Helen Smith,Female,25,Salaried,53600.0,West,Station Area,3620.38,740,2021-07-15,helen.smith_446@email.com,+1-704-688-5501,1,Medium,0.0,0.0,Regular
+CUST00447,Stephanie Anderson,Female,42,Business Owner,50600.0,North,Suburb,15198.46,619,2022-09-30,stephanie.anderson_447@email.com,+1-689-653-1533,1,High,0.0,0.0,Regular
+CUST00448,Nancy Robinson,Female,45,Self-Employed,91100.0,Central,Industrial Area,2321.09,689,2021-07-16,nancy.robinson_448@email.com,+1-905-108-1193,1,Medium,0.0,0.0,Regular
+CUST00449,Emma Miller,Female,40,Student,18000.0,East,Highway,28448.08,619,2020-11-29,emma.miller_449@email.com,+1-391-661-5306,1,High,0.0,0.0,Regular
+CUST00450,Helen Perez,Female,38,Student,11400.0,South,Industrial Area,80114.21,681,2022-10-03,helen.perez_450@email.com,+1-415-529-7099,1,Medium,0.0,0.0,Regular
+CUST00451,Kimberly Lewis,Female,64,Business Owner,88400.0,Central,Airport Road,9413.61,558,2020-07-25,kimberly.lewis_451@email.com,+1-302-838-5422,1,High,0.0,0.0,Regular
+CUST00452,Deborah Gonzalez,Female,20,Business Owner,47200.0,South,Industrial Area,30350.01,720,2018-02-09,deborah.gonzalez_452@email.com,+1-380-531-9185,1,Medium,0.0,0.0,Regular
+CUST00453,Amy Martin,Female,23,Government,63400.0,Central,Highway,12336.61,691,2018-07-15,amy.martin_453@email.com,+1-607-201-3676,0,Medium,0.0,0.0,Regular
+CUST00454,Kathleen Miller,Female,61,Freelancer,57100.0,East,Mall Road,15958.76,608,2022-01-18,kathleen.miller_454@email.com,+1-568-673-5222,1,High,0.0,0.0,Regular
+CUST00455,Jessica Thompson,Female,18,Professional,62700.0,Central,Highway,17096.75,601,2019-12-16,jessica.thompson_455@email.com,+1-999-391-6818,1,High,0.0,0.0,Regular
+CUST00456,Laura Garcia,Female,40,Retired,35800.0,Central,Mall Road,16817.46,627,2023-03-15,laura.garcia_456@email.com,+1-846-248-3745,1,High,0.0,0.0,Regular
+CUST00457,Rebecca Flores,Female,44,Retired,39600.0,North,Downtown,5952.23,792,2019-10-26,rebecca.flores_457@email.com,+1-551-333-6136,1,Low,0.0,0.0,Regular
+CUST00458,Kimberly Hill,Female,40,Retired,35200.0,East,Industrial Area,51526.8,698,2022-01-27,kimberly.hill_458@email.com,+1-965-701-9535,1,Medium,0.0,0.0,Regular
+CUST00459,Lisa Lopez,Female,53,Salaried,59700.0,South,Tech Park,10562.6,708,2020-10-27,lisa.lopez_459@email.com,+1-961-817-2311,1,Medium,0.0,0.0,Regular
+CUST00460,Susan Miller,Female,28,Self-Employed,67100.0,West,Suburb,21165.42,663,2018-08-09,susan.miller_460@email.com,+1-226-889-7504,1,Medium,0.0,0.0,Regular
+CUST00461,Joseph Taylor,Male,40,Business Owner,39200.0,North,University,11401.84,687,2021-06-21,joseph.taylor_461@email.com,+1-434-353-5655,1,Medium,0.0,0.0,Regular
+CUST00462,Charles King,Male,43,Business Owner,62300.0,North,Main Branch,100594.15,610,2022-01-01,charles.king_462@email.com,+1-533-984-8801,1,High,0.0,0.0,Regular
+CUST00463,Brenda Lewis,Female,53,Business Owner,101500.0,Central,Airport Road,10142.88,822,2023-02-14,brenda.lewis_463@email.com,+1-846-866-8126,1,Low,0.0,0.0,Regular
+CUST00464,Amanda Walker,Female,27,Professional,102100.0,North,Industrial Area,73181.56,626,2021-06-15,amanda.walker_464@email.com,+1-574-522-5256,1,High,0.0,0.0,Regular
+CUST00465,James King,Male,58,Business Owner,83200.0,East,Mall Road,31145.73,700,2023-04-06,james.king_465@email.com,+1-747-108-9059,1,Medium,0.0,0.0,Regular
+CUST00466,Donna Smith,Female,40,Retired,43500.0,East,Highway,57078.71,540,2020-08-05,donna.smith_466@email.com,+1-207-661-7121,1,High,0.0,0.0,Regular
+CUST00467,Stephanie Thomas,Female,57,Business Owner,45100.0,West,University,76043.09,770,2020-06-22,stephanie.thomas_467@email.com,+1-469-181-7917,1,Low,0.0,0.0,Regular
+CUST00468,Emily Wright,Female,28,Government,43800.0,West,Tech Park,5843.9,662,2018-10-08,emily.wright_468@email.com,+1-386-239-5744,1,Medium,0.0,0.0,Regular
+CUST00469,Helen Lewis,Female,38,Government,61700.0,Central,Industrial Area,106124.74,791,2020-02-09,helen.lewis_469@email.com,+1-528-119-3492,0,Low,0.0,0.0,Regular
+CUST00470,Anthony Miller,Male,35,Government,46900.0,East,Airport Road,2921.56,615,2022-12-01,anthony.miller_470@email.com,+1-944-108-4814,1,High,0.0,0.0,Regular
+CUST00471,Jonathan Wilson,Male,53,Student,22300.0,West,Mall Road,5007.95,632,2023-08-04,jonathan.wilson_471@email.com,+1-580-574-1519,1,High,0.0,0.0,Regular
+CUST00472,William Moore,Male,41,Retired,37900.0,North,Suburb,8337.14,713,2023-04-10,william.moore_472@email.com,+1-385-296-5097,1,Medium,0.0,0.0,Regular
+CUST00473,Thomas Thomas,Male,36,Retired,34800.0,West,Tech Park,42427.04,680,2018-05-18,thomas.thomas_473@email.com,+1-403-571-2539,1,Medium,0.0,0.0,Regular
+CUST00474,Eric Harris,Male,36,Government,48400.0,East,Airport Road,19810.44,650,2018-06-22,eric.harris_474@email.com,+1-962-662-9534,1,Medium,0.0,0.0,Regular
+CUST00475,Donna Gonzalez,Female,38,Student,22200.0,North,Tech Park,43178.73,656,2019-04-08,donna.gonzalez_475@email.com,+1-441-748-8113,1,Medium,0.0,0.0,Regular
+CUST00476,Kenneth Nguyen,Male,50,Self-Employed,58500.0,West,Tech Park,90016.62,709,2018-02-06,kenneth.nguyen_476@email.com,+1-243-695-8786,1,Medium,0.0,0.0,Regular
+CUST00477,Edward Garcia,Male,40,Professional,90700.0,South,Industrial Area,3344.09,589,2019-01-10,edward.garcia_477@email.com,+1-902-733-6544,1,High,0.0,0.0,Regular
+CUST00478,William Thompson,Male,27,Business Owner,93900.0,Central,Downtown,176137.11,850,2019-05-31,william.thompson_478@email.com,+1-699-338-6189,1,Low,0.0,0.0,Regular
+CUST00479,Laura Gonzalez,Female,49,Salaried,63300.0,West,Station Area,2536.98,636,2019-07-06,laura.gonzalez_479@email.com,+1-456-140-8951,1,High,0.0,0.0,Regular
+CUST00480,Anna Young,Female,32,Professional,65100.0,Central,Airport Road,18001.81,642,2021-11-25,anna.young_480@email.com,+1-531-849-8674,1,High,0.0,0.0,Regular
+CUST00481,David King,Male,18,Business Owner,110200.0,West,Mall Road,6079.69,699,2020-12-14,david.king_481@email.com,+1-754-475-8439,0,Medium,0.0,0.0,Regular
+CUST00482,Nancy Johnson,Female,66,Student,10900.0,Central,Tech Park,1057.49,657,2021-08-06,nancy.johnson_482@email.com,+1-938-164-9830,1,Medium,0.0,0.0,Regular
+CUST00483,Larry Young,Male,55,Business Owner,142900.0,Central,Mall Road,5036.87,719,2021-08-14,larry.young_483@email.com,+1-619-756-6276,1,Medium,0.0,0.0,Regular
+CUST00484,Michael Rodriguez,Male,36,Business Owner,87100.0,North,Tech Park,500000.0,559,2019-03-15,michael.rodriguez_484@email.com,+1-697-296-2617,0,High,0.0,0.0,Regular
+CUST00485,Amy King,Female,45,Government,57000.0,North,Station Area,81059.89,687,2020-06-23,amy.king_485@email.com,+1-820-835-2161,0,Medium,0.0,0.0,Regular
+CUST00486,Jonathan Garcia,Male,45,Freelancer,39700.0,North,Station Area,30422.94,652,2022-08-31,jonathan.garcia_486@email.com,+1-577-913-1955,1,Medium,0.0,0.0,Regular
+CUST00487,Shirley Williams,Female,49,Self-Employed,57800.0,East,Downtown,34631.55,677,2020-06-03,shirley.williams_487@email.com,+1-731-199-2658,1,Medium,0.0,0.0,Regular
+CUST00488,Betty Gonzalez,Female,55,Professional,78800.0,Central,Airport Road,2623.75,780,2022-08-28,betty.gonzalez_488@email.com,+1-964-208-6864,1,Low,0.0,0.0,Regular
+CUST00489,Susan Hernandez,Female,31,Business Owner,72300.0,Central,University,10777.4,789,2023-08-30,susan.hernandez_489@email.com,+1-545-773-3591,1,Low,0.0,0.0,Regular
+CUST00490,Amanda Lee,Female,18,Student,29100.0,East,University,78219.02,697,2022-10-30,amanda.lee_490@email.com,+1-943-431-4943,1,Medium,0.0,0.0,Regular
+CUST00491,Jason Scott,Male,41,Government,54300.0,East,Industrial Area,41165.13,731,2023-01-07,jason.scott_491@email.com,+1-606-100-1567,1,Medium,0.0,0.0,Regular
+CUST00492,Larry Rodriguez,Male,48,Government,51300.0,North,Mall Road,17382.06,667,2020-06-27,larry.rodriguez_492@email.com,+1-419-976-6159,0,Medium,0.0,0.0,Regular
+CUST00493,Brenda Allen,Female,39,Business Owner,120600.0,North,Main Branch,44903.37,444,2023-03-01,brenda.allen_493@email.com,+1-564-259-3267,1,High,0.0,0.0,Regular
+CUST00494,Andrew Taylor,Male,49,Government,52900.0,North,Highway,21537.47,648,2022-06-26,andrew.taylor_494@email.com,+1-782-322-2264,1,High,0.0,0.0,Regular
+CUST00495,Nancy Young,Female,55,Self-Employed,83500.0,Central,Mall Road,8712.79,712,2018-06-03,nancy.young_495@email.com,+1-948-927-7251,0,Medium,0.0,0.0,Regular
+CUST00496,Timothy Thompson,Male,30,Retired,20500.0,West,Downtown,10383.15,748,2020-07-17,timothy.thompson_496@email.com,+1-965-768-1187,1,Medium,0.0,0.0,Regular
+CUST00497,Linda Martin,Female,53,Salaried,63500.0,East,Suburb,52581.25,721,2019-09-05,linda.martin_497@email.com,+1-534-614-4617,1,Medium,0.0,0.0,Regular
+CUST00498,Laura Hill,Female,34,Self-Employed,73400.0,South,University,57554.72,740,2021-04-01,laura.hill_498@email.com,+1-603-251-3165,1,Medium,0.0,0.0,Regular
+CUST00499,Pamela Brown,Female,56,Retired,42400.0,East,Downtown,33581.74,765,2022-06-21,pamela.brown_499@email.com,+1-713-544-3136,1,Low,0.0,0.0,Regular
+CUST00500,Brenda Gonzalez,Female,41,Freelancer,33100.0,West,Highway,18111.81,620,2020-03-14,brenda.gonzalez_500@email.com,+1-774-730-9589,1,High,0.0,0.0,Regular
+CUST00501,Kenneth Ramirez,Male,33,Student,14300.0,Central,Downtown,8510.84,655,2019-04-06,kenneth.ramirez_501@email.com,+1-887-523-7939,1,Medium,0.0,0.0,Regular
+CUST00502,George Thompson,Male,19,Salaried,58500.0,East,Airport Road,22058.35,614,2021-12-03,george.thompson_502@email.com,+1-831-941-8245,1,High,0.0,0.0,Regular
+CUST00503,Jennifer Anderson,Female,49,Professional,102500.0,East,Airport Road,3200.07,618,2018-12-18,jennifer.anderson_503@email.com,+1-315-857-1893,1,High,0.0,0.0,Regular
+CUST00504,Kevin Smith,Male,32,Student,10800.0,North,Mall Road,59597.55,664,2023-01-18,kevin.smith_504@email.com,+1-682-123-6437,1,Medium,0.0,0.0,Regular
+CUST00505,Steven Wright,Male,38,Government,19900.0,Central,Industrial Area,47216.64,580,2019-08-02,steven.wright_505@email.com,+1-911-815-1301,1,High,0.0,0.0,Regular
+CUST00506,Joshua Hernandez,Male,42,Salaried,59600.0,East,Tech Park,112734.45,575,2021-01-16,joshua.hernandez_506@email.com,+1-254-576-1136,0,High,0.0,0.0,Regular
+CUST00507,Melissa Miller,Female,18,Salaried,58000.0,East,University,191111.71,779,2020-08-04,melissa.miller_507@email.com,+1-589-620-2631,1,Low,0.0,0.0,Regular
+CUST00508,Nicole Wright,Female,44,Self-Employed,55400.0,South,Tech Park,58020.24,602,2023-08-13,nicole.wright_508@email.com,+1-668-674-1352,0,High,0.0,0.0,Regular
+CUST00509,Carol Young,Female,47,Retired,40300.0,South,Main Branch,78609.82,850,2021-11-21,carol.young_509@email.com,+1-900-460-6822,1,Low,0.0,0.0,Regular
+CUST00510,Stephen Moore,Male,46,Salaried,46600.0,East,University,21360.76,538,2018-05-01,stephen.moore_510@email.com,+1-768-386-4695,1,High,0.0,0.0,Regular
+CUST00511,Sarah Garcia,Female,33,Retired,30700.0,Central,Highway,11743.96,692,2020-07-20,sarah.garcia_511@email.com,+1-627-346-3502,1,Medium,0.0,0.0,Regular
+CUST00512,Nicole Perez,Female,32,Freelancer,60100.0,Central,Airport Road,22031.94,679,2020-04-26,nicole.perez_512@email.com,+1-868-241-9869,1,Medium,0.0,0.0,Regular
+CUST00513,Charles Martin,Male,38,Business Owner,94200.0,West,Airport Road,59285.37,610,2019-10-10,charles.martin_513@email.com,+1-525-169-9732,1,High,0.0,0.0,Regular
+CUST00514,Anthony Lee,Male,34,Business Owner,81800.0,North,Station Area,4380.66,614,2022-08-23,anthony.lee_514@email.com,+1-621-410-8258,1,High,0.0,0.0,Regular
+CUST00515,Karen Gonzalez,Female,36,Self-Employed,82000.0,South,Airport Road,30184.19,695,2018-04-18,karen.gonzalez_515@email.com,+1-980-726-5372,1,Medium,0.0,0.0,Regular
+CUST00516,Samuel Anderson,Male,52,Professional,76700.0,North,Station Area,35191.43,671,2018-11-22,samuel.anderson_516@email.com,+1-904-898-8808,1,Medium,0.0,0.0,Regular
+CUST00517,Melissa Lopez,Female,45,Retired,28900.0,West,Industrial Area,1180.18,669,2019-07-18,melissa.lopez_517@email.com,+1-367-297-4707,0,Medium,0.0,0.0,Regular
+CUST00518,Kenneth Clark,Male,59,Professional,102200.0,South,Tech Park,70156.03,778,2018-09-28,kenneth.clark_518@email.com,+1-381-549-9027,1,Low,0.0,0.0,Regular
+CUST00519,Ashley Ramirez,Female,43,Retired,37100.0,North,Highway,10496.72,654,2022-04-08,ashley.ramirez_519@email.com,+1-937-420-7457,1,Medium,0.0,0.0,Regular
+CUST00520,Larry Miller,Male,49,Freelancer,61300.0,West,Main Branch,18632.53,643,2020-10-03,larry.miller_520@email.com,+1-731-650-7481,1,High,0.0,0.0,Regular
+CUST00521,Scott Harris,Male,42,Salaried,64900.0,South,Mall Road,3894.71,496,2022-12-06,scott.harris_521@email.com,+1-607-411-5684,1,High,0.0,0.0,Regular
+CUST00522,Emily Flores,Female,35,Salaried,34900.0,Central,Airport Road,11970.87,668,2023-03-14,emily.flores_522@email.com,+1-861-562-2481,1,Medium,0.0,0.0,Regular
+CUST00523,Anthony Nguyen,Male,36,Business Owner,129200.0,West,University,32600.85,704,2021-08-17,anthony.nguyen_523@email.com,+1-661-125-3930,1,Medium,0.0,0.0,Regular
+CUST00524,Nicholas Garcia,Male,49,Government,32900.0,East,Airport Road,76644.58,673,2019-05-22,nicholas.garcia_524@email.com,+1-293-216-8362,1,Medium,0.0,0.0,Regular
+CUST00525,Larry Harris,Male,50,Business Owner,61100.0,West,Suburb,3413.49,745,2022-04-08,larry.harris_525@email.com,+1-244-886-3799,1,Medium,0.0,0.0,Regular
+CUST00526,Matthew Martinez,Male,46,Business Owner,65600.0,North,University,7757.41,770,2021-06-15,matthew.martinez_526@email.com,+1-516-847-8311,1,Low,0.0,0.0,Regular
+CUST00527,Thomas Rodriguez,Male,27,Professional,119400.0,North,Highway,7474.52,731,2020-11-02,thomas.rodriguez_527@email.com,+1-212-569-9153,1,Medium,0.0,0.0,Regular
+CUST00528,Samuel Young,Male,38,Professional,94500.0,South,Highway,11465.1,666,2023-05-03,samuel.young_528@email.com,+1-664-519-8239,0,Medium,0.0,0.0,Regular
+CUST00529,Paul Scott,Male,42,Government,35000.0,Central,Suburb,53583.11,638,2020-04-30,paul.scott_529@email.com,+1-250-289-3429,0,High,0.0,0.0,Regular
+CUST00530,Jennifer Martinez,Female,39,Salaried,38600.0,Central,Highway,1017.6,664,2021-05-07,jennifer.martinez_530@email.com,+1-539-189-1803,1,Medium,0.0,0.0,Regular
+CUST00531,Matthew Jackson,Male,70,Business Owner,111200.0,West,Highway,21523.22,658,2022-01-15,matthew.jackson_531@email.com,+1-236-195-5903,1,Medium,0.0,0.0,Regular
+CUST00532,Barbara Ramirez,Female,42,Self-Employed,75700.0,East,Industrial Area,5340.23,769,2019-07-06,barbara.ramirez_532@email.com,+1-324-811-5496,1,Low,0.0,0.0,Regular
+CUST00533,Shirley Wilson,Female,50,Professional,97200.0,Central,Main Branch,37278.46,681,2019-03-24,shirley.wilson_533@email.com,+1-785-847-9666,1,Medium,0.0,0.0,Regular
+CUST00534,Nicole Jackson,Female,50,Retired,41200.0,Central,Station Area,14402.41,634,2020-11-29,nicole.jackson_534@email.com,+1-738-688-6797,1,High,0.0,0.0,Regular
+CUST00535,Shirley Young,Female,43,Freelancer,65900.0,South,Highway,4979.43,562,2020-08-11,shirley.young_535@email.com,+1-925-397-4171,0,High,0.0,0.0,Regular
+CUST00536,Nicholas Davis,Male,43,Professional,81200.0,Central,University,27119.55,699,2022-08-23,nicholas.davis_536@email.com,+1-246-441-6728,1,Medium,0.0,0.0,Regular
+CUST00537,James Gonzalez,Male,39,Government,72300.0,East,Downtown,3225.73,613,2021-06-14,james.gonzalez_537@email.com,+1-507-618-6307,1,High,0.0,0.0,Regular
+CUST00538,Timothy Perez,Male,40,Retired,17700.0,Central,Highway,17836.01,812,2018-04-30,timothy.perez_538@email.com,+1-379-298-6415,1,Low,0.0,0.0,Regular
+CUST00539,Kathleen Williams,Female,42,Business Owner,96200.0,West,Airport Road,4855.18,630,2023-03-02,kathleen.williams_539@email.com,+1-749-443-8577,1,High,0.0,0.0,Regular
+CUST00540,Linda King,Female,37,Government,45200.0,Central,Station Area,102536.34,724,2024-01-04,linda.king_540@email.com,+1-219-313-6434,1,Medium,0.0,0.0,Regular
+CUST00541,Barbara Martinez,Female,28,Government,53700.0,North,Station Area,40049.28,771,2022-03-17,barbara.martinez_541@email.com,+1-841-647-3719,1,Low,0.0,0.0,Regular
+CUST00542,Nancy Hill,Female,60,Self-Employed,45200.0,East,Station Area,8324.61,579,2018-05-10,nancy.hill_542@email.com,+1-478-523-2422,1,High,0.0,0.0,Regular
+CUST00543,Edward Lewis,Male,39,Government,57000.0,South,Suburb,72027.37,673,2021-05-23,edward.lewis_543@email.com,+1-379-214-7131,1,Medium,0.0,0.0,Regular
+CUST00544,Richard Lewis,Male,38,Salaried,57500.0,West,Suburb,8085.51,847,2019-09-24,richard.lewis_544@email.com,+1-394-448-8921,1,Low,0.0,0.0,Regular
+CUST00545,Michelle Martinez,Female,22,Self-Employed,68600.0,Central,Airport Road,249777.92,680,2020-04-20,michelle.martinez_545@email.com,+1-941-137-8526,1,Medium,0.0,0.0,Regular
+CUST00546,James Martin,Male,39,Salaried,49100.0,Central,Downtown,17739.16,789,2021-09-27,james.martin_546@email.com,+1-678-147-2689,1,Low,0.0,0.0,Regular
+CUST00547,Patricia Torres,Female,18,Government,73000.0,South,Station Area,3988.82,658,2020-04-01,patricia.torres_547@email.com,+1-397-393-5532,1,Medium,0.0,0.0,Regular
+CUST00548,Jessica Moore,Female,36,Business Owner,105900.0,South,Mall Road,3236.51,716,2019-04-14,jessica.moore_548@email.com,+1-215-737-9422,1,Medium,0.0,0.0,Regular
+CUST00549,Brenda Lee,Female,66,Government,29600.0,South,Mall Road,27657.37,627,2020-09-29,brenda.lee_549@email.com,+1-375-172-6101,1,High,0.0,0.0,Regular
+CUST00550,Anna Lewis,Female,47,Salaried,55300.0,South,Main Branch,10200.74,719,2023-04-13,anna.lewis_550@email.com,+1-891-151-2735,1,Medium,0.0,0.0,Regular
+CUST00551,Jacob Sanchez,Male,63,Business Owner,84800.0,Central,Highway,52245.53,576,2023-01-01,jacob.sanchez_551@email.com,+1-831-464-6119,1,High,0.0,0.0,Regular
+CUST00552,Justin Garcia,Male,30,Freelancer,51400.0,Central,Airport Road,130736.51,708,2019-01-16,justin.garcia_552@email.com,+1-915-579-2593,1,Medium,0.0,0.0,Regular
+CUST00553,Kathleen Anderson,Female,38,Professional,80000.0,South,Highway,4912.36,728,2020-11-22,kathleen.anderson_553@email.com,+1-572-501-4004,1,Medium,0.0,0.0,Regular
+CUST00554,Michelle Robinson,Female,52,Freelancer,38900.0,North,Downtown,12530.86,701,2023-05-01,michelle.robinson_554@email.com,+1-315-459-8842,1,Medium,0.0,0.0,Regular
+CUST00555,Kevin Thompson,Male,36,Business Owner,88200.0,Central,Downtown,273666.68,660,2022-07-20,kevin.thompson_555@email.com,+1-931-915-2752,1,Medium,0.0,0.0,Regular
+CUST00556,Brian Wright,Male,37,Freelancer,36300.0,West,Highway,53800.09,665,2022-08-21,brian.wright_556@email.com,+1-444-735-4992,1,Medium,0.0,0.0,Regular
+CUST00557,Deborah Jones,Female,34,Student,20900.0,South,Highway,120997.31,631,2022-11-01,deborah.jones_557@email.com,+1-645-680-6606,1,High,0.0,0.0,Regular
+CUST00558,Anthony Jones,Male,19,Freelancer,58600.0,North,Highway,9686.07,743,2023-03-12,anthony.jones_558@email.com,+1-533-668-2599,1,Medium,0.0,0.0,Regular
+CUST00559,Brian Sanchez,Male,18,Self-Employed,82400.0,Central,Downtown,5149.18,738,2022-04-02,brian.sanchez_559@email.com,+1-535-606-2007,1,Medium,0.0,0.0,Regular
+CUST00560,Benjamin Smith,Male,42,Business Owner,64200.0,South,Industrial Area,13515.01,734,2023-12-17,benjamin.smith_560@email.com,+1-498-499-8326,1,Medium,0.0,0.0,Regular
+CUST00561,Donna Torres,Female,43,Government,58800.0,West,Station Area,236033.42,554,2019-01-01,donna.torres_561@email.com,+1-796-108-9362,1,High,0.0,0.0,Regular
+CUST00562,Kevin Brown,Male,61,Student,15500.0,Central,Main Branch,7491.01,573,2018-01-04,kevin.brown_562@email.com,+1-920-673-6885,1,High,0.0,0.0,Regular
+CUST00563,Patricia Thomas,Female,39,Retired,44700.0,Central,University,18900.45,800,2021-07-27,patricia.thomas_563@email.com,+1-928-491-7652,1,Low,0.0,0.0,Regular
+CUST00564,Anthony Walker,Male,24,Business Owner,89700.0,South,Suburb,4900.67,709,2022-04-25,anthony.walker_564@email.com,+1-568-960-7835,1,Medium,0.0,0.0,Regular
+CUST00565,Charles Smith,Male,52,Self-Employed,56800.0,North,Airport Road,967.72,695,2023-06-17,charles.smith_565@email.com,+1-873-547-3224,1,Medium,0.0,0.0,Regular
+CUST00566,Cynthia Hill,Female,47,Retired,39200.0,Central,Airport Road,97045.83,594,2023-02-05,cynthia.hill_566@email.com,+1-721-534-8373,1,High,0.0,0.0,Regular
+CUST00567,Anthony Ramirez,Male,50,Salaried,74700.0,Central,Industrial Area,2606.32,705,2020-08-27,anthony.ramirez_567@email.com,+1-929-613-5411,1,Medium,0.0,0.0,Regular
+CUST00568,Jennifer Williams,Female,35,Freelancer,43900.0,East,Downtown,33430.09,641,2023-05-27,jennifer.williams_568@email.com,+1-907-181-3327,1,High,0.0,0.0,Regular
+CUST00569,Cynthia King,Female,33,Self-Employed,65700.0,Central,Highway,5974.79,593,2018-12-29,cynthia.king_569@email.com,+1-451-583-2279,1,High,0.0,0.0,Regular
+CUST00570,Helen Brown,Female,50,Student,10000.0,Central,Main Branch,48999.97,717,2023-04-05,helen.brown_570@email.com,+1-664-624-8687,1,Medium,0.0,0.0,Regular
+CUST00571,Rebecca Thompson,Female,21,Government,39800.0,East,Airport Road,92312.17,601,2018-05-25,rebecca.thompson_571@email.com,+1-911-711-5981,1,High,0.0,0.0,Regular
+CUST00572,Linda Walker,Female,36,Business Owner,102500.0,Central,Main Branch,56391.21,659,2021-04-10,linda.walker_572@email.com,+1-955-739-1447,1,Medium,0.0,0.0,Regular
+CUST00573,Charles Allen,Male,34,Self-Employed,92700.0,East,Mall Road,177491.78,758,2019-06-27,charles.allen_573@email.com,+1-830-387-5509,1,Low,0.0,0.0,Regular
+CUST00574,Thomas Hill,Male,43,Business Owner,68200.0,Central,Airport Road,8131.22,721,2023-01-04,thomas.hill_574@email.com,+1-578-927-3873,1,Medium,0.0,0.0,Regular
+CUST00575,Jonathan Lopez,Male,47,Salaried,78100.0,East,Downtown,48076.08,559,2019-08-18,jonathan.lopez_575@email.com,+1-809-941-3525,1,High,0.0,0.0,Regular
+CUST00576,Deborah Thomas,Female,54,Freelancer,31500.0,South,Tech Park,13894.31,700,2021-11-14,deborah.thomas_576@email.com,+1-255-757-5331,1,Medium,0.0,0.0,Regular
+CUST00577,William Hernandez,Male,65,Freelancer,87000.0,West,Industrial Area,45618.46,665,2021-05-19,william.hernandez_577@email.com,+1-687-864-9724,1,Medium,0.0,0.0,Regular
+CUST00578,Kathleen Taylor,Female,48,Business Owner,114000.0,Central,University,14990.9,823,2018-02-18,kathleen.taylor_578@email.com,+1-495-916-8353,1,Low,0.0,0.0,Regular
+CUST00579,Shirley Williams,Female,44,Self-Employed,74700.0,Central,Station Area,48977.15,713,2022-11-04,shirley.williams_579@email.com,+1-825-767-5466,1,Medium,0.0,0.0,Regular
+CUST00580,Susan Taylor,Female,52,Retired,28500.0,West,Tech Park,11271.56,591,2020-03-09,susan.taylor_580@email.com,+1-732-445-3947,1,High,0.0,0.0,Regular
+CUST00581,James Jones,Male,47,Salaried,67900.0,West,Downtown,38151.77,813,2023-11-22,james.jones_581@email.com,+1-306-801-8306,1,Low,0.0,0.0,Regular
+CUST00582,Dorothy Gonzalez,Female,41,Salaried,66000.0,North,Highway,5942.94,649,2019-01-12,dorothy.gonzalez_582@email.com,+1-258-708-4552,1,High,0.0,0.0,Regular
+CUST00583,Thomas Garcia,Male,50,Business Owner,112900.0,West,Highway,15479.0,674,2020-01-27,thomas.garcia_583@email.com,+1-313-812-4018,1,Medium,0.0,0.0,Regular
+CUST00584,Barbara Robinson,Female,23,Government,44600.0,West,Station Area,64116.68,726,2020-11-20,barbara.robinson_584@email.com,+1-365-899-2212,1,Medium,0.0,0.0,Regular
+CUST00585,Jason Harris,Male,48,Student,15200.0,North,Mall Road,22213.95,627,2020-12-20,jason.harris_585@email.com,+1-382-551-2137,1,High,0.0,0.0,Regular
+CUST00586,Raymond Sanchez,Male,50,Business Owner,101400.0,West,Downtown,39752.29,637,2019-08-13,raymond.sanchez_586@email.com,+1-753-887-8065,1,High,0.0,0.0,Regular
+CUST00587,Gary Taylor,Male,18,Self-Employed,86400.0,North,Downtown,12399.3,610,2018-10-16,gary.taylor_587@email.com,+1-785-845-5105,1,High,0.0,0.0,Regular
+CUST00588,Jonathan Martinez,Male,50,Salaried,48500.0,North,University,78584.02,729,2020-12-27,jonathan.martinez_588@email.com,+1-355-816-6403,1,Medium,0.0,0.0,Regular
+CUST00589,Stephen Young,Male,50,Freelancer,26600.0,West,University,94309.08,700,2018-10-15,stephen.young_589@email.com,+1-753-331-1054,1,Medium,0.0,0.0,Regular
+CUST00590,Jessica Torres,Female,37,Student,15600.0,East,Mall Road,2613.69,712,2022-06-29,jessica.torres_590@email.com,+1-256-747-2485,1,Medium,0.0,0.0,Regular
+CUST00591,Elizabeth Robinson,Female,29,Government,29700.0,South,Airport Road,3544.56,769,2018-06-11,elizabeth.robinson_591@email.com,+1-593-776-4129,1,Low,0.0,0.0,Regular
+CUST00592,Susan Thompson,Female,34,Freelancer,65700.0,North,Industrial Area,11580.04,543,2020-02-16,susan.thompson_592@email.com,+1-343-136-4163,0,High,0.0,0.0,Regular
+CUST00593,Jonathan Harris,Male,28,Self-Employed,89100.0,Central,Mall Road,18268.29,636,2023-08-09,jonathan.harris_593@email.com,+1-746-954-8361,1,High,0.0,0.0,Regular
+CUST00594,Michael Perez,Male,43,Salaried,63300.0,East,Main Branch,84193.97,795,2022-07-19,michael.perez_594@email.com,+1-321-316-9570,1,Low,0.0,0.0,Regular
+CUST00595,Benjamin Anderson,Male,37,Self-Employed,39100.0,North,Airport Road,13411.15,700,2023-06-26,benjamin.anderson_595@email.com,+1-869-119-8720,1,Medium,0.0,0.0,Regular
+CUST00596,Paul Rodriguez,Male,30,Salaried,39200.0,South,Main Branch,33274.46,676,2021-06-12,paul.rodriguez_596@email.com,+1-299-567-3796,1,Medium,0.0,0.0,Regular
+CUST00597,Joseph Davis,Male,42,Freelancer,34800.0,Central,Highway,16705.93,606,2020-06-22,joseph.davis_597@email.com,+1-264-923-4320,1,High,0.0,0.0,Regular
+CUST00598,Michelle Davis,Female,52,Business Owner,118000.0,East,Tech Park,2403.24,605,2018-07-06,michelle.davis_598@email.com,+1-807-277-6496,0,High,0.0,0.0,Regular
+CUST00599,Karen Clark,Female,24,Business Owner,72400.0,East,Suburb,19927.87,564,2019-11-07,karen.clark_599@email.com,+1-649-349-1666,1,High,0.0,0.0,Regular
+CUST00600,Lisa Johnson,Female,30,Freelancer,31400.0,North,Main Branch,28246.39,685,2018-01-30,lisa.johnson_600@email.com,+1-383-191-5648,1,Medium,0.0,0.0,Regular
+CUST00601,Sarah Wilson,Female,33,Business Owner,94800.0,East,Suburb,11429.85,658,2023-01-19,sarah.wilson_601@email.com,+1-621-344-3859,1,Medium,0.0,0.0,Regular
+CUST00602,Samuel Lopez,Male,62,Freelancer,63100.0,Central,Downtown,4630.88,746,2021-05-18,samuel.lopez_602@email.com,+1-556-528-1074,1,Medium,0.0,0.0,Regular
+CUST00603,Thomas King,Male,51,Self-Employed,42600.0,Central,Station Area,58837.41,803,2023-09-10,thomas.king_603@email.com,+1-424-575-4409,1,Low,0.0,0.0,Regular
+CUST00604,Thomas Martinez,Male,28,Freelancer,32600.0,West,Airport Road,74696.89,701,2019-10-17,thomas.martinez_604@email.com,+1-886-144-1885,1,Medium,0.0,0.0,Regular
+CUST00605,Margaret Ramirez,Female,48,Government,55100.0,East,Highway,35201.19,573,2023-01-31,margaret.ramirez_605@email.com,+1-244-206-1859,1,High,0.0,0.0,Regular
+CUST00606,Matthew Johnson,Male,54,Freelancer,60800.0,Central,Downtown,16726.19,676,2018-10-18,matthew.johnson_606@email.com,+1-440-838-8287,1,Medium,0.0,0.0,Regular
+CUST00607,Rebecca Gonzalez,Female,23,Student,17300.0,South,Downtown,43759.72,675,2021-08-28,rebecca.gonzalez_607@email.com,+1-433-200-4884,1,Medium,0.0,0.0,Regular
+CUST00608,Jason Anderson,Male,55,Self-Employed,58500.0,West,Highway,43370.17,598,2023-06-08,jason.anderson_608@email.com,+1-255-546-3374,1,High,0.0,0.0,Regular
+CUST00609,Nancy Harris,Female,41,Student,14200.0,South,Industrial Area,28864.55,650,2020-03-06,nancy.harris_609@email.com,+1-847-467-5418,1,Medium,0.0,0.0,Regular
+CUST00610,Michael Torres,Male,40,Salaried,68600.0,East,Airport Road,13041.38,551,2019-04-01,michael.torres_610@email.com,+1-676-569-7852,1,High,0.0,0.0,Regular
+CUST00611,Sandra Jackson,Female,62,Business Owner,127300.0,Central,Airport Road,4671.73,735,2020-07-29,sandra.jackson_611@email.com,+1-288-521-9548,1,Medium,0.0,0.0,Regular
+CUST00612,Benjamin Walker,Male,35,Freelancer,48600.0,East,Main Branch,31353.12,661,2022-10-20,benjamin.walker_612@email.com,+1-953-993-5041,1,Medium,0.0,0.0,Regular
+CUST00613,Emma Anderson,Female,32,Business Owner,71400.0,Central,Main Branch,7336.15,613,2022-09-08,emma.anderson_613@email.com,+1-245-141-8711,1,High,0.0,0.0,Regular
+CUST00614,Jacob King,Male,41,Retired,27500.0,West,Downtown,49934.25,798,2023-01-28,jacob.king_614@email.com,+1-707-346-2361,1,Low,0.0,0.0,Regular
+CUST00615,Ryan Wilson,Male,35,Business Owner,96500.0,East,Mall Road,40119.67,717,2020-09-06,ryan.wilson_615@email.com,+1-863-192-1260,1,Medium,0.0,0.0,Regular
+CUST00616,Lisa Robinson,Female,42,Salaried,67300.0,West,Industrial Area,39288.96,580,2019-07-22,lisa.robinson_616@email.com,+1-920-515-4030,1,High,0.0,0.0,Regular
+CUST00617,Cynthia Smith,Female,52,Self-Employed,82300.0,West,Station Area,8813.65,683,2023-12-15,cynthia.smith_617@email.com,+1-233-403-7977,1,Medium,0.0,0.0,Regular
+CUST00618,Richard Flores,Male,50,Student,14100.0,North,Suburb,79823.53,850,2022-01-30,richard.flores_618@email.com,+1-252-213-7274,1,Low,0.0,0.0,Regular
+CUST00619,Edward White,Male,32,Business Owner,52700.0,Central,Downtown,31716.18,737,2020-04-18,edward.white_619@email.com,+1-341-442-4909,1,Medium,0.0,0.0,Regular
+CUST00620,Emma Wilson,Female,39,Professional,114900.0,East,Station Area,4419.02,735,2020-12-31,emma.wilson_620@email.com,+1-715-796-7929,1,Medium,0.0,0.0,Regular
+CUST00621,Edward Thompson,Male,34,Freelancer,68200.0,West,Suburb,240630.64,618,2023-11-28,edward.thompson_621@email.com,+1-325-581-9714,1,High,0.0,0.0,Regular
+CUST00622,Laura Flores,Female,35,Student,18900.0,North,Tech Park,13841.73,676,2023-02-19,laura.flores_622@email.com,+1-289-182-7400,1,Medium,0.0,0.0,Regular
+CUST00623,Barbara Miller,Female,42,Business Owner,38200.0,East,Downtown,21663.73,624,2019-08-30,barbara.miller_623@email.com,+1-708-254-4346,1,High,0.0,0.0,Regular
+CUST00624,Kevin Clark,Male,36,Business Owner,129000.0,West,Station Area,4876.54,745,2022-09-17,kevin.clark_624@email.com,+1-654-855-1351,1,Medium,0.0,0.0,Regular
+CUST00625,Robert Anderson,Male,38,Student,13700.0,West,Highway,56865.62,707,2021-11-05,robert.anderson_625@email.com,+1-871-761-6346,1,Medium,0.0,0.0,Regular
+CUST00626,Cynthia Martin,Female,48,Business Owner,116100.0,East,Airport Road,14800.7,631,2020-11-30,cynthia.martin_626@email.com,+1-432-595-7093,1,High,0.0,0.0,Regular
+CUST00627,Daniel Thompson,Male,28,Government,37600.0,West,Airport Road,500000.0,779,2019-10-21,daniel.thompson_627@email.com,+1-928-648-5673,1,Low,0.0,0.0,Regular
+CUST00628,Daniel Hernandez,Male,25,Professional,48300.0,North,Main Branch,39270.91,723,2021-07-20,daniel.hernandez_628@email.com,+1-788-229-8223,1,Medium,0.0,0.0,Regular
+CUST00629,Steven Scott,Male,48,Salaried,50800.0,East,Station Area,18948.02,706,2019-08-29,steven.scott_629@email.com,+1-581-559-9845,1,Medium,0.0,0.0,Regular
+CUST00630,Jessica Johnson,Female,43,Retired,11700.0,West,Airport Road,16717.99,611,2023-02-20,jessica.johnson_630@email.com,+1-527-259-1070,1,High,0.0,0.0,Regular
+CUST00631,Emily Walker,Female,44,Government,94800.0,Central,Airport Road,34234.12,654,2022-12-16,emily.walker_631@email.com,+1-546-805-2840,1,Medium,0.0,0.0,Regular
+CUST00632,Charles Scott,Male,53,Self-Employed,74400.0,East,Main Branch,36465.19,728,2022-07-04,charles.scott_632@email.com,+1-832-961-4610,1,Medium,0.0,0.0,Regular
+CUST00633,George Brown,Male,66,Professional,52900.0,Central,Suburb,38884.79,605,2020-06-28,george.brown_633@email.com,+1-985-384-4206,0,High,0.0,0.0,Regular
+CUST00634,Elizabeth Allen,Female,48,Retired,25400.0,South,Industrial Area,13348.51,656,2021-07-25,elizabeth.allen_634@email.com,+1-817-719-9381,1,Medium,0.0,0.0,Regular
+CUST00635,Stephanie Martinez,Female,53,Retired,44600.0,East,University,4940.09,684,2022-03-08,stephanie.martinez_635@email.com,+1-212-391-6651,1,Medium,0.0,0.0,Regular
+CUST00636,Brenda Garcia,Female,33,Professional,49800.0,West,University,16976.4,655,2022-12-18,brenda.garcia_636@email.com,+1-495-267-7944,1,Medium,0.0,0.0,Regular
+CUST00637,Sarah Nguyen,Female,71,Self-Employed,73400.0,South,Tech Park,4216.91,634,2021-05-27,sarah.nguyen_637@email.com,+1-686-988-9606,1,High,0.0,0.0,Regular
+CUST00638,Benjamin Harris,Male,54,Self-Employed,105700.0,North,University,3284.01,529,2021-01-24,benjamin.harris_638@email.com,+1-624-279-8571,1,High,0.0,0.0,Regular
+CUST00639,Mark Lopez,Male,64,Retired,39100.0,East,Suburb,7770.18,722,2023-07-03,mark.lopez_639@email.com,+1-243-942-5947,1,Medium,0.0,0.0,Regular
+CUST00640,Amy Scott,Female,18,Freelancer,45000.0,South,Main Branch,32642.99,753,2018-01-11,amy.scott_640@email.com,+1-357-368-5917,1,Low,0.0,0.0,Regular
+CUST00641,Jessica Jackson,Female,29,Retired,35900.0,South,Industrial Area,7255.32,700,2020-09-29,jessica.jackson_641@email.com,+1-229-222-5541,1,Medium,0.0,0.0,Regular
+CUST00642,Samuel White,Male,31,Freelancer,39500.0,Central,University,6667.64,732,2020-11-22,samuel.white_642@email.com,+1-843-802-8799,1,Medium,0.0,0.0,Regular
+CUST00643,Edward Allen,Male,52,Salaried,51100.0,East,Airport Road,23060.71,564,2018-08-28,edward.allen_643@email.com,+1-349-427-8553,1,High,0.0,0.0,Regular
+CUST00644,Ronald Hernandez,Male,38,Salaried,54200.0,East,Station Area,500000.0,591,2022-09-15,ronald.hernandez_644@email.com,+1-851-464-1798,1,High,0.0,0.0,Regular
+CUST00645,Stephen Gonzalez,Male,59,Business Owner,116900.0,North,Highway,30846.04,820,2019-11-16,stephen.gonzalez_645@email.com,+1-756-430-6180,1,Low,0.0,0.0,Regular
+CUST00646,Kimberly White,Female,46,Self-Employed,72600.0,Central,Highway,20666.21,777,2021-12-11,kimberly.white_646@email.com,+1-347-113-3243,1,Low,0.0,0.0,Regular
+CUST00647,Amy Clark,Female,55,Student,12200.0,South,Downtown,4522.88,663,2020-06-11,amy.clark_647@email.com,+1-358-615-4622,1,Medium,0.0,0.0,Regular
+CUST00648,Ryan Robinson,Male,32,Self-Employed,63800.0,North,Airport Road,97238.87,643,2018-03-13,ryan.robinson_648@email.com,+1-691-456-6104,1,High,0.0,0.0,Regular
+CUST00649,Gary Hill,Male,41,Student,15300.0,South,Mall Road,60968.77,500,2018-04-28,gary.hill_649@email.com,+1-962-934-2943,1,High,0.0,0.0,Regular
+CUST00650,Andrew Martin,Male,34,Business Owner,95700.0,South,Airport Road,92975.82,640,2018-11-18,andrew.martin_650@email.com,+1-635-807-2830,0,High,0.0,0.0,Regular
+CUST00651,Sharon Williams,Female,19,Professional,94900.0,North,Main Branch,10275.99,584,2023-10-05,sharon.williams_651@email.com,+1-807-160-8685,1,High,0.0,0.0,Regular
+CUST00652,Jennifer Jones,Female,34,Government,47200.0,North,Downtown,10660.56,503,2019-05-23,jennifer.jones_652@email.com,+1-816-310-4277,1,High,0.0,0.0,Regular
+CUST00653,Patricia Garcia,Female,52,Business Owner,124400.0,East,Highway,48137.96,588,2021-11-25,patricia.garcia_653@email.com,+1-560-264-9202,1,High,0.0,0.0,Regular
+CUST00654,Stephen Torres,Male,39,Self-Employed,64900.0,North,Highway,45186.48,733,2018-02-27,stephen.torres_654@email.com,+1-741-322-4138,1,Medium,0.0,0.0,Regular
+CUST00655,Justin Smith,Male,33,Self-Employed,66600.0,South,Suburb,38129.23,796,2023-04-29,justin.smith_655@email.com,+1-575-814-4033,1,Low,0.0,0.0,Regular
+CUST00656,Anthony Thompson,Male,50,Retired,43300.0,West,Tech Park,24357.42,792,2023-10-08,anthony.thompson_656@email.com,+1-433-517-2848,1,Low,0.0,0.0,Regular
+CUST00657,Jessica Robinson,Female,46,Self-Employed,48200.0,Central,Airport Road,118663.14,735,2023-07-24,jessica.robinson_657@email.com,+1-980-469-5723,1,Medium,0.0,0.0,Regular
+CUST00658,Richard Lee,Male,36,Freelancer,38500.0,North,University,31441.71,717,2021-03-07,richard.lee_658@email.com,+1-667-714-6111,1,Medium,0.0,0.0,Regular
+CUST00659,Sandra Scott,Female,44,Retired,38300.0,East,University,169388.28,765,2020-02-13,sandra.scott_659@email.com,+1-271-961-8793,1,Low,0.0,0.0,Regular
+CUST00660,Nancy Smith,Female,44,Freelancer,57700.0,North,University,6380.31,711,2022-11-30,nancy.smith_660@email.com,+1-735-774-2392,1,Medium,0.0,0.0,Regular
+CUST00661,Stephanie Nguyen,Female,63,Self-Employed,60700.0,South,Downtown,7965.22,627,2022-01-29,stephanie.nguyen_661@email.com,+1-403-446-4281,1,High,0.0,0.0,Regular
+CUST00662,Jessica Anderson,Female,28,Retired,26800.0,West,Mall Road,14120.6,567,2021-01-23,jessica.anderson_662@email.com,+1-974-908-7557,1,High,0.0,0.0,Regular
+CUST00663,Amy Allen,Female,42,Government,63500.0,South,Industrial Area,7410.79,801,2019-03-19,amy.allen_663@email.com,+1-325-356-9017,1,Low,0.0,0.0,Regular
+CUST00664,Robert Miller,Male,48,Salaried,72000.0,North,Industrial Area,10002.58,748,2018-04-20,robert.miller_664@email.com,+1-383-491-6356,1,Medium,0.0,0.0,Regular
+CUST00665,David King,Male,28,Freelancer,57000.0,West,Tech Park,27070.7,724,2021-04-17,david.king_665@email.com,+1-877-609-9032,1,Medium,0.0,0.0,Regular
+CUST00666,Anna Wright,Female,27,Salaried,40200.0,North,University,45101.64,604,2019-05-03,anna.wright_666@email.com,+1-592-560-6153,1,High,0.0,0.0,Regular
+CUST00667,Cynthia Williams,Female,47,Salaried,32400.0,South,Suburb,60950.0,581,2021-05-26,cynthia.williams_667@email.com,+1-923-268-9052,1,High,0.0,0.0,Regular
+CUST00668,Deborah Young,Female,48,Self-Employed,77200.0,Central,Industrial Area,9545.96,726,2023-04-09,deborah.young_668@email.com,+1-687-675-3560,1,Medium,0.0,0.0,Regular
+CUST00669,Dorothy Young,Female,45,Retired,29300.0,Central,Station Area,6566.49,522,2021-03-11,dorothy.young_669@email.com,+1-528-162-1461,1,High,0.0,0.0,Regular
+CUST00670,Edward Thompson,Male,46,Salaried,29200.0,East,University,24696.41,658,2019-02-03,edward.thompson_670@email.com,+1-638-453-6855,1,Medium,0.0,0.0,Regular
+CUST00671,Paul Thomas,Male,50,Professional,72800.0,East,Highway,14833.79,738,2018-12-14,paul.thomas_671@email.com,+1-904-167-5995,1,Medium,0.0,0.0,Regular
+CUST00672,Robert Wright,Male,46,Student,16400.0,North,Industrial Area,38681.67,557,2022-09-27,robert.wright_672@email.com,+1-781-627-7900,1,High,0.0,0.0,Regular
+CUST00673,Emma Johnson,Female,51,Student,17800.0,West,Highway,6502.75,660,2022-05-18,emma.johnson_673@email.com,+1-530-686-2601,1,Medium,0.0,0.0,Regular
+CUST00674,Steven Perez,Male,41,Freelancer,43200.0,Central,Station Area,32880.4,794,2019-11-14,steven.perez_674@email.com,+1-829-406-6952,1,Low,0.0,0.0,Regular
+CUST00675,Jonathan Jones,Male,54,Professional,48500.0,East,Mall Road,46466.36,786,2018-07-14,jonathan.jones_675@email.com,+1-504-687-7586,1,Low,0.0,0.0,Regular
+CUST00676,Benjamin Miller,Male,46,Student,19900.0,East,Downtown,246403.21,761,2023-12-16,benjamin.miller_676@email.com,+1-686-537-4436,1,Low,0.0,0.0,Regular
+CUST00677,Brian Allen,Male,44,Government,65700.0,West,Suburb,26209.19,681,2021-07-07,brian.allen_677@email.com,+1-404-524-7591,1,Medium,0.0,0.0,Regular
+CUST00678,Brenda Lopez,Female,37,Salaried,80800.0,Central,Airport Road,8249.32,802,2023-08-07,brenda.lopez_678@email.com,+1-418-776-8656,1,Low,0.0,0.0,Regular
+CUST00679,Pamela Brown,Female,47,Professional,46400.0,East,Industrial Area,34241.0,511,2019-08-29,pamela.brown_679@email.com,+1-446-254-5919,1,High,0.0,0.0,Regular
+CUST00680,Michelle Jones,Female,49,Professional,101200.0,West,Mall Road,10820.23,689,2021-03-21,michelle.jones_680@email.com,+1-861-264-5201,1,Medium,0.0,0.0,Regular
+CUST00681,Jeffrey Thomas,Male,65,Self-Employed,55100.0,South,Tech Park,6181.47,798,2018-04-24,jeffrey.thomas_681@email.com,+1-451-916-6087,1,Low,0.0,0.0,Regular
+CUST00682,Sharon Williams,Female,65,Professional,80100.0,South,Mall Road,74143.35,787,2019-07-13,sharon.williams_682@email.com,+1-229-364-5551,1,Low,0.0,0.0,Regular
+CUST00683,Michael Young,Male,33,Salaried,47000.0,North,Downtown,96475.99,814,2021-07-09,michael.young_683@email.com,+1-816-405-2041,1,Low,0.0,0.0,Regular
+CUST00684,Melissa Garcia,Female,48,Retired,25800.0,South,Tech Park,239060.83,637,2019-04-04,melissa.garcia_684@email.com,+1-784-852-9196,1,High,0.0,0.0,Regular
+CUST00685,Amy Garcia,Female,37,Professional,88200.0,Central,Downtown,142200.39,748,2021-07-07,amy.garcia_685@email.com,+1-537-952-7388,1,Medium,0.0,0.0,Regular
+CUST00686,Jacob Wilson,Male,46,Business Owner,102500.0,North,Airport Road,23207.19,724,2020-05-26,jacob.wilson_686@email.com,+1-481-550-7690,1,Medium,0.0,0.0,Regular
+CUST00687,Jonathan Wright,Male,18,Student,13700.0,North,Station Area,29424.6,587,2022-10-02,jonathan.wright_687@email.com,+1-686-799-5036,1,High,0.0,0.0,Regular
+CUST00688,Edward Walker,Male,46,Student,14100.0,East,Main Branch,181057.66,805,2018-05-23,edward.walker_688@email.com,+1-957-778-1895,1,Low,0.0,0.0,Regular
+CUST00689,Joshua Scott,Male,36,Retired,33400.0,East,Station Area,20156.11,643,2019-05-15,joshua.scott_689@email.com,+1-747-987-4872,1,High,0.0,0.0,Regular
+CUST00690,Mary Sanchez,Female,44,Government,38600.0,East,Downtown,5671.8,729,2020-08-22,mary.sanchez_690@email.com,+1-504-315-3625,1,Medium,0.0,0.0,Regular
+CUST00691,Rebecca Williams,Female,49,Government,37900.0,North,Industrial Area,64500.39,629,2023-04-14,rebecca.williams_691@email.com,+1-954-522-6451,1,High,0.0,0.0,Regular
+CUST00692,Matthew Taylor,Male,45,Self-Employed,81000.0,East,University,21155.71,716,2021-08-31,matthew.taylor_692@email.com,+1-664-811-1448,1,Medium,0.0,0.0,Regular
+CUST00693,Gary Rodriguez,Male,35,Salaried,51800.0,West,Tech Park,17205.23,620,2021-06-05,gary.rodriguez_693@email.com,+1-521-689-2347,1,High,0.0,0.0,Regular
+CUST00694,Larry Rodriguez,Male,39,Retired,18700.0,East,Industrial Area,12217.39,657,2023-05-14,larry.rodriguez_694@email.com,+1-952-236-5270,1,Medium,0.0,0.0,Regular
+CUST00695,Emily Gonzalez,Female,38,Self-Employed,60300.0,West,Station Area,20452.96,718,2020-01-16,emily.gonzalez_695@email.com,+1-602-997-7182,1,Medium,0.0,0.0,Regular
+CUST00696,Robert Johnson,Male,52,Professional,64400.0,North,Industrial Area,5198.67,596,2020-03-23,robert.johnson_696@email.com,+1-468-818-3764,0,High,0.0,0.0,Regular
+CUST00697,Nicole Taylor,Female,36,Business Owner,80500.0,North,Station Area,8742.97,576,2019-11-28,nicole.taylor_697@email.com,+1-780-220-1231,1,High,0.0,0.0,Regular
+CUST00698,Cynthia Young,Female,36,Self-Employed,68500.0,South,Tech Park,44982.79,635,2020-02-20,cynthia.young_698@email.com,+1-472-394-9096,1,High,0.0,0.0,Regular
+CUST00699,Margaret Hill,Female,37,Professional,57800.0,East,Tech Park,21210.95,612,2022-09-10,margaret.hill_699@email.com,+1-384-518-3391,0,High,0.0,0.0,Regular
+CUST00700,Ashley Flores,Female,48,Freelancer,20900.0,South,Station Area,14306.14,704,2023-02-20,ashley.flores_700@email.com,+1-287-110-8682,1,Medium,0.0,0.0,Regular
+CUST00701,Stephanie Wilson,Female,44,Retired,63300.0,West,Highway,33515.39,599,2020-11-15,stephanie.wilson_701@email.com,+1-274-197-1962,0,High,0.0,0.0,Regular
+CUST00702,Eric Thompson,Male,40,Salaried,25700.0,North,Mall Road,19995.86,613,2023-08-29,eric.thompson_702@email.com,+1-834-490-5956,1,High,0.0,0.0,Regular
+CUST00703,Sarah Scott,Female,52,Salaried,45900.0,Central,Airport Road,19146.61,629,2020-12-02,sarah.scott_703@email.com,+1-373-615-9074,1,High,0.0,0.0,Regular
+CUST00704,Sarah Garcia,Female,62,Student,13600.0,Central,University,198604.06,745,2019-08-04,sarah.garcia_704@email.com,+1-466-219-6132,0,Medium,0.0,0.0,Regular
+CUST00705,Jonathan Moore,Male,47,Student,16700.0,West,Mall Road,35332.44,525,2020-12-14,jonathan.moore_705@email.com,+1-827-949-5321,1,High,0.0,0.0,Regular
+CUST00706,Lisa Lee,Female,38,Freelancer,56400.0,South,Suburb,20771.21,567,2022-12-08,lisa.lee_706@email.com,+1-254-293-3435,0,High,0.0,0.0,Regular
+CUST00707,Michael Walker,Male,41,Government,75600.0,South,Industrial Area,98348.25,675,2022-11-23,michael.walker_707@email.com,+1-318-606-1668,1,Medium,0.0,0.0,Regular
+CUST00708,Cynthia Young,Female,53,Self-Employed,57900.0,South,Downtown,2850.8,606,2021-12-02,cynthia.young_708@email.com,+1-295-308-5654,1,High,0.0,0.0,Regular
+CUST00709,Stephen Moore,Male,60,Professional,73400.0,Central,Main Branch,16447.67,656,2023-11-25,stephen.moore_709@email.com,+1-985-684-3958,1,Medium,0.0,0.0,Regular
+CUST00710,Paul Young,Male,64,Self-Employed,96700.0,East,Main Branch,315696.4,667,2021-03-10,paul.young_710@email.com,+1-897-796-2998,1,Medium,0.0,0.0,Regular
+CUST00711,George Martinez,Male,45,Salaried,30000.0,North,Industrial Area,129614.68,586,2023-05-20,george.martinez_711@email.com,+1-664-743-5412,1,High,0.0,0.0,Regular
+CUST00712,Timothy Williams,Male,44,Freelancer,30200.0,East,Highway,10865.63,613,2019-06-14,timothy.williams_712@email.com,+1-416-983-1797,1,High,0.0,0.0,Regular
+CUST00713,Michelle Brown,Female,34,Self-Employed,54500.0,Central,Highway,11408.08,746,2022-04-12,michelle.brown_713@email.com,+1-294-508-5180,1,Medium,0.0,0.0,Regular
+CUST00714,Elizabeth Johnson,Female,28,Professional,85300.0,South,University,94992.29,638,2022-07-07,elizabeth.johnson_714@email.com,+1-491-762-3525,1,High,0.0,0.0,Regular
+CUST00715,Sharon Martin,Female,33,Business Owner,83800.0,East,Downtown,90732.44,695,2022-02-14,sharon.martin_715@email.com,+1-724-304-9021,1,Medium,0.0,0.0,Regular
+CUST00716,Kathleen Moore,Female,35,Retired,40100.0,North,University,5867.88,734,2022-02-17,kathleen.moore_716@email.com,+1-828-290-8112,1,Medium,0.0,0.0,Regular
+CUST00717,Michael Allen,Male,46,Student,13600.0,West,Tech Park,8052.17,609,2019-09-28,michael.allen_717@email.com,+1-707-639-9596,1,High,0.0,0.0,Regular
+CUST00718,Sharon Garcia,Female,48,Freelancer,61600.0,East,Airport Road,10252.03,716,2019-06-08,sharon.garcia_718@email.com,+1-900-407-5073,1,Medium,0.0,0.0,Regular
+CUST00719,Pamela Brown,Female,18,Self-Employed,53600.0,North,Suburb,21220.63,607,2019-03-17,pamela.brown_719@email.com,+1-722-535-7766,1,High,0.0,0.0,Regular
+CUST00720,Amanda Taylor,Female,30,Self-Employed,52000.0,Central,Main Branch,31276.78,665,2019-04-12,amanda.taylor_720@email.com,+1-958-777-8583,1,Medium,0.0,0.0,Regular
+CUST00721,Jeffrey Williams,Male,18,Self-Employed,23600.0,West,Mall Road,10633.47,716,2021-07-09,jeffrey.williams_721@email.com,+1-801-841-8454,1,Medium,0.0,0.0,Regular
+CUST00722,Helen Taylor,Female,18,Student,12800.0,South,Tech Park,11713.56,791,2020-01-29,helen.taylor_722@email.com,+1-280-864-5248,1,Low,0.0,0.0,Regular
+CUST00723,Jacob Wright,Male,37,Salaried,61300.0,North,University,26095.25,509,2019-04-23,jacob.wright_723@email.com,+1-213-275-8817,1,High,0.0,0.0,Regular
+CUST00724,Nicole Young,Female,51,Government,53200.0,Central,Highway,40535.05,850,2022-01-17,nicole.young_724@email.com,+1-907-789-7471,1,Low,0.0,0.0,Regular
+CUST00725,Charles Rodriguez,Male,18,Salaried,83500.0,South,Downtown,15600.57,702,2018-03-07,charles.rodriguez_725@email.com,+1-912-292-1439,1,Medium,0.0,0.0,Regular
+CUST00726,Paul Ramirez,Male,41,Professional,69800.0,North,Mall Road,11116.66,706,2023-03-14,paul.ramirez_726@email.com,+1-351-585-7912,0,Medium,0.0,0.0,Regular
+CUST00727,Daniel Lewis,Male,23,Freelancer,55100.0,West,Main Branch,13367.3,589,2023-01-16,daniel.lewis_727@email.com,+1-799-348-4298,1,High,0.0,0.0,Regular
+CUST00728,Linda Perez,Female,36,Salaried,75700.0,North,University,11586.52,708,2022-08-30,linda.perez_728@email.com,+1-707-854-5764,0,Medium,0.0,0.0,Regular
+CUST00729,Amy Allen,Female,33,Freelancer,55200.0,South,Main Branch,50141.75,827,2023-12-04,amy.allen_729@email.com,+1-219-532-6174,1,Low,0.0,0.0,Regular
+CUST00730,Rebecca Walker,Female,39,Self-Employed,78000.0,West,Highway,24777.25,783,2021-11-21,rebecca.walker_730@email.com,+1-659-814-8147,0,Low,0.0,0.0,Regular
+CUST00731,Betty Walker,Female,33,Student,18400.0,West,Tech Park,17437.24,674,2023-09-11,betty.walker_731@email.com,+1-424-701-6556,1,Medium,0.0,0.0,Regular
+CUST00732,Sarah Jackson,Female,43,Retired,37600.0,West,Station Area,19158.95,697,2023-04-19,sarah.jackson_732@email.com,+1-365-736-4394,1,Medium,0.0,0.0,Regular
+CUST00733,Eric Rodriguez,Male,60,Business Owner,116600.0,South,Airport Road,62503.98,643,2023-07-09,eric.rodriguez_733@email.com,+1-303-912-7815,1,High,0.0,0.0,Regular
+CUST00734,Donna Thomas,Female,31,Professional,102900.0,Central,Main Branch,63023.07,797,2018-03-16,donna.thomas_734@email.com,+1-567-367-6849,1,Low,0.0,0.0,Regular
+CUST00735,Stephen Williams,Male,34,Self-Employed,60500.0,East,University,3079.8,648,2019-04-12,stephen.williams_735@email.com,+1-832-332-2977,1,High,0.0,0.0,Regular
+CUST00736,Dorothy Perez,Female,53,Student,12900.0,North,Suburb,47504.31,664,2020-12-31,dorothy.perez_736@email.com,+1-354-973-9444,1,Medium,0.0,0.0,Regular
+CUST00737,William Lewis,Male,45,Freelancer,29500.0,North,Downtown,24397.88,440,2019-02-22,william.lewis_737@email.com,+1-775-142-9311,1,High,0.0,0.0,Regular
+CUST00738,Steven White,Male,39,Business Owner,46000.0,East,Industrial Area,93638.17,742,2023-09-04,steven.white_738@email.com,+1-710-850-2626,1,Medium,0.0,0.0,Regular
+CUST00739,Carol Rodriguez,Female,47,Self-Employed,94700.0,South,Industrial Area,7053.65,819,2022-08-30,carol.rodriguez_739@email.com,+1-987-887-1107,1,Low,0.0,0.0,Regular
+CUST00740,Carol Jackson,Female,53,Business Owner,83600.0,North,Mall Road,86055.2,591,2022-03-06,carol.jackson_740@email.com,+1-932-872-7799,1,High,0.0,0.0,Regular
+CUST00741,Daniel King,Male,32,Retired,28600.0,South,Airport Road,11675.25,595,2022-10-23,daniel.king_741@email.com,+1-623-519-8516,1,High,0.0,0.0,Regular
+CUST00742,Patricia Lewis,Female,56,Business Owner,83000.0,North,Suburb,33624.36,634,2018-10-13,patricia.lewis_742@email.com,+1-286-446-6157,1,High,0.0,0.0,Regular
+CUST00743,Jacob Brown,Male,20,Retired,37800.0,North,Airport Road,2220.07,674,2018-08-25,jacob.brown_743@email.com,+1-846-830-9516,1,Medium,0.0,0.0,Regular
+CUST00744,Stephanie Scott,Female,25,Government,79800.0,East,Station Area,65751.34,688,2018-02-02,stephanie.scott_744@email.com,+1-486-640-3406,1,Medium,0.0,0.0,Regular
+CUST00745,Margaret Wright,Female,57,Freelancer,33600.0,East,University,42284.47,695,2020-03-19,margaret.wright_745@email.com,+1-508-186-1605,1,Medium,0.0,0.0,Regular
+CUST00746,Sarah King,Female,45,Government,69100.0,South,Downtown,53050.02,703,2023-09-27,sarah.king_746@email.com,+1-765-419-9541,1,Medium,0.0,0.0,Regular
+CUST00747,Robert Johnson,Male,22,Government,35600.0,South,Mall Road,19010.55,687,2022-09-28,robert.johnson_747@email.com,+1-717-213-1982,1,Medium,0.0,0.0,Regular
+CUST00748,Angela Thompson,Female,28,Self-Employed,112000.0,North,Downtown,135899.76,728,2023-01-13,angela.thompson_748@email.com,+1-505-686-1085,1,Medium,0.0,0.0,Regular
+CUST00749,Benjamin Torres,Male,42,Professional,74900.0,East,Mall Road,7028.28,686,2021-03-11,benjamin.torres_749@email.com,+1-882-903-3293,1,Medium,0.0,0.0,Regular
+CUST00750,Joseph Lee,Male,45,Professional,50200.0,East,Industrial Area,32892.89,667,2019-02-06,joseph.lee_750@email.com,+1-350-828-7974,1,Medium,0.0,0.0,Regular
+CUST00751,Richard Brown,Male,19,Retired,26000.0,South,Industrial Area,13408.89,831,2020-05-29,richard.brown_751@email.com,+1-656-179-7050,1,Low,0.0,0.0,Regular
+CUST00752,Emma Scott,Female,48,Retired,21000.0,East,Highway,39467.92,556,2023-08-06,emma.scott_752@email.com,+1-851-533-8210,1,High,0.0,0.0,Regular
+CUST00753,Rebecca Hernandez,Female,54,Business Owner,77300.0,Central,Airport Road,19685.48,786,2023-06-09,rebecca.hernandez_753@email.com,+1-928-568-3119,1,Low,0.0,0.0,Regular
+CUST00754,Steven Robinson,Male,26,Freelancer,26100.0,North,Airport Road,10934.53,763,2022-02-21,steven.robinson_754@email.com,+1-321-716-7694,1,Low,0.0,0.0,Regular
+CUST00755,Pamela Jackson,Female,23,Salaried,10000.0,Central,Airport Road,12818.05,724,2019-04-28,pamela.jackson_755@email.com,+1-580-412-7135,1,Medium,0.0,0.0,Regular
+CUST00756,Patricia Martinez,Female,56,Business Owner,77500.0,Central,University,13444.0,772,2018-07-19,patricia.martinez_756@email.com,+1-512-390-4532,1,Low,0.0,0.0,Regular
+CUST00757,Mary Davis,Female,19,Student,13300.0,North,Main Branch,27681.2,715,2022-09-07,mary.davis_757@email.com,+1-692-686-6074,1,Medium,0.0,0.0,Regular
+CUST00758,Deborah Walker,Female,35,Business Owner,90900.0,South,Suburb,1112.1,627,2023-03-03,deborah.walker_758@email.com,+1-979-560-8357,1,High,0.0,0.0,Regular
+CUST00759,Elizabeth Flores,Female,47,Retired,24700.0,West,Tech Park,23642.02,715,2022-06-08,elizabeth.flores_759@email.com,+1-547-653-1750,1,Medium,0.0,0.0,Regular
+CUST00760,Kimberly Garcia,Female,37,Business Owner,94600.0,North,Highway,6937.67,663,2021-06-19,kimberly.garcia_760@email.com,+1-774-760-3028,1,Medium,0.0,0.0,Regular
+CUST00761,Mark Flores,Male,49,Salaried,57600.0,Central,Suburb,10896.12,697,2020-02-15,mark.flores_761@email.com,+1-968-587-9235,1,Medium,0.0,0.0,Regular
+CUST00762,Justin Lopez,Male,50,Salaried,21200.0,East,Tech Park,88511.6,653,2020-10-01,justin.lopez_762@email.com,+1-922-959-8278,1,Medium,0.0,0.0,Regular
+CUST00763,Stephanie Nguyen,Female,47,Salaried,74800.0,West,Main Branch,4247.1,623,2021-10-24,stephanie.nguyen_763@email.com,+1-647-284-7798,0,High,0.0,0.0,Regular
+CUST00764,Deborah Taylor,Female,38,Self-Employed,49700.0,North,Downtown,176649.69,611,2019-11-20,deborah.taylor_764@email.com,+1-492-247-3992,1,High,0.0,0.0,Regular
+CUST00765,Daniel Martin,Male,35,Retired,37100.0,South,Main Branch,5205.24,648,2021-08-25,daniel.martin_765@email.com,+1-385-127-1958,1,High,0.0,0.0,Regular
+CUST00766,George Martinez,Male,45,Retired,31500.0,East,Mall Road,19691.37,637,2022-03-19,george.martinez_766@email.com,+1-323-153-4318,1,High,0.0,0.0,Regular
+CUST00767,Jonathan Allen,Male,23,Retired,38400.0,North,Mall Road,180939.81,681,2018-09-06,jonathan.allen_767@email.com,+1-525-575-7669,0,Medium,0.0,0.0,Regular
+CUST00768,Ryan Anderson,Male,44,Salaried,66400.0,East,Suburb,4802.08,816,2019-02-20,ryan.anderson_768@email.com,+1-452-881-3057,1,Low,0.0,0.0,Regular
+CUST00769,Laura Garcia,Female,44,Professional,119200.0,South,Station Area,9139.49,825,2019-11-20,laura.garcia_769@email.com,+1-451-650-7942,1,Low,0.0,0.0,Regular
+CUST00770,Jennifer Smith,Female,51,Freelancer,52500.0,Central,Mall Road,29168.05,660,2019-11-17,jennifer.smith_770@email.com,+1-200-161-8900,1,Medium,0.0,0.0,Regular
+CUST00771,Deborah Thompson,Female,56,Professional,83400.0,Central,Suburb,2078.74,590,2021-02-26,deborah.thompson_771@email.com,+1-246-265-9750,1,High,0.0,0.0,Regular
+CUST00772,Elizabeth Sanchez,Female,39,Self-Employed,71000.0,South,Suburb,20580.39,777,2021-02-18,elizabeth.sanchez_772@email.com,+1-642-315-9270,1,Low,0.0,0.0,Regular
+CUST00773,Carol Taylor,Female,18,Freelancer,46900.0,East,Tech Park,2485.99,740,2021-08-10,carol.taylor_773@email.com,+1-549-315-8533,1,Medium,0.0,0.0,Regular
+CUST00774,Patricia Rodriguez,Female,40,Salaried,61900.0,Central,Industrial Area,7811.41,782,2018-01-18,patricia.rodriguez_774@email.com,+1-209-788-3843,1,Low,0.0,0.0,Regular
+CUST00775,Stephanie Wright,Female,54,Self-Employed,76400.0,North,Suburb,18855.87,726,2018-05-07,stephanie.wright_775@email.com,+1-887-555-3022,1,Medium,0.0,0.0,Regular
+CUST00776,Nicole Thompson,Female,33,Retired,44000.0,South,Main Branch,159432.68,765,2019-05-27,nicole.thompson_776@email.com,+1-673-479-4161,1,Low,0.0,0.0,Regular
+CUST00777,Robert Moore,Male,33,Student,16600.0,South,Downtown,4666.81,725,2021-05-26,robert.moore_777@email.com,+1-935-326-4838,1,Medium,0.0,0.0,Regular
+CUST00778,Jennifer Moore,Female,47,Freelancer,19800.0,Central,Tech Park,5463.58,657,2018-01-30,jennifer.moore_778@email.com,+1-400-940-7489,1,Medium,0.0,0.0,Regular
+CUST00779,Pamela Allen,Female,38,Freelancer,28700.0,South,Suburb,35128.73,700,2020-03-04,pamela.allen_779@email.com,+1-875-856-3875,0,Medium,0.0,0.0,Regular
+CUST00780,David Rodriguez,Male,39,Government,38700.0,Central,Tech Park,77532.2,812,2023-11-13,david.rodriguez_780@email.com,+1-946-901-5494,1,Low,0.0,0.0,Regular
+CUST00781,Justin Flores,Male,36,Government,40800.0,Central,Industrial Area,39713.61,651,2018-01-09,justin.flores_781@email.com,+1-637-756-1849,1,Medium,0.0,0.0,Regular
+CUST00782,Sharon Clark,Female,40,Government,61100.0,North,Suburb,2227.81,785,2023-03-27,sharon.clark_782@email.com,+1-707-470-9474,1,Low,0.0,0.0,Regular
+CUST00783,William Moore,Male,42,Retired,30700.0,Central,Industrial Area,19789.74,676,2021-07-19,william.moore_783@email.com,+1-205-501-4188,1,Medium,0.0,0.0,Regular
+CUST00784,Andrew Ramirez,Male,21,Self-Employed,94200.0,South,Tech Park,23146.31,715,2019-11-05,andrew.ramirez_784@email.com,+1-537-418-2029,1,Medium,0.0,0.0,Regular
+CUST00785,Robert Walker,Male,53,Retired,24300.0,North,Highway,38877.32,658,2021-10-01,robert.walker_785@email.com,+1-456-353-2766,1,Medium,0.0,0.0,Regular
+CUST00786,Linda Perez,Female,52,Professional,28900.0,North,Highway,19556.97,631,2022-12-02,linda.perez_786@email.com,+1-982-197-8314,1,High,0.0,0.0,Regular
+CUST00787,William Williams,Male,47,Retired,39900.0,East,Downtown,9422.44,623,2019-06-07,william.williams_787@email.com,+1-263-921-8240,0,High,0.0,0.0,Regular
+CUST00788,Barbara Miller,Female,40,Salaried,40200.0,Central,Main Branch,60498.9,650,2021-04-22,barbara.miller_788@email.com,+1-590-511-2570,1,Medium,0.0,0.0,Regular
+CUST00789,Sandra Hill,Female,18,Salaried,48800.0,West,University,6334.38,549,2023-03-17,sandra.hill_789@email.com,+1-638-735-2659,1,High,0.0,0.0,Regular
+CUST00790,Nicholas King,Male,27,Student,15500.0,Central,Tech Park,108485.2,705,2019-03-19,nicholas.king_790@email.com,+1-305-112-2106,1,Medium,0.0,0.0,Regular
+CUST00791,Brandon Rodriguez,Male,34,Government,56800.0,East,University,12696.63,624,2023-05-26,brandon.rodriguez_791@email.com,+1-942-735-8284,1,High,0.0,0.0,Regular
+CUST00792,Michael Brown,Male,28,Business Owner,42700.0,East,Highway,13795.41,692,2022-11-21,michael.brown_792@email.com,+1-725-767-6861,1,Medium,0.0,0.0,Regular
+CUST00793,Daniel Walker,Male,40,Government,43800.0,Central,Station Area,7080.53,728,2021-04-07,daniel.walker_793@email.com,+1-577-108-9481,1,Medium,0.0,0.0,Regular
+CUST00794,William Thomas,Male,26,Salaried,67800.0,West,Station Area,6616.62,619,2020-03-11,william.thomas_794@email.com,+1-405-755-4297,1,High,0.0,0.0,Regular
+CUST00795,Betty Walker,Female,24,Freelancer,38200.0,Central,Station Area,70995.73,721,2021-10-06,betty.walker_795@email.com,+1-830-406-7859,1,Medium,0.0,0.0,Regular
+CUST00796,Nicholas Williams,Male,53,Freelancer,52000.0,South,Main Branch,5858.19,653,2020-07-02,nicholas.williams_796@email.com,+1-909-335-8643,1,Medium,0.0,0.0,Regular
+CUST00797,Eric Perez,Male,32,Retired,49000.0,South,University,5238.83,751,2020-01-25,eric.perez_797@email.com,+1-206-471-1162,0,Low,0.0,0.0,Regular
+CUST00798,Scott Davis,Male,52,Business Owner,139400.0,East,Industrial Area,13472.1,736,2020-03-07,scott.davis_798@email.com,+1-846-699-6896,0,Medium,0.0,0.0,Regular
+CUST00799,Mark Gonzalez,Male,69,Government,40700.0,South,Tech Park,3491.03,529,2020-12-09,mark.gonzalez_799@email.com,+1-936-278-6567,1,High,0.0,0.0,Regular
+CUST00800,Anthony Gonzalez,Male,50,Salaried,23900.0,South,Mall Road,14089.95,714,2019-02-19,anthony.gonzalez_800@email.com,+1-221-951-3248,1,Medium,0.0,0.0,Regular
+CUST00801,Timothy Wilson,Male,44,Government,56400.0,West,Tech Park,28760.2,782,2022-02-23,timothy.wilson_801@email.com,+1-581-776-3807,1,Low,0.0,0.0,Regular
+CUST00802,Barbara Davis,Female,30,Business Owner,71700.0,South,Tech Park,8715.07,746,2020-02-25,barbara.davis_802@email.com,+1-745-487-7131,1,Medium,0.0,0.0,Regular
+CUST00803,Ashley Williams,Female,52,Professional,90800.0,Central,Mall Road,91143.68,585,2019-09-01,ashley.williams_803@email.com,+1-535-353-1872,1,High,0.0,0.0,Regular
+CUST00804,Sarah Allen,Female,62,Freelancer,65600.0,South,Downtown,53249.64,822,2023-04-12,sarah.allen_804@email.com,+1-879-729-2062,1,Low,0.0,0.0,Regular
+CUST00805,Angela White,Female,22,Freelancer,37900.0,Central,Industrial Area,9114.63,737,2020-01-04,angela.white_805@email.com,+1-529-829-7125,1,Medium,0.0,0.0,Regular
+CUST00806,Amy Walker,Female,29,Government,61400.0,Central,University,114078.65,735,2018-05-30,amy.walker_806@email.com,+1-412-324-4325,1,Medium,0.0,0.0,Regular
+CUST00807,Jeffrey Wilson,Male,45,Government,35200.0,West,University,7972.7,779,2019-10-06,jeffrey.wilson_807@email.com,+1-583-360-2388,1,Low,0.0,0.0,Regular
+CUST00808,Kevin Lewis,Male,51,Student,14800.0,South,Highway,13339.82,517,2018-06-18,kevin.lewis_808@email.com,+1-676-624-6511,1,High,0.0,0.0,Regular
+CUST00809,Sharon Clark,Female,29,Student,23600.0,West,Station Area,4738.39,695,2021-01-23,sharon.clark_809@email.com,+1-591-125-3942,1,Medium,0.0,0.0,Regular
+CUST00810,Barbara Thompson,Female,54,Self-Employed,40500.0,East,Suburb,27492.06,755,2023-10-02,barbara.thompson_810@email.com,+1-759-759-2280,1,Low,0.0,0.0,Regular
+CUST00811,Joseph Davis,Male,42,Self-Employed,120900.0,East,Main Branch,2974.05,764,2020-03-31,joseph.davis_811@email.com,+1-541-301-6394,1,Low,0.0,0.0,Regular
+CUST00812,Betty Hill,Female,39,Business Owner,110800.0,Central,Mall Road,37405.33,621,2018-02-04,betty.hill_812@email.com,+1-988-406-5617,1,High,0.0,0.0,Regular
+CUST00813,Stephanie Nguyen,Female,44,Salaried,24300.0,West,Suburb,45428.59,703,2019-09-04,stephanie.nguyen_813@email.com,+1-607-333-4717,1,Medium,0.0,0.0,Regular
+CUST00814,Eric Anderson,Male,49,Freelancer,59300.0,West,Station Area,34239.79,691,2018-12-18,eric.anderson_814@email.com,+1-520-966-4077,1,Medium,0.0,0.0,Regular
+CUST00815,Margaret Lewis,Female,31,Freelancer,35400.0,Central,Main Branch,91498.84,794,2022-03-15,margaret.lewis_815@email.com,+1-342-691-3102,1,Low,0.0,0.0,Regular
+CUST00816,Jonathan Thompson,Male,39,Student,15200.0,South,University,7438.78,773,2022-10-10,jonathan.thompson_816@email.com,+1-902-870-7608,1,Low,0.0,0.0,Regular
+CUST00817,Michelle Nguyen,Female,49,Salaried,87000.0,Central,Main Branch,7677.22,649,2019-07-24,michelle.nguyen_817@email.com,+1-357-438-7404,1,High,0.0,0.0,Regular
+CUST00818,Jeffrey Jones,Male,44,Retired,41800.0,South,Industrial Area,17003.91,610,2019-03-21,jeffrey.jones_818@email.com,+1-536-683-8397,1,High,0.0,0.0,Regular
+CUST00819,Elizabeth Hernandez,Female,52,Self-Employed,79100.0,Central,Airport Road,7335.43,788,2018-05-12,elizabeth.hernandez_819@email.com,+1-905-717-9005,0,Low,0.0,0.0,Regular
+CUST00820,David Harris,Male,56,Government,52000.0,South,Tech Park,24234.13,724,2021-04-07,david.harris_820@email.com,+1-875-636-2146,1,Medium,0.0,0.0,Regular
+CUST00821,Shirley Smith,Female,31,Business Owner,90800.0,East,University,1664.27,750,2022-05-21,shirley.smith_821@email.com,+1-360-213-3115,1,Low,0.0,0.0,Regular
+CUST00822,Barbara Harris,Female,23,Professional,116100.0,South,Tech Park,14821.82,663,2021-06-22,barbara.harris_822@email.com,+1-642-937-8778,1,Medium,0.0,0.0,Regular
+CUST00823,Emma Gonzalez,Female,34,Freelancer,41100.0,East,Tech Park,120841.81,480,2018-01-31,emma.gonzalez_823@email.com,+1-346-556-2048,1,High,0.0,0.0,Regular
+CUST00824,Larry Perez,Male,57,Freelancer,49600.0,West,Industrial Area,5174.89,593,2018-06-10,larry.perez_824@email.com,+1-954-193-5717,1,High,0.0,0.0,Regular
+CUST00825,Amanda Martin,Female,62,Retired,25100.0,Central,Airport Road,5519.15,770,2022-08-28,amanda.martin_825@email.com,+1-455-283-8079,1,Low,0.0,0.0,Regular
+CUST00826,Brandon Miller,Male,46,Retired,25200.0,North,Tech Park,28565.36,597,2019-10-09,brandon.miller_826@email.com,+1-480-743-9810,1,High,0.0,0.0,Regular
+CUST00827,Steven Young,Male,55,Retired,46100.0,Central,Downtown,41706.3,708,2022-02-19,steven.young_827@email.com,+1-278-873-2723,1,Medium,0.0,0.0,Regular
+CUST00828,Rebecca Lewis,Female,63,Business Owner,90000.0,East,Tech Park,5333.44,715,2023-09-04,rebecca.lewis_828@email.com,+1-245-573-1437,0,Medium,0.0,0.0,Regular
+CUST00829,Deborah Perez,Female,67,Retired,24300.0,South,University,14274.71,713,2018-06-04,deborah.perez_829@email.com,+1-210-356-2878,1,Medium,0.0,0.0,Regular
+CUST00830,George Robinson,Male,41,Freelancer,31700.0,West,Downtown,84645.69,850,2018-12-05,george.robinson_830@email.com,+1-761-772-4969,1,Low,0.0,0.0,Regular
+CUST00831,Sarah Walker,Female,44,Government,36400.0,South,Airport Road,3433.2,700,2018-03-15,sarah.walker_831@email.com,+1-821-202-3903,1,Medium,0.0,0.0,Regular
+CUST00832,Lisa Jones,Female,55,Salaried,62800.0,East,Airport Road,21963.02,632,2022-12-10,lisa.jones_832@email.com,+1-566-282-4549,1,High,0.0,0.0,Regular
+CUST00833,Gary Brown,Male,28,Self-Employed,81300.0,West,Mall Road,65941.68,556,2022-12-24,gary.brown_833@email.com,+1-253-712-1076,0,High,0.0,0.0,Regular
+CUST00834,Betty Thomas,Female,61,Student,17600.0,South,Tech Park,118126.76,572,2019-01-10,betty.thomas_834@email.com,+1-216-531-1457,1,High,0.0,0.0,Regular
+CUST00835,Betty Jones,Female,25,Professional,76400.0,North,Airport Road,40269.16,823,2019-11-16,betty.jones_835@email.com,+1-245-525-9396,1,Low,0.0,0.0,Regular
+CUST00836,Michelle Scott,Female,50,Professional,74200.0,Central,Tech Park,6427.6,778,2022-06-07,michelle.scott_836@email.com,+1-638-223-4807,1,Low,0.0,0.0,Regular
+CUST00837,Michelle Lopez,Female,30,Salaried,81900.0,West,Station Area,15658.02,807,2018-02-19,michelle.lopez_837@email.com,+1-598-317-8516,1,Low,0.0,0.0,Regular
+CUST00838,Helen White,Female,50,Salaried,52700.0,North,Tech Park,11810.27,652,2022-08-11,helen.white_838@email.com,+1-508-885-9185,1,Medium,0.0,0.0,Regular
+CUST00839,Justin Torres,Male,47,Business Owner,92100.0,East,Downtown,10801.35,666,2021-08-21,justin.torres_839@email.com,+1-846-813-7366,1,Medium,0.0,0.0,Regular
+CUST00840,Timothy Lopez,Male,42,Student,10000.0,West,Downtown,38169.87,601,2021-10-04,timothy.lopez_840@email.com,+1-218-723-8354,1,High,0.0,0.0,Regular
+CUST00841,Stephen Nguyen,Male,28,Salaried,27200.0,South,Main Branch,2558.89,571,2019-05-24,stephen.nguyen_841@email.com,+1-516-342-8020,1,High,0.0,0.0,Regular
+CUST00842,William Rodriguez,Male,33,Student,23800.0,West,Mall Road,11718.74,694,2020-04-07,william.rodriguez_842@email.com,+1-355-484-4348,1,Medium,0.0,0.0,Regular
+CUST00843,Samuel Lewis,Male,46,Student,15600.0,South,Mall Road,20071.73,584,2021-07-24,samuel.lewis_843@email.com,+1-859-905-1648,1,High,0.0,0.0,Regular
+CUST00844,Emily Johnson,Female,59,Professional,123400.0,East,Station Area,2924.3,598,2020-09-19,emily.johnson_844@email.com,+1-410-652-1885,1,High,0.0,0.0,Regular
+CUST00845,Andrew Hill,Male,38,Retired,24900.0,Central,Station Area,40423.18,621,2020-01-22,andrew.hill_845@email.com,+1-652-744-1099,0,High,0.0,0.0,Regular
+CUST00846,Barbara Gonzalez,Female,67,Salaried,74600.0,South,Tech Park,28426.83,762,2019-05-30,barbara.gonzalez_846@email.com,+1-293-277-9992,1,Low,0.0,0.0,Regular
+CUST00847,Paul Allen,Male,55,Self-Employed,54000.0,West,Industrial Area,8271.24,686,2021-06-29,paul.allen_847@email.com,+1-368-838-4236,1,Medium,0.0,0.0,Regular
+CUST00848,Samuel Thomas,Male,52,Government,52100.0,East,Highway,3319.62,615,2023-01-11,samuel.thomas_848@email.com,+1-850-306-5454,1,High,0.0,0.0,Regular
+CUST00849,Elizabeth White,Female,41,Retired,34200.0,West,Airport Road,234931.82,569,2023-04-13,elizabeth.white_849@email.com,+1-651-532-9278,1,High,0.0,0.0,Regular
+CUST00850,Karen Walker,Female,48,Salaried,79600.0,West,University,336293.54,647,2018-12-07,karen.walker_850@email.com,+1-977-407-9801,1,High,0.0,0.0,Regular
+CUST00851,Joshua Harris,Male,47,Freelancer,52700.0,East,Industrial Area,27849.72,672,2021-03-06,joshua.harris_851@email.com,+1-584-675-8878,0,Medium,0.0,0.0,Regular
+CUST00852,Eric Gonzalez,Male,47,Business Owner,21600.0,South,Main Branch,49935.3,690,2018-02-22,eric.gonzalez_852@email.com,+1-712-847-7131,1,Medium,0.0,0.0,Regular
+CUST00853,Stephanie White,Female,39,Retired,56500.0,West,Mall Road,9799.43,647,2018-10-19,stephanie.white_853@email.com,+1-618-139-3039,1,High,0.0,0.0,Regular
+CUST00854,Mark Ramirez,Male,65,Government,37500.0,East,Suburb,11382.83,668,2023-06-25,mark.ramirez_854@email.com,+1-850-805-7032,1,Medium,0.0,0.0,Regular
+CUST00855,Sharon Thomas,Female,52,Professional,85000.0,West,Main Branch,4669.7,637,2022-01-20,sharon.thomas_855@email.com,+1-846-823-1462,1,High,0.0,0.0,Regular
+CUST00856,Joshua Hill,Male,34,Freelancer,44000.0,South,Mall Road,36717.63,713,2020-10-10,joshua.hill_856@email.com,+1-816-692-3644,0,Medium,0.0,0.0,Regular
+CUST00857,Jason Sanchez,Male,20,Self-Employed,85700.0,Central,Tech Park,29824.41,790,2022-09-29,jason.sanchez_857@email.com,+1-369-949-7993,1,Low,0.0,0.0,Regular
+CUST00858,Angela Wright,Female,47,Retired,46600.0,Central,Mall Road,38555.51,787,2022-08-13,angela.wright_858@email.com,+1-970-997-2456,1,Low,0.0,0.0,Regular
+CUST00859,Karen Moore,Female,48,Professional,77600.0,West,Mall Road,336691.27,751,2018-01-27,karen.moore_859@email.com,+1-372-935-9056,0,Low,0.0,0.0,Regular
+CUST00860,Ryan King,Male,48,Retired,21600.0,East,University,4693.96,703,2019-11-30,ryan.king_860@email.com,+1-380-483-4053,1,Medium,0.0,0.0,Regular
+CUST00861,Jonathan Lopez,Male,43,Self-Employed,53000.0,West,Highway,26086.66,807,2020-05-20,jonathan.lopez_861@email.com,+1-390-305-1966,1,Low,0.0,0.0,Regular
+CUST00862,Joshua Clark,Male,50,Freelancer,29600.0,Central,Downtown,19267.78,615,2019-11-12,joshua.clark_862@email.com,+1-281-400-2404,1,High,0.0,0.0,Regular
+CUST00863,Barbara Perez,Female,37,Salaried,48200.0,Central,Tech Park,12417.04,579,2023-05-12,barbara.perez_863@email.com,+1-696-788-2651,0,High,0.0,0.0,Regular
+CUST00864,Mary Nguyen,Female,40,Salaried,45700.0,North,Tech Park,655.02,844,2023-11-10,mary.nguyen_864@email.com,+1-207-484-9520,1,Low,0.0,0.0,Regular
+CUST00865,Amy Walker,Female,55,Student,13300.0,Central,University,22529.55,586,2021-10-10,amy.walker_865@email.com,+1-579-798-6620,1,High,0.0,0.0,Regular
+CUST00866,Edward Sanchez,Male,62,Retired,54900.0,Central,Main Branch,26583.14,761,2021-12-29,edward.sanchez_866@email.com,+1-538-925-2641,0,Low,0.0,0.0,Regular
+CUST00867,Sarah Johnson,Female,44,Self-Employed,38900.0,Central,Mall Road,13437.6,690,2020-10-15,sarah.johnson_867@email.com,+1-577-562-8785,1,Medium,0.0,0.0,Regular
+CUST00868,James Lee,Male,36,Salaried,51400.0,East,Main Branch,19738.39,673,2021-08-26,james.lee_868@email.com,+1-894-554-4826,1,Medium,0.0,0.0,Regular
+CUST00869,Helen Garcia,Female,42,Student,10200.0,West,Industrial Area,9316.86,577,2019-02-16,helen.garcia_869@email.com,+1-951-494-5814,1,High,0.0,0.0,Regular
+CUST00870,Larry Torres,Male,53,Salaried,20300.0,South,Industrial Area,87931.06,790,2018-12-23,larry.torres_870@email.com,+1-508-952-9990,1,Low,0.0,0.0,Regular
+CUST00871,Lisa Lewis,Female,38,Self-Employed,14200.0,West,Suburb,14277.32,674,2020-09-13,lisa.lewis_871@email.com,+1-449-316-3792,1,Medium,0.0,0.0,Regular
+CUST00872,Joseph Ramirez,Male,29,Salaried,46500.0,South,Station Area,138169.19,733,2022-04-20,joseph.ramirez_872@email.com,+1-984-387-4610,1,Medium,0.0,0.0,Regular
+CUST00873,Jessica Rodriguez,Female,30,Freelancer,23400.0,North,Station Area,14877.11,662,2020-07-05,jessica.rodriguez_873@email.com,+1-789-884-2059,1,Medium,0.0,0.0,Regular
+CUST00874,Deborah Scott,Female,47,Retired,29400.0,South,Tech Park,40692.52,834,2020-11-27,deborah.scott_874@email.com,+1-318-397-2436,1,Low,0.0,0.0,Regular
+CUST00875,Emma Gonzalez,Female,51,Self-Employed,64100.0,Central,Station Area,17680.53,651,2019-06-06,emma.gonzalez_875@email.com,+1-520-489-1027,1,Medium,0.0,0.0,Regular
+CUST00876,Jason Ramirez,Male,56,Student,12200.0,East,Airport Road,23254.81,684,2023-10-30,jason.ramirez_876@email.com,+1-879-716-4639,1,Medium,0.0,0.0,Regular
+CUST00877,Justin Robinson,Male,35,Student,10000.0,South,Mall Road,32453.69,675,2020-06-15,justin.robinson_877@email.com,+1-711-796-8467,1,Medium,0.0,0.0,Regular
+CUST00878,Karen Williams,Female,48,Student,12600.0,East,Suburb,95319.11,609,2019-05-21,karen.williams_878@email.com,+1-480-968-8836,1,High,0.0,0.0,Regular
+CUST00879,Jonathan Jackson,Male,62,Retired,16600.0,North,Station Area,37113.06,718,2019-09-18,jonathan.jackson_879@email.com,+1-933-315-4687,1,Medium,0.0,0.0,Regular
+CUST00880,Anthony Young,Male,32,Retired,39500.0,East,Airport Road,102275.19,502,2018-03-30,anthony.young_880@email.com,+1-761-501-6528,1,High,0.0,0.0,Regular
+CUST00881,Amanda Sanchez,Female,48,Retired,10000.0,North,Suburb,6913.3,810,2021-03-05,amanda.sanchez_881@email.com,+1-489-813-4196,1,Low,0.0,0.0,Regular
+CUST00882,Susan Rodriguez,Female,35,Student,10000.0,Central,Main Branch,17369.56,845,2021-05-30,susan.rodriguez_882@email.com,+1-668-770-3681,1,Low,0.0,0.0,Regular
+CUST00883,Kathleen Jackson,Female,20,Business Owner,61600.0,South,Tech Park,132842.3,828,2020-03-12,kathleen.jackson_883@email.com,+1-952-766-1149,1,Low,0.0,0.0,Regular
+CUST00884,Daniel Harris,Male,40,Retired,22000.0,South,Main Branch,272396.01,807,2019-01-29,daniel.harris_884@email.com,+1-564-585-3943,1,Low,0.0,0.0,Regular
+CUST00885,Stephen Perez,Male,50,Retired,26500.0,South,University,20767.92,667,2020-09-30,stephen.perez_885@email.com,+1-234-221-4946,1,Medium,0.0,0.0,Regular
+CUST00886,Nicole Lopez,Female,45,Retired,50200.0,North,Industrial Area,63278.47,593,2022-04-15,nicole.lopez_886@email.com,+1-481-747-8292,1,High,0.0,0.0,Regular
+CUST00887,Thomas Garcia,Male,58,Self-Employed,71100.0,West,Suburb,50235.59,797,2020-07-10,thomas.garcia_887@email.com,+1-223-700-8856,1,Low,0.0,0.0,Regular
+CUST00888,Benjamin Lopez,Male,28,Retired,34600.0,West,University,11640.6,554,2021-05-07,benjamin.lopez_888@email.com,+1-785-228-2629,1,High,0.0,0.0,Regular
+CUST00889,Jeffrey Johnson,Male,46,Retired,61400.0,Central,Suburb,2420.93,677,2023-12-12,jeffrey.johnson_889@email.com,+1-700-165-9501,1,Medium,0.0,0.0,Regular
+CUST00890,Steven Davis,Male,49,Business Owner,93300.0,Central,Airport Road,19230.37,576,2018-01-22,steven.davis_890@email.com,+1-768-557-6149,1,High,0.0,0.0,Regular
+CUST00891,Brandon Wilson,Male,44,Business Owner,69600.0,North,Suburb,1590.96,775,2020-11-17,brandon.wilson_891@email.com,+1-971-135-2386,1,Low,0.0,0.0,Regular
+CUST00892,Melissa Wright,Female,53,Business Owner,91400.0,West,Main Branch,28995.32,765,2020-10-14,melissa.wright_892@email.com,+1-507-147-9510,1,Low,0.0,0.0,Regular
+CUST00893,Anna Lewis,Female,44,Business Owner,114400.0,Central,Industrial Area,15413.84,784,2021-07-05,anna.lewis_893@email.com,+1-735-460-9818,1,Low,0.0,0.0,Regular
+CUST00894,Michael Thomas,Male,45,Salaried,58200.0,South,Airport Road,4797.87,702,2021-05-12,michael.thomas_894@email.com,+1-420-237-4539,1,Medium,0.0,0.0,Regular
+CUST00895,Sarah Flores,Female,32,Retired,28300.0,North,Suburb,8279.59,594,2020-11-10,sarah.flores_895@email.com,+1-466-490-3675,1,High,0.0,0.0,Regular
+CUST00896,Joshua Ramirez,Male,67,Business Owner,125900.0,Central,Tech Park,220673.83,582,2018-10-17,joshua.ramirez_896@email.com,+1-844-850-5413,1,High,0.0,0.0,Regular
+CUST00897,Edward Torres,Male,42,Business Owner,55100.0,West,Airport Road,9558.31,606,2021-07-19,edward.torres_897@email.com,+1-644-488-1424,1,High,0.0,0.0,Regular
+CUST00898,David Moore,Male,56,Self-Employed,57300.0,Central,Downtown,79384.24,728,2022-07-25,david.moore_898@email.com,+1-267-437-2457,1,Medium,0.0,0.0,Regular
+CUST00899,Kimberly Martinez,Female,69,Professional,44500.0,East,Main Branch,99815.61,771,2019-02-06,kimberly.martinez_899@email.com,+1-586-327-7203,1,Low,0.0,0.0,Regular
+CUST00900,Anthony King,Male,30,Government,65100.0,Central,Industrial Area,32970.68,661,2019-01-27,anthony.king_900@email.com,+1-741-457-5620,1,Medium,0.0,0.0,Regular
+CUST00901,William Hernandez,Male,32,Student,11800.0,West,Airport Road,257757.5,680,2021-11-14,william.hernandez_901@email.com,+1-959-794-9711,1,Medium,0.0,0.0,Regular
+CUST00902,Kathleen Nguyen,Female,51,Business Owner,68600.0,East,Main Branch,8640.16,766,2023-10-05,kathleen.nguyen_902@email.com,+1-930-259-3070,1,Low,0.0,0.0,Regular
+CUST00903,Linda White,Female,25,Professional,70000.0,Central,University,22944.49,688,2023-02-19,linda.white_903@email.com,+1-387-549-6799,1,Medium,0.0,0.0,Regular
+CUST00904,Kimberly Ramirez,Female,39,Professional,89500.0,East,Downtown,50585.84,738,2021-06-05,kimberly.ramirez_904@email.com,+1-616-889-6123,1,Medium,0.0,0.0,Regular
+CUST00905,David Thomas,Male,30,Self-Employed,59500.0,South,Highway,92384.59,751,2018-08-24,david.thomas_905@email.com,+1-286-861-5683,1,Low,0.0,0.0,Regular
+CUST00906,Mary Ramirez,Female,25,Business Owner,99500.0,West,Industrial Area,2051.1,683,2023-10-11,mary.ramirez_906@email.com,+1-901-793-9722,1,Medium,0.0,0.0,Regular
+CUST00907,Mary Flores,Female,64,Professional,57200.0,North,University,8093.47,741,2023-12-29,mary.flores_907@email.com,+1-967-453-5001,1,Medium,0.0,0.0,Regular
+CUST00908,Samuel Lewis,Male,23,Business Owner,72900.0,Central,Tech Park,45059.06,629,2019-12-18,samuel.lewis_908@email.com,+1-276-475-3184,1,High,0.0,0.0,Regular
+CUST00909,Jacob Young,Male,39,Retired,42800.0,South,Station Area,36528.76,701,2019-04-09,jacob.young_909@email.com,+1-546-795-5092,1,Medium,0.0,0.0,Regular
+CUST00910,Kevin Martin,Male,37,Freelancer,50000.0,East,Mall Road,18987.21,716,2020-05-22,kevin.martin_910@email.com,+1-202-855-7449,1,Medium,0.0,0.0,Regular
+CUST00911,Angela Williams,Female,36,Freelancer,42500.0,Central,Industrial Area,6714.67,677,2018-08-24,angela.williams_911@email.com,+1-564-106-8542,1,Medium,0.0,0.0,Regular
+CUST00912,Susan Smith,Female,32,Student,10000.0,South,University,30043.25,697,2021-12-23,susan.smith_912@email.com,+1-209-203-8058,1,Medium,0.0,0.0,Regular
+CUST00913,Larry Allen,Male,51,Business Owner,78400.0,West,Downtown,35942.06,724,2023-06-20,larry.allen_913@email.com,+1-207-259-5098,1,Medium,0.0,0.0,Regular
+CUST00914,Melissa Martin,Female,47,Student,11300.0,West,Airport Road,26350.33,709,2024-01-07,melissa.martin_914@email.com,+1-475-211-8185,1,Medium,0.0,0.0,Regular
+CUST00915,Lisa Rodriguez,Female,42,Student,10000.0,West,Main Branch,26704.5,850,2022-01-11,lisa.rodriguez_915@email.com,+1-926-303-2813,1,Low,0.0,0.0,Regular
+CUST00916,Charles Sanchez,Male,37,Retired,27400.0,East,Main Branch,34475.98,704,2019-10-19,charles.sanchez_916@email.com,+1-882-303-8852,1,Medium,0.0,0.0,Regular
+CUST00917,Jessica Clark,Female,56,Freelancer,28000.0,Central,Industrial Area,52979.29,727,2019-06-06,jessica.clark_917@email.com,+1-532-869-7551,1,Medium,0.0,0.0,Regular
+CUST00918,Sarah Davis,Female,40,Self-Employed,71600.0,North,Airport Road,75761.76,749,2019-09-30,sarah.davis_918@email.com,+1-552-612-1223,1,Medium,0.0,0.0,Regular
+CUST00919,William Perez,Male,28,Retired,43600.0,Central,Main Branch,20381.31,685,2022-11-15,william.perez_919@email.com,+1-691-396-5623,1,Medium,0.0,0.0,Regular
+CUST00920,Ashley Flores,Female,42,Business Owner,85900.0,Central,Airport Road,92046.48,673,2020-10-18,ashley.flores_920@email.com,+1-487-885-2884,1,Medium,0.0,0.0,Regular
+CUST00921,Jacob Gonzalez,Male,28,Freelancer,39700.0,North,Suburb,27294.31,778,2020-01-13,jacob.gonzalez_921@email.com,+1-393-975-3436,1,Low,0.0,0.0,Regular
+CUST00922,Jeffrey Williams,Male,49,Government,37200.0,South,Airport Road,434620.23,701,2022-10-13,jeffrey.williams_922@email.com,+1-218-731-4270,1,Medium,0.0,0.0,Regular
+CUST00923,Jason Clark,Male,57,Government,47700.0,South,Tech Park,41774.07,747,2021-10-08,jason.clark_923@email.com,+1-636-590-2005,1,Medium,0.0,0.0,Regular
+CUST00924,Brian Davis,Male,56,Government,65900.0,East,Mall Road,62732.59,654,2021-12-08,brian.davis_924@email.com,+1-928-528-5046,1,Medium,0.0,0.0,Regular
+CUST00925,Anthony Williams,Male,35,Salaried,60500.0,North,Station Area,67491.28,662,2020-05-18,anthony.williams_925@email.com,+1-492-583-5590,1,Medium,0.0,0.0,Regular
+CUST00926,Jacob Lopez,Male,54,Government,71800.0,West,Station Area,7335.02,613,2021-10-01,jacob.lopez_926@email.com,+1-511-214-2587,1,High,0.0,0.0,Regular
+CUST00927,Timothy White,Male,40,Student,16400.0,Central,Suburb,11737.21,788,2022-03-03,timothy.white_927@email.com,+1-443-765-5521,1,Low,0.0,0.0,Regular
+CUST00928,Elizabeth Miller,Female,47,Business Owner,91100.0,Central,Downtown,3932.02,574,2018-06-18,elizabeth.miller_928@email.com,+1-800-770-4120,1,High,0.0,0.0,Regular
+CUST00929,Susan Jones,Female,45,Student,10000.0,East,Industrial Area,74247.91,667,2020-04-07,susan.jones_929@email.com,+1-746-838-3517,0,Medium,0.0,0.0,Regular
+CUST00930,Ryan Scott,Male,75,Government,84600.0,Central,Station Area,17716.67,671,2022-02-08,ryan.scott_930@email.com,+1-659-744-2923,1,Medium,0.0,0.0,Regular
+CUST00931,Eric Clark,Male,53,Salaried,83100.0,South,Highway,3085.18,537,2021-01-27,eric.clark_931@email.com,+1-913-232-5745,0,High,0.0,0.0,Regular
+CUST00932,Mark Sanchez,Male,34,Freelancer,52900.0,Central,Suburb,39984.55,765,2018-11-04,mark.sanchez_932@email.com,+1-369-548-9344,1,Low,0.0,0.0,Regular
+CUST00933,Stephanie Hill,Female,27,Government,15300.0,South,Airport Road,61673.96,613,2018-01-15,stephanie.hill_933@email.com,+1-363-685-4568,1,High,0.0,0.0,Regular
+CUST00934,Stephen Robinson,Male,18,Government,52200.0,East,Tech Park,57057.27,670,2021-04-28,stephen.robinson_934@email.com,+1-925-374-2951,1,Medium,0.0,0.0,Regular
+CUST00935,Justin Thomas,Male,36,Government,47600.0,North,Airport Road,14119.34,572,2021-02-11,justin.thomas_935@email.com,+1-336-376-1844,1,High,0.0,0.0,Regular
+CUST00936,Steven Wright,Male,33,Self-Employed,75200.0,North,Station Area,32403.26,693,2022-02-20,steven.wright_936@email.com,+1-532-185-9999,1,Medium,0.0,0.0,Regular
+CUST00937,Ryan Flores,Male,30,Government,47300.0,East,Main Branch,1615.7,694,2018-02-12,ryan.flores_937@email.com,+1-564-324-5582,1,Medium,0.0,0.0,Regular
+CUST00938,Justin Nguyen,Male,59,Self-Employed,36300.0,West,Mall Road,10904.02,706,2020-04-24,justin.nguyen_938@email.com,+1-652-325-6312,1,Medium,0.0,0.0,Regular
+CUST00939,Karen Lewis,Female,57,Professional,69200.0,West,Station Area,9597.9,522,2019-08-31,karen.lewis_939@email.com,+1-690-195-9125,1,High,0.0,0.0,Regular
+CUST00940,Anthony Gonzalez,Male,43,Freelancer,72600.0,South,Mall Road,30724.95,678,2018-03-28,anthony.gonzalez_940@email.com,+1-517-266-3911,1,Medium,0.0,0.0,Regular
+CUST00941,David Martinez,Male,45,Self-Employed,64800.0,West,Tech Park,8303.09,745,2023-02-07,david.martinez_941@email.com,+1-860-512-2642,1,Medium,0.0,0.0,Regular
+CUST00942,James Hill,Male,44,Self-Employed,65300.0,West,University,6833.28,784,2018-03-26,james.hill_942@email.com,+1-312-946-1222,1,Low,0.0,0.0,Regular
+CUST00943,Charles Thomas,Male,49,Self-Employed,54200.0,East,Airport Road,73290.76,640,2018-02-25,charles.thomas_943@email.com,+1-209-910-2742,1,High,0.0,0.0,Regular
+CUST00944,Elizabeth Gonzalez,Female,32,Business Owner,69500.0,West,Highway,2629.94,717,2022-12-25,elizabeth.gonzalez_944@email.com,+1-367-414-6435,1,Medium,0.0,0.0,Regular
+CUST00945,William Wright,Male,20,Government,31600.0,Central,Downtown,1824.93,673,2018-03-28,william.wright_945@email.com,+1-245-205-9923,1,Medium,0.0,0.0,Regular
+CUST00946,Karen Smith,Female,40,Professional,72200.0,North,Tech Park,6303.79,586,2022-10-16,karen.smith_946@email.com,+1-594-250-6788,1,High,0.0,0.0,Regular
+CUST00947,Jason Davis,Male,47,Freelancer,37600.0,South,Downtown,32197.05,609,2020-07-08,jason.davis_947@email.com,+1-304-388-6854,0,High,0.0,0.0,Regular
+CUST00948,Jessica White,Female,44,Self-Employed,90400.0,North,Highway,44506.88,647,2019-09-11,jessica.white_948@email.com,+1-382-538-9691,1,High,0.0,0.0,Regular
+CUST00949,Jacob Martinez,Male,45,Government,46400.0,Central,Mall Road,22235.74,653,2021-11-27,jacob.martinez_949@email.com,+1-306-377-9179,1,Medium,0.0,0.0,Regular
+CUST00950,Barbara Smith,Female,40,Business Owner,95700.0,South,Station Area,6687.33,598,2019-08-29,barbara.smith_950@email.com,+1-599-557-8838,1,High,0.0,0.0,Regular
+CUST00951,Brandon Ramirez,Male,25,Government,26000.0,South,Downtown,5111.56,692,2021-08-16,brandon.ramirez_951@email.com,+1-330-286-7308,1,Medium,0.0,0.0,Regular
+CUST00952,Sharon Walker,Female,31,Retired,40400.0,Central,Station Area,22963.39,522,2019-07-21,sharon.walker_952@email.com,+1-869-351-7278,1,High,0.0,0.0,Regular
+CUST00953,Anna Wright,Female,49,Freelancer,55900.0,Central,Suburb,6683.28,713,2020-07-31,anna.wright_953@email.com,+1-593-185-7911,1,Medium,0.0,0.0,Regular
+CUST00954,Richard Thomas,Male,31,Student,15400.0,North,Tech Park,4830.0,536,2018-03-12,richard.thomas_954@email.com,+1-571-671-8764,1,High,0.0,0.0,Regular
+CUST00955,William Thompson,Male,37,Student,14400.0,South,Mall Road,13667.61,585,2023-03-01,william.thompson_955@email.com,+1-347-955-7898,1,High,0.0,0.0,Regular
+CUST00956,William Rodriguez,Male,37,Self-Employed,70300.0,South,University,20871.26,694,2018-04-18,william.rodriguez_956@email.com,+1-912-534-7089,0,Medium,0.0,0.0,Regular
+CUST00957,Benjamin Jones,Male,33,Freelancer,60800.0,Central,Airport Road,5370.05,719,2018-05-04,benjamin.jones_957@email.com,+1-350-474-3314,0,Medium,0.0,0.0,Regular
+CUST00958,James Torres,Male,56,Retired,40000.0,South,Airport Road,17274.23,637,2023-04-09,james.torres_958@email.com,+1-961-243-9641,1,High,0.0,0.0,Regular
+CUST00959,Kathleen Clark,Female,54,Student,10000.0,West,Main Branch,6876.4,648,2021-03-20,kathleen.clark_959@email.com,+1-313-259-1983,1,High,0.0,0.0,Regular
+CUST00960,Samuel Lopez,Male,56,Business Owner,100300.0,North,University,6893.57,655,2022-10-02,samuel.lopez_960@email.com,+1-896-996-8443,1,Medium,0.0,0.0,Regular
+CUST00961,Pamela Allen,Female,34,Government,39400.0,South,University,71301.13,570,2019-10-05,pamela.allen_961@email.com,+1-478-194-9544,1,High,0.0,0.0,Regular
+CUST00962,Steven Sanchez,Male,61,Salaried,68700.0,South,University,81555.09,642,2020-01-23,steven.sanchez_962@email.com,+1-963-672-2264,1,High,0.0,0.0,Regular
+CUST00963,Kathleen Lee,Female,40,Retired,20000.0,West,Airport Road,11735.87,719,2018-08-12,kathleen.lee_963@email.com,+1-580-762-7950,1,Medium,0.0,0.0,Regular
+CUST00964,Joseph Jones,Male,57,Student,10000.0,Central,Station Area,14205.62,667,2018-04-25,joseph.jones_964@email.com,+1-445-388-3666,1,Medium,0.0,0.0,Regular
+CUST00965,Steven Hill,Male,25,Salaried,64800.0,East,Tech Park,9239.21,664,2020-04-06,steven.hill_965@email.com,+1-853-133-4937,1,Medium,0.0,0.0,Regular
+CUST00966,Brandon Walker,Male,36,Salaried,42000.0,North,Station Area,21841.04,662,2019-01-17,brandon.walker_966@email.com,+1-516-108-6843,1,Medium,0.0,0.0,Regular
+CUST00967,Angela Gonzalez,Female,37,Student,11700.0,West,Station Area,32319.62,812,2019-06-15,angela.gonzalez_967@email.com,+1-919-790-2595,1,Low,0.0,0.0,Regular
+CUST00968,Stephen Martinez,Male,43,Salaried,71400.0,Central,University,4153.61,692,2023-05-08,stephen.martinez_968@email.com,+1-800-989-1612,1,Medium,0.0,0.0,Regular
+CUST00969,Nicholas Garcia,Male,28,Self-Employed,36200.0,South,Tech Park,9070.24,775,2019-07-31,nicholas.garcia_969@email.com,+1-987-835-3638,1,Low,0.0,0.0,Regular
+CUST00970,Laura Rodriguez,Female,53,Student,16100.0,East,Station Area,3500.84,664,2022-10-31,laura.rodriguez_970@email.com,+1-240-829-7350,1,Medium,0.0,0.0,Regular
+CUST00971,Daniel Torres,Male,45,Freelancer,47400.0,North,Main Branch,2410.16,608,2019-08-08,daniel.torres_971@email.com,+1-984-991-6071,1,High,0.0,0.0,Regular
+CUST00972,Jonathan Miller,Male,41,Freelancer,52200.0,East,Airport Road,1579.16,667,2021-04-25,jonathan.miller_972@email.com,+1-365-169-5589,1,Medium,0.0,0.0,Regular
+CUST00973,Elizabeth Jones,Female,43,Business Owner,112900.0,West,Mall Road,50585.95,726,2023-04-23,elizabeth.jones_973@email.com,+1-462-881-8242,1,Medium,0.0,0.0,Regular
+CUST00974,Thomas Torres,Male,32,Freelancer,19200.0,North,Station Area,13743.71,760,2021-03-20,thomas.torres_974@email.com,+1-610-518-3113,1,Low,0.0,0.0,Regular
+CUST00975,Melissa Garcia,Female,58,Retired,42500.0,Central,Industrial Area,36872.05,710,2020-12-12,melissa.garcia_975@email.com,+1-898-143-1934,1,Medium,0.0,0.0,Regular
+CUST00976,Scott Smith,Male,35,Business Owner,86500.0,North,Mall Road,163224.76,604,2022-03-20,scott.smith_976@email.com,+1-362-683-7541,1,High,0.0,0.0,Regular
+CUST00977,Jason Robinson,Male,61,Self-Employed,58700.0,East,Industrial Area,108068.28,567,2023-04-03,jason.robinson_977@email.com,+1-857-647-8616,1,High,0.0,0.0,Regular
+CUST00978,Joseph Sanchez,Male,49,Retired,27300.0,South,University,4030.64,697,2021-09-08,joseph.sanchez_978@email.com,+1-266-424-6610,1,Medium,0.0,0.0,Regular
+CUST00979,Margaret Walker,Female,54,Self-Employed,48500.0,East,Industrial Area,3645.25,672,2018-06-06,margaret.walker_979@email.com,+1-758-259-8699,1,Medium,0.0,0.0,Regular
+CUST00980,George Torres,Male,40,Salaried,64000.0,Central,University,68838.16,675,2018-09-13,george.torres_980@email.com,+1-570-908-8046,1,Medium,0.0,0.0,Regular
+CUST00981,William Wilson,Male,64,Salaried,58700.0,West,Mall Road,14534.61,551,2020-10-29,william.wilson_981@email.com,+1-850-280-2369,1,High,0.0,0.0,Regular
+CUST00982,Stephanie Garcia,Female,38,Government,45000.0,West,University,69728.59,716,2023-11-20,stephanie.garcia_982@email.com,+1-419-785-5250,1,Medium,0.0,0.0,Regular
+CUST00983,Richard Ramirez,Male,27,Student,15800.0,East,Airport Road,49307.79,802,2020-03-24,richard.ramirez_983@email.com,+1-557-529-8890,1,Low,0.0,0.0,Regular
+CUST00984,Jacob Thompson,Male,52,Retired,43000.0,North,Suburb,23673.3,711,2020-03-24,jacob.thompson_984@email.com,+1-279-840-3369,1,Medium,0.0,0.0,Regular
+CUST00985,Mary Martinez,Female,56,Freelancer,27000.0,South,Industrial Area,14482.16,618,2021-07-20,mary.martinez_985@email.com,+1-316-911-7658,1,High,0.0,0.0,Regular
+CUST00986,Gary Rodriguez,Male,46,Freelancer,61600.0,Central,Downtown,10760.43,488,2018-05-30,gary.rodriguez_986@email.com,+1-423-863-4074,1,High,0.0,0.0,Regular
+CUST00987,Samuel Harris,Male,37,Professional,101900.0,East,Tech Park,41988.7,714,2020-02-22,samuel.harris_987@email.com,+1-895-690-1235,1,Medium,0.0,0.0,Regular
+CUST00988,Patricia Martin,Female,38,Government,30800.0,Central,Downtown,40878.24,613,2023-08-07,patricia.martin_988@email.com,+1-864-566-7783,1,High,0.0,0.0,Regular
+CUST00989,Anna Ramirez,Female,68,Student,17600.0,North,Airport Road,10973.32,631,2023-02-23,anna.ramirez_989@email.com,+1-638-482-3898,1,High,0.0,0.0,Regular
+CUST00990,Justin Ramirez,Male,40,Retired,32500.0,East,University,84136.9,694,2021-03-06,justin.ramirez_990@email.com,+1-918-735-2625,1,Medium,0.0,0.0,Regular
+CUST00991,Richard Johnson,Male,33,Retired,54800.0,North,Industrial Area,23369.1,741,2019-02-13,richard.johnson_991@email.com,+1-848-554-9247,1,Medium,0.0,0.0,Regular
+CUST00992,Kevin Clark,Male,34,Professional,88700.0,South,Industrial Area,31994.91,528,2022-04-10,kevin.clark_992@email.com,+1-317-300-8693,1,High,0.0,0.0,Regular
+CUST00993,Cynthia Clark,Female,66,Retired,48600.0,North,Station Area,13675.56,591,2020-07-06,cynthia.clark_993@email.com,+1-719-390-5384,1,High,0.0,0.0,Regular
+CUST00994,Donna Clark,Female,46,Professional,82100.0,North,University,33752.26,695,2018-05-14,donna.clark_994@email.com,+1-215-126-3512,1,Medium,0.0,0.0,Regular
+CUST00995,Carol Hernandez,Female,48,Retired,50200.0,South,Suburb,43552.56,596,2022-05-23,carol.hernandez_995@email.com,+1-397-731-7444,1,High,0.0,0.0,Regular
+CUST00996,Sarah Harris,Female,58,Business Owner,134300.0,West,Station Area,500000.0,590,2023-10-20,sarah.harris_996@email.com,+1-362-547-4784,1,High,0.0,0.0,Regular
+CUST00997,Stephen Davis,Male,44,Retired,13100.0,East,Suburb,42777.99,636,2019-10-14,stephen.davis_997@email.com,+1-530-308-2527,1,High,0.0,0.0,Regular
+CUST00998,Mary Nguyen,Female,65,Business Owner,69100.0,North,Highway,2901.49,642,2018-11-19,mary.nguyen_998@email.com,+1-785-491-1414,1,High,0.0,0.0,Regular
+CUST00999,Nicholas Thompson,Male,18,Business Owner,110300.0,South,Tech Park,1848.08,682,2021-05-01,nicholas.thompson_999@email.com,+1-398-648-5018,1,Medium,0.0,0.0,Regular
+CUST01000,Dorothy Brown,Female,18,Government,45200.0,North,Airport Road,158269.38,708,2018-04-05,dorothy.brown_1000@email.com,+1-853-693-2694,1,Medium,0.0,0.0,Regular
