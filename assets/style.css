@@ -39,7 +39,9 @@ section[data-testid="stSidebar"] {
 }
 
 /* Hide standard Streamlit page navigation list */
-[data-testid="stSidebarNav"] {
+[data-testid="stSidebarNav"], 
+.stSidebarNav,
+[data-testid="stSidebarNavItems"] {
     display: none !important;
 }
 

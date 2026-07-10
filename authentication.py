@@ -1,10 +1,11 @@
 """
 Authentication Module — Login UI and session management for Streamlit.
 """
+import os
 import streamlit as st
 from jwt_handler import create_token, validate_token
 from utils.auth import authenticate_user, log_activity
-from config import PAGE_ACCESS, ROLES, DEMO_USERS
+from config import PAGE_ACCESS, ROLES, DEMO_USERS, ASSETS_DIR
 
 
 def login_page():
@@ -112,6 +113,12 @@ def render_sidebar(current_page: str = "Home"):
     user = st.session_state.get("user")
     if not user:
         return
+        
+    # Load custom CSS to apply styles (including hiding default navigation) on all pages
+    css_path = os.path.join(ASSETS_DIR, "style.css")
+    if os.path.exists(css_path):
+        with open(css_path, encoding="utf-8") as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
     with st.sidebar:
         # App branding header
         st.markdown(
