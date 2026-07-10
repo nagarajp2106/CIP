@@ -50,7 +50,7 @@ if not user:
 # ──────────────────────────────────────────────
 # Sidebar — Authenticated User
 # ──────────────────────────────────────────────
-render_sidebar()
+render_sidebar("Home")
 
 # ──────────────────────────────────────────────
 # Main Content — Welcome Page
@@ -135,10 +135,10 @@ if role in ["admin", "bank_manager", "loan_officer"]:
     nav_items.append(("🏦", "Loan Analytics", "Loan portfolio analysis and metrics"))
 if role in ["admin", "bank_manager", "relationship_manager"]:
     nav_items.append(("🔮", "Churn Prediction", "Predict customer churn probability"))
-if role in ["admin", "bank_manager", "loan_officer"]:
-    nav_items.append(("⚡", "Credit Risk", "Assess customer credit risk"))
-if role in ["admin", "bank_manager", "auditor"]:
-    nav_items.append(("🛡️", "Fraud Detection", "Detect suspicious transactions"))
+if role in ["admin", "bank_manager", "relationship_manager"]:
+    nav_items.append(("💎", "CLV Prediction", "Estimate customer lifetime value"))
+if role in ["admin", "relationship_manager"]:
+    nav_items.append(("🎯", "Product Recommendation", "AI-powered product suggestions"))
 if role in ["admin", "bank_manager"]:
     nav_items.append(("📈", "AI Business Insights", "AI-generated analytical insights"))
 if role in ["admin", "bank_manager", "auditor"]:

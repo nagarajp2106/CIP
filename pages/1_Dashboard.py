@@ -35,12 +35,7 @@ avg_balance = pd.read_sql("SELECT COALESCE(AVG(balance), 0) as a FROM customers"
 total_revenue = pd.read_sql("SELECT COALESCE(SUM(amount), 0) as s FROM transactions", conn).iloc[0]["s"]
 monthly_txns = pd.read_sql("SELECT COUNT(*) as c FROM transactions WHERE date >= date('now', '-30 days')", conn).iloc[0]["c"]
 churn_rate = round((1 - active_customers / max(total_customers, 1)) * 100, 1)
-fraud_alerts = pd.read_sql("SELECT COUNT(*) as c FROM transactions WHERE is_fraud = 1", conn).iloc[0]["c"]
 
-# Loan approval rate
-total_loans = pd.read_sql("SELECT COUNT(*) as c FROM loans", conn).iloc[0]["c"]
-approved_loans = pd.read_sql("SELECT COUNT(*) as c FROM loans WHERE status IN ('Active', 'Closed')", conn).iloc[0]["c"]
-approval_rate = round(approved_loans / max(total_loans, 1) * 100, 1)
 
 # Row 1
 r1c1, r1c2, r1c3, r1c4 = st.columns(4)
@@ -69,9 +64,11 @@ r3c1, r3c2, r3c3 = st.columns(3)
 with r3c1:
     st.markdown(kpi_card("Total Revenue", f"${total_revenue:,.0f}", "💵", color="green"), unsafe_allow_html=True)
 with r3c2:
-    st.markdown(kpi_card("Fraud Alerts", f"{fraud_alerts:,}", "🛡️", color="red"), unsafe_allow_html=True)
+    total_loans_count = pd.read_sql("SELECT COUNT(*) as c FROM loans", conn).iloc[0]["c"]
+    st.markdown(kpi_card("Total Loans", f"{total_loans_count:,}", "🏦", color="purple"), unsafe_allow_html=True)
 with r3c3:
-    st.markdown(kpi_card("Loan Approval Rate", f"{approval_rate}%", "✔️", color="teal"), unsafe_allow_html=True)
+    avg_credit = pd.read_sql("SELECT COALESCE(AVG(credit_score), 0) as a FROM customers", conn).iloc[0]["a"]
+    st.markdown(kpi_card("Avg Credit Score", f"{avg_credit:.0f}", "⭐", color="gold"), unsafe_allow_html=True)
 
 st.markdown("---")
 

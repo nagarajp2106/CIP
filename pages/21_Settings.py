@@ -126,7 +126,6 @@ with tab4:
 with tab5:
     st.markdown("### Notification Preferences")
 
-    fraud_threshold = st.slider("Fraud Alert Threshold ($)", 1000, 50000, 10000, step=1000, key="fraud_thresh")
     churn_threshold = st.slider("Churn Alert Threshold (%)", 5, 50, 20, step=5, key="churn_thresh")
     balance_alert = st.number_input("Low Balance Alert ($)", value=1000, min_value=0, step=100, key="bal_alert")
 
@@ -134,7 +133,6 @@ with tab5:
 
     if st.button("💾 Save Notification Preferences", type="primary"):
         st.session_state["notification_prefs"] = {
-            "fraud_threshold": fraud_threshold,
             "churn_threshold": churn_threshold,
             "balance_alert": balance_alert,
         }

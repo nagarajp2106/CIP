@@ -87,14 +87,6 @@ def generate_insights() -> list[dict]:
         })
 
     # ── Risk Insights ──
-    if not transactions_df.empty:
-        fraud_count = transactions_df["is_fraud"].sum()
-        fraud_pct = fraud_count / max(len(transactions_df), 1) * 100
-        insights.append({
-            "icon": "🛡️", "category": "Risk",
-            "text": f"**{fraud_count:,}** potentially fraudulent transactions detected (**{fraud_pct:.2f}%** of total). {'Within normal range.' if fraud_pct < 2 else 'Elevated fraud activity requires investigation.'}",
-            "severity": "info" if fraud_pct < 2 else "warning"
-        })
 
     # High-risk customers
     high_risk = customers_df[customers_df["risk_level"] == "High"]

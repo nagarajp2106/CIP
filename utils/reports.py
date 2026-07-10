@@ -151,8 +151,6 @@ def get_report_data(report_type: str, conn, filters: dict = None) -> pd.DataFram
         "Customer Report": "SELECT * FROM customers",
         "Loan Report": "SELECT * FROM loans",
         "Transaction Report": "SELECT * FROM transactions",
-        "Fraud Report": "SELECT * FROM transactions WHERE is_fraud = 1",
-        "Credit Risk Report": "SELECT * FROM customers ORDER BY credit_score ASC",
         "Customer Segmentation Report": "SELECT * FROM customers",
         "Churn Report": "SELECT * FROM customers WHERE is_active = 0",
     }

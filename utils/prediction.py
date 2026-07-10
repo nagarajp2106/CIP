@@ -132,69 +132,6 @@ def train_churn_model(df: pd.DataFrame, txn_df: pd.DataFrame = None) -> tuple:
     return model_data, metrics
 
 
-def train_credit_risk_model(df: pd.DataFrame) -> tuple:
-    """Train credit risk model (XGBoost or Random Forest)."""
-    df = df.copy()
-
-    # Create risk label from credit_score
-    def risk_label(score):
-        if score >= 750:
-            return 0  # Low
-        elif score >= 650:
-            return 1  # Medium
-        else:
-            return 2  # High
-
-    df["risk_class"] = df["credit_score"].apply(risk_label)
-
-    features = ["age", "income", "balance"]
-    available = [f for f in features if f in df.columns]
-
-    X = df[available].fillna(0)
-    y = df["risk_class"]
-
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
-
-    if HAS_XGBOOST:
-        model = XGBClassifier(n_estimators=100, max_depth=6, random_state=42, eval_metric='mlogloss')
-    else:
-        model = RandomForestClassifier(n_estimators=100, random_state=42, max_depth=8)
-
-    model.fit(X_train, y_train)
-    metrics = evaluate_classifier(model, X_test, y_test)
-
-    model_data = {"model": model, "features": available, "metrics": metrics, "risk_labels": {0: "Low", 1: "Medium", 2: "High"}}
-    save_model(model_data, "credit_risk")
-
-    return model_data, metrics
-
-
-def train_loan_approval_model(loans_df: pd.DataFrame, customers_df: pd.DataFrame) -> tuple:
-    """Train loan approval model (Random Forest)."""
-    # Merge loan with customer data
-    df = loans_df.merge(customers_df[["customer_id", "income", "age", "credit_score", "balance"]], on="customer_id", how="left")
-    df = df.dropna(subset=["income", "credit_score"])
-
-    # Label: approved (Active/Closed) = 1, Rejected/Defaulted/Pending = 0
-    df["approved"] = df["status"].isin(["Active", "Closed"]).astype(int)
-
-    features = ["income", "credit_score", "loan_amount", "interest_rate", "age", "balance"]
-    available = [f for f in features if f in df.columns]
-
-    X = df[available].fillna(0)
-    y = df["approved"]
-
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
-
-    model = RandomForestClassifier(n_estimators=100, random_state=42, max_depth=10)
-    model.fit(X_train, y_train)
-    metrics = evaluate_classifier(model, X_test, y_test)
-
-    model_data = {"model": model, "features": available, "metrics": metrics}
-    save_model(model_data, "loan_approval")
-
-    return model_data, metrics
-
 
 def train_clv_model(df: pd.DataFrame) -> tuple:
     """Train Customer Lifetime Value model (Gradient Boosting Regressor)."""
@@ -219,48 +156,6 @@ def train_clv_model(df: pd.DataFrame) -> tuple:
 
     model_data = {"model": model, "features": available, "metrics": metrics}
     save_model(model_data, "clv")
-
-    return model_data, metrics
-
-
-def train_fraud_model(txn_df: pd.DataFrame) -> tuple:
-    """Train fraud detection model (Isolation Forest)."""
-    features = ["amount"]
-    X = txn_df[features].fillna(0)
-
-    model = IsolationForest(contamination=0.03, random_state=42, n_estimators=100)
-    model.fit(X)
-
-    model_data = {"model": model, "features": features}
-    save_model(model_data, "fraud")
-
-    return model_data, {}
-
-
-def train_income_model(df: pd.DataFrame) -> tuple:
-    """Train income prediction model (Gradient Boosting Regressor)."""
-    df = df.copy()
-    df = df.dropna(subset=["income"])
-    df = df[df["income"] > 0]
-
-    # Encode occupation
-    le = LabelEncoder()
-    df["occupation_enc"] = le.fit_transform(df["occupation"].fillna("Unknown"))
-
-    features = ["age", "balance", "credit_score", "occupation_enc"]
-    available = [f for f in features if f in df.columns]
-
-    X = df[available].fillna(0)
-    y = df["income"]
-
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-    model = GradientBoostingRegressor(n_estimators=100, random_state=42, max_depth=5)
-    model.fit(X_train, y_train)
-    metrics = evaluate_regressor(model, X_test, y_test)
-
-    model_data = {"model": model, "features": available, "metrics": metrics, "label_encoder": le}
-    save_model(model_data, "income")
 
     return model_data, metrics
 
@@ -296,7 +191,6 @@ def train_all_models():
     conn = get_connection()
     customers_df = pd.read_sql("SELECT * FROM customers", conn)
     transactions_df = pd.read_sql("SELECT * FROM transactions", conn)
-    loans_df = pd.read_sql("SELECT * FROM loans", conn)
     conn.close()
 
     if customers_df.empty:
@@ -307,16 +201,9 @@ def train_all_models():
     train_segmentation_model(customers_df)
     print("Training churn model...")
     train_churn_model(customers_df, transactions_df)
-    print("Training credit risk model...")
-    train_credit_risk_model(customers_df)
-    print("Training loan approval model...")
-    train_loan_approval_model(loans_df, customers_df)
     print("Training CLV model...")
     train_clv_model(customers_df)
-    print("Training fraud model...")
-    train_fraud_model(transactions_df)
-    print("Training income model...")
-    train_income_model(customers_df)
     print("Training deposit model...")
     train_deposit_model(customers_df)
     print("All models trained successfully!")
+

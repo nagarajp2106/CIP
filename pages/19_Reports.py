@@ -26,8 +26,7 @@ REPORT_TYPES = {
     "Customer Report": {"table": "customers", "description": "Comprehensive customer data report"},
     "Loan Report": {"table": "loans", "description": "Loan portfolio analysis report"},
     "Transaction Report": {"table": "transactions", "description": "Transaction activity report"},
-    "Fraud Report": {"table": "transactions", "filter": "is_fraud = 1", "description": "Fraudulent transaction report"},
-    "Credit Risk Report": {"table": "customers", "description": "Customer credit risk assessment report"},
+
     "Customer Segmentation Report": {"table": "customers", "description": "Customer segmentation analysis"},
     "Churn Report": {"table": "customers", "description": "Customer churn analysis report"},
     "Executive Dashboard Summary": {"table": None, "description": "High-level executive summary"},
@@ -63,7 +62,7 @@ if st.button("📊 Generate Report", type="primary", use_container_width=True):
             total_deposits = pd.read_sql("SELECT COALESCE(SUM(amount), 0) as s FROM transactions WHERE type='Deposit'", conn).iloc[0]["s"]
             total_loans_amt = pd.read_sql("SELECT COALESCE(SUM(loan_amount), 0) as s FROM loans", conn).iloc[0]["s"]
             avg_balance = pd.read_sql("SELECT COALESCE(AVG(balance), 0) as a FROM customers", conn).iloc[0]["a"]
-            fraud_count = pd.read_sql("SELECT COUNT(*) as c FROM transactions WHERE is_fraud = 1", conn).iloc[0]["c"]
+
 
             summary_data = pd.DataFrame([
                 {"Metric": "Total Customers", "Value": f"{customers:,}"},
@@ -73,7 +72,7 @@ if st.button("📊 Generate Report", type="primary", use_container_width=True):
                 {"Metric": "Total Deposits", "Value": f"${total_deposits:,.2f}"},
                 {"Metric": "Total Loan Amount", "Value": f"${total_loans_amt:,.2f}"},
                 {"Metric": "Average Balance", "Value": f"${avg_balance:,.2f}"},
-                {"Metric": "Fraud Alerts", "Value": f"{fraud_count:,}"},
+
             ])
             df = summary_data
         elif "filter" in report_config:

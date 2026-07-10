@@ -70,12 +70,11 @@ PAGE_ACCESS = {
     "EDA":                    ["admin", "data_analyst"],
     "Customer Segmentation":  ["admin", "bank_manager", "relationship_manager", "data_analyst"],
     "Churn Prediction":       ["admin", "bank_manager", "relationship_manager"],
-    "Credit Risk":            ["admin", "bank_manager", "loan_officer"],
-    "Loan Approval":          ["admin", "loan_officer"],
+
     "CLV Prediction":         ["admin", "bank_manager", "relationship_manager"],
-    "Fraud Detection":        ["admin", "bank_manager", "auditor"],
+
     "Product Recommendation": ["admin", "relationship_manager"],
-    "Income Prediction":      ["admin", "data_analyst"],
+
     "Deposit Prediction":     ["admin", "bank_manager", "relationship_manager"],
     "AI Business Insights":   ["admin", "bank_manager"],
     "Reports":                ["admin", "bank_manager", "auditor"],
@@ -89,12 +88,11 @@ PAGE_ACCESS = {
 MODEL_PATHS = {
     "segmentation":   os.path.join(MODELS_DIR, "segmentation.pkl"),
     "churn":          os.path.join(MODELS_DIR, "churn.pkl"),
-    "credit_risk":    os.path.join(MODELS_DIR, "credit_risk.pkl"),
-    "loan_approval":  os.path.join(MODELS_DIR, "loan.pkl"),
+
     "clv":            os.path.join(MODELS_DIR, "clv.pkl"),
-    "fraud":          os.path.join(MODELS_DIR, "fraud.pkl"),
+
     "recommendation": os.path.join(MODELS_DIR, "recommendation.pkl"),
-    "income":         os.path.join(MODELS_DIR, "income.pkl"),
+
     "deposit":        os.path.join(MODELS_DIR, "deposit.pkl"),
 }
 

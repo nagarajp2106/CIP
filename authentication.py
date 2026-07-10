@@ -9,6 +9,20 @@ from config import PAGE_ACCESS, ROLES, DEMO_USERS
 
 def login_page():
     """Render the login page with banking-themed UI and demo credentials panel."""
+    # Hide sidebar when not logged in
+    st.markdown(
+        """
+        <style>
+        [data-testid="stSidebar"] {
+            display: none !important;
+        }
+        [data-testid="stSidebarCollapsedControl"] {
+            display: none !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
     # Center the login form
     col1, col2, col3 = st.columns([1, 2, 1])
@@ -93,20 +107,13 @@ def login_page():
         )
 
 
-def check_auth() -> dict | None:
-    """
-    Check if the current session is authenticated.
-    Call this at the top of every page.
-
-    Returns:
-        User dict if authenticated, None otherwise (also calls st.stop())
-    """
-def render_sidebar():
-    """Render the user profile and logout button in the sidebar (shared across all pages)."""
+def render_sidebar(current_page: str = "Home"):
+    """Render the user profile and custom navigation in the sidebar (shared across all pages)."""
     user = st.session_state.get("user")
     if not user:
         return
     with st.sidebar:
+        # App branding header
         st.markdown(
             f'<div style="text-align: center; padding: 0.5rem 0;">'
             f'<div style="font-size: 2.2rem; margin-bottom: 0.2rem;">🏦</div>'
@@ -126,6 +133,83 @@ def render_sidebar():
             f'</div>',
             unsafe_allow_html=True
         )
+        
+        # Custom Page Navigation Tree
+        st.page_link("app.py", label="Home", icon="🏠")
+        
+        # 1. Dashboard
+        is_dashboard_expanded = (current_page == "Dashboard")
+        if user["role"] in PAGE_ACCESS.get("Dashboard", []):
+            with st.expander("📊 Dashboard", expanded=is_dashboard_expanded):
+                st.page_link("pages/1_Dashboard.py", label="Dashboard", icon="📊")
+                
+        # 2. Data Management
+        data_mgmt_pages = [
+            ("Data Upload", "pages/2_Data_Upload.py", "📤"),
+            ("Data Preprocessing", "pages/3_Data_Preprocessing.py", "🛠️"),
+            ("Database Manager", "pages/4_Database_Manager.py", "🗄️")
+        ]
+        is_data_expanded = (current_page in [p[0] for p in data_mgmt_pages])
+        allowed_data_pages = [p for p in data_mgmt_pages if user["role"] in PAGE_ACCESS.get(p[0], [])]
+        if allowed_data_pages:
+            with st.expander("📂 Data Management", expanded=is_data_expanded):
+                for label, path, icon in allowed_data_pages:
+                    st.page_link(path, label=label, icon=icon)
+                    
+        # 3. Customer Management
+        is_cust_expanded = (current_page == "Customer Management")
+        if user["role"] in PAGE_ACCESS.get("Customer Management", []):
+            with st.expander("👥 Customer Management", expanded=is_cust_expanded):
+                st.page_link("pages/5_Customer_Management.py", label="Customer Management", icon="👥")
+                
+        # 4. Analytics
+        analytics_pages = [
+            ("Transaction Analytics", "pages/6_Transaction_Analytics.py", "💳"),
+            ("Loan Analytics", "pages/7_Loan_Analytics.py", "🏦"),
+            ("EDA", "pages/8_EDA.py", "📈")
+        ]
+        is_analytics_expanded = (current_page in [p[0] for p in analytics_pages])
+        allowed_analytics_pages = [p for p in analytics_pages if user["role"] in PAGE_ACCESS.get(p[0], [])]
+        if allowed_analytics_pages:
+            with st.expander("📈 Analytics", expanded=is_analytics_expanded):
+                for label, path, icon in allowed_analytics_pages:
+                    st.page_link(path, label=label, icon=icon)
+                    
+        # 5. AI & Machine Learning
+        ai_ml_pages = [
+            ("Customer Segmentation", "pages/9_Customer_Segmentation.py", "🎯"),
+            ("Churn Prediction", "pages/10_Churn_Prediction.py", "🔮"),
+            ("CLV Prediction", "pages/13_CLV_Prediction.py", "💎"),
+            ("Product Recommendation", "pages/15_Product_Recommendation.py", "💡"),
+            ("Deposit Prediction", "pages/17_Deposit_Prediction.py", "💰"),
+            ("AI Business Insights", "pages/18_AI_Business_Insights.py", "🤖")
+        ]
+        is_ai_expanded = (current_page in [p[0] for p in ai_ml_pages])
+        allowed_ai_pages = [p for p in ai_ml_pages if user["role"] in PAGE_ACCESS.get(p[0], [])]
+        if allowed_ai_pages:
+            with st.expander("🤖 AI & Machine Learning", expanded=is_ai_expanded):
+                for label, path, icon in allowed_ai_pages:
+                    st.page_link(path, label=label, icon=icon)
+                    
+        # 6. Reports
+        is_reports_expanded = (current_page == "Reports")
+        if user["role"] in PAGE_ACCESS.get("Reports", []):
+            with st.expander("📑 Reports", expanded=is_reports_expanded):
+                st.page_link("pages/19_Reports.py", label="Reports", icon="📑")
+                
+        # 7. Administration
+        admin_pages = [
+            ("Admin", "pages/20_Admin.py", "🔑"),
+            ("Settings", "pages/21_Settings.py", "⚙️")
+        ]
+        is_admin_expanded = (current_page in [p[0] for p in admin_pages])
+        allowed_admin_pages = [p for p in admin_pages if user["role"] in PAGE_ACCESS.get(p[0], [])]
+        if allowed_admin_pages:
+            with st.expander("⚙️ Administration", expanded=is_admin_expanded):
+                for label, path, icon in allowed_admin_pages:
+                    st.page_link(path, label=label, icon=icon)
+                    
+        st.markdown("---")
         
         # Logout button
         if st.button("🚪 Logout", use_container_width=True, key="shared_sidebar_logout_btn"):
@@ -171,7 +255,7 @@ def require_role(page_name: str):
 
     allowed_roles = PAGE_ACCESS.get(page_name, [])
     if user["role"] not in allowed_roles:
-        render_sidebar()
+        render_sidebar(page_name)
         st.error("🚫 **Access Denied**")
         st.markdown(f"""
         <div style="padding: 1.5rem; background: #F8D7DA; border-radius: 8px; border-left: 4px solid #DC3545; margin-top: 1rem;">
@@ -185,7 +269,7 @@ def require_role(page_name: str):
         """, unsafe_allow_html=True)
         st.stop()
 
-    render_sidebar()
+    render_sidebar(page_name)
 
 
 def logout():

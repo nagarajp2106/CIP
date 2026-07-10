@@ -31,38 +31,103 @@
     color: var(--text-main) !important;
 }
 
-/* ── Sidebar (Light Theme Styling) ── */
+/* ── Sidebar (Light Theme Styling & Custom Navigation) ── */
 section[data-testid="stSidebar"] {
     background-color: var(--card-bg) !important;
     background-image: none !important;
     border-right: 1px solid var(--border-color) !important;
 }
 
-/* Sidebar navigation text & links */
-div[data-testid="stSidebarNavItems"] a {
-    color: var(--text-main) !important;
-    font-weight: 500 !important;
-    border-radius: 8px !important;
-    margin: 2px 0 !important;
-    padding: 8px 12px !important;
-    transition: var(--transition) !important;
+/* Hide standard Streamlit page navigation list */
+[data-testid="stSidebarNav"] {
+    display: none !important;
 }
 
-div[data-testid="stSidebarNavItems"] a:hover {
-    background-color: #F0F4F8 !important;
+/* Keep sidebar fixed and scrollable */
+[data-testid="stSidebarUserContent"] {
+    max-height: 100vh !important;
+    overflow-y: auto !important;
+    padding-top: 1rem !important;
+    padding-bottom: 2rem !important;
+}
+
+/* Sidebar Custom Accordion/Expander Styling */
+[data-testid="stSidebar"] .stExpander {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin-bottom: 0.25rem !important;
+    padding: 0 !important;
+}
+
+[data-testid="stSidebar"] .stExpander details {
+    border: none !important;
+    background: transparent !important;
+}
+
+[data-testid="stSidebar"] .stExpander details summary {
+    background-color: transparent !important;
+    border: none !important;
+    color: #4A5568 !important; /* Muted gray */
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+}
+
+[data-testid="stSidebar"] .stExpander details summary:hover {
+    background-color: #EDF2F7 !important;
+    color: #1A202C !important;
+}
+
+/* Customize expander toggle icon/arrow */
+[data-testid="stSidebar"] .stExpander details summary svg {
+    fill: #718096 !important;
+    transition: transform 0.2s ease !important;
+}
+
+/* Indent and style expander contents */
+[data-testid="stSidebar"] .stExpander details > div[role="definition"] {
+    padding: 4px 0 4px 16px !important; /* Indent sub-links */
+    border-left: 1px solid #E2E8F0 !important;
+    margin-left: 16px !important;
+    background-color: transparent !important;
+}
+
+/* Style st.page_link components inside Sidebar */
+[data-testid="stSidebar"] .stPageLink {
+    padding: 2px 0 !important;
+    margin: 0 !important;
+}
+
+[data-testid="stSidebar"] .stPageLink a {
+    background-color: transparent !important;
+    border: none !important;
+    color: #4A5568 !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    padding: 6px 12px !important;
+    border-radius: 6px !important;
+    transition: all 0.15s ease !important;
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+[data-testid="stSidebar"] .stPageLink a:hover {
+    background-color: #EDF2F7 !important;
     color: var(--secondary) !important;
 }
 
-div[data-testid="stSidebarNavItems"] a[aria-current="page"] {
+/* Highlight the active page link */
+[data-testid="stSidebar"] .stPageLink a[aria-current="page"] {
     background-color: #E2E8F0 !important;
     color: var(--primary) !important;
     font-weight: 700 !important;
-}
-
-/* Sidebar page icons/text readability */
-div[data-testid="stSidebarNavItems"] span {
-    color: var(--text-main) !important;
-    font-weight: 500 !important;
+    border-left: 3px solid var(--secondary) !important;
+    border-radius: 0 6px 6px 0 !important;
 }
 
 section[data-testid="stSidebar"] hr {

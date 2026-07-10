@@ -1,6 +1,6 @@
 # AI-Powered Retail Banking Customer Insights Platform
 
-A full-stack, AI-powered retail banking analytics platform built with Streamlit, SQLite, and Python. The platform enables banks to manage customer profiles, analyze transaction and loan trends, assess credit risks, predict churn, detect fraud, and automatically generate data-driven business insights.
+A full-stack, AI-powered retail banking analytics platform built with Streamlit, SQLite, and Python. The platform enables banks to manage customer profiles, analyze transaction and loan trends, predict churn, estimate customer lifetime value, recommend products, and automatically generate data-driven business insights.
 
 🌐 **GitHub Repository**: [nagarajp2106/CIP](https://github.com/nagarajp2106/CIP)
 
@@ -11,9 +11,14 @@ A full-stack, AI-powered retail banking analytics platform built with Streamlit,
 * **Role-Based Authentication**: Secure JWT-based authentication supporting 6 unique roles (Admin, Bank Manager, Relationship Manager, Loan Officer, Data Analyst, Auditor).
 * **Interactive Dashboards**: Real-time KPI metrics and 8+ Plotly visualizations covering customer demographics, regional distributions, monthly transactions, and loan portfolios.
 * **Robust Data Pipeline**: Data validation checks, auto-cleaning (duplicate removal, missing value imputation), and feature engineering (value scores, utilization ratios, age/income categories).
-* **9 Predictive ML Modules**: Fully integrated analytical models for churn, credit risk (XGBoost), loan approval, customer lifetime value, fraud detection (Isolation Forest), product recommendations, and campaign targeting.
-* **AI Business Insights**: Dynamic generation of 15+ actionable, data-driven insights across risk, operations, and revenue.
-* **Professional Report Export**: Generate custom executive, transaction, and fraud reports in Excel (`.xlsx` formatted) and PDF (`ReportLab` styled) formats.
+* **6 Core Customer Insights Modules**:
+  * **Customer Segmentation**: KMeans Clustering with 2D/3D PCA projections.
+  * **Churn Prediction**: Random Forest Classifier for stay vs. leave probabilities.
+  * **CLV Prediction**: Gradient Boosting Regressor tracking tier levels (Platinum, Gold, Silver, Bronze).
+  * **Product Recommendation**: Dual rule-based and collaborative similarity matcher.
+  * **Deposit Subscription Prediction**: Random Forest Classifier mapping prospective targeting campaigns.
+  * **AI Business Insights Engine**: 15+ automated data-driven insights scanning correlations in risk, customer tenure, branch performance, and deposit volumes.
+* **Professional Report Export**: Generate custom executive, transaction, and segmentation reports in Excel (`.xlsx` formatted) and PDF (`ReportLab` styled) formats.
 * **Light Theme UI/UX**: Premium, high-contrast light theme with fully responsive desktop spacing and a persistent shared sidebar.
 
 ---
@@ -54,11 +59,7 @@ AI_Banking_Customer_Insights/
 ├── models/                         # Trained ML model pickles (auto-generated)
 │   ├── segmentation.pkl            # KMeans Clustering
 │   ├── churn.pkl                   # Random Forest Classifier
-│   ├── credit_risk.pkl             # XGBoost Classifier
-│   ├── loan.pkl                    # Random Forest Classifier
 │   ├── clv.pkl                     # Gradient Boosting Regressor
-│   ├── fraud.pkl                   # Isolation Forest Anomaly detector
-│   ├── income.pkl                  # Gradient Boosting Regressor
 │   └── deposit.pkl                 # Random Forest Classifier
 │
 ├── utils/                          # Reusable modules & controllers
@@ -72,7 +73,7 @@ AI_Banking_Customer_Insights/
 │   ├── reports.py                  # Excel/PDF layout compilers
 │   └── visualization.py            # Plotly builders & metric card HTML
 │
-└── pages/                          # Role-gated functional modules (21 pages)
+└── pages/                          # Role-gated functional modules (17 pages)
     ├── 1_Dashboard.py
     ├── 2_Data_Upload.py
     ├── 3_Data_Preprocessing.py
@@ -83,12 +84,8 @@ AI_Banking_Customer_Insights/
     ├── 8_EDA.py
     ├── 9_Customer_Segmentation.py
     ├── 10_Churn_Prediction.py
-    ├── 11_Credit_Risk.py
-    ├── 12_Loan_Approval.py
     ├── 13_CLV_Prediction.py
-    ├── 14_Fraud_Detection.py
     ├── 15_Product_Recommendation.py
-    ├── 16_Income_Prediction.py
     ├── 17_Deposit_Prediction.py
     ├── 18_AI_Business_Insights.py
     ├── 19_Reports.py
@@ -107,9 +104,9 @@ The platform features role-based access control. Log in using one of the predefi
 | `admin` | `admin123` | **Admin** | Full system configuration, backup, user CRUD, page management |
 | `manager` | `manager123` | **Bank Manager** | Executive dashboards, analytical charts, reports, insights |
 | `relationship` | `relation123` | **Relationship Manager** | Profiles, history, churn risk, product recommendations |
-| `loanofficer` | `loan123` | **Loan Officer** | Loan analytics, risk scoring, approval predictions |
+| `loanofficer` | `loan123` | **Loan Officer** | Loan analytics, portfolio management |
 | `analyst` | `analyst123` | **Data Analyst** | CSV upload, cleaning panel, feature scaling, interactive EDA |
-| `auditor` | `auditor123` | **Auditor** | Read-only access to transaction activity & fraud timelines |
+| `auditor` | `auditor123` | **Auditor** | Read-only access to transaction activity & reports |
 
 ---
 
@@ -136,7 +133,7 @@ python -c "from database import init_db, seed_demo_data; init_db(); seed_demo_da
 ```
 
 ### 4. Train Machine Learning Models
-Train all 8 regression, classification, and anomaly detection models:
+Train all 4 regression, classification, and clustering models:
 ```bash
 python -c "from utils.prediction import train_all_models; train_all_models()"
 ```
