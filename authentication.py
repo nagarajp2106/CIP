@@ -140,12 +140,8 @@ Unlock deep retail banking customer insights with predictive ML pipelines, CLV f
         username = st.text_input("Username", placeholder="Enter your username", key="login_username")
         username_error = st.empty()
         
-        # Password input + show password toggle overlay + error block
-        st.markdown('<div class="show-pass-container">', unsafe_allow_html=True)
-        show_pass = st.checkbox("👁️", key="show_pass", label_visibility="collapsed")
-        pass_type = "default" if show_pass else "password"
-        password = st.text_input("Password", type=pass_type, placeholder="Enter your password", key="login_password")
-        st.markdown('</div>', unsafe_allow_html=True)
+        # Password input + error block
+        password = st.text_input("Password", type="password", placeholder="Enter your password", key="login_password")
         password_error = st.empty()
         
         st.markdown('<div style="height: 12px;"></div>', unsafe_allow_html=True)
