@@ -25,7 +25,7 @@ def login_page():
 }
 
 /* Layout Grid Container */
-[data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] {
+div[data-testid="stHorizontalBlock"] {
     background: #FFFFFF !important;
     border-radius: 16px !important;
     box-shadow: 0 10px 40px rgba(27, 42, 74, 0.08) !important;
@@ -37,8 +37,9 @@ def login_page():
 }
 
 /* Left Column (Branded Indigo Hero) */
-[data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"]:nth-of-type(1) {
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-of-type(1) {
     background-color: #3D3DE0 !important;
+    background: #3D3DE0 !important;
     padding: 3.5rem 3rem !important;
     color: #FFFFFF !important;
     min-height: 590px !important;
@@ -49,9 +50,14 @@ def login_page():
     overflow: hidden !important;
 }
 
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-of-type(1) * {
+    color: #FFFFFF !important;
+}
+
 /* Right Column (Centered Login Form) */
-[data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"]:nth-of-type(2) {
+div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-of-type(2) {
     background-color: #FFFFFF !important;
+    background: #FFFFFF !important;
     padding: 3.5rem 3rem !important;
     min-height: 590px !important;
     display: flex !important;
@@ -61,14 +67,14 @@ def login_page():
 
 /* Responsive styling for Mobile */
 @media (max-width: 768px) {
-    [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] {
+    div[data-testid="stHorizontalBlock"] {
         margin: 1rem !important;
         border-radius: 16px !important;
     }
-    [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"]:nth-of-type(1) {
+    div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-of-type(1) {
         display: none !important;
     }
-    [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"]:nth-of-type(2) {
+    div[data-testid="stHorizontalBlock"] div[data-testid="stColumn"]:nth-of-type(2) {
         border-radius: 16px !important;
         border-left: 1px solid #E2E8F0 !important;
         padding: 2.25rem !important;
