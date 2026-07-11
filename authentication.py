@@ -335,9 +335,11 @@ def render_sidebar(current_page: str = "Home"):
         st.markdown("---")
         
         # Logout button
+        st.markdown('<div class="sidebar-logout-container">', unsafe_allow_html=True)
         if st.button("🚪 Logout", use_container_width=True, key="shared_sidebar_logout_btn"):
             logout()
             st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
         st.markdown("---")
 
 
