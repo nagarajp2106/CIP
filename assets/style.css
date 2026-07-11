@@ -180,16 +180,15 @@ section[data-testid="stSidebar"] {
     background-color: transparent !important;
 }
 
-/* Page links inside sidebar (including sub-links) */
-[data-testid="stSidebar"] .stPageLink {
+/* Page links inside sidebar */
+[data-testid="stSidebar"] [data-testid="stPageLink"] {
     padding: 1px 0 !important;
     margin: 0 !important;
 }
 
-[data-testid="stSidebar"] .stPageLink a {
+[data-testid="stSidebar"] [data-testid="stPageLink"] a {
     background-color: transparent !important;
     border: none !important;
-    color: rgba(255, 255, 255, 0.6) !important; /* Muted inactive state */
     font-size: 0.85rem !important;
     font-weight: 500 !important;
     padding: 7px 12px !important;
@@ -200,8 +199,25 @@ section[data-testid="stSidebar"] {
     align-items: center !important;
 }
 
-[data-testid="stSidebar"] .stPageLink a span[data-testid="stIcon"] {
-    color: inherit !important;
+/* Force active/inactive/hover colors on page links and all their nested children */
+[data-testid="stSidebar"] [data-testid="stPageLink"] a,
+[data-testid="stSidebar"] [data-testid="stPageLink"] a *,
+[data-testid="stSidebar"] [data-testid="stPageLink"] a span,
+[data-testid="stSidebar"] [data-testid="stPageLink"] a p,
+[data-testid="stSidebar"] [data-testid="stPageLink"] a div {
+    color: rgba(255, 255, 255, 0.65) !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stPageLink"] a:hover,
+[data-testid="stSidebar"] [data-testid="stPageLink"] a:hover *,
+[data-testid="stSidebar"] [data-testid="stPageLink"] a:hover span,
+[data-testid="stSidebar"] [data-testid="stPageLink"] a:hover p,
+[data-testid="stSidebar"] [data-testid="stPageLink"] a:hover div {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #FFFFFF !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stPageLink"] a span[data-testid="stIcon"] {
     font-size: 1.15rem !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -209,19 +225,17 @@ section[data-testid="stSidebar"] {
     margin-right: 8px !important;
 }
 
-[data-testid="stSidebar"] .stPageLink a:hover {
-    background-color: rgba(255, 255, 255, 0.05) !important;
-    color: #FFFFFF !important;
-}
-
 /* Active navigation pill highlight */
-[data-testid="stSidebar"] .stPageLink a[aria-current="page"] {
+[data-testid="stSidebar"] [data-testid="stPageLink"] a[aria-current="page"],
+[data-testid="stSidebar"] [data-testid="stPageLink"] a[aria-current="page"] *,
+[data-testid="stSidebar"] [data-testid="stPageLink"] a[aria-current="page"] span,
+[data-testid="stSidebar"] [data-testid="stPageLink"] a[aria-current="page"] p,
+[data-testid="stSidebar"] [data-testid="stPageLink"] a[aria-current="page"] div {
     background-color: var(--secondary) !important; /* Accent color (#2E86AB) */
     color: #FFFFFF !important;
     font-weight: 700 !important;
     opacity: 1 !important;
     border-radius: 8px !important;
-    box-shadow: 0 4px 12px rgba(46, 134, 171, 0.25) !important;
 }
 
 /* Sidebar Group Header Label */

@@ -334,18 +334,6 @@ def render_sidebar(current_page: str = "Home"):
                     
         st.markdown("---")
         
-        # Pinned Contact Us CTA
-        st.markdown(
-            f'<div class="sidebar-cta-card">'
-            f'<div class="sidebar-cta-title">Need Assistance?</div>'
-            f'<div class="sidebar-cta-text">Contact our dedicated support desk for priority assistance.</div>'
-            f'<a class="sidebar-cta-btn" href="mailto:support@aibanking.com">Support Desk</a>'
-            f'</div>',
-            unsafe_allow_html=True
-        )
-        
-        st.markdown("<div style='margin-bottom: 1rem;'></div>", unsafe_allow_html=True)
-        
         # Logout button
         if st.button("🚪 Logout", use_container_width=True, key="shared_sidebar_logout_btn"):
             logout()
