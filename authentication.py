@@ -83,10 +83,7 @@ def login_page():
         role_colors = {
             "admin": "#DC3545",
             "bank_manager": "#2E86AB",
-            "relationship_manager": "#28A745",
-            "loan_officer": "#FD7E14",
             "data_analyst": "#6F42C1",
-            "auditor": "#17A2B8",
         }
 
         table_rows = ""
@@ -294,10 +291,7 @@ def get_role_badge_html(role: str) -> str:
     role_colors = {
         "admin": "#DC3545",
         "bank_manager": "#2E86AB",
-        "relationship_manager": "#28A745",
-        "loan_officer": "#FD7E14",
         "data_analyst": "#6F42C1",
-        "auditor": "#17A2B8",
     }
     color = role_colors.get(role, "#6C757D")
     label = ROLES.get(role, role)

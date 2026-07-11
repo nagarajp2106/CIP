@@ -8,7 +8,7 @@ A full-stack, AI-powered retail banking analytics platform built with Streamlit,
 
 ## 🚀 Key Features
 
-* **Role-Based Authentication**: Secure JWT-based authentication supporting 6 unique roles (Admin, Bank Manager, Relationship Manager, Loan Officer, Data Analyst, Auditor).
+* **Role-Based Authentication**: Secure JWT-based authentication supporting 3 roles (Admin, Manager, Analyst).
 * **Interactive Dashboards**: Real-time KPI metrics and 8+ Plotly visualizations covering customer demographics, regional distributions, monthly transactions, and loan portfolios.
 * **Robust Data Pipeline**: Data validation checks, auto-cleaning (duplicate removal, missing value imputation), and feature engineering (value scores, utilization ratios, age/income categories).
 * **6 Core Customer Insights Modules**:
@@ -102,11 +102,8 @@ The platform features role-based access control. Log in using one of the predefi
 | Username | Password | Role | Features Gated |
 |:---|:---|:---|:---|
 | `admin` | `admin123` | **Admin** | Full system configuration, backup, user CRUD, page management |
-| `manager` | `manager123` | **Bank Manager** | Executive dashboards, analytical charts, reports, insights |
-| `relationship` | `relation123` | **Relationship Manager** | Profiles, history, churn risk, product recommendations |
-| `loanofficer` | `loan123` | **Loan Officer** | Loan analytics, portfolio management |
-| `analyst` | `analyst123` | **Data Analyst** | CSV upload, cleaning panel, feature scaling, interactive EDA |
-| `auditor` | `auditor123` | **Auditor** | Read-only access to transaction activity & reports |
+| `manager` | `manager123` | **Manager** | Executive dashboards, analytics, ML predictions, reports, insights |
+| `analyst` | `analyst123` | **Analyst** | CSV upload, cleaning panel, EDA, segmentation, reports |
 
 ---
 

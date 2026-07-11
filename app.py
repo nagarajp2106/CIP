@@ -125,23 +125,23 @@ st.markdown('<div class="section-header">📌 Quick Navigation</div>', unsafe_al
 role = user["role"]
 nav_items = []
 
-if role in ["admin", "bank_manager", "relationship_manager", "loan_officer", "data_analyst", "auditor"]:
+if role in ["admin", "bank_manager", "data_analyst"]:
     nav_items.append(("📊", "Dashboard", "View KPIs, charts, and executive summary"))
 if role in ["admin", "data_analyst"]:
     nav_items.append(("📤", "Data Upload", "Upload and validate banking datasets"))
-if role in ["admin", "bank_manager", "relationship_manager"]:
+if role in ["admin", "bank_manager"]:
     nav_items.append(("👤", "Customer Management", "Search, view, and manage customers"))
-if role in ["admin", "bank_manager", "loan_officer"]:
+if role in ["admin", "bank_manager"]:
     nav_items.append(("🏦", "Loan Analytics", "Loan portfolio analysis and metrics"))
-if role in ["admin", "bank_manager", "relationship_manager"]:
+if role in ["admin", "bank_manager"]:
     nav_items.append(("🔮", "Churn Prediction", "Predict customer churn probability"))
-if role in ["admin", "bank_manager", "relationship_manager"]:
+if role in ["admin", "bank_manager"]:
     nav_items.append(("💎", "CLV Prediction", "Estimate customer lifetime value"))
-if role in ["admin", "relationship_manager"]:
+if role in ["admin", "bank_manager"]:
     nav_items.append(("🎯", "Product Recommendation", "AI-powered product suggestions"))
 if role in ["admin", "bank_manager"]:
     nav_items.append(("📈", "AI Business Insights", "AI-generated analytical insights"))
-if role in ["admin", "bank_manager", "auditor"]:
+if role in ["admin", "bank_manager", "data_analyst"]:
     nav_items.append(("📑", "Reports", "Generate and export professional reports"))
 
 cols = st.columns(3)

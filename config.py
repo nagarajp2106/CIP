@@ -37,49 +37,40 @@ JWT_EXPIRY_HOURS = 24
 # ──────────────────────────────────────────────
 ROLES = {
     "admin": "Admin",
-    "bank_manager": "Bank Manager",
-    "relationship_manager": "Relationship Manager",
-    "loan_officer": "Loan Officer",
-    "data_analyst": "Data Analyst",
-    "auditor": "Auditor",
+    "bank_manager": "Manager",
+    "data_analyst": "Analyst",
 }
 
 # ──────────────────────────────────────────────
 # Demo Login Credentials
 # ──────────────────────────────────────────────
 DEMO_USERS = [
-    {"username": "admin",       "password": "admin123",    "full_name": "System Administrator", "role": "admin",               "email": "admin@aibanking.com"},
-    {"username": "manager",     "password": "manager123",  "full_name": "Sarah Johnson",        "role": "bank_manager",        "email": "sarah.johnson@aibanking.com"},
-    {"username": "relationship","password": "relation123", "full_name": "Michael Chen",         "role": "relationship_manager", "email": "michael.chen@aibanking.com"},
-    {"username": "loanofficer", "password": "loan123",     "full_name": "Emily Davis",          "role": "loan_officer",        "email": "emily.davis@aibanking.com"},
-    {"username": "analyst",     "password": "analyst123",  "full_name": "David Wilson",         "role": "data_analyst",        "email": "david.wilson@aibanking.com"},
-    {"username": "auditor",     "password": "auditor123",  "full_name": "Jennifer Brown",       "role": "auditor",             "email": "jennifer.brown@aibanking.com"},
+    {"username": "admin",   "password": "admin123",   "full_name": "System Administrator", "role": "admin",        "email": "admin@aibanking.com"},
+    {"username": "manager", "password": "manager123", "full_name": "Sarah Johnson",        "role": "bank_manager", "email": "sarah.johnson@aibanking.com"},
+    {"username": "analyst", "password": "analyst123", "full_name": "David Wilson",         "role": "data_analyst", "email": "david.wilson@aibanking.com"},
 ]
 
 # ──────────────────────────────────────────────
 # Page Access Control (role → allowed pages)
 # ──────────────────────────────────────────────
 PAGE_ACCESS = {
-    "Dashboard":              ["admin", "bank_manager", "relationship_manager", "loan_officer", "data_analyst", "auditor"],
+    "Dashboard":              ["admin", "bank_manager", "data_analyst"],
     "Data Upload":            ["admin", "data_analyst"],
     "Data Preprocessing":     ["admin", "data_analyst"],
     "Database Manager":       ["admin"],
-    "Customer Management":    ["admin", "bank_manager", "relationship_manager"],
-    "Transaction Analytics":  ["admin", "bank_manager", "relationship_manager", "loan_officer", "data_analyst", "auditor"],
-    "Loan Analytics":         ["admin", "bank_manager", "loan_officer"],
+    "Customer Management":    ["admin", "bank_manager"],
+    "Transaction Analytics":  ["admin", "bank_manager", "data_analyst"],
+    "Loan Analytics":         ["admin", "bank_manager"],
     "EDA":                    ["admin", "data_analyst"],
-    "Customer Segmentation":  ["admin", "bank_manager", "relationship_manager", "data_analyst"],
-    "Churn Prediction":       ["admin", "bank_manager", "relationship_manager"],
-
-    "CLV Prediction":         ["admin", "bank_manager", "relationship_manager"],
-
-    "Product Recommendation": ["admin", "relationship_manager"],
-
-    "Deposit Prediction":     ["admin", "bank_manager", "relationship_manager"],
+    "Customer Segmentation":  ["admin", "bank_manager", "data_analyst"],
+    "Churn Prediction":       ["admin", "bank_manager"],
+    "CLV Prediction":         ["admin", "bank_manager"],
+    "Product Recommendation": ["admin", "bank_manager"],
+    "Deposit Prediction":     ["admin", "bank_manager"],
     "AI Business Insights":   ["admin", "bank_manager"],
-    "Reports":                ["admin", "bank_manager", "auditor"],
+    "Reports":                ["admin", "bank_manager", "data_analyst"],
     "Admin":                  ["admin"],
-    "Settings":               ["admin", "bank_manager", "relationship_manager", "loan_officer", "data_analyst", "auditor"],
+    "Settings":               ["admin", "bank_manager", "data_analyst"],
 }
 
 # ──────────────────────────────────────────────

@@ -46,7 +46,7 @@ def init_db():
             password_hash TEXT NOT NULL,
             full_name TEXT NOT NULL,
             email TEXT,
-            role TEXT NOT NULL DEFAULT 'auditor',
+            role TEXT NOT NULL DEFAULT 'data_analyst',
             is_active INTEGER DEFAULT 1,
             created_at TEXT DEFAULT (datetime('now')),
             last_login TEXT
