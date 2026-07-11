@@ -77,13 +77,46 @@ with s4:
 st.markdown("---")
 
 # ── Customer List ──
-if df.empty:
-    st.info("No customers found matching your criteria.")
-else:
-    display_cols = ["customer_id", "name", "gender", "age", "occupation", "income",
-                    "region", "branch", "balance", "credit_score", "risk_level", "is_active"]
-    available_cols = [c for c in display_cols if c in df.columns]
-    st.dataframe(df[available_cols], use_container_width=True, height=400)
+    if df.empty:
+        st.info("No customers found matching your criteria.")
+    else:
+        table_html = """
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Name & Demographics</th>
+                <th>Occupation</th>
+                <th>Location</th>
+                <th>Financials</th>
+                <th>Credit Score</th>
+                <th>Risk Level</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+    """
+    for _, row in df.iterrows():
+        risk_val = row.get("risk_level", "Low")
+        risk_class = "success" if risk_val == "Low" else "warning" if risk_val == "Medium" else "danger"
+        
+        status_val = "Active" if row.get("is_active") else "Inactive"
+        status_class = "success" if row.get("is_active") else "danger"
+        
+        table_html += f"""
+            <tr>
+                <td><code>{row['customer_id']}</code></td>
+                <td><b>{row['name']}</b><br><span style="font-size:0.75rem; color:#64748B;">{row['gender']}, Age {row['age']}</span></td>
+                <td>{row['occupation']}</td>
+                <td>{row['region']}<br><span style="font-size:0.75rem; color:#64748B;">{row['branch']}</span></td>
+                <td>Bal: <b>${row['balance']:,.2f}</b><br><span style="font-size:0.75rem; color:#64748B;">Inc: ${row['income']:,.0f}</span></td>
+                <td>{row['credit_score']:.0f}</td>
+                <td><span class="status-pill {risk_class}">{risk_val}</span></td>
+                <td><span class="status-pill {status_class}">{status_val}</span></td>
+            </tr>
+        """
+    table_html += "</tbody></table>"
+    st.markdown(table_html, unsafe_allow_html=True)
 
     # Pagination
     total_pages = max(1, (total + 20 - 1) // 20)

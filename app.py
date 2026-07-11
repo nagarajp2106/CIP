@@ -146,12 +146,13 @@ if role in ["admin", "bank_manager", "data_analyst"]:
 
 cols = st.columns(3)
 for idx, (icon, title, desc) in enumerate(nav_items):
+    border_color = 'var(--secondary)' if idx % 3 == 0 else 'var(--accent)' if idx % 3 == 1 else 'var(--success)'
     with cols[idx % 3]:
         st.markdown(f"""
-        <div class="kpi-card" style="cursor: pointer; border-left-color: {'#2E86AB' if idx % 3 == 0 else '#D4AF37' if idx % 3 == 1 else '#28A745'};">
+        <div class="kpi-card" style="cursor: pointer; border-left-color: {border_color};">
             <div style="font-size: 1.8rem;">{icon}</div>
-            <div style="font-weight: 700; color: #1B2A4A; margin: 0.3rem 0;">{title}</div>
-            <div style="color: #6C757D; font-size: 0.85rem;">{desc}</div>
+            <div style="font-weight: 700; color: var(--primary); margin: 0.3rem 0;">{title}</div>
+            <div style="color: var(--text-muted); font-size: 0.85rem;">{desc}</div>
         </div>
         """, unsafe_allow_html=True)
 

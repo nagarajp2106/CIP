@@ -1,41 +1,84 @@
 /* ══════════════════════════════════════════════
-   AI Banking Customer Insights — Custom Light Theme
+   AI Banking Customer Insights — Centralized Design System
    ══════════════════════════════════════════════ */
 
 /* ── CSS Variables ── */
 :root {
-    --primary: #1B2A4A;
-    --secondary: #2E86AB;
-    --accent: #D4AF37;
-    --success: #28A745;
-    --warning: #FD7E14;
-    --danger: #DC3545;
-    --info: #17A2B8;
-    --light: #F8F9FA;
-    --dark: #0D1B2A;
+    --primary: #1B2A4A;          /* Dark Navy */
+    --secondary: #2E86AB;        /* Steel Blue */
+    --accent: #D4AF37;           /* Gold Accent */
+    
+    /* Semantic Status Colors (Pill Styles) */
+    --success: #2E7D32;
+    --success-bg: #E8F5E9;
+    --warning: #E65100;
+    --warning-bg: #FFF3E0;
+    --danger: #C62828;
+    --danger-bg: #FFEBEE;
+    --info: #006064;
+    --info-bg: #E0F7FA;
+    
+    /* Layout */
+    --bg-light: #F4F6F9;         /* Slate Light Background */
     --card-bg: #FFFFFF;
     --border-color: #E2E8F0;
-    --text-main: #1B2A4A;
-    --text-muted: #6C757D;
     
-    --card-shadow: 0 4px 12px rgba(27, 42, 74, 0.05);
-    --card-shadow-hover: 0 8px 24px rgba(27, 42, 74, 0.1);
-    --radius: 12px;
-    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Text Hierarchy */
+    --text-main: #1B2A4A;
+    --text-muted: #64748B;       /* Slate gray */
+    
+    /* Theme Tokens */
+    --card-shadow: 0 4px 20px rgba(27, 42, 74, 0.04);
+    --card-shadow-hover: 0 10px 30px rgba(27, 42, 74, 0.07);
+    --radius: 16px;
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ── Global Canvas ── */
 .stApp {
     font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif;
-    background-color: var(--light) !important;
+    background-color: var(--bg-light) !important;
     color: var(--text-main) !important;
 }
 
-/* ── Sidebar (Light Theme Styling & Custom Navigation) ── */
+/* Override default scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+}
+
+/* ── Entry Animations ── */
+.animate-in {
+    animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Sidebar (Premium Dark Navy & Custom Navigation) ── */
 section[data-testid="stSidebar"] {
-    background-color: var(--card-bg) !important;
+    background-color: var(--primary) !important;
     background-image: none !important;
-    border-right: 1px solid var(--border-color) !important;
+    border-right: none !important;
 }
 
 /* Hide standard Streamlit page navigation list */
@@ -45,20 +88,56 @@ section[data-testid="stSidebar"] {
     display: none !important;
 }
 
-/* Keep sidebar fixed and scrollable */
 [data-testid="stSidebarUserContent"] {
     max-height: 100vh !important;
     overflow-y: auto !important;
-    padding-top: 1rem !important;
-    padding-bottom: 2rem !important;
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Sidebar Custom Accordion/Expander Styling */
+/* Title text styling inside Dark Sidebar */
+[data-testid="stSidebar"] .sidebar-title {
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+}
+[data-testid="stSidebar"] .sidebar-subtitle {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-weight: 500 !important;
+}
+
+/* User details card inside sidebar */
+[data-testid="stSidebar"] .sidebar-profile-card {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 12px !important;
+    padding: 0.85rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+[data-testid="stSidebar"] .sidebar-profile-label {
+    margin: 0 !important;
+    font-size: 0.75rem !important;
+    color: rgba(255, 255, 255, 0.45) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+}
+
+[data-testid="stSidebar"] .sidebar-profile-name {
+    margin: 0.1rem 0 0.4rem 0 !important;
+    font-size: 0.95rem !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+}
+
+/* Custom Accordion/Expander inside Dark Sidebar */
 [data-testid="stSidebar"] .stExpander {
     background-color: transparent !important;
     border: none !important;
     box-shadow: none !important;
-    margin-bottom: 0.25rem !important;
+    margin-bottom: 0.35rem !important;
     padding: 0 !important;
 }
 
@@ -70,35 +149,38 @@ section[data-testid="stSidebar"] {
 [data-testid="stSidebar"] .stExpander details summary {
     background-color: transparent !important;
     border: none !important;
-    color: #4A5568 !important; /* Muted gray */
+    color: rgba(255, 255, 255, 0.75) !important;
     font-size: 0.9rem !important;
     font-weight: 600 !important;
     padding: 8px 12px !important;
-    border-radius: 6px !important;
-    transition: all 0.2s ease !important;
+    border-radius: 8px !important;
+    transition: var(--transition) !important;
     cursor: pointer !important;
 }
 
 [data-testid="stSidebar"] .stExpander details summary:hover {
-    background-color: #EDF2F7 !important;
-    color: #1A202C !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    color: #FFFFFF !important;
 }
 
-/* Customize expander toggle icon/arrow */
+/* Custom Expand Arrow */
 [data-testid="stSidebar"] .stExpander details summary svg {
-    fill: #718096 !important;
-    transition: transform 0.2s ease !important;
+    fill: rgba(255, 255, 255, 0.5) !important;
+    transition: var(--transition) !important;
+}
+[data-testid="stSidebar"] .stExpander details summary:hover svg {
+    fill: #FFFFFF !important;
 }
 
-/* Indent and style expander contents */
+/* Sub-links block styling */
 [data-testid="stSidebar"] .stExpander details > div[role="definition"] {
-    padding: 4px 0 4px 16px !important; /* Indent sub-links */
-    border-left: 1px solid #E2E8F0 !important;
-    margin-left: 16px !important;
+    padding: 4px 0 4px 12px !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.15) !important;
+    margin-left: 18px !important;
     background-color: transparent !important;
 }
 
-/* Style st.page_link components inside Sidebar */
+/* Page links inside sidebar (including sub-links) */
 [data-testid="stSidebar"] .stPageLink {
     padding: 2px 0 !important;
     margin: 0 !important;
@@ -107,65 +189,126 @@ section[data-testid="stSidebar"] {
 [data-testid="stSidebar"] .stPageLink a {
     background-color: transparent !important;
     border: none !important;
-    color: #4A5568 !important;
+    color: rgba(255, 255, 255, 0.65) !important; /* Muted inactive state */
     font-size: 0.85rem !important;
     font-weight: 500 !important;
-    padding: 6px 12px !important;
-    border-radius: 6px !important;
-    transition: all 0.15s ease !important;
+    padding: 7px 12px !important;
+    border-radius: 8px !important;
+    transition: var(--transition) !important;
     text-decoration: none !important;
     display: flex !important;
     align-items: center !important;
 }
 
 [data-testid="stSidebar"] .stPageLink a:hover {
-    background-color: #EDF2F7 !important;
-    color: var(--secondary) !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    color: #FFFFFF !important;
 }
 
-/* Highlight the active page link */
+/* Active navigation pill highlight */
 [data-testid="stSidebar"] .stPageLink a[aria-current="page"] {
-    background-color: #E2E8F0 !important;
-    color: var(--primary) !important;
+    background-color: var(--secondary) !important; /* Soft pill color */
+    color: #FFFFFF !important;
     font-weight: 700 !important;
-    border-left: 3px solid var(--secondary) !important;
-    border-radius: 0 6px 6px 0 !important;
+    opacity: 1 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(46, 134, 171, 0.25) !important;
 }
 
 section[data-testid="stSidebar"] hr {
-    border-color: var(--border-color) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    margin: 1rem 0 !important;
 }
 
-/* ── KPI Metric Cards ── */
-.kpi-card {
+/* Pinned Contact Us Card in Sidebar */
+.sidebar-cta-card {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    padding: 0.85rem !important;
+    margin-top: auto !important;
+    text-align: center !important;
+}
+
+.sidebar-cta-title {
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+    font-size: 0.8rem !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.sidebar-cta-text {
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 0.75rem !important;
+    margin-bottom: 0.6rem !important;
+}
+
+.sidebar-cta-btn {
+    background-color: var(--secondary) !important;
+    color: #FFFFFF !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    padding: 4px 10px !important;
+    border-radius: 6px !important;
+    display: inline-block !important;
+    text-decoration: none !important;
+    transition: var(--transition) !important;
+}
+.sidebar-cta-btn:hover {
+    background-color: #3b9ac3 !important;
+    box-shadow: 0 2px 8px rgba(46, 134, 171, 0.3) !important;
+}
+
+/* Sidebar Logout Button Styling */
+[data-testid="stSidebar"] button[key*="shared_sidebar_logout_btn"] {
+    background-color: rgba(220, 53, 69, 0.1) !important;
+    color: #FF8F94 !important;
+    border: 1px solid rgba(220, 53, 69, 0.2) !important;
+    border-radius: 8px !important;
+    transition: var(--transition) !important;
+}
+
+[data-testid="stSidebar"] button[key*="shared_sidebar_logout_btn"]:hover {
+    background-color: #DC3545 !important;
+    color: #FFFFFF !important;
+    border-color: #DC3545 !important;
+}
+
+
+/* ── Cards (16px, soft shadow, generous padding) ── */
+.kpi-card, .chart-card, .list-card, .form-card {
     background: var(--card-bg);
     border-radius: var(--radius);
-    padding: 1.25rem;
+    padding: 1.5rem;
     box-shadow: var(--card-shadow);
     border: 1px solid var(--border-color);
-    border-left: 5px solid var(--secondary);
     transition: var(--transition);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
     display: flex;
     flex-direction: column;
 }
 
-.kpi-card:hover {
+.kpi-card:hover, .chart-card:hover, .list-card:hover {
     box-shadow: var(--card-shadow-hover);
     transform: translateY(-2px);
 }
 
+.kpi-card {
+    border-left: 5px solid var(--secondary);
+}
+
+/* KPI Card details */
 .kpi-card .kpi-icon {
-    font-size: 1.75rem;
-    margin-bottom: 0.25rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
 }
 
 .kpi-card .kpi-value {
-    font-size: 1.75rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--primary);
-    margin: 0.2rem 0;
     line-height: 1.1;
+    margin: 0.15rem 0;
 }
 
 .kpi-card .kpi-label {
@@ -177,228 +320,210 @@ section[data-testid="stSidebar"] hr {
 }
 
 .kpi-card .kpi-delta {
+    display: inline-flex;
+    align-items: center;
     font-size: 0.75rem;
-    margin-top: 0.25rem;
     font-weight: 600;
+    margin-top: 0.4rem;
+    padding: 2px 8px;
+    border-radius: 8px;
+    width: fit-content;
 }
 
-.kpi-delta.positive { color: var(--success); }
-.kpi-delta.negative { color: var(--danger); }
+/* Soft status background deltas */
+.kpi-card .kpi-delta.positive {
+    background-color: var(--success-bg);
+    color: var(--success);
+}
 
-/* Card color variants */
+.kpi-card .kpi-delta.negative {
+    background-color: var(--danger-bg);
+    color: var(--danger);
+}
+
+/* KPI card colors mapping */
 .kpi-card.blue   { border-left-color: var(--secondary); }
 .kpi-card.gold   { border-left-color: var(--accent); }
-.kpi-card.green  { border-left-color: var(--success); }
-.kpi-card.red    { border-left-color: var(--danger); }
-.kpi-card.teal   { border-left-color: var(--info); }
+.kpi-card.green  { border-left-color: #28A745; }
+.kpi-card.red    { border-left-color: #DC3545; }
+.kpi-card.teal   { border-left-color: #17A2B8; }
 .kpi-card.purple { border-left-color: #6F42C1; }
 .kpi-card.orange { border-left-color: var(--warning); }
 
-/* ── Section Headers ── */
-.section-header {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin: 2rem 0 1rem 0;
-    padding-bottom: 0.4rem;
-    border-bottom: 2px solid var(--accent);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
 
-/* ── Insight Cards ── */
-.insight-card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    padding: 1.2rem;
-    box-shadow: var(--card-shadow);
-    border: 1px solid var(--border-color);
-    border-left: 4px solid var(--accent);
-    margin-bottom: 0.75rem;
-    transition: var(--transition);
-}
-
-.insight-card:hover {
-    box-shadow: var(--card-shadow-hover);
-}
-
-.insight-card .insight-icon {
-    font-size: 1.4rem;
-    margin-right: 0.75rem;
-    float: left;
-}
-
-.insight-card .insight-text {
-    font-size: 0.95rem;
-    color: var(--text-main);
-    line-height: 1.5;
-}
-
-.insight-card .insight-category {
+/* ── Status Pills (Soft Colored Badges) ── */
+.status-pill {
     display: inline-block;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 0.5rem;
-}
-
-/* ── Prediction Result Cards ── */
-.prediction-result {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    padding: 2rem;
-    box-shadow: var(--card-shadow);
-    border: 1px solid var(--border-color);
-    text-align: center;
-    margin: 1rem 0;
-}
-
-.prediction-result .prediction-label {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 0.5rem;
-}
-
-.prediction-result .prediction-value {
-    font-size: 2.25rem;
-    font-weight: 800;
-    margin: 0.5rem 0;
-}
-
-.prediction-result .prediction-score {
-    font-size: 1rem;
-    color: var(--text-muted);
-}
-
-.prediction-approved { color: var(--success); }
-.prediction-rejected { color: var(--danger); }
-.prediction-low-risk { color: var(--success); }
-.prediction-medium-risk { color: var(--warning); }
-.prediction-high-risk { color: var(--danger); }
-
-/* ── Progress Bars ── */
-.progress-container {
-    background: #E2E8F0;
-    border-radius: 20px;
-    overflow: hidden;
-    height: 20px;
-    margin: 0.4rem 0;
-}
-
-.progress-bar {
-    height: 100%;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: white;
-}
-
-/* ── Data Tables ── */
-.styled-table {
-    width: 100%;
-    border-collapse: collapse;
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--card-shadow);
-    border: 1px solid var(--border-color);
-}
-
-.styled-table thead th {
-    background: var(--primary);
-    color: var(--accent);
-    padding: 12px 16px;
-    text-align: left;
-    font-weight: 600;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-}
-
-.styled-table tbody td {
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--border-color);
-    font-size: 0.9rem;
-    color: var(--text-main);
-}
-
-.styled-table tbody tr:hover {
-    background: #F8FAFC;
-}
-
-/* ── Status Badges ── */
-.status-badge {
-    display: inline-block;
-    padding: 3px 10px;
+    padding: 4px 10px;
     border-radius: 12px;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    color: white;
+    text-transform: capitalize;
 }
 
-.badge-active   { background: var(--success); }
-.badge-inactive { background: var(--text-muted); }
-.badge-pending  { background: #FFF3CD; color: #856404; }
-.badge-closed   { background: var(--info); }
-.badge-default  { background: var(--danger); }
+.status-pill.success, .status-pill.active {
+    background-color: var(--success-bg) !important;
+    color: var(--success) !important;
+}
 
-/* ── Form & Inputs Readability ── */
+.status-pill.warning, .status-pill.pending {
+    background-color: var(--warning-bg) !important;
+    color: var(--warning) !important;
+}
+
+.status-pill.danger, .status-pill.inactive, .status-pill.cancelled {
+    background-color: var(--danger-bg) !important;
+    color: var(--danger) !important;
+}
+
+.status-pill.info, .status-pill.closed {
+    background-color: var(--info-bg) !important;
+    color: var(--info) !important;
+}
+
+
+/* ── Form Forms & Inputs Readability ── */
 .stForm {
     background: var(--card-bg) !important;
     border-radius: var(--radius) !important;
     box-shadow: var(--card-shadow) !important;
     border: 1px solid var(--border-color) !important;
-    padding: 1.5rem !important;
+    padding: 1.75rem !important;
 }
 
-/* Make text inside input widgets highly visible */
+/* Inputs, dropdowns, and text area aesthetics */
+div[data-baseweb="input"] {
+    border-radius: 8px !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid var(--border-color) !important;
+    transition: var(--transition) !important;
+}
+div[data-baseweb="input"]:focus-within {
+    border-color: var(--secondary) !important;
+    box-shadow: 0 0 0 3px rgba(46, 134, 171, 0.15) !important;
+}
+
 div[data-baseweb="input"] input {
     color: var(--text-main) !important;
+    font-size: 0.9rem !important;
 }
 
 div[data-baseweb="select"] {
+    border-radius: 8px !important;
+    border-color: var(--border-color) !important;
     color: var(--text-main) !important;
 }
 
-/* Labels visibility */
 label[data-testid="stWidgetLabel"] p {
     color: var(--text-main) !important;
     font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 0.25rem !important;
 }
 
-/* ── Tabs ── */
-.stTabs [data-baseweb="tab-list"] {
-    gap: 4px;
+/* Buttons style system */
+.stButton button {
+    border-radius: 8px !important;
+    padding: 0.5rem 1.25rem !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    transition: var(--transition) !important;
 }
 
-.stTabs [data-baseweb="tab"] {
-    border-radius: 8px 8px 0 0;
+.stButton button[kind="primary"] {
+    background-color: var(--secondary) !important;
+    border-color: var(--secondary) !important;
+    color: #FFFFFF !important;
+}
+.stButton button[kind="primary"]:hover {
+    background-color: #246e8c !important;
+    border-color: #246e8c !important;
+    box-shadow: 0 4px 12px rgba(46, 134, 171, 0.2) !important;
+}
+
+
+/* ── Center Login Page UI container ── */
+.login-container {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 2.25rem;
+    box-shadow: 0 10px 40px rgba(27, 42, 74, 0.08);
+    border: 1px solid var(--border-color);
+    margin-top: 2rem;
+}
+
+.login-inline-error {
+    color: var(--danger) !important;
+    background-color: var(--danger-bg);
+    border-left: 3px solid var(--danger);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-inline-success {
+    color: var(--success) !important;
+    background-color: var(--success-bg);
+    border-left: 3px solid var(--success);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+
+/* ── Data Tables ── */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    border: 1px solid var(--border-color);
+}
+
+.styled-table thead th {
+    background: var(--primary);
+    color: #FFFFFF;
+    padding: 14px 18px;
+    text-align: left;
     font-weight: 600;
-    color: var(--text-muted) !important;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
-.stTabs [data-baseweb="tab"][aria-selected="true"] {
-    color: var(--primary) !important;
-    border-bottom-color: var(--secondary) !important;
+.styled-table tbody td {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-main);
+    background: #FFFFFF;
 }
 
-/* ── Metric Display Override ── */
-[data-testid="stMetricValue"] {
-    font-size: 1.6rem !important;
-    font-weight: 700 !important;
-    color: var(--primary) !important;
+.styled-table tbody tr:hover td {
+    background: #F8FAFC !important;
 }
 
-[data-testid="stMetricDelta"] {
-    font-size: 0.85rem !important;
+
+/* ── Section Headers ── */
+.section-header {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 2.25rem 0 1.25rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
+
 
 /* ── Plotly Chart Containers ── */
 .js-plotly-plot {
@@ -408,17 +533,39 @@ label[data-testid="stWidgetLabel"] p {
     background-color: var(--card-bg);
 }
 
+
+/* ── Tabs Styling ── */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 4px;
+}
+
+.stTabs [data-baseweb="tab"] {
+    border-radius: 8px 8px 0 0;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-muted) !important;
+    padding: 8px 16px !important;
+    transition: var(--transition) !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    color: var(--secondary) !important;
+    background-color: rgba(46, 134, 171, 0.05) !important;
+}
+
+.stTabs [data-baseweb="tab"][aria-selected="true"] {
+    color: var(--primary) !important;
+    border-bottom-color: var(--secondary) !important;
+}
+
+
 /* ── Desktop Responsiveness ── */
 @media (min-width: 1200px) {
-    /* Responsive layout helper */
-    .responsive-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 1rem;
-    }
     .block-container {
-        padding-left: 5rem !important;
-        padding-right: 5rem !important;
+        padding-left: 4rem !important;
+        padding-right: 4rem !important;
         max-width: 1400px !important;
         margin: 0 auto !important;
     }
@@ -426,17 +573,17 @@ label[data-testid="stWidgetLabel"] p {
 
 @media (min-width: 768px) and (max-width: 1199px) {
     .block-container {
-        padding-left: 3rem !important;
-        padding-right: 3rem !important;
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
     }
 }
 
 @media (max-width: 767px) {
     .block-container {
-        padding-left: 1.25rem !important;
-        padding-right: 1.25rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
         padding-top: 1.5rem !important;
     }
-    .kpi-card .kpi-value { font-size: 1.4rem; }
-    .kpi-card { padding: 0.8rem 1rem; }
+    .kpi-card .kpi-value { font-size: 1.5rem; }
+    .kpi-card { padding: 1rem; }
 }

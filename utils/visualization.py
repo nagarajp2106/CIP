@@ -12,13 +12,13 @@ from config import CHART_COLORS, COLORS
 # Common Layout Config
 # ──────────────────────────────────────────────
 PLOTLY_LAYOUT = dict(
-    font=dict(family="Inter, Segoe UI, sans-serif", size=12, color="#1B2A4A"),
-    paper_bgcolor="white",
-    plot_bgcolor="#FAFBFC",
-    margin=dict(l=40, r=40, t=50, b=40),
+    font=dict(family="Inter, Segoe UI, -apple-system, sans-serif", size=12, color="#1B2A4A"),
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="#F8FAFC",
+    margin=dict(l=45, r=45, t=55, b=45),
     colorway=CHART_COLORS,
-    hoverlabel=dict(bgcolor="white", font_size=13, font_family="Inter"),
-    legend=dict(orientation="h", yanchor="bottom", y=-0.2, xanchor="center", x=0.5),
+    hoverlabel=dict(bgcolor="#FFFFFF", font_size=13, font_family="Inter", bordercolor="#E2E8F0"),
+    legend=dict(orientation="h", yanchor="bottom", y=-0.25, xanchor="center", x=0.5),
 )
 
 
@@ -26,9 +26,11 @@ def apply_layout(fig, title="", height=400):
     """Apply consistent banking theme layout to a Plotly figure."""
     fig.update_layout(
         **PLOTLY_LAYOUT,
-        title=dict(text=title, font=dict(size=16, color="#1B2A4A"), x=0, xanchor="left"),
+        title=dict(text=f"<b>{title}</b>" if title else "", font=dict(size=15, color="#1B2A4A"), x=0.02, y=0.95, xanchor="left"),
         height=height,
     )
+    fig.update_xaxes(showgrid=False, linecolor="#E2E8F0", title_font=dict(size=11, color="#64748B"), tickfont=dict(size=10, color="#64748B"))
+    fig.update_yaxes(showgrid=True, gridcolor="#F1F5F9", linecolor="rgba(0,0,0,0)", title_font=dict(size=11, color="#64748B"), tickfont=dict(size=10, color="#64748B"))
     return fig
 
 
