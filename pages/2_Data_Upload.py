@@ -2,6 +2,7 @@
 Data Upload Page — CSV upload, validation, preview, and database insertion.
 """
 import streamlit as st
+from utils.icons import render_html_icon
 import pandas as pd
 from authentication import check_auth, require_role
 from database import get_connection
@@ -14,7 +15,7 @@ if not user:
     st.switch_page("app.py")
 require_role("Data Upload")
 
-st.markdown("# 📤 Data Upload")
+st.markdown(f"# {render_html_icon('upload_file', size='30px')} Data Upload", unsafe_allow_html=True)
 st.markdown("Upload, validate, and store banking datasets")
 st.markdown("---")
 
@@ -35,16 +36,16 @@ uploaded_file = st.file_uploader(
 if uploaded_file is not None:
     try:
         df = pd.read_csv(uploaded_file)
-        st.success(f"✅ File loaded: **{uploaded_file.name}** ({len(df)} rows, {len(df.columns)} columns)")
+        st.success(f"File loaded: **{uploaded_file.name}** ({len(df)} rows, {len(df.columns)} columns)")
 
         # ── Tabs ──
-        tab1, tab2, tab3, tab4 = st.tabs(["📋 Preview", "✅ Validation", "🔍 Quality Report", "📥 Upload"])
+        tab1, tab2, tab3, tab4 = st.tabs([":material/preview: Preview", ":material/check_circle: Validation", ":material/search: Quality Report", ":material/upload: Upload"])
 
         with tab1:
             st.markdown("### Data Preview (First 100 Rows)")
             st.dataframe(df.head(100), use_container_width=True, height=400)
 
-            with st.expander("📊 Column Info"):
+            with st.expander(":material/analytics: Column Info"):
                 col_info = pd.DataFrame({
                     "Column": df.columns,
                     "Type": df.dtypes.values,
@@ -60,24 +61,24 @@ if uploaded_file is not None:
             report = validate_upload(df, target_table)
 
             if report["valid"]:
-                st.success("✅ **Validation Passed** — Data is ready for upload")
+                st.success("**Validation Passed** — Data is ready for upload", icon=":material/check_circle:")
             else:
-                st.error("❌ **Validation Failed** — Fix errors before uploading")
+                st.error("**Validation Failed** — Fix errors before uploading", icon=":material/cancel:")
 
             if report["errors"]:
-                st.markdown("#### ❌ Errors")
+                st.markdown(f"#### {render_html_icon('cancel', size='20px', color='var(--danger)')} Errors", unsafe_allow_html=True)
                 for err in report["errors"]:
-                    st.markdown(f"- 🔴 {err}")
+                    st.markdown(f"- {render_html_icon('error', size='16px', color='var(--danger)')} {err}", unsafe_allow_html=True)
 
             if report["warnings"]:
-                st.markdown("#### ⚠️ Warnings")
+                st.markdown(f"#### {render_html_icon('warning', size='20px', color='var(--warning)')} Warnings", unsafe_allow_html=True)
                 for warn in report["warnings"]:
-                    st.markdown(f"- 🟡 {warn}")
+                    st.markdown(f"- {render_html_icon('warning', size='16px', color='var(--warning)')} {warn}", unsafe_allow_html=True)
 
             if report["info"]:
                 st.markdown("#### ℹ️ Info")
                 for info in report["info"]:
-                    st.markdown(f"- 🔵 {info}")
+                    st.markdown(f"- {render_html_icon('info', size='16px', color='var(--info)')} {info}", unsafe_allow_html=True)
 
         with tab3:
             st.markdown("### Data Quality Report")
@@ -109,15 +110,15 @@ if uploaded_file is not None:
             report = validate_upload(df, target_table)
 
             if not report["valid"]:
-                st.warning("⚠️ Please fix validation errors before uploading.")
+                st.warning("Please fix validation errors before uploading.", icon=":material/warning:")
             else:
-                auto_clean = st.checkbox("🧹 Auto-clean data before upload", value=True)
+                auto_clean = st.checkbox("Auto-clean data before upload", value=True)
 
-                col_map_expander = st.expander("🔧 Column Mapping (optional)")
+                col_map_expander = st.expander(":material/build: Column Mapping (optional)")
                 with col_map_expander:
                     st.info("Columns will be matched by name (case-insensitive). Rename columns here if needed.")
 
-                if st.button("📥 Upload to Database", type="primary", use_container_width=True):
+                if st.button("Upload to Database", icon=":material/upload:", type="primary", use_container_width=True):
                     with st.spinner("Processing..."):
                         upload_df = df.copy()
 
@@ -128,7 +129,7 @@ if uploaded_file is not None:
                         if auto_clean:
                             upload_df, clean_report = clean_data(upload_df)
                             for action in clean_report["actions"]:
-                                st.info(f"🧹 {action}")
+                                st.info(f"{action}")
 
                         # Insert into database
                         conn = get_connection()
@@ -152,7 +153,7 @@ if uploaded_file is not None:
                         conn.close()
 
                         # Summary
-                        st.markdown("### 📊 Upload Summary")
+                        st.markdown(f"### {render_html_icon('analytics', size='22px')} Upload Summary", unsafe_allow_html=True)
                         s1, s2, s3 = st.columns(3)
                         with s1:
                             st.metric("Total Rows", len(upload_df))
@@ -161,7 +162,7 @@ if uploaded_file is not None:
                         with s3:
                             st.metric("Skipped", skipped)
 
-                        st.success(f"✅ Upload complete! {inserted} records added to **{target_table}**.")
+                        st.success(f"Upload complete! {inserted} records added to **{target_table}**.")
 
                         # Log activity
                         log_activity(
@@ -171,4 +172,4 @@ if uploaded_file is not None:
                         )
 
     except Exception as e:
-        st.error(f"❌ Error reading file: {str(e)}")
+        st.error(f"Error reading file: {str(e)}", icon=":material/cancel:")

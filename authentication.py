@@ -6,6 +6,7 @@ import streamlit as st
 from jwt_handler import create_token, validate_token
 from utils.auth import authenticate_user, log_activity
 from config import PAGE_ACCESS, ROLES, DEMO_USERS, ASSETS_DIR
+from utils.icons import render_html_icon, get_native_icon
 
 
 def login_page():
@@ -158,10 +159,10 @@ Unlock deep retail banking customer insights with predictive ML pipelines, CLV f
             password_error.empty()
             
             if not username:
-                username_error.markdown('<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600;">⚠️ Username is required.</div>', unsafe_allow_html=True)
+                username_error.markdown(f'<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600; display: flex; align-items: center; gap: 4px;">{render_html_icon("warning", size="16px", color="#C62828")} Username is required.</div>', unsafe_allow_html=True)
                 has_error = True
             if not password:
-                password_error.markdown('<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600;">⚠️ Password is required.</div>', unsafe_allow_html=True)
+                password_error.markdown(f'<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600; display: flex; align-items: center; gap: 4px;">{render_html_icon("warning", size="16px", color="#C62828")} Password is required.</div>', unsafe_allow_html=True)
                 has_error = True
                 
             if not has_error:
@@ -181,52 +182,52 @@ Unlock deep retail banking customer insights with predictive ML pipelines, CLV f
                         log_activity(user["user_id"], user["username"], "LOGIN", "User logged in successfully")
                         st.rerun()
                     else:
-                        password_error.markdown('<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600;">❌ Invalid username or password.</div>', unsafe_allow_html=True)
+                        password_error.markdown(f'<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600; display: flex; align-items: center; gap: 4px;">{render_html_icon("cancel", size="16px", color="#C62828")} Invalid username or password.</div>', unsafe_allow_html=True)
 
         # Demo Credentials Panel inside minimal card expander
         st.markdown('<div style="height: 12px;"></div>', unsafe_allow_html=True)
-        with st.expander("🎯 View Demo Credentials", expanded=False):
+        with st.expander(":material/vpn_key: View Demo Credentials", expanded=False):
             st.markdown(
-                """<style>
-.demo-card-item {
+                f"""<style>
+.demo-card-item {{
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #F1F5F9;
     padding: 8px 0;
-}
-.demo-card-item:last-child {
+}}
+.demo-card-item:last-child {{
     border-bottom: none;
-}
-.demo-role-badge {
+}}
+.demo-role-badge {{
     display: inline-block;
     padding: 2px 10px;
     border-radius: 12px;
     font-size: 0.75rem;
     font-weight: 600;
-}
+}}
 </style>
 <div style="background: #FFFFFF; padding: 4px; font-size: 0.85rem;">
     <div style="margin-bottom: 8px; font-weight: 600; color: #64748B;">Test credentials with pre-configured roles:</div>
     <div class="demo-card-item">
-        <span>👤 <code>admin</code> (admin123)</span>
+        <span style="display: flex; align-items: center; gap: 6px;">{render_html_icon("person", size="18px", color="#64748B")} <code>admin</code> (admin123)</span>
         <span class="demo-role-badge" style="background:#FFEBEE; color:#C62828;">Admin</span>
     </div>
     <div class="demo-card-item">
-        <span>👤 <code>manager</code> (manager123)</span>
+        <span style="display: flex; align-items: center; gap: 6px;">{render_html_icon("person", size="18px", color="#64748B")} <code>manager</code> (manager123)</span>
         <span class="demo-role-badge" style="background:#E8F5E9; color:#2E7D32;">Manager</span>
     </div>
     <div class="demo-card-item">
-        <span>👤 <code>analyst</code> (analyst123)</span>
+        <span style="display: flex; align-items: center; gap: 6px;">{render_html_icon("person", size="18px", color="#64748B")} <code>analyst</code> (analyst123)</span>
         <span class="demo-role-badge" style="background:#E0F7FA; color:#006064;">Analyst</span>
     </div>
 </div>""",
                 unsafe_allow_html=True
             )
             st.markdown(
-                '<div style="margin-top: 8px; padding: 0.75rem; background: #FFF3E0; border-radius: 8px; border-left: 4px solid #FF9800; font-size: 0.82rem; color: #E65100; font-weight: 500;">'
-                '💡 <strong>Tip:</strong> Log in with different roles to test different page permissions.'
-                '</div>',
+                f'<div style="margin-top: 8px; padding: 0.75rem; background: #FFF3E0; border-radius: 8px; border-left: 4px solid #FF9800; font-size: 0.82rem; color: #E65100; font-weight: 500; display: flex; align-items: center; gap: 6px;">'
+                f'{render_html_icon("recommend", size="18px", color="#E65100")} <strong>Tip:</strong> Log in with different roles to test different page permissions.'
+                f'</div>',
                 unsafe_allow_html=True
             )
 
@@ -246,7 +247,9 @@ def render_sidebar(current_page: str = "Home"):
         # App branding header
         st.markdown(
             f'<div style="text-align: center; padding: 0.5rem 0;">'
-            f'<div style="font-size: 2.2rem; margin-bottom: 0.2rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));">🏦</div>'
+            f'<div style="margin-bottom: 0.4rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));">'
+            f'{render_html_icon("account_balance", size="36px", color="#FFFFFF")}'
+            f'</div>'
             f'<h3 class="sidebar-title" style="margin: 0; font-size: 1.15rem; font-weight: 700; letter-spacing: 0.5px;">AI Banking Insights</h3>'
             f'<p class="sidebar-subtitle" style="margin: 0.2rem 0; font-size: 0.8rem; font-weight: 500;">Customer Insights Platform</p>'
             f'</div>',
@@ -336,7 +339,7 @@ def render_sidebar(current_page: str = "Home"):
         
         # Logout button
         st.markdown('<div class="sidebar-logout-container">', unsafe_allow_html=True)
-        if st.button("🚪 Logout", use_container_width=True, key="shared_sidebar_logout_btn"):
+        if st.button("Logout", icon=":material/logout:", use_container_width=True, key="shared_sidebar_logout_btn"):
             logout()
             st.rerun()
         st.markdown('</div>', unsafe_allow_html=True)
@@ -399,16 +402,17 @@ def require_role(page_name: str):
     """
     user = st.session_state.get("user")
     if not user:
-        st.error("🔒 Please log in to access this page.")
+        st.error("Please log in to access this page.", icon=":material/lock:")
         st.stop()
 
     allowed_roles = PAGE_ACCESS.get(page_name, [])
     if user["role"] not in allowed_roles:
         render_sidebar(page_name)
-        st.error("🚫 **Access Denied**")
+        st.error("**Access Denied**", icon=":material/block:")
         st.markdown(f"""
         <div style="padding: 1.5rem; background: #F8D7DA; border-radius: 8px; border-left: 4px solid #DC3545; margin-top: 1rem;">
-            <p style="margin: 0; color: #721C24;">
+            <p style="margin: 0; color: #721C24; display: flex; align-items: center; gap: 6px;">
+                {render_html_icon("block", size="18px", color="#DC3545")}
                 Your role <strong>({ROLES.get(user['role'], user['role'])})</strong> does not have permission to access <strong>{page_name}</strong>.
             </p>
             <p style="margin: 0.5rem 0 0 0; color: #721C24; font-size: 0.9rem;">

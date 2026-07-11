@@ -7,6 +7,7 @@ import os
 from config import APP_NAME, APP_ICON, ASSETS_DIR, ROLES
 from database import init_db, seed_demo_data
 from authentication import login_page, check_auth, logout, get_role_badge_html, render_sidebar
+from utils.icons import render_html_icon, get_native_icon
 
 # ──────────────────────────────────────────────
 # Page Configuration
@@ -57,7 +58,7 @@ render_sidebar("Home")
 # ──────────────────────────────────────────────
 st.markdown(f"""
 <div style="text-align: center; padding: 2rem 0;">
-    <h1 style="color: #1B2A4A; font-size: 2.2rem;">Welcome, {user['full_name']}! 👋</h1>
+    <h1 style="color: #1B2A4A; font-size: 2.2rem; display: flex; align-items: center; justify-content: center; gap: 8px;">Welcome, {user['full_name']}!</h1>
     <p style="color: #6C757D; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
         AI-Powered Retail Banking Customer Insights Platform — Your intelligent dashboard for
         customer analytics, risk assessment, and data-driven decision making.
@@ -79,7 +80,7 @@ with col1:
     count = pd.read_sql("SELECT COUNT(*) as c FROM customers", conn).iloc[0]["c"]
     st.markdown(f"""
     <div class="kpi-card blue animate-in">
-        <div class="kpi-icon">👥</div>
+        <div class="kpi-icon" style="color: var(--secondary);">{render_html_icon("group", size="2.5rem")}</div>
         <div class="kpi-value">{count:,}</div>
         <div class="kpi-label">Total Customers</div>
     </div>
@@ -89,7 +90,7 @@ with col2:
     count = pd.read_sql("SELECT COUNT(*) as c FROM accounts", conn).iloc[0]["c"]
     st.markdown(f"""
     <div class="kpi-card gold animate-in">
-        <div class="kpi-icon">🏧</div>
+        <div class="kpi-icon" style="color: var(--accent);">{render_html_icon("credit_card", size="2.5rem")}</div>
         <div class="kpi-value">{count:,}</div>
         <div class="kpi-label">Total Accounts</div>
     </div>
@@ -99,7 +100,7 @@ with col3:
     count = pd.read_sql("SELECT COUNT(*) as c FROM transactions", conn).iloc[0]["c"]
     st.markdown(f"""
     <div class="kpi-card green animate-in">
-        <div class="kpi-icon">💳</div>
+        <div class="kpi-icon" style="color: var(--success);">{render_html_icon("credit_card", size="2.5rem")}</div>
         <div class="kpi-value">{count:,}</div>
         <div class="kpi-label">Total Transactions</div>
     </div>
@@ -109,7 +110,7 @@ with col4:
     count = pd.read_sql("SELECT COUNT(*) as c FROM loans", conn).iloc[0]["c"]
     st.markdown(f"""
     <div class="kpi-card teal animate-in">
-        <div class="kpi-icon">💰</div>
+        <div class="kpi-icon" style="color: var(--info);">{render_html_icon("savings", size="2.5rem")}</div>
         <div class="kpi-value">{count:,}</div>
         <div class="kpi-label">Total Loans</div>
     </div>
@@ -120,37 +121,37 @@ conn.close()
 st.markdown("---")
 
 # Navigation cards for quick access
-st.markdown('<div class="section-header">📌 Quick Navigation</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="section-header">{render_html_icon("explore", size="22px")} Quick Navigation</div>', unsafe_allow_html=True)
 
 role = user["role"]
 nav_items = []
 
 if role in ["admin", "bank_manager", "data_analyst"]:
-    nav_items.append(("📊", "Dashboard", "View KPIs, charts, and executive summary", "pages/1_Dashboard.py"))
+    nav_items.append(("dashboard", "Dashboard", "View KPIs, charts, and executive summary", "pages/1_Dashboard.py"))
 if role in ["admin", "data_analyst"]:
-    nav_items.append(("📤", "Data Upload", "Upload and validate banking datasets", "pages/2_Data_Upload.py"))
+    nav_items.append(("upload_file", "Data Upload", "Upload and validate banking datasets", "pages/2_Data_Upload.py"))
 if role in ["admin", "bank_manager"]:
-    nav_items.append(("👤", "Customer Management", "Search, view, and manage customers", "pages/5_Customer_Management.py"))
+    nav_items.append(("group", "Customer Management", "Search, view, and manage customers", "pages/5_Customer_Management.py"))
 if role in ["admin", "bank_manager"]:
-    nav_items.append(("🏦", "Loan Analytics", "Loan portfolio analysis and metrics", "pages/7_Loan_Analytics.py"))
+    nav_items.append(("account_balance", "Loan Analytics", "Loan portfolio analysis and metrics", "pages/7_Loan_Analytics.py"))
 if role in ["admin", "bank_manager"]:
-    nav_items.append(("🔮", "Churn Prediction", "Predict customer churn probability", "pages/10_Churn_Prediction.py"))
+    nav_items.append(("change_circle", "Churn Prediction", "Predict customer churn probability", "pages/10_Churn_Prediction.py"))
 if role in ["admin", "bank_manager"]:
-    nav_items.append(("💎", "CLV Prediction", "Estimate customer lifetime value", "pages/13_CLV_Prediction.py"))
+    nav_items.append(("insights", "CLV Prediction", "Estimate customer lifetime value", "pages/13_CLV_Prediction.py"))
 if role in ["admin", "bank_manager"]:
-    nav_items.append(("🎯", "Product Recommendation", "AI-powered product suggestions", "pages/15_Product_Recommendation.py"))
+    nav_items.append(("recommend", "Product Recommendation", "AI-powered product suggestions", "pages/15_Product_Recommendation.py"))
 if role in ["admin", "bank_manager"]:
-    nav_items.append(("📈", "AI Business Insights", "AI-generated analytical insights", "pages/18_AI_Business_Insights.py"))
+    nav_items.append(("smart_toy", "AI Business Insights", "AI-generated analytical insights", "pages/18_AI_Business_Insights.py"))
 if role in ["admin", "bank_manager", "data_analyst"]:
-    nav_items.append(("📑", "Reports", "Generate and export professional reports", "pages/19_Reports.py"))
+    nav_items.append(("description", "Reports", "Generate and export professional reports", "pages/19_Reports.py"))
 
 cols = st.columns(3)
-for idx, (icon, title, desc, path) in enumerate(nav_items):
+for idx, (icon_name, title, desc, path) in enumerate(nav_items):
     border_color = 'var(--secondary)' if idx % 3 == 0 else 'var(--accent)' if idx % 3 == 1 else 'var(--success)'
     with cols[idx % 3]:
         st.markdown(f"""
         <div class="kpi-card" style="border-left-color: {border_color}; margin-bottom: 8px;">
-            <div style="font-size: 1.8rem;">{icon}</div>
+            <div style="margin-bottom: 0.4rem;">{render_html_icon(icon_name, size="2rem", color=border_color)}</div>
             <div style="font-weight: 700; color: var(--primary); margin: 0.3rem 0; font-size: 1.05rem;">{title}</div>
             <div style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.3; min-height: 38px;">{desc}</div>
         </div>

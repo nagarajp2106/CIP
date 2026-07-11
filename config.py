@@ -8,7 +8,7 @@ import os
 # ──────────────────────────────────────────────
 APP_NAME = "AI Banking Customer Insights"
 APP_VERSION = "1.0.0"
-APP_ICON = "🏦"
+APP_ICON = ":material/account_balance:"
 
 # ──────────────────────────────────────────────
 # Paths

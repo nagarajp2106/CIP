@@ -12,11 +12,11 @@ if not user:
     st.switch_page("app.py")
 require_role("Settings")
 
-st.markdown("# ⚙️ Settings")
+st.markdown(f"# {render_html_icon('settings', size='30px')} Settings", unsafe_allow_html=True)
 st.markdown("Platform configuration and preferences")
 st.markdown("---")
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["🎨 Theme", "🏦 General", "🔐 Security", "📤 Export", "🔔 Notifications"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs([":material/palette: Theme", ":material/account_balance: General", ":material/lock: Security", ":material/upload_file: Export", ":material/notifications: Notifications"])
 
 # ── Theme ──
 with tab1:
@@ -33,11 +33,11 @@ with tab1:
             .kpi-card .kpi-value { color: #E0E6ED; }
         </style>
         """, unsafe_allow_html=True)
-        st.info("🌙 Dark theme applied for this session.")
+        st.info("Dark theme applied for this session.", icon=":material/dark_mode:")
     elif theme == "Banking (Navy/Gold)":
-        st.info("🏦 Default banking theme is active.")
+        st.info("Default banking theme is active.", icon=":material/account_balance:")
     else:
-        st.info("☀️ Light theme is active.")
+        st.info("Light theme is active.", icon=":material/light_mode:")
 
     st.markdown("---")
     st.markdown("### Display Options")
@@ -45,13 +45,13 @@ with tab1:
     compact_mode = st.checkbox("Compact mode", value=False, key="compact")
     default_page_size = st.selectbox("Default table page size", [10, 20, 50, 100], index=1, key="page_size_setting")
 
-    if st.button("💾 Save Display Preferences", type="primary"):
+    if st.button("Save Display Preferences", icon=":material/save:", type="primary"):
         st.session_state["display_prefs"] = {
             "animations": show_animations,
             "compact": compact_mode,
             "page_size": default_page_size
         }
-        st.success("✅ Display preferences saved!")
+        st.success("Display preferences saved!", icon=":material/check_circle:")
 
 # ── General ──
 with tab2:
@@ -89,6 +89,7 @@ with tab3:
         st.markdown("### Role Permissions")
 
         from config import PAGE_ACCESS
+from utils.icons import render_html_icon
         role_matrix = {}
         for page, roles in PAGE_ACCESS.items():
             for role in roles:
@@ -102,9 +103,9 @@ with tab3:
             pages = role_matrix[selected_role]
             st.markdown(f"**{ROLES[selected_role]}** has access to **{len(pages)}** pages:")
             for page in sorted(pages):
-                st.markdown(f"- ✅ {page}")
+                st.markdown(f"- {render_html_icon('check_circle', size='16px', color='var(--success)')} {page}", unsafe_allow_html=True)
     else:
-        st.info("🔒 Security settings are only visible to administrators.")
+        st.info("Security settings are only visible to administrators.", icon=":material/lock:")
 
 # ── Export ──
 with tab4:
@@ -114,13 +115,13 @@ with tab4:
     include_metadata = st.checkbox("Include metadata sheet in Excel exports", value=True, key="inc_meta")
     max_pdf_rows = st.number_input("Max rows in PDF reports", value=100, min_value=50, max_value=500, key="pdf_rows")
 
-    if st.button("💾 Save Export Preferences", type="primary"):
+    if st.button("Save Export Preferences", icon=":material/save:", type="primary"):
         st.session_state["export_prefs"] = {
             "format": default_format,
             "include_metadata": include_metadata,
             "max_pdf_rows": max_pdf_rows
         }
-        st.success("✅ Export preferences saved!")
+        st.success("Export preferences saved!", icon=":material/check_circle:")
 
 # ── Notifications ──
 with tab5:
@@ -131,9 +132,9 @@ with tab5:
 
     notify_email = st.checkbox("Email notifications (coming soon)", value=False, disabled=True, key="email_notif")
 
-    if st.button("💾 Save Notification Preferences", type="primary"):
+    if st.button("Save Notification Preferences", icon=":material/save:", type="primary"):
         st.session_state["notification_prefs"] = {
             "churn_threshold": churn_threshold,
             "balance_alert": balance_alert,
         }
-        st.success("✅ Notification preferences saved!")
+        st.success("Notification preferences saved!", icon=":material/check_circle:")

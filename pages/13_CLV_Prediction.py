@@ -2,6 +2,7 @@
 Customer Lifetime Value Prediction Page — Gradient Boosting Regressor.
 """
 import streamlit as st
+from utils.icons import render_html_icon, get_symbol_name
 import pandas as pd
 from authentication import check_auth, require_role
 from database import get_connection
@@ -14,7 +15,7 @@ if not user:
     st.switch_page("app.py")
 require_role("CLV Prediction")
 
-st.markdown("# 💎 Customer Lifetime Value Prediction")
+st.markdown(f"# {render_html_icon('insights', size='30px')} Customer Lifetime Value Prediction", unsafe_allow_html=True)
 st.markdown("Estimate the lifetime value of each customer using regression")
 st.markdown("---")
 
@@ -23,12 +24,12 @@ customers_df = pd.read_sql("SELECT * FROM customers", conn)
 conn.close()
 
 if customers_df.empty:
-    st.warning("⚠️ No customer data available.")
+    st.warning("No customer data available.", icon=":material/warning:")
     st.stop()
 
 model_data = load_model("clv")
 if model_data is None:
-    with st.spinner("🤖 Training CLV model..."):
+    with st.spinner("Training CLV model..."):
         model_data, metrics = train_clv_model(customers_df)
 
 model = model_data["model"]
@@ -38,15 +39,15 @@ metrics = model_data.get("metrics", {})
 if metrics:
     m1, m2, m3 = st.columns(3)
     with m1:
-        st.markdown(kpi_card("R² Score", f"{metrics.get('r2_score', 0):.3f}", "📐", color="green"), unsafe_allow_html=True)
+        st.markdown(kpi_card("R² Score", f"{metrics.get('r2_score', 0):.3f}", "straighten", color="green"), unsafe_allow_html=True)
     with m2:
-        st.markdown(kpi_card("RMSE", f"${metrics.get('rmse', 0):,.0f}", "📊", color="blue"), unsafe_allow_html=True)
+        st.markdown(kpi_card("RMSE", f"${metrics.get('rmse', 0):,.0f}", "", color="blue"), unsafe_allow_html=True)
     with m3:
-        st.markdown(kpi_card("MAE", f"${metrics.get('mae', 0):,.0f}", "📈", color="gold"), unsafe_allow_html=True)
+        st.markdown(kpi_card("MAE", f"${metrics.get('mae', 0):,.0f}", "", color="gold"), unsafe_allow_html=True)
 
 st.markdown("---")
 
-tab1, tab2 = st.tabs(["🔮 Individual Prediction", "📊 Portfolio CLV"])
+tab1, tab2 = st.tabs([":material/change_circle: Individual Prediction", ":material/business_center: Portfolio CLV"])
 
 with tab1:
     st.markdown("### Predict CLV for a Customer")
@@ -63,7 +64,7 @@ with tab1:
         credit_score = st.number_input("Credit Score", value=int(cust.get("credit_score", 700)), key="clv_cs")
         age = st.number_input("Age", value=int(cust.get("age", 40)), key="clv_age")
 
-    if st.button("💎 Predict CLV", type="primary", use_container_width=True):
+    if st.button("Predict CLV", icon=":material/insights:", type="primary", use_container_width=True):
         input_data = pd.DataFrame([{"income": income, "balance": balance, "credit_score": credit_score, "age": age}])
         input_features = input_data[[f for f in features if f in input_data.columns]]
 
@@ -72,13 +73,13 @@ with tab1:
 
         # Category
         if clv > 100000:
-            category = "🏆 Platinum"
+            category = "Platinum"
         elif clv > 50000:
-            category = "🥇 Gold"
+            category = "Gold"
         elif clv > 20000:
-            category = "🥈 Silver"
+            category = "Silver"
         else:
-            category = "🥉 Bronze"
+            category = "Bronze"
 
         st.markdown(f"""
         <div class="prediction-result animate-in">
@@ -90,13 +91,13 @@ with tab1:
 
         importance_df = get_feature_importance(model, features)
         if not importance_df.empty:
-            fig = create_horizontal_bar(importance_df, "importance", "feature", "📊 CLV Drivers")
+            fig = create_horizontal_bar(importance_df, "importance", "feature", "CLV Drivers")
             st.plotly_chart(fig, use_container_width=True)
 
 with tab2:
     st.markdown("### Portfolio CLV Analysis")
 
-    if st.button("🚀 Calculate CLV for All Customers", type="primary", use_container_width=True):
+    if st.button("Calculate CLV for All Customers", icon=":material/calculate:", type="primary", use_container_width=True):
         with st.spinner("Calculating..."):
             X = customers_df[features].fillna(0)
             clv_predictions = model.predict(X)
@@ -112,17 +113,17 @@ with tab2:
             # Summary
             s1, s2, s3 = st.columns(3)
             with s1:
-                st.markdown(kpi_card("Avg CLV", f"${result_df['estimated_clv'].mean():,.0f}", "💰", color="gold"), unsafe_allow_html=True)
+                st.markdown(kpi_card("Avg CLV", f"${result_df['estimated_clv'].mean():,.0f}", "", color="gold"), unsafe_allow_html=True)
             with s2:
-                st.markdown(kpi_card("Total CLV", f"${result_df['estimated_clv'].sum():,.0f}", "💎", color="purple"), unsafe_allow_html=True)
+                st.markdown(kpi_card("Total CLV", f"${result_df['estimated_clv'].sum():,.0f}", "insights", color="purple"), unsafe_allow_html=True)
             with s3:
-                st.markdown(kpi_card("Median CLV", f"${result_df['estimated_clv'].median():,.0f}", "📊", color="blue"), unsafe_allow_html=True)
+                st.markdown(kpi_card("Median CLV", f"${result_df['estimated_clv'].median():,.0f}", "", color="blue"), unsafe_allow_html=True)
 
-            fig = create_histogram(result_df, "estimated_clv", "💎 CLV Distribution", nbins=50)
+            fig = create_histogram(result_df, "estimated_clv", "CLV Distribution", nbins=50)
             st.plotly_chart(fig, use_container_width=True)
 
-            st.markdown("#### 🏆 Top 20 Highest CLV Customers")
+            st.markdown(f"#### {render_html_icon('star', size='20px')} Top 20 Highest CLV Customers", unsafe_allow_html=True)
             st.dataframe(result_df.head(20), use_container_width=True)
 
             csv = result_df.to_csv(index=False)
-            st.download_button("📥 Download CLV Report", csv, "clv_predictions.csv", "text/csv")
+            st.download_button("Download CLV Report", csv, "clv_predictions.csv", "text/csv", icon=":material/download:")

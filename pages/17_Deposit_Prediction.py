@@ -2,6 +2,7 @@
 Deposit Subscription Prediction Page — Random Forest Classifier.
 """
 import streamlit as st
+from utils.icons import render_html_icon, get_symbol_name
 import pandas as pd
 from authentication import check_auth, require_role
 from database import get_connection
@@ -14,7 +15,7 @@ if not user:
     st.switch_page("app.py")
 require_role("Deposit Prediction")
 
-st.markdown("# 🏦 Deposit Subscription Prediction")
+st.markdown(f"# {render_html_icon('savings', size='30px')} Deposit Subscription Prediction", unsafe_allow_html=True)
 st.markdown("Predict whether a customer will subscribe to a term deposit")
 st.markdown("---")
 
@@ -23,12 +24,12 @@ customers_df = pd.read_sql("SELECT * FROM customers", conn)
 conn.close()
 
 if customers_df.empty:
-    st.warning("⚠️ No customer data available.")
+    st.warning("No customer data available.", icon=":material/warning:")
     st.stop()
 
 model_data = load_model("deposit")
 if model_data is None:
-    with st.spinner("🤖 Training deposit model..."):
+    with st.spinner("Training deposit model..."):
         model_data, metrics = train_deposit_model(customers_df)
 
 model = model_data["model"]
@@ -38,17 +39,17 @@ metrics = model_data.get("metrics", {})
 if metrics:
     m1, m2, m3, m4 = st.columns(4)
     with m1:
-        st.markdown(kpi_card("Accuracy", f"{metrics.get('accuracy', 0):.1%}", "🎯", color="green"), unsafe_allow_html=True)
+        st.markdown(kpi_card("Accuracy", f"{metrics.get('accuracy', 0):.1%}", "track_changes", color="green"), unsafe_allow_html=True)
     with m2:
-        st.markdown(kpi_card("Precision", f"{metrics.get('precision', 0):.1%}", "🔍", color="blue"), unsafe_allow_html=True)
+        st.markdown(kpi_card("Precision", f"{metrics.get('precision', 0):.1%}", "search", color="blue"), unsafe_allow_html=True)
     with m3:
-        st.markdown(kpi_card("Recall", f"{metrics.get('recall', 0):.1%}", "📊", color="gold"), unsafe_allow_html=True)
+        st.markdown(kpi_card("Recall", f"{metrics.get('recall', 0):.1%}", "", color="gold"), unsafe_allow_html=True)
     with m4:
-        st.markdown(kpi_card("F1 Score", f"{metrics.get('f1_score', 0):.1%}", "⚡", color="teal"), unsafe_allow_html=True)
+        st.markdown(kpi_card("F1 Score", f"{metrics.get('f1_score', 0):.1%}", "bolt", color="teal"), unsafe_allow_html=True)
 
 st.markdown("---")
 
-tab1, tab2 = st.tabs(["🔮 Individual Prediction", "📊 Campaign Targeting"])
+tab1, tab2 = st.tabs([":material/change_circle: Individual Prediction", ":material/campaign: Campaign Targeting"])
 
 with tab1:
     st.markdown("### Predict Deposit Subscription")
@@ -66,7 +67,7 @@ with tab1:
         balance = st.number_input("Balance", value=float(cust.get("balance", 10000)), key="dp_balance")
         credit_score = st.number_input("Credit Score", value=int(cust.get("credit_score", 700)), key="dp_cs")
 
-    if st.button("🔮 Predict", type="primary", use_container_width=True):
+    if st.button("Predict", icon=":material/change_circle:", type="primary", use_container_width=True):
         input_data = pd.DataFrame([{"age": age, "income": income, "balance": balance, "credit_score": credit_score}])
         input_features = input_data[[f for f in features if f in input_data.columns]]
 
@@ -76,21 +77,21 @@ with tab1:
         yes_prob = probability[1] if len(probability) > 1 else probability[0]
 
         if prediction == 1:
-            st.markdown(prediction_result_card("Deposit Subscription", "✅ YES — Likely to Subscribe", yes_prob, "prediction-approved"), unsafe_allow_html=True)
+            st.markdown(prediction_result_card("Deposit Subscription", "YES — Likely to Subscribe", yes_prob, "prediction-approved"), unsafe_allow_html=True)
         else:
-            st.markdown(prediction_result_card("Deposit Subscription", "❌ NO — Unlikely to Subscribe", 1 - yes_prob, "prediction-rejected"), unsafe_allow_html=True)
+            st.markdown(prediction_result_card("Deposit Subscription", "NO — Unlikely to Subscribe", 1 - yes_prob, "prediction-rejected"), unsafe_allow_html=True)
 
         st.markdown(progress_bar_html(yes_prob * 100, label="Subscription Probability", color="#28A745" if prediction == 1 else "#DC3545"), unsafe_allow_html=True)
 
         importance_df = get_feature_importance(model, features)
         if not importance_df.empty:
-            fig = create_horizontal_bar(importance_df, "importance", "feature", "📊 Key Factors")
+            fig = create_horizontal_bar(importance_df, "importance", "feature", "Key Factors")
             st.plotly_chart(fig, use_container_width=True)
 
 with tab2:
     st.markdown("### Campaign Targeting — Find Likely Subscribers")
 
-    if st.button("🚀 Identify Target Customers", type="primary", use_container_width=True):
+    if st.button("Identify Target Customers", icon=":material/campaign:", type="primary", use_container_width=True):
         with st.spinner("Analyzing all customers..."):
             X = customers_df[features].fillna(0)
             predictions = model.predict(X)
@@ -106,20 +107,20 @@ with tab2:
 
             s1, s2, s3 = st.columns(3)
             with s1:
-                st.markdown(kpi_card("Likely Subscribers", f"{yes_count:,}", "✅", color="green"), unsafe_allow_html=True)
+                st.markdown(kpi_card("Likely Subscribers", f"{yes_count:,}", "", color="green"), unsafe_allow_html=True)
             with s2:
-                st.markdown(kpi_card("Unlikely", f"{no_count:,}", "❌", color="red"), unsafe_allow_html=True)
+                st.markdown(kpi_card("Unlikely", f"{no_count:,}", "cancel", color="red"), unsafe_allow_html=True)
             with s3:
                 conv_rate = round(yes_count / max(len(predictions), 1) * 100, 1)
-                st.markdown(kpi_card("Conversion Rate", f"{conv_rate}%", "📊", color="gold"), unsafe_allow_html=True)
+                st.markdown(kpi_card("Conversion Rate", f"{conv_rate}%", "", color="gold"), unsafe_allow_html=True)
 
             dist = result_df["will_subscribe"].value_counts().reset_index()
             dist.columns = ["response", "count"]
-            fig = create_pie_chart(dist, "response", "count", "📊 Subscription Prediction Distribution", hole=0.4)
+            fig = create_pie_chart(dist, "response", "count", "Subscription Prediction Distribution", hole=0.4)
             st.plotly_chart(fig, use_container_width=True)
 
-            st.markdown("#### 🎯 Top Campaign Targets")
+            st.markdown(f"#### {render_html_icon('campaign', size='20px')} Top Campaign Targets", unsafe_allow_html=True)
             st.dataframe(result_df[result_df["will_subscribe"] == "Yes"].head(30), use_container_width=True)
 
             csv = result_df.to_csv(index=False)
-            st.download_button("📥 Download Target List", csv, "deposit_targets.csv", "text/csv")
+            st.download_button("Download Target List", csv, "deposit_targets.csv", "text/csv", icon=":material/download:")

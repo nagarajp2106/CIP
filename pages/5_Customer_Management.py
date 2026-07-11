@@ -2,6 +2,7 @@
 Customer Management Page — Search, profile view, edit, delete, and history.
 """
 import streamlit as st
+from utils.icons import render_html_icon
 import pandas as pd
 from authentication import check_auth, require_role
 from database import get_connection
@@ -15,7 +16,7 @@ if not user:
     st.switch_page("app.py")
 require_role("Customer Management")
 
-st.markdown("# 👤 Customer Management")
+st.markdown(f"# {render_html_icon('group', size='30px')} Customer Management", unsafe_allow_html=True)
 st.markdown("Search, view, and manage customer profiles")
 st.markdown("---")
 
@@ -24,7 +25,7 @@ conn = get_connection()
 # ── Filters ──
 fc1, fc2, fc3, fc4 = st.columns(4)
 with fc1:
-    search = st.text_input("🔍 Search", placeholder="Name, ID, or email...")
+    search = st.text_input("Search", placeholder="Name, ID, or email...")
 with fc2:
     regions = ["All"] + pd.read_sql("SELECT DISTINCT region FROM customers ORDER BY region", conn)["region"].tolist()
     region_filter = st.selectbox("Region", regions)
@@ -63,16 +64,16 @@ conn.close()
 # ── Summary Stats ──
 s1, s2, s3, s4 = st.columns(4)
 with s1:
-    st.markdown(kpi_card("Results Found", f"{total:,}", "👥", color="blue"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Results Found", f"{total:,}", "", color="blue"), unsafe_allow_html=True)
 with s2:
     avg_income = df["income"].mean() if not df.empty else 0
-    st.markdown(kpi_card("Avg Income", f"${avg_income:,.0f}", "💵", color="green"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Avg Income", f"${avg_income:,.0f}", "", color="green"), unsafe_allow_html=True)
 with s3:
     avg_balance = df["balance"].mean() if not df.empty else 0
-    st.markdown(kpi_card("Avg Balance", f"${avg_balance:,.0f}", "🏦", color="gold"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Avg Balance", f"${avg_balance:,.0f}", "", color="gold"), unsafe_allow_html=True)
 with s4:
     avg_cs = df["credit_score"].mean() if not df.empty else 0
-    st.markdown(kpi_card("Avg Credit Score", f"{avg_cs:.0f}", "📊", color="teal"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Avg Credit Score", f"{avg_cs:.0f}", "", color="teal"), unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -130,7 +131,7 @@ with pc3:
 
 # ── Customer Profile Detail ──
 st.markdown("---")
-st.markdown("### 📋 Customer Profile")
+st.markdown(f"### {render_html_icon('person', size='22px')} Customer Profile", unsafe_allow_html=True)
 
 selected_id = st.selectbox(
     "Select Customer",
@@ -146,7 +147,7 @@ if selected_id:
     with p1:
         st.markdown(f"""
         <div class="kpi-card blue">
-            <h4 style="color:#1B2A4A; margin:0;">👤 {cust['name']}</h4>
+            <h4 style="color:#1B2A4A; margin:0; display:flex; align-items:center; gap:8px;">' + render_html_icon('person', size='22px', color='var(--primary)') + f'{cust['name']}</h4>
             <p style="margin:0.25rem 0; color:#6C757D;">ID: {cust['customer_id']}</p>
             <p style="margin:0; color:#6C757D;">Gender: {cust.get('gender', 'N/A')} · Age: {cust.get('age', 'N/A')}</p>
         </div>
@@ -173,7 +174,7 @@ if selected_id:
         """, unsafe_allow_html=True)
 
     # Customer History
-    with st.expander("📜 Transaction History"):
+    with st.expander(":material/history: Transaction History"):
         conn = get_connection()
         txn_df = pd.read_sql(
             "SELECT * FROM transactions WHERE customer_id = ? ORDER BY date DESC LIMIT 50",
@@ -185,7 +186,7 @@ if selected_id:
         else:
             st.info("No transactions found.")
 
-    with st.expander("🏦 Loan History"):
+    with st.expander(":material/account_balance: Loan History"):
         conn = get_connection()
         loan_df = pd.read_sql(
             "SELECT * FROM loans WHERE customer_id = ? ORDER BY applied_date DESC",
@@ -198,7 +199,7 @@ if selected_id:
             st.info("No loans found.")
 
     # Edit / Delete
-    with st.expander("✏️ Edit Customer"):
+    with st.expander(":material/edit: Edit Customer"):
         with st.form("edit_customer_form"):
             ec1, ec2 = st.columns(2)
             with ec1:
@@ -208,20 +209,20 @@ if selected_id:
                 new_balance = st.number_input("Balance", value=float(cust.get('balance', 0)))
                 new_branch = st.text_input("Branch", value=cust.get('branch', ''))
 
-            if st.form_submit_button("💾 Save Changes", type="primary"):
+            if st.form_submit_button("Save Changes", icon=":material/save:", type="primary"):
                 update_record("customers", "customer_id", selected_id, {
                     "income": new_income, "balance": new_balance,
                     "region": new_region, "branch": new_branch
                 })
-                st.success("✅ Customer updated!")
+                st.success("Customer updated!", icon=":material/check_circle:")
                 log_activity(user["user_id"], user["username"], "UPDATE_CUSTOMER", f"Updated {selected_id}")
                 st.rerun()
 
-    with st.expander("🗑️ Delete Customer"):
-        st.warning(f"⚠️ This will permanently delete customer **{cust['name']}** ({selected_id})")
+    with st.expander(":material/delete: Delete Customer"):
+        st.warning(f"This will permanently delete customer **{cust['name']}** ({selected_id})")
         if st.checkbox("I confirm deletion", key="confirm_cust_delete"):
-            if st.button("🗑️ Delete", type="primary"):
+            if st.button("Delete", icon=":material/delete:", type="primary"):
                 delete_record("customers", "customer_id", selected_id)
-                st.success("✅ Customer deleted!")
+                st.success("Customer deleted!", icon=":material/check_circle:")
                 log_activity(user["user_id"], user["username"], "DELETE_CUSTOMER", f"Deleted {selected_id}")
                 st.rerun()

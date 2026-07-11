@@ -12,6 +12,7 @@ from utils.auth import (
 from utils.database_utils import backup_database, get_table_stats
 from utils.visualization import kpi_card
 from config import ROLES
+from utils.icons import render_html_icon
 
 # ── Auth ──
 user = check_auth()
@@ -19,11 +20,11 @@ if not user:
     st.switch_page("app.py")
 require_role("Admin")
 
-st.markdown("# ⚙️ Admin Panel")
+st.markdown(f"# {render_html_icon('admin_panel_settings', size='30px')} Admin Panel", unsafe_allow_html=True)
 st.markdown("System administration, user management, and monitoring")
 st.markdown("---")
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["👥 Users", "📋 Audit Logs", "💾 Backup", "📊 Statistics", "🕐 Activity"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs([":material/group: Users", ":material/description: Audit Logs", ":material/save: Backup", ":material/analytics: Statistics", ":material/schedule: Activity"])
 
 # ── Tab 1: User Management ──
 with tab1:
@@ -34,13 +35,13 @@ with tab1:
     # Summary
     s1, s2, s3 = st.columns(3)
     with s1:
-        st.markdown(kpi_card("Total Users", f"{len(users)}", "👥", color="blue"), unsafe_allow_html=True)
+        st.markdown(kpi_card("Total Users", f"{len(users)}", "", color="blue"), unsafe_allow_html=True)
     with s2:
         active = sum(1 for u in users if u.get("is_active"))
-        st.markdown(kpi_card("Active Users", f"{active}", "✅", color="green"), unsafe_allow_html=True)
+        st.markdown(kpi_card("Active Users", f"{active}", "", color="green"), unsafe_allow_html=True)
     with s3:
         roles_count = len(set(u["role"] for u in users))
-        st.markdown(kpi_card("Roles Used", f"{roles_count}", "🏷️", color="gold"), unsafe_allow_html=True)
+        st.markdown(kpi_card("Roles Used", f"{roles_count}", "", color="gold"), unsafe_allow_html=True)
 
     st.markdown("---")
 
@@ -76,7 +77,7 @@ with tab1:
 
     # Create new user
     st.markdown("---")
-    with st.expander("➕ Create New User"):
+    with st.expander(":material/person_add: Create New User"):
         with st.form("create_user_form", clear_on_submit=True):
             nc1, nc2 = st.columns(2)
             with nc1:
@@ -87,19 +88,19 @@ with tab1:
                 new_fullname = st.text_input("Full Name")
                 new_role = st.selectbox("Role", list(ROLES.keys()), format_func=lambda x: ROLES[x])
 
-            if st.form_submit_button("➕ Create User", type="primary", use_container_width=True):
+            if st.form_submit_button("Create User", icon=":material/person_add:", type="primary", use_container_width=True):
                 if new_username and new_password and new_fullname:
                     if create_user(new_username, new_password, new_fullname, new_email, new_role):
-                        st.success(f"✅ User '{new_username}' created!")
+                        st.success(f"User '{new_username}' created!")
                         log_activity(user["user_id"], user["username"], "CREATE_USER", f"Created user {new_username}")
                         st.rerun()
                     else:
-                        st.error("❌ Username already exists.")
+                        st.error("Username already exists.", icon=":material/cancel:")
                 else:
-                    st.warning("⚠️ Please fill in all required fields.")
+                    st.warning("Please fill in all required fields.", icon=":material/warning:")
 
     # Edit / Reset / Delete
-    with st.expander("✏️ Edit User"):
+    with st.expander(":material/edit: Edit User"):
         if users:
             edit_user = st.selectbox("Select User", users,
                 format_func=lambda u: f"{u['username']} ({ROLES.get(u['role'], u['role'])})", key="edit_select")
@@ -117,30 +118,30 @@ with tab1:
 
                 bc1, bc2 = st.columns(2)
                 with bc1:
-                    if st.button("💾 Save Changes", type="primary", use_container_width=True):
+                    if st.button("Save Changes", icon=":material/save:", type="primary", use_container_width=True):
                         update_user(edit_user["id"], full_name=edit_name, email=edit_email,
                                    role=edit_role, is_active=1 if edit_active else 0)
-                        st.success("✅ User updated!")
+                        st.success("User updated!", icon=":material/check_circle:")
                         log_activity(user["user_id"], user["username"], "UPDATE_USER", f"Updated {edit_user['username']}")
                         st.rerun()
                 with bc2:
                     new_pw = st.text_input("New Password", type="password", key="reset_pw")
-                    if st.button("🔑 Reset Password", use_container_width=True):
+                    if st.button("Reset Password", icon=":material/vpn_key:", use_container_width=True):
                         if new_pw:
                             reset_password(edit_user["id"], new_pw)
-                            st.success("✅ Password reset!")
+                            st.success("Password reset!", icon=":material/check_circle:")
                             log_activity(user["user_id"], user["username"], "RESET_PASSWORD", f"Reset password for {edit_user['username']}")
 
-    with st.expander("🗑️ Delete User"):
+    with st.expander(":material/delete: Delete User"):
         if users:
             del_user = st.selectbox("Select User to Deactivate", users,
                 format_func=lambda u: f"{u['username']} ({ROLES.get(u['role'], u['role'])})", key="del_select")
             if del_user:
-                st.warning(f"⚠️ This will deactivate user **{del_user['username']}**")
+                st.warning(f"This will deactivate user **{del_user['username']}**")
                 if st.checkbox("I confirm deactivation", key="confirm_del_user"):
-                    if st.button("🗑️ Deactivate User", type="primary"):
+                    if st.button("Deactivate User", icon=":material/delete:", type="primary"):
                         delete_user(del_user["id"])
-                        st.success("✅ User deactivated!")
+                        st.success("User deactivated!", icon=":material/check_circle:")
                         log_activity(user["user_id"], user["username"], "DELETE_USER", f"Deactivated {del_user['username']}")
                         st.rerun()
 
@@ -148,7 +149,7 @@ with tab1:
 with tab2:
     st.markdown("### Audit Logs")
 
-    search = st.text_input("🔍 Search logs", placeholder="Search by username, action, or details...")
+    search = st.text_input("Search logs", placeholder="Search by username, action, or details...")
 
     if "audit_page" not in st.session_state:
         st.session_state["audit_page"] = 0
@@ -179,14 +180,14 @@ with tab3:
     st.markdown("### Database Backup")
     st.markdown(f"**Database Size:** {get_db_size()}")
 
-    if st.button("💾 Create Backup", type="primary", use_container_width=True):
+    if st.button("Create Backup", icon=":material/save:", type="primary", use_container_width=True):
         with st.spinner("Creating backup..."):
             backup_path = backup_database()
-            st.success(f"✅ Backup created: `{backup_path}`")
+            st.success(f"Backup created: `{backup_path}`")
             log_activity(user["user_id"], user["username"], "DATABASE_BACKUP", f"Backup created at {backup_path}")
 
             with open(backup_path, "rb") as f:
-                st.download_button("📥 Download Backup", f, "banking_backup.db", "application/octet-stream")
+                st.download_button("Download Backup", f, "banking_backup.db", "application/octet-stream", icon=":material/download:")
 
 # ── Tab 4: System Statistics ──
 with tab4:
@@ -213,13 +214,20 @@ with tab5:
     logs, _ = get_audit_logs(limit=20)
     if logs:
         for log in logs:
-            icon = {"LOGIN": "🔑", "LOGOUT": "🚪", "CREATE_USER": "➕", "UPDATE_USER": "✏️",
-                    "DELETE_USER": "🗑️", "DATA_UPLOAD": "📤", "REPORT_GENERATED": "📑",
-                    "DATABASE_BACKUP": "💾"}.get(log["action"], "📝")
+            icon = {
+                "LOGIN": render_html_icon("vpn_key", size="18px", color="var(--primary)"),
+                "LOGOUT": render_html_icon("logout", size="18px", color="var(--primary)"),
+                "CREATE_USER": render_html_icon("person_add", size="18px", color="var(--primary)"),
+                "UPDATE_USER": render_html_icon("edit", size="18px", color="var(--primary)"),
+                "DELETE_USER": render_html_icon("delete", size="18px", color="var(--primary)"),
+                "DATA_UPLOAD": render_html_icon("upload_file", size="18px", color="var(--primary)"),
+                "REPORT_GENERATED": render_html_icon("description", size="18px", color="var(--primary)"),
+                "DATABASE_BACKUP": render_html_icon("save", size="18px", color="var(--primary)")
+            }.get(log["action"], render_html_icon("description", size="18px", color="var(--primary)"))
 
             st.markdown(f"""
-            <div style="padding: 0.5rem 1rem; margin: 0.25rem 0; background: #F8F9FA; border-radius: 6px; border-left: 3px solid #2E86AB;">
-                <span style="font-size: 1.1rem;">{icon}</span>
+            <div style="padding: 0.5rem 1rem; margin: 0.25rem 0; background: #F8F9FA; border-radius: 6px; border-left: 3px solid #2E86AB; display: flex; align-items: center; gap: 8px;">
+                <span>{icon}</span>
                 <strong>{log['username']}</strong> · {log['action']} · <span style="color:#6C757D;">{log['timestamp']}</span>
                 {f" · {log['details']}" if log.get('details') else ""}
             </div>

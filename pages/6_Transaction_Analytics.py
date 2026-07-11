@@ -2,6 +2,7 @@
 Transaction Analytics Page — KPIs, charts, and transaction insights.
 """
 import streamlit as st
+from utils.icons import render_html_icon
 import pandas as pd
 import numpy as np
 from authentication import check_auth, require_role
@@ -17,7 +18,7 @@ if not user:
     st.switch_page("app.py")
 require_role("Transaction Analytics")
 
-st.markdown("# 💳 Transaction Analytics")
+st.markdown(f"# {render_html_icon('credit_card', size='30px')} Transaction Analytics", unsafe_allow_html=True)
 st.markdown("Comprehensive analysis of banking transactions")
 st.markdown("---")
 
@@ -25,7 +26,7 @@ conn = get_connection()
 txn_df = pd.read_sql("SELECT * FROM transactions", conn)
 
 if txn_df.empty:
-    st.warning("⚠️ No transaction data available.")
+    st.warning("No transaction data available.", icon=":material/warning:")
     conn.close()
     st.stop()
 
@@ -42,13 +43,13 @@ min_txn = txn_df["amount"].min()
 
 k1, k2, k3, k4 = st.columns(4)
 with k1:
-    st.markdown(kpi_card("Average Transaction", f"${avg_txn:,.2f}", "📊", color="blue"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Average Transaction", f"${avg_txn:,.2f}", "", color="blue"), unsafe_allow_html=True)
 with k2:
-    st.markdown(kpi_card("Monthly Volume", f"{monthly_vol:,.0f}", "📈", color="gold"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Monthly Volume", f"{monthly_vol:,.0f}", "", color="gold"), unsafe_allow_html=True)
 with k3:
-    st.markdown(kpi_card("Highest Transaction", f"${max_txn:,.2f}", "🔝", color="green"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Highest Transaction", f"${max_txn:,.2f}", "", color="green"), unsafe_allow_html=True)
 with k4:
-    st.markdown(kpi_card("Lowest Transaction", f"${min_txn:,.2f}", "🔻", color="teal"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Lowest Transaction", f"${min_txn:,.2f}", "", color="teal"), unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -58,11 +59,11 @@ c1, c2 = st.columns(2)
 
 with c1:
     monthly = txn_df.groupby("month").agg(count=("amount", "size"), total=("amount", "sum")).reset_index()
-    fig = create_bar_chart(monthly, "month", "count", "📊 Monthly Transaction Count")
+    fig = create_bar_chart(monthly, "month", "count", "Monthly Transaction Count")
     st.plotly_chart(fig, use_container_width=True)
 
 with c2:
-    fig = create_area_chart(monthly, "month", "total", "📈 Transaction Volume (Amount)")
+    fig = create_area_chart(monthly, "month", "total", "Transaction Volume (Amount)")
     st.plotly_chart(fig, use_container_width=True)
 
 # Row 2: Deposit Trend & Withdrawal Trend
@@ -70,12 +71,12 @@ c3, c4 = st.columns(2)
 
 with c3:
     deposits = txn_df[txn_df["type"] == "Deposit"].groupby("month")["amount"].sum().reset_index()
-    fig = create_line_chart(deposits, "month", "amount", "💰 Deposit Trend")
+    fig = create_line_chart(deposits, "month", "amount", "Deposit Trend")
     st.plotly_chart(fig, use_container_width=True)
 
 with c4:
     withdrawals = txn_df[txn_df["type"] == "Withdrawal"].groupby("month")["amount"].sum().reset_index()
-    fig = create_line_chart(withdrawals, "month", "amount", "💸 Withdrawal Trend")
+    fig = create_line_chart(withdrawals, "month", "amount", "Withdrawal Trend")
     st.plotly_chart(fig, use_container_width=True)
 
 # Row 3: Branch Transactions & Payment Channel
@@ -88,12 +89,12 @@ with c5:
     branch_summary = branch_txn.groupby("branch")["amount"].agg(["count", "sum"]).reset_index()
     branch_summary.columns = ["branch", "count", "total"]
     branch_summary = branch_summary.sort_values("count", ascending=False).head(10)
-    fig = create_bar_chart(branch_summary, "branch", "count", "🏢 Branch Transaction Count")
+    fig = create_bar_chart(branch_summary, "branch", "count", "Branch Transaction Count")
     st.plotly_chart(fig, use_container_width=True)
 
 with c6:
     channel = txn_df.groupby("channel")["amount"].size().reset_index(name="count")
-    fig = create_pie_chart(channel, "channel", "count", "📱 Payment Channel Distribution")
+    fig = create_pie_chart(channel, "channel", "count", "Payment Channel Distribution")
     st.plotly_chart(fig, use_container_width=True)
 
 # Row 4: Merchant Analysis & Transaction Heatmap
@@ -104,7 +105,7 @@ with c7:
     merchant_df.columns = ["merchant", "count", "total"]
     merchant_df = merchant_df.sort_values("total", ascending=False).head(15)
     if not merchant_df.empty:
-        fig = create_bar_chart(merchant_df, "merchant", "total", "🏪 Top Merchants by Amount", orientation="v")
+        fig = create_bar_chart(merchant_df, "merchant", "total", "Top Merchants by Amount", orientation="v")
         st.plotly_chart(fig, use_container_width=True)
 
 with c8:
@@ -116,7 +117,7 @@ with c8:
     available_days = [d for d in days_order if d in pivot.index]
     if available_days:
         pivot = pivot.reindex(available_days)
-        fig = create_heatmap(pivot.values, pivot.columns.tolist(), pivot.index.tolist(), "🗓️ Transaction Heatmap")
+        fig = create_heatmap(pivot.values, pivot.columns.tolist(), pivot.index.tolist(), "Transaction Heatmap")
         st.plotly_chart(fig, use_container_width=True)
 
 conn.close()

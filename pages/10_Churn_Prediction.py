@@ -2,6 +2,7 @@
 Churn Prediction Page — Random Forest classifier for customer retention.
 """
 import streamlit as st
+from utils.icons import render_html_icon, get_symbol_name
 import pandas as pd
 import numpy as np
 from authentication import check_auth, require_role
@@ -15,7 +16,7 @@ if not user:
     st.switch_page("app.py")
 require_role("Churn Prediction")
 
-st.markdown("# 📉 Customer Churn Prediction")
+st.markdown(f"# {render_html_icon('change_circle', size='30px')} Customer Churn Prediction", unsafe_allow_html=True)
 st.markdown("Predict which customers are likely to leave using Random Forest")
 st.markdown("---")
 
@@ -24,17 +25,17 @@ customers_df = pd.read_sql("SELECT * FROM customers", conn)
 conn.close()
 
 if customers_df.empty:
-    st.warning("⚠️ No customer data available.")
+    st.warning("No customer data available.", icon=":material/warning:")
     st.stop()
 
 # Load or train model
 model_data = load_model("churn")
 if model_data is None:
-    with st.spinner("🤖 Training churn model..."):
+    with st.spinner("Training churn model..."):
         model_data, metrics = train_churn_model(customers_df)
 
 if model_data is None:
-    st.error("❌ Failed to train churn model.")
+    st.error("Failed to train churn model.", icon=":material/cancel:")
     st.stop()
 
 model = model_data["model"]
@@ -45,17 +46,17 @@ metrics = model_data.get("metrics", {})
 if metrics:
     m1, m2, m3, m4 = st.columns(4)
     with m1:
-        st.markdown(kpi_card("Accuracy", f"{metrics.get('accuracy', 0):.1%}", "🎯", color="green"), unsafe_allow_html=True)
+        st.markdown(kpi_card("Accuracy", f"{metrics.get('accuracy', 0):.1%}", "track_changes", color="green"), unsafe_allow_html=True)
     with m2:
-        st.markdown(kpi_card("Precision", f"{metrics.get('precision', 0):.1%}", "🔍", color="blue"), unsafe_allow_html=True)
+        st.markdown(kpi_card("Precision", f"{metrics.get('precision', 0):.1%}", "search", color="blue"), unsafe_allow_html=True)
     with m3:
-        st.markdown(kpi_card("Recall", f"{metrics.get('recall', 0):.1%}", "📊", color="gold"), unsafe_allow_html=True)
+        st.markdown(kpi_card("Recall", f"{metrics.get('recall', 0):.1%}", "", color="gold"), unsafe_allow_html=True)
     with m4:
-        st.markdown(kpi_card("F1 Score", f"{metrics.get('f1_score', 0):.1%}", "⚡", color="teal"), unsafe_allow_html=True)
+        st.markdown(kpi_card("F1 Score", f"{metrics.get('f1_score', 0):.1%}", "bolt", color="teal"), unsafe_allow_html=True)
 
 st.markdown("---")
 
-tab1, tab2 = st.tabs(["🔮 Individual Prediction", "📊 Batch Prediction"])
+tab1, tab2 = st.tabs([":material/change_circle: Individual Prediction", ":material/dataset: Batch Prediction"])
 
 with tab1:
     st.markdown("### Predict Churn for a Customer")
@@ -77,7 +78,7 @@ with tab1:
         balance = st.number_input("Balance", value=float(cust.get("balance", 10000)))
         credit_score = st.number_input("Credit Score", value=int(cust.get("credit_score", 700)), min_value=300, max_value=850)
 
-    if st.button("🔮 Predict Churn", type="primary", use_container_width=True):
+    if st.button("Predict Churn", icon=":material/change_circle:", type="primary", use_container_width=True):
         input_data = pd.DataFrame([{
             "age": age, "income": income, "balance": balance, "credit_score": credit_score
         }])
@@ -92,9 +93,9 @@ with tab1:
 
         # Result card
         if prediction == 0:
-            st.markdown(prediction_result_card("Churn Prediction", "✅ STAY", stay_prob, "prediction-approved"), unsafe_allow_html=True)
+            st.markdown(prediction_result_card("Churn Prediction", "STAY", stay_prob, "prediction-approved"), unsafe_allow_html=True)
         else:
-            st.markdown(prediction_result_card("Churn Prediction", "⚠️ LIKELY TO LEAVE", churn_prob, "prediction-rejected"), unsafe_allow_html=True)
+            st.markdown(prediction_result_card("Churn Prediction", "LIKELY TO LEAVE", churn_prob, "prediction-rejected"), unsafe_allow_html=True)
 
         # Probability bars
         r1, r2 = st.columns(2)
@@ -106,7 +107,7 @@ with tab1:
         # Feature importance
         importance_df = get_feature_importance(model, features)
         if not importance_df.empty:
-            st.markdown("#### 📊 Key Factors")
+            st.markdown(f"#### {render_html_icon('analytics', size='20px')} Key Factors", unsafe_allow_html=True)
             fig = create_horizontal_bar(importance_df.head(10), "importance", "feature", "Feature Importance")
             st.plotly_chart(fig, use_container_width=True)
 
@@ -114,7 +115,7 @@ with tab2:
     st.markdown("### Batch Churn Prediction")
     st.markdown("Run churn prediction on all customers")
 
-    if st.button("🚀 Run Batch Prediction", type="primary", use_container_width=True):
+    if st.button("Run Batch Prediction", icon=":material/bolt:", type="primary", use_container_width=True):
         with st.spinner("Predicting churn for all customers..."):
             X = customers_df[features].fillna(0)
             predictions = model.predict(X)
@@ -133,12 +134,12 @@ with tab2:
 
             s1, s2, s3 = st.columns(3)
             with s1:
-                st.markdown(kpi_card("At Risk", f"{churn_count:,}", "⚠️", color="red"), unsafe_allow_html=True)
+                st.markdown(kpi_card("At Risk", f"{churn_count:,}", "", color="red"), unsafe_allow_html=True)
             with s2:
-                st.markdown(kpi_card("Stable", f"{stay_count:,}", "✅", color="green"), unsafe_allow_html=True)
+                st.markdown(kpi_card("Stable", f"{stay_count:,}", "", color="green"), unsafe_allow_html=True)
             with s3:
                 churn_pct = round(churn_count / max(len(predictions), 1) * 100, 1)
-                st.markdown(kpi_card("Churn Rate", f"{churn_pct}%", "📊", color="gold"), unsafe_allow_html=True)
+                st.markdown(kpi_card("Churn Rate", f"{churn_pct}%", "", color="gold"), unsafe_allow_html=True)
 
             st.markdown("#### High-Risk Customers")
             high_risk = result_df[result_df["churn_prediction"] == "Churn"].head(20)
@@ -146,4 +147,4 @@ with tab2:
 
             # Download
             csv = result_df.to_csv(index=False)
-            st.download_button("📥 Download Results", csv, "churn_predictions.csv", "text/csv")
+            st.download_button("Download Results", csv, "churn_predictions.csv", "text/csv", icon=":material/download:")

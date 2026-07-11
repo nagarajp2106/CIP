@@ -11,6 +11,7 @@ from database import get_connection
 from utils.visualization import kpi_card
 from utils.auth import log_activity
 from config import REPORTS_DIR
+from utils.icons import render_html_icon
 
 # ── Auth ──
 user = check_auth()
@@ -18,7 +19,7 @@ if not user:
     st.switch_page("app.py")
 require_role("Reports")
 
-st.markdown("# 📑 Reports")
+st.markdown(f"# {render_html_icon('description', size='30px')} Reports", unsafe_allow_html=True)
 st.markdown("Generate and export professional banking reports")
 st.markdown("---")
 
@@ -36,7 +37,7 @@ REPORT_TYPES = {
 selected_report = st.selectbox("Select Report Type", list(REPORT_TYPES.keys()))
 report_config = REPORT_TYPES[selected_report]
 
-st.info(f"📋 **{selected_report}**: {report_config['description']}")
+st.info(f"**{selected_report}**: {report_config['description']}")
 
 # ── Configuration ──
 c1, c2 = st.columns(2)
@@ -48,7 +49,7 @@ with c2:
 # ── Generate Report ──
 st.markdown("---")
 
-if st.button("📊 Generate Report", type="primary", use_container_width=True):
+if st.button("Generate Report", type="primary", use_container_width=True):
     with st.spinner("Generating report..."):
         conn = get_connection()
 
@@ -83,7 +84,7 @@ if st.button("📊 Generate Report", type="primary", use_container_width=True):
         conn.close()
 
         # ── Preview ──
-        st.markdown("### 📋 Report Preview")
+        st.markdown(f"### {render_html_icon('description', size='22px')} Report Preview", unsafe_allow_html=True)
         st.markdown(f"**Records:** {len(df)} | **Columns:** {len(df.columns)}")
         st.dataframe(df.head(50), use_container_width=True)
 
@@ -107,7 +108,7 @@ if st.button("📊 Generate Report", type="primary", use_container_width=True):
 
             buffer.seek(0)
             st.download_button(
-                "📥 Download Excel Report",
+                "Download Excel Report",
                 buffer,
                 f"{filename}.xlsx",
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -156,15 +157,15 @@ if st.button("📊 Generate Report", type="primary", use_container_width=True):
                 buffer.seek(0)
 
                 st.download_button(
-                    "📥 Download PDF Report",
+                    "Download PDF Report",
                     buffer,
                     f"{filename}.pdf",
                     "application/pdf",
                     use_container_width=True
                 )
             except ImportError:
-                st.error("❌ ReportLab not installed. Please install it: `pip install reportlab`")
+                st.error("ReportLab not installed. Please install it: `pip install reportlab`", icon=":material/cancel:")
 
         # Log activity
         log_activity(user["user_id"], user["username"], "REPORT_GENERATED", f"Generated {selected_report} ({export_format})")
-        st.success(f"✅ Report generated successfully!")
+        st.success(f"Report generated successfully!")

@@ -2,6 +2,7 @@
 Data Preprocessing Page — Cleaning, feature engineering, encoding, and scaling.
 """
 import streamlit as st
+from utils.icons import render_html_icon
 import pandas as pd
 from authentication import check_auth, require_role
 from database import get_connection
@@ -18,7 +19,7 @@ if not user:
     st.switch_page("app.py")
 require_role("Data Preprocessing")
 
-st.markdown("# 🔧 Data Preprocessing")
+st.markdown(f"# {render_html_icon('build', size='30px')} Data Preprocessing", unsafe_allow_html=True)
 st.markdown("Clean, transform, and engineer features from banking data")
 st.markdown("---")
 
@@ -29,10 +30,10 @@ transactions_df = pd.read_sql("SELECT * FROM transactions", conn)
 conn.close()
 
 if customers_df.empty:
-    st.warning("⚠️ No customer data available. Please upload data first.")
+    st.warning("No customer data available. Please upload data first.", icon=":material/warning:")
     st.stop()
 
-tab1, tab2, tab3, tab4 = st.tabs(["🧹 Auto Clean", "⚙️ Feature Engineering", "🔤 Encoding", "📏 Scaling"])
+tab1, tab2, tab3, tab4 = st.tabs([":material/cleaning_services: Auto Clean", ":material/settings: Feature Engineering", ":material/font_download: Encoding", ":material/straighten: Scaling"])
 
 # ── Tab 1: Auto Cleaning ──
 with tab1:
@@ -53,16 +54,16 @@ with tab1:
         total_missing = sum(v["count"] for v in quality["missing"].values())
         st.metric("Missing Values", total_missing)
 
-    if st.button("🧹 Run Auto-Clean", type="primary", use_container_width=True):
+    if st.button("Run Auto-Clean", type="primary", use_container_width=True):
         with st.spinner("Cleaning data..."):
             cleaned_df, report = clean_data(customers_df)
 
             st.markdown("#### Cleaning Report")
             if report["actions"]:
                 for action in report["actions"]:
-                    st.info(f"✅ {action}")
+                    st.info(f"{action}")
             else:
-                st.success("✨ Data is already clean — no actions needed!")
+                st.success("Data is already clean — no actions needed!")
 
             c1, c2 = st.columns(2)
             with c1:
@@ -90,7 +91,7 @@ with tab2:
         default=["All Features"]
     )
 
-    if st.button("⚙️ Generate Features", type="primary", use_container_width=True):
+    if st.button("Generate Features", icon=":material/settings:", type="primary", use_container_width=True):
         with st.spinner("Engineering features..."):
             result_df = source_df.copy()
 
@@ -110,7 +111,7 @@ with tab2:
                     result_df = calculate_customer_value_score(result_df)
 
             new_cols = [c for c in result_df.columns if c not in source_df.columns]
-            st.success(f"✅ Generated {len(new_cols)} new features: {', '.join(new_cols)}")
+            st.success(f"Generated {len(new_cols)} new features: {', '.join(new_cols)}")
 
             st.markdown("#### Preview with New Features")
             st.dataframe(result_df.head(50), use_container_width=True)
@@ -130,12 +131,12 @@ with tab3:
         method = st.radio("Encoding Method", ["Label Encoding", "One-Hot Encoding"])
         selected_cols = st.multiselect("Select Columns to Encode", cat_cols, default=cat_cols[:3])
 
-        if selected_cols and st.button("🔤 Apply Encoding", type="primary"):
+        if selected_cols and st.button("Apply Encoding", icon=":material/font_download:", type="primary"):
             with st.spinner("Encoding..."):
                 enc_method = "label" if method == "Label Encoding" else "onehot"
                 encoded_df, encoders = encode_features(source_df, enc_method, selected_cols)
 
-                st.success(f"✅ {method} applied to {len(selected_cols)} columns")
+                st.success(f"{method} applied to {len(selected_cols)} columns")
                 st.dataframe(encoded_df.head(50), use_container_width=True)
                 st.session_state["preprocessed_df"] = encoded_df
 
@@ -152,12 +153,12 @@ with tab4:
         method = st.radio("Scaling Method", ["StandardScaler", "MinMaxScaler"])
         selected_cols = st.multiselect("Select Columns to Scale", num_cols, default=num_cols[:4])
 
-        if selected_cols and st.button("📏 Apply Scaling", type="primary"):
+        if selected_cols and st.button("Apply Scaling", icon=":material/straighten:", type="primary"):
             with st.spinner("Scaling..."):
                 sc_method = "standard" if method == "StandardScaler" else "minmax"
                 scaled_df, scaler = scale_features(source_df, sc_method, selected_cols)
 
-                st.success(f"✅ {method} applied to {len(selected_cols)} columns")
+                st.success(f"{method} applied to {len(selected_cols)} columns")
 
                 before_after = pd.DataFrame({
                     "Column": selected_cols,

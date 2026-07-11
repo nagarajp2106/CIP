@@ -2,6 +2,7 @@
 AI Business Insights Page — Auto-generated data-driven insights.
 """
 import streamlit as st
+from utils.icons import render_html_icon, get_symbol_name
 import pandas as pd
 import numpy as np
 from authentication import check_auth, require_role
@@ -14,7 +15,7 @@ if not user:
     st.switch_page("app.py")
 require_role("AI Business Insights")
 
-st.markdown("# 🧠 AI Business Insights")
+st.markdown(f"# {render_html_icon('smart_toy', size='30px')} AI Business Insights", unsafe_allow_html=True)
 st.markdown("Automatically generated data-driven insights for strategic decision making")
 st.markdown("---")
 
@@ -26,7 +27,7 @@ accounts_df = pd.read_sql("SELECT * FROM accounts", conn)
 conn.close()
 
 if customers_df.empty:
-    st.warning("⚠️ No data available for insight generation.")
+    st.warning("No data available for insight generation.", icon=":material/warning:")
     st.stop()
 
 
@@ -39,7 +40,7 @@ def generate_insights() -> list[dict]:
     active_pct = customers_df["is_active"].mean() * 100
     churn_pct = 100 - active_pct
     insights.append({
-        "icon": "📉", "category": "Customer",
+        "icon": "", "category": "Customer",
         "text": f"Customer churn rate is **{churn_pct:.1f}%**. {'This is within acceptable limits.' if churn_pct < 10 else 'Immediate retention strategies are recommended.'}",
         "severity": "info" if churn_pct < 10 else "warning"
     })
@@ -48,7 +49,7 @@ def generate_insights() -> list[dict]:
     high_income = customers_df[customers_df["income"] > customers_df["income"].quantile(0.75)]
     high_income_churn = (1 - high_income["is_active"].mean()) * 100
     insights.append({
-        "icon": "💰", "category": "Customer",
+        "icon": "", "category": "Customer",
         "text": f"High-income customers (top 25%) have a **{high_income_churn:.1f}%** churn rate. {'They show strong loyalty.' if high_income_churn < 5 else 'Consider premium retention programs.'}",
         "severity": "success" if high_income_churn < 5 else "warning"
     })
@@ -57,7 +58,7 @@ def generate_insights() -> list[dict]:
     age_deposit = customers_df.groupby(pd.cut(customers_df["age"], bins=[0, 30, 45, 60, 100], labels=["18-30", "31-45", "46-60", "60+"]))["balance"].mean()
     top_age_group = age_deposit.idxmax()
     insights.append({
-        "icon": "👤", "category": "Customer",
+        "icon": "", "category": "Customer",
         "text": f"Customers aged **{top_age_group}** hold the highest average balance of **${age_deposit.max():,.0f}**. Target this segment for premium products.",
         "severity": "info"
     })
@@ -71,7 +72,7 @@ def generate_insights() -> list[dict]:
             previous = monthly_revenue.iloc[-2]
             growth = ((recent - previous) / max(previous, 1)) * 100
             insights.append({
-                "icon": "📈", "category": "Revenue",
+                "icon": "", "category": "Revenue",
                 "text": f"Monthly transaction volume {'increased' if growth > 0 else 'decreased'} by **{abs(growth):.1f}%**. {'Strong growth trajectory.' if growth > 5 else 'Revenue growth needs attention.' if growth < -5 else 'Stable performance.'}",
                 "severity": "success" if growth > 5 else "warning" if growth < -5 else "info"
             })
@@ -81,7 +82,7 @@ def generate_insights() -> list[dict]:
         withdrawals = transactions_df[transactions_df["type"] == "Withdrawal"]["amount"].sum()
         ratio = deposits / max(withdrawals, 1)
         insights.append({
-            "icon": "💵", "category": "Revenue",
+            "icon": "", "category": "Revenue",
             "text": f"Deposit-to-withdrawal ratio is **{ratio:.2f}x**. {'Healthy liquidity position.' if ratio > 1.2 else 'Monitor liquidity carefully.'}",
             "severity": "success" if ratio > 1.2 else "warning"
         })
@@ -91,7 +92,7 @@ def generate_insights() -> list[dict]:
     # High-risk customers
     high_risk = customers_df[customers_df["risk_level"] == "High"]
     insights.append({
-        "icon": "⚠️", "category": "Risk",
+        "icon": "", "category": "Risk",
         "text": f"**{len(high_risk):,}** customers ({len(high_risk)/max(len(customers_df),1)*100:.1f}%) are classified as **High Risk**. Additional verification and monitoring recommended.",
         "severity": "warning" if len(high_risk) > len(customers_df) * 0.15 else "info"
     })
@@ -101,7 +102,7 @@ def generate_insights() -> list[dict]:
         approved = loans_df[loans_df["status"].isin(["Active", "Closed"])]
         approval_rate = len(approved) / max(len(loans_df), 1) * 100
         insights.append({
-            "icon": "🏦", "category": "Operations",
+            "icon": "", "category": "Operations",
             "text": f"Loan approval rate is **{approval_rate:.1f}%**. {'Strong lending performance.' if approval_rate > 70 else 'Review underwriting criteria.'}",
             "severity": "success" if approval_rate > 70 else "info"
         })
@@ -110,7 +111,7 @@ def generate_insights() -> list[dict]:
         top_loan = loans_df.groupby("loan_type")["loan_amount"].sum().idxmax()
         top_loan_amt = loans_df.groupby("loan_type")["loan_amount"].sum().max()
         insights.append({
-            "icon": "📊", "category": "Operations",
+            "icon": "", "category": "Operations",
             "text": f"**{top_loan}** is the most popular loan product with total disbursement of **${top_loan_amt:,.0f}**.",
             "severity": "info"
         })
@@ -118,7 +119,7 @@ def generate_insights() -> list[dict]:
         # Default analysis
         default_rate = len(loans_df[loans_df["status"] == "Defaulted"]) / max(len(loans_df), 1) * 100
         insights.append({
-            "icon": "🔴", "category": "Risk",
+            "icon": "warning", "category": "Risk",
             "text": f"Loan default rate is **{default_rate:.1f}%**. {'Well controlled.' if default_rate < 5 else 'Requires immediate risk mitigation strategies.'}",
             "severity": "success" if default_rate < 5 else "warning"
         })
@@ -128,7 +129,7 @@ def generate_insights() -> list[dict]:
     region_balance = customers_df.groupby("region")["balance"].mean()
     top_region = region_balance.idxmax()
     insights.append({
-        "icon": "🌍", "category": "Operations",
+        "icon": "", "category": "Operations",
         "text": f"**{top_region}** region has the highest average customer balance of **${region_balance.max():,.0f}**. Consider expanding services in this area.",
         "severity": "info"
     })
@@ -137,7 +138,7 @@ def generate_insights() -> list[dict]:
     if not accounts_df.empty:
         savings_pct = len(accounts_df[accounts_df["account_type"] == "Savings"]) / max(len(accounts_df), 1) * 100
         insights.append({
-            "icon": "💳", "category": "Operations",
+            "icon": "", "category": "Operations",
             "text": f"**{savings_pct:.1f}%** of accounts are Savings accounts. {'Cross-sell current accounts and FDs.' if savings_pct > 40 else 'Good product diversification.'}",
             "severity": "info"
         })
@@ -146,7 +147,7 @@ def generate_insights() -> list[dict]:
     customers_df["customer_since"] = pd.to_datetime(customers_df["customer_since"], errors="coerce")
     avg_tenure = (pd.Timestamp.now() - customers_df["customer_since"]).dt.days.mean() / 365
     insights.append({
-        "icon": "⏰", "category": "Customer",
+        "icon": "schedule", "category": "Customer",
         "text": f"Average customer tenure is **{avg_tenure:.1f} years**. {'Strong customer loyalty.' if avg_tenure > 3 else 'Focus on early engagement programs.'}",
         "severity": "success" if avg_tenure > 3 else "info"
     })
@@ -154,7 +155,7 @@ def generate_insights() -> list[dict]:
     # Credit score distribution
     avg_cs = customers_df["credit_score"].mean()
     insights.append({
-        "icon": "📊", "category": "Customer",
+        "icon": "", "category": "Customer",
         "text": f"Average credit score across all customers is **{avg_cs:.0f}**. {'Healthy portfolio.' if avg_cs > 680 else 'Consider credit improvement initiatives.'}",
         "severity": "success" if avg_cs > 680 else "info"
     })
@@ -163,11 +164,11 @@ def generate_insights() -> list[dict]:
 
 
 # ── Generate and Display ──
-if st.button("🔄 Refresh Insights", type="primary"):
+if st.button("Refresh Insights", icon=":material/autorenew:", type="primary"):
     st.session_state.pop("insights_cache", None)
 
 if "insights_cache" not in st.session_state:
-    with st.spinner("🧠 Analyzing data and generating insights..."):
+    with st.spinner("Analyzing data and generating insights..."):
         st.session_state["insights_cache"] = generate_insights()
 
 insights = st.session_state["insights_cache"]
@@ -179,15 +180,15 @@ for ins in insights:
     categories[ins["category"]] = categories.get(ins["category"], 0) + 1
 
 with s1:
-    st.markdown(kpi_card("Total Insights", f"{len(insights)}", "🧠", color="blue"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Total Insights", f"{len(insights)}", "smart_toy", color="blue"), unsafe_allow_html=True)
 with s2:
-    st.markdown(kpi_card("Categories", f"{len(categories)}", "📂", color="gold"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Categories", f"{len(categories)}", "folder", color="gold"), unsafe_allow_html=True)
 with s3:
     warnings = sum(1 for i in insights if i["severity"] == "warning")
-    st.markdown(kpi_card("Warnings", f"{warnings}", "⚠️", color="orange"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Warnings", f"{warnings}", "", color="orange"), unsafe_allow_html=True)
 with s4:
     successes = sum(1 for i in insights if i["severity"] == "success")
-    st.markdown(kpi_card("Positive", f"{successes}", "✅", color="green"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Positive", f"{successes}", "", color="green"), unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -209,7 +210,7 @@ for insight in insights:
     <div class="insight-card" style="border-left-color: {border_color};">
         <div style="display: flex; justify-content: space-between; align-items: flex-start;">
             <div>
-                <span class="insight-icon">{insight['icon']}</span>
+                <span class="insight-icon" style="margin-right: 8px; vertical-align: middle;">' + render_html_icon(insight['icon'] if insight['icon'] else ("warning" if insight['category'] == "Risk" else ("payments" if insight['category'] == "Revenue" else ("settings" if insight['category'] == "Operations" else "person"))), size="20px", color="var(--primary)") + '</span>
                 <span class="insight-text">{insight['text']}</span>
             </div>
             <span class="insight-category" style="background: {cat_color}; color: white;">{insight['category']}</span>

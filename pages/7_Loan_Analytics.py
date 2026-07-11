@@ -2,6 +2,7 @@
 Loan Analytics Page — KPIs, distributions, and loan portfolio analysis.
 """
 import streamlit as st
+from utils.icons import render_html_icon
 import pandas as pd
 from authentication import check_auth, require_role
 from database import get_connection
@@ -16,7 +17,7 @@ if not user:
     st.switch_page("app.py")
 require_role("Loan Analytics")
 
-st.markdown("# 🏦 Loan Analytics")
+st.markdown(f"# {render_html_icon('account_balance', size='30px')} Loan Analytics", unsafe_allow_html=True)
 st.markdown("Loan portfolio analysis, approval rates, and risk metrics")
 st.markdown("---")
 
@@ -24,7 +25,7 @@ conn = get_connection()
 loans_df = pd.read_sql("SELECT * FROM loans", conn)
 
 if loans_df.empty:
-    st.warning("⚠️ No loan data available.")
+    st.warning("No loan data available.", icon=":material/warning:")
     conn.close()
     st.stop()
 
@@ -37,13 +38,13 @@ default_rate = round(defaulted / max(total_loans, 1) * 100, 1)
 
 k1, k2, k3, k4 = st.columns(4)
 with k1:
-    st.markdown(kpi_card("Total Loans", f"{total_loans:,}", "📋", color="blue"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Total Loans", f"{total_loans:,}", "", color="blue"), unsafe_allow_html=True)
 with k2:
-    st.markdown(kpi_card("Active Loans", f"{active_loans:,}", "✅", color="green"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Active Loans", f"{active_loans:,}", "", color="green"), unsafe_allow_html=True)
 with k3:
-    st.markdown(kpi_card("Closed Loans", f"{closed_loans:,}", "🔒", color="teal"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Closed Loans", f"{closed_loans:,}", "", color="teal"), unsafe_allow_html=True)
 with k4:
-    st.markdown(kpi_card("Default Rate", f"{default_rate}%", "⚠️", color="red"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Default Rate", f"{default_rate}%", "", color="red"), unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -51,7 +52,7 @@ st.markdown("---")
 c1, c2 = st.columns(2)
 
 with c1:
-    fig = create_histogram(loans_df, "loan_amount", "💰 Loan Amount Distribution", nbins=40)
+    fig = create_histogram(loans_df, "loan_amount", "Loan Amount Distribution", nbins=40)
     st.plotly_chart(fig, use_container_width=True)
 
 with c2:
@@ -67,18 +68,18 @@ with c3:
         count=("loan_id", "count"),
         total_amount=("loan_amount", "sum")
     ).reset_index()
-    fig = create_pie_chart(type_dist, "loan_type", "count", "📊 Loan Type Distribution", hole=0.4)
+    fig = create_pie_chart(type_dist, "loan_type", "count", "Loan Type Distribution", hole=0.4)
     st.plotly_chart(fig, use_container_width=True)
 
 with c4:
-    fig = create_box_plot(loans_df, "loan_type", "interest_rate", "📈 Interest Rate by Loan Type")
+    fig = create_box_plot(loans_df, "loan_type", "interest_rate", "Interest Rate by Loan Type")
     st.plotly_chart(fig, use_container_width=True)
 
 c5, c6 = st.columns(2)
 
 with c5:
     if "emi" in loans_df.columns:
-        fig = create_scatter(loans_df, "loan_amount", "emi", "💳 EMI vs Loan Amount", color="loan_type")
+        fig = create_scatter(loans_df, "loan_amount", "emi", "EMI vs Loan Amount", color="loan_type")
         st.plotly_chart(fig, use_container_width=True)
 
 with c6:
@@ -88,12 +89,12 @@ with c6:
     branch_loans = loan_branch.groupby("branch")["loan_amount"].agg(["count", "sum"]).reset_index()
     branch_loans.columns = ["branch", "count", "total"]
     branch_loans = branch_loans.sort_values("total", ascending=False).head(10)
-    fig = create_bar_chart(branch_loans, "branch", "total", "🏢 Branch-wise Loan Amount")
+    fig = create_bar_chart(branch_loans, "branch", "total", "Branch-wise Loan Amount")
     st.plotly_chart(fig, use_container_width=True)
 
 # ── Loan Details Table ──
 st.markdown("---")
-st.markdown("### 📋 Loan Details")
+st.markdown(f"### {render_html_icon('description', size='22px')} Loan Details", unsafe_allow_html=True)
 status_filter = st.multiselect("Filter by Status", loans_df["status"].unique().tolist(), default=loans_df["status"].unique().tolist())
 filtered = loans_df[loans_df["status"].isin(status_filter)]
 st.dataframe(filtered, use_container_width=True, height=300)

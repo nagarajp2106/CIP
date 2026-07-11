@@ -2,6 +2,7 @@
 Database Manager Page — CRUD operations with search, filters, and pagination.
 """
 import streamlit as st
+from utils.icons import render_html_icon
 import pandas as pd
 from authentication import check_auth, require_role
 from utils.database_utils import (
@@ -16,7 +17,7 @@ if not user:
     st.switch_page("app.py")
 require_role("Database Manager")
 
-st.markdown("# 🗄️ Database Manager")
+st.markdown(f"# {render_html_icon('database', size='30px')} Database Manager", unsafe_allow_html=True)
 st.markdown("Manage banking database tables with full CRUD operations")
 st.markdown("---")
 
@@ -45,14 +46,14 @@ with s3:
 st.markdown("---")
 
 # ── Tabs ──
-tab_read, tab_create, tab_update, tab_delete = st.tabs(["📖 Browse", "➕ Create", "✏️ Update", "🗑️ Delete"])
+tab_read, tab_create, tab_update, tab_delete = st.tabs([":material/menu_book: Browse", ":material/add: Create", ":material/edit: Update", ":material/delete: Delete"])
 
 # ── Read Tab ──
 with tab_read:
     # Search and filters
     fc1, fc2 = st.columns([2, 1])
     with fc1:
-        search = st.text_input("🔍 Search", placeholder="Search across key columns...", key="db_search")
+        search = st.text_input("Search", placeholder="Search across key columns...", key="db_search")
     with fc2:
         page_size = st.selectbox("Rows per page", [10, 20, 50, 100], index=1, key="db_page_size")
 
@@ -105,18 +106,18 @@ with tab_create:
             with cols[i % 2]:
                 new_record[col_name] = st.text_input(col_name.replace("_", " ").title(), key=f"create_{col_name}")
 
-        if st.form_submit_button("➕ Add Record", type="primary", use_container_width=True):
+        if st.form_submit_button("Add Record", icon=":material/add:", type="primary", use_container_width=True):
             # Remove empty values
             new_record = {k: v for k, v in new_record.items() if v}
             if new_record:
                 if insert_record(selected_table, new_record):
-                    st.success(f"✅ Record added to {selected_table}")
+                    st.success(f"Record added to {selected_table}")
                     log_activity(user["user_id"], user["username"], "CREATE", f"Added record to {selected_table}")
                     st.rerun()
                 else:
-                    st.error("❌ Failed to add record (duplicate ID?)")
+                    st.error("Failed to add record (duplicate ID?)", icon=":material/cancel:")
             else:
-                st.warning("⚠️ Please fill in at least one field")
+                st.warning("Please fill in at least one field", icon=":material/warning:")
 
 # ── Update Tab ──
 with tab_update:
@@ -130,7 +131,7 @@ with tab_update:
         )
 
         if df_record.empty:
-            st.warning(f"⚠️ No record found with {table_config['id_col']} = {record_id}")
+            st.warning(f"No record found with {table_config['id_col']} = {record_id}")
         else:
             st.markdown("#### Current Values")
             st.dataframe(df_record, use_container_width=True)
@@ -149,18 +150,18 @@ with tab_update:
                                 key=f"update_{col_name}"
                             )
 
-                if st.form_submit_button("✏️ Update Record", type="primary", use_container_width=True):
+                if st.form_submit_button("Update Record", icon=":material/edit:", type="primary", use_container_width=True):
                     updates = {k: v for k, v in updates.items() if v}
                     if updates:
                         update_record(selected_table, table_config["id_col"], record_id, updates)
-                        st.success(f"✅ Record updated in {selected_table}")
+                        st.success(f"Record updated in {selected_table}")
                         log_activity(user["user_id"], user["username"], "UPDATE", f"Updated {record_id} in {selected_table}")
                         st.rerun()
 
 # ── Delete Tab ──
 with tab_delete:
     st.markdown("### Delete Record")
-    st.warning("⚠️ This action cannot be undone!")
+    st.warning("This action cannot be undone!", icon=":material/warning:")
 
     del_id = st.text_input(f"Enter {table_config['id_col'].replace('_', ' ').title()} to Delete", key="delete_id")
 
@@ -171,15 +172,15 @@ with tab_delete:
         )
 
         if df_record.empty:
-            st.warning(f"⚠️ No record found with {table_config['id_col']} = {del_id}")
+            st.warning(f"No record found with {table_config['id_col']} = {del_id}")
         else:
             st.markdown("#### Record to Delete")
             st.dataframe(df_record, use_container_width=True)
 
             confirm = st.checkbox("I confirm I want to delete this record", key="confirm_delete")
             if confirm:
-                if st.button("🗑️ Delete Record", type="primary"):
+                if st.button("Delete Record", icon=":material/delete:", type="primary"):
                     delete_record(selected_table, table_config["id_col"], del_id)
-                    st.success(f"✅ Record deleted from {selected_table}")
+                    st.success(f"Record deleted from {selected_table}")
                     log_activity(user["user_id"], user["username"], "DELETE", f"Deleted {del_id} from {selected_table}")
                     st.rerun()

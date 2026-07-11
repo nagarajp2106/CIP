@@ -2,6 +2,7 @@
 Exploratory Data Analysis Page — Interactive Plotly visualizations.
 """
 import streamlit as st
+from utils.icons import render_html_icon
 import pandas as pd
 import numpy as np
 from authentication import check_auth, require_role
@@ -18,7 +19,7 @@ if not user:
     st.switch_page("app.py")
 require_role("EDA")
 
-st.markdown("# 🔬 Exploratory Data Analysis")
+st.markdown(f"# {render_html_icon('analytics', size='30px')} Exploratory Data Analysis", unsafe_allow_html=True)
 st.markdown("Interactive visualizations for banking data exploration")
 st.markdown("---")
 
@@ -30,11 +31,11 @@ accounts_df = pd.read_sql("SELECT * FROM accounts", conn)
 conn.close()
 
 if customers_df.empty:
-    st.warning("⚠️ No data available for analysis.")
+    st.warning("No data available for analysis.", icon=":material/warning:")
     st.stop()
 
 # Summary stats
-st.markdown("### 📊 Summary Statistics")
+st.markdown(f"### {render_html_icon('analytics', size='22px')} Summary Statistics", unsafe_allow_html=True)
 numeric_df = customers_df.select_dtypes(include=[np.number])
 st.dataframe(numeric_df.describe().round(2), use_container_width=True)
 
@@ -43,30 +44,30 @@ st.markdown("---")
 # ── Row 1: Age & Income ──
 c1, c2 = st.columns(2)
 with c1:
-    fig = create_histogram(customers_df, "age", "👤 Age Distribution", nbins=30)
+    fig = create_histogram(customers_df, "age", "Age Distribution", nbins=30)
     st.plotly_chart(fig, use_container_width=True)
 with c2:
-    fig = create_violin(customers_df, "occupation", "income", "💵 Income by Occupation")
+    fig = create_violin(customers_df, "occupation", "income", "Income by Occupation")
     st.plotly_chart(fig, use_container_width=True)
 
 # ── Row 2: Balance & Loan Amount ──
 c3, c4 = st.columns(2)
 with c3:
-    fig = create_box_plot(customers_df, "region", "balance", "🏦 Balance by Region")
+    fig = create_box_plot(customers_df, "region", "balance", "Balance by Region")
     st.plotly_chart(fig, use_container_width=True)
 with c4:
     if not loans_df.empty:
-        fig = create_histogram(loans_df, "loan_amount", "💰 Loan Amount Distribution", nbins=40)
+        fig = create_histogram(loans_df, "loan_amount", "Loan Amount Distribution", nbins=40)
         st.plotly_chart(fig, use_container_width=True)
 
 # ── Row 3: Transaction Distribution & Correlation ──
 c5, c6 = st.columns(2)
 with c5:
     if not transactions_df.empty:
-        fig = create_histogram(transactions_df, "amount", "💳 Transaction Amount Distribution", nbins=50)
+        fig = create_histogram(transactions_df, "amount", "Transaction Amount Distribution", nbins=50)
         st.plotly_chart(fig, use_container_width=True)
 with c6:
-    fig = create_correlation_matrix(customers_df, "🔗 Correlation Matrix")
+    fig = create_correlation_matrix(customers_df, "Correlation Matrix")
     st.plotly_chart(fig, use_container_width=True)
 
 # ── Row 4: Branch & Occupation Analysis ──
@@ -76,14 +77,14 @@ with c7:
         count=("customer_id", "count"),
         avg_balance=("balance", "mean")
     ).reset_index().sort_values("count", ascending=False)
-    fig = create_bar_chart(branch_stats, "branch", "count", "🏢 Branch Analysis — Customer Count")
+    fig = create_bar_chart(branch_stats, "branch", "count", "Branch Analysis — Customer Count")
     st.plotly_chart(fig, use_container_width=True)
 with c8:
     occ_stats = customers_df.groupby("occupation").agg(
         count=("customer_id", "count"),
         avg_income=("income", "mean")
     ).reset_index()
-    fig = create_bar_chart(occ_stats, "occupation", "avg_income", "💼 Average Income by Occupation")
+    fig = create_bar_chart(occ_stats, "occupation", "avg_income", "Average Income by Occupation")
     st.plotly_chart(fig, use_container_width=True)
 
 # ── Row 5: Regional Analysis & Product Usage ──
@@ -94,12 +95,12 @@ with c9:
         avg_balance=("balance", "mean"),
         avg_income=("income", "mean")
     ).reset_index()
-    fig = create_bar_chart(region_stats, "region", "customers", "🌍 Regional Analysis")
+    fig = create_bar_chart(region_stats, "region", "customers", "Regional Analysis")
     st.plotly_chart(fig, use_container_width=True)
 with c10:
     if not accounts_df.empty:
         product_usage = accounts_df.groupby("account_type").size().reset_index(name="count")
-        fig = create_pie_chart(product_usage, "account_type", "count", "📦 Product Usage")
+        fig = create_pie_chart(product_usage, "account_type", "count", "Product Usage")
         st.plotly_chart(fig, use_container_width=True)
 
 # ── Monthly Growth ──
@@ -111,12 +112,12 @@ if not transactions_df.empty:
         volume=("amount", "sum")
     ).reset_index()
     monthly.columns = ["month", "transactions", "volume"]
-    fig = create_line_chart(monthly, "month", "volume", "📈 Monthly Transaction Volume Growth")
+    fig = create_line_chart(monthly, "month", "volume", "Monthly Transaction Volume Growth")
     st.plotly_chart(fig, use_container_width=True)
 
 # ── Custom Analysis ──
 st.markdown("---")
-st.markdown("### 🎯 Custom Analysis")
+st.markdown(f"### {render_html_icon('track_changes', size='22px')} Custom Analysis", unsafe_allow_html=True)
 cc1, cc2 = st.columns(2)
 with cc1:
     x_col = st.selectbox("X Axis", numeric_df.columns.tolist(), key="eda_x")
@@ -127,7 +128,7 @@ color_col = st.selectbox("Color By (optional)", ["None"] + customers_df.select_d
 
 fig = create_scatter(
     customers_df, x_col, y_col,
-    f"📊 {x_col.title()} vs {y_col.title()}",
+    f"{x_col.title()} vs {y_col.title()}",
     color=color_col if color_col != "None" else None
 )
 st.plotly_chart(fig, use_container_width=True)
