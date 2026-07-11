@@ -46,35 +46,31 @@ with tab1:
 
     # User list
     if users:
-        table_html = """
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Full Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Status</th>
-                    <th>Last Login</th>
-                </tr>
-            </thead>
-            <tbody>
-        """
+        table_html = """<table class="styled-table">
+<thead>
+<tr>
+<th>Username</th>
+<th>Full Name</th>
+<th>Email</th>
+<th>Role</th>
+<th>Status</th>
+<th>Last Login</th>
+</tr>
+</thead>
+<tbody>"""
         for u in users:
             role_label = ROLES.get(u["role"], u["role"])
             status_class = "success" if u.get("is_active") else "danger"
             status_text = "Active" if u.get("is_active") else "Inactive"
             last_login = u.get("last_login") if u.get("last_login") else "Never"
-            table_html += f"""
-                <tr>
-                    <td><b>{u['username']}</b></td>
-                    <td>{u['full_name']}</td>
-                    <td>{u['email'] if u['email'] else '-'}</td>
-                    <td>{role_label}</td>
-                    <td><span class="status-pill {status_class}">{status_text}</span></td>
-                    <td>{last_login}</td>
-                </tr>
-            """
+            table_html += f"""<tr>
+<td><b>{u['username']}</b></td>
+<td>{u['full_name']}</td>
+<td>{u['email'] if u['email'] else '-'}</td>
+<td>{role_label}</td>
+<td><span class="status-pill {status_class}">{status_text}</span></td>
+<td>{last_login}</td>
+</tr>"""
         table_html += "</tbody></table>"
         st.markdown(table_html, unsafe_allow_html=True)
 
