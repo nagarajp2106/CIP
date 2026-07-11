@@ -265,79 +265,72 @@ def render_sidebar(current_page: str = "Home"):
         )
         
         # Custom Page Navigation Tree
-        st.page_link("app.py", label="Home", icon="🏠")
+        st.page_link("app.py", label="Home", icon=":material/home:")
         
         # 1. Dashboard
-        is_dashboard_expanded = (current_page == "Dashboard")
         if user["role"] in PAGE_ACCESS.get("Dashboard", []):
-            with st.expander("📊 Dashboard", expanded=is_dashboard_expanded):
-                st.page_link("pages/1_Dashboard.py", label="Dashboard", icon="📊")
-                
+            st.markdown('<div class="sidebar-section-header">DASHBOARD</div>', unsafe_allow_html=True)
+            st.page_link("pages/1_Dashboard.py", label="Dashboard", icon=":material/dashboard:")
+            
         # 2. Data Management
         data_mgmt_pages = [
-            ("Data Upload", "pages/2_Data_Upload.py", "📤"),
-            ("Data Preprocessing", "pages/3_Data_Preprocessing.py", "🛠️"),
-            ("Database Manager", "pages/4_Database_Manager.py", "🗄️")
+            ("Data Upload", "pages/2_Data_Upload.py", ":material/upload_file:"),
+            ("Data Preprocessing", "pages/3_Data_Preprocessing.py", ":material/build:"),
+            ("Database Manager", "pages/4_Database_Manager.py", ":material/database:")
         ]
-        is_data_expanded = (current_page in [p[0] for p in data_mgmt_pages])
         allowed_data_pages = [p for p in data_mgmt_pages if user["role"] in PAGE_ACCESS.get(p[0], [])]
         if allowed_data_pages:
-            with st.expander("📂 Data Management", expanded=is_data_expanded):
-                for label, path, icon in allowed_data_pages:
-                    st.page_link(path, label=label, icon=icon)
-                    
-        # 3. Customer Management
-        is_cust_expanded = (current_page == "Customer Management")
-        if user["role"] in PAGE_ACCESS.get("Customer Management", []):
-            with st.expander("👥 Customer Management", expanded=is_cust_expanded):
-                st.page_link("pages/5_Customer_Management.py", label="Customer Management", icon="👥")
+            st.markdown('<div class="sidebar-section-header">DATA MANAGEMENT</div>', unsafe_allow_html=True)
+            for label, path, icon in allowed_data_pages:
+                st.page_link(path, label=label, icon=icon)
                 
+        # 3. Customer Management
+        if user["role"] in PAGE_ACCESS.get("Customer Management", []):
+            st.markdown('<div class="sidebar-section-header">CUSTOMER MANAGEMENT</div>', unsafe_allow_html=True)
+            st.page_link("pages/5_Customer_Management.py", label="Customer Management", icon=":material/group:")
+            
         # 4. Analytics
         analytics_pages = [
-            ("Transaction Analytics", "pages/6_Transaction_Analytics.py", "💳"),
-            ("Loan Analytics", "pages/7_Loan_Analytics.py", "🏦"),
-            ("EDA", "pages/8_EDA.py", "📈")
+            ("Transaction Analytics", "pages/6_Transaction_Analytics.py", ":material/credit_card:"),
+            ("Loan Analytics", "pages/7_Loan_Analytics.py", ":material/account_balance:"),
+            ("EDA", "pages/8_EDA.py", ":material/analytics:")
         ]
-        is_analytics_expanded = (current_page in [p[0] for p in analytics_pages])
         allowed_analytics_pages = [p for p in analytics_pages if user["role"] in PAGE_ACCESS.get(p[0], [])]
         if allowed_analytics_pages:
-            with st.expander("📈 Analytics", expanded=is_analytics_expanded):
-                for label, path, icon in allowed_analytics_pages:
-                    st.page_link(path, label=label, icon=icon)
-                    
+            st.markdown('<div class="sidebar-section-header">ANALYTICS</div>', unsafe_allow_html=True)
+            for label, path, icon in allowed_analytics_pages:
+                st.page_link(path, label=label, icon=icon)
+                
         # 5. AI & Machine Learning
         ai_ml_pages = [
-            ("Customer Segmentation", "pages/9_Customer_Segmentation.py", "🎯"),
-            ("Churn Prediction", "pages/10_Churn_Prediction.py", "🔮"),
-            ("CLV Prediction", "pages/13_CLV_Prediction.py", "💎"),
-            ("Product Recommendation", "pages/15_Product_Recommendation.py", "💡"),
-            ("Deposit Prediction", "pages/17_Deposit_Prediction.py", "💰"),
-            ("AI Business Insights", "pages/18_AI_Business_Insights.py", "🤖")
+            ("Customer Segmentation", "pages/9_Customer_Segmentation.py", ":material/track_changes:"),
+            ("Churn Prediction", "pages/10_Churn_Prediction.py", ":material/change_circle:"),
+            ("CLV Prediction", "pages/13_CLV_Prediction.py", ":material/insights:"),
+            ("Product Recommendation", "pages/15_Product_Recommendation.py", ":material/recommend:"),
+            ("Deposit Prediction", "pages/17_Deposit_Prediction.py", ":material/savings:"),
+            ("AI Business Insights", "pages/18_AI_Business_Insights.py", ":material/smart_toy:")
         ]
-        is_ai_expanded = (current_page in [p[0] for p in ai_ml_pages])
         allowed_ai_pages = [p for p in ai_ml_pages if user["role"] in PAGE_ACCESS.get(p[0], [])]
         if allowed_ai_pages:
-            with st.expander("🤖 AI & Machine Learning", expanded=is_ai_expanded):
-                for label, path, icon in allowed_ai_pages:
-                    st.page_link(path, label=label, icon=icon)
-                    
-        # 6. Reports
-        is_reports_expanded = (current_page == "Reports")
-        if user["role"] in PAGE_ACCESS.get("Reports", []):
-            with st.expander("📑 Reports", expanded=is_reports_expanded):
-                st.page_link("pages/19_Reports.py", label="Reports", icon="📑")
+            st.markdown('<div class="sidebar-section-header">AI & MACHINE LEARNING</div>', unsafe_allow_html=True)
+            for label, path, icon in allowed_ai_pages:
+                st.page_link(path, label=label, icon=icon)
                 
+        # 6. Reports
+        if user["role"] in PAGE_ACCESS.get("Reports", []):
+            st.markdown('<div class="sidebar-section-header">REPORTS</div>', unsafe_allow_html=True)
+            st.page_link("pages/19_Reports.py", label="Reports", icon=":material/description:")
+            
         # 7. Administration
         admin_pages = [
-            ("Admin", "pages/20_Admin.py", "🔑"),
-            ("Settings", "pages/21_Settings.py", "⚙️")
+            ("Admin", "pages/20_Admin.py", ":material/admin_panel_settings:"),
+            ("Settings", "pages/21_Settings.py", ":material/settings:")
         ]
-        is_admin_expanded = (current_page in [p[0] for p in admin_pages])
         allowed_admin_pages = [p for p in admin_pages if user["role"] in PAGE_ACCESS.get(p[0], [])]
         if allowed_admin_pages:
-            with st.expander("⚙️ Administration", expanded=is_admin_expanded):
-                for label, path, icon in allowed_admin_pages:
-                    st.page_link(path, label=label, icon=icon)
+            st.markdown('<div class="sidebar-section-header">ADMINISTRATION</div>', unsafe_allow_html=True)
+            for label, path, icon in allowed_admin_pages:
+                st.page_link(path, label=label, icon=icon)
                     
         st.markdown("---")
         

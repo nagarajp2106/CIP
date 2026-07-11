@@ -182,37 +182,56 @@ section[data-testid="stSidebar"] {
 
 /* Page links inside sidebar (including sub-links) */
 [data-testid="stSidebar"] .stPageLink {
-    padding: 2px 0 !important;
+    padding: 1px 0 !important;
     margin: 0 !important;
 }
 
 [data-testid="stSidebar"] .stPageLink a {
     background-color: transparent !important;
     border: none !important;
-    color: rgba(255, 255, 255, 0.65) !important; /* Muted inactive state */
+    color: rgba(255, 255, 255, 0.6) !important; /* Muted inactive state */
     font-size: 0.85rem !important;
     font-weight: 500 !important;
     padding: 7px 12px !important;
     border-radius: 8px !important;
-    transition: var(--transition) !important;
+    transition: background-color 175ms ease, color 175ms ease !important;
     text-decoration: none !important;
     display: flex !important;
     align-items: center !important;
 }
 
+[data-testid="stSidebar"] .stPageLink a span[data-testid="stIcon"] {
+    color: inherit !important;
+    font-size: 1.15rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-right: 8px !important;
+}
+
 [data-testid="stSidebar"] .stPageLink a:hover {
-    background-color: rgba(255, 255, 255, 0.06) !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
     color: #FFFFFF !important;
 }
 
 /* Active navigation pill highlight */
 [data-testid="stSidebar"] .stPageLink a[aria-current="page"] {
-    background-color: var(--secondary) !important; /* Soft pill color */
+    background-color: var(--secondary) !important; /* Accent color (#2E86AB) */
     color: #FFFFFF !important;
     font-weight: 700 !important;
     opacity: 1 !important;
     border-radius: 8px !important;
     box-shadow: 0 4px 12px rgba(46, 134, 171, 0.25) !important;
+}
+
+/* Sidebar Group Header Label */
+.sidebar-section-header {
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    color: rgba(255, 255, 255, 0.35) !important;
+    letter-spacing: 1.2px !important;
+    text-transform: uppercase !important;
+    margin: 1.1rem 0 0.35rem 12px !important;
 }
 
 section[data-testid="stSidebar"] hr {
