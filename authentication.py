@@ -370,6 +370,18 @@ def check_auth() -> dict | None:
     """
     token = st.session_state.get("jwt_token")
     if not token:
+        # Hide sidebar immediately for unauthenticated users
+        st.markdown(
+            """<style>
+            [data-testid="stSidebar"] {
+                display: none !important;
+            }
+            [data-testid="stSidebarCollapsedControl"] {
+                display: none !important;
+            }
+            </style>""",
+            unsafe_allow_html=True
+        )
         return None
 
     payload = validate_token(token)
@@ -377,6 +389,18 @@ def check_auth() -> dict | None:
         # Token expired or invalid
         st.session_state.pop("jwt_token", None)
         st.session_state.pop("user", None)
+        # Hide sidebar immediately for unauthenticated users
+        st.markdown(
+            """<style>
+            [data-testid="stSidebar"] {
+                display: none !important;
+            }
+            [data-testid="stSidebarCollapsedControl"] {
+                display: none !important;
+            }
+            </style>""",
+            unsafe_allow_html=True
+        )
         return None
 
     return st.session_state.get("user")
