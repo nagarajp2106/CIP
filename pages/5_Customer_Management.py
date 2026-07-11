@@ -77,10 +77,10 @@ with s4:
 st.markdown("---")
 
 # ── Customer List ──
-    if df.empty:
-        st.info("No customers found matching your criteria.")
-    else:
-        table_html = """
+if df.empty:
+    st.info("No customers found matching your criteria.")
+else:
+    table_html = """
     <table class="styled-table">
         <thead>
             <tr>
@@ -118,19 +118,19 @@ st.markdown("---")
     table_html += "</tbody></table>"
     st.markdown(table_html, unsafe_allow_html=True)
 
-    # Pagination
-    total_pages = max(1, (total + 20 - 1) // 20)
-    pc1, pc2, pc3 = st.columns([1, 2, 1])
-    with pc1:
-        if st.button("◀️ Previous", disabled=st.session_state["cust_page"] <= 1, key="cp"):
-            st.session_state["cust_page"] -= 1
-            st.rerun()
-    with pc2:
-        st.markdown(f"<div style='text-align:center;'>Page {st.session_state['cust_page']} of {total_pages}</div>", unsafe_allow_html=True)
-    with pc3:
-        if st.button("Next ▶️", disabled=st.session_state["cust_page"] >= total_pages, key="cn"):
-            st.session_state["cust_page"] += 1
-            st.rerun()
+# Pagination
+total_pages = max(1, (total + 20 - 1) // 20)
+pc1, pc2, pc3 = st.columns([1, 2, 1])
+with pc1:
+    if st.button("◀️ Previous", disabled=st.session_state["cust_page"] <= 1, key="cp"):
+        st.session_state["cust_page"] -= 1
+        st.rerun()
+with pc2:
+    st.markdown(f"<div style='text-align:center;'>Page {st.session_state['cust_page']} of {total_pages}</div>", unsafe_allow_html=True)
+with pc3:
+    if st.button("Next ▶️", disabled=st.session_state["cust_page"] >= total_pages, key="cn"):
+        st.session_state["cust_page"] += 1
+        st.rerun()
 
     # ── Customer Profile Detail ──
     st.markdown("---")
