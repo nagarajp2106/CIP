@@ -126,34 +126,36 @@ role = user["role"]
 nav_items = []
 
 if role in ["admin", "bank_manager", "data_analyst"]:
-    nav_items.append(("📊", "Dashboard", "View KPIs, charts, and executive summary"))
+    nav_items.append(("📊", "Dashboard", "View KPIs, charts, and executive summary", "/Dashboard"))
 if role in ["admin", "data_analyst"]:
-    nav_items.append(("📤", "Data Upload", "Upload and validate banking datasets"))
+    nav_items.append(("📤", "Data Upload", "Upload and validate banking datasets", "/Data_Upload"))
 if role in ["admin", "bank_manager"]:
-    nav_items.append(("👤", "Customer Management", "Search, view, and manage customers"))
+    nav_items.append(("👤", "Customer Management", "Search, view, and manage customers", "/Customer_Management"))
 if role in ["admin", "bank_manager"]:
-    nav_items.append(("🏦", "Loan Analytics", "Loan portfolio analysis and metrics"))
+    nav_items.append(("🏦", "Loan Analytics", "Loan portfolio analysis and metrics", "/Loan_Analytics"))
 if role in ["admin", "bank_manager"]:
-    nav_items.append(("🔮", "Churn Prediction", "Predict customer churn probability"))
+    nav_items.append(("🔮", "Churn Prediction", "Predict customer churn probability", "/Churn_Prediction"))
 if role in ["admin", "bank_manager"]:
-    nav_items.append(("💎", "CLV Prediction", "Estimate customer lifetime value"))
+    nav_items.append(("💎", "CLV Prediction", "Estimate customer lifetime value", "/CLV_Prediction"))
 if role in ["admin", "bank_manager"]:
-    nav_items.append(("🎯", "Product Recommendation", "AI-powered product suggestions"))
+    nav_items.append(("🎯", "Product Recommendation", "AI-powered product suggestions", "/Product_Recommendation"))
 if role in ["admin", "bank_manager"]:
-    nav_items.append(("📈", "AI Business Insights", "AI-generated analytical insights"))
+    nav_items.append(("📈", "AI Business Insights", "AI-generated analytical insights", "/AI_Business_Insights"))
 if role in ["admin", "bank_manager", "data_analyst"]:
-    nav_items.append(("📑", "Reports", "Generate and export professional reports"))
+    nav_items.append(("📑", "Reports", "Generate and export professional reports", "/Reports"))
 
 cols = st.columns(3)
-for idx, (icon, title, desc) in enumerate(nav_items):
+for idx, (icon, title, desc, url) in enumerate(nav_items):
     border_color = 'var(--secondary)' if idx % 3 == 0 else 'var(--accent)' if idx % 3 == 1 else 'var(--success)'
     with cols[idx % 3]:
         st.markdown(f"""
-        <div class="kpi-card" style="cursor: pointer; border-left-color: {border_color};">
-            <div style="font-size: 1.8rem;">{icon}</div>
-            <div style="font-weight: 700; color: var(--primary); margin: 0.3rem 0;">{title}</div>
-            <div style="color: var(--text-muted); font-size: 0.85rem;">{desc}</div>
-        </div>
+        <a href="{url}" target="_self" style="text-decoration: none; color: inherit; display: block;">
+            <div class="kpi-card" style="cursor: pointer; border-left-color: {border_color}; min-height: 140px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div style="font-size: 1.8rem;">{icon}</div>
+                <div style="font-weight: 700; color: var(--primary); margin: 0.3rem 0;">{title}</div>
+                <div style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.3;">{desc}</div>
+            </div>
+        </a>
         """, unsafe_allow_html=True)
 
 st.markdown("---")
