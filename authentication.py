@@ -12,71 +12,69 @@ def login_page():
     """Render the split-screen login page with left hero panel and centered right form."""
     # Hide sidebar and default header components, configure full bleed split-screen
     st.markdown(
-        """
-        <style>
-        [data-testid="stSidebar"] {
-            display: none !important;
-        }
-        [data-testid="stSidebarCollapsedControl"] {
-            display: none !important;
-        }
-        
-        .stApp {
-            background-color: #F8FAFC !important;
-        }
-        
-        /* Layout Grid Container */
-        [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] {
-            background: #FFFFFF !important;
-            border-radius: 16px !important;
-            box-shadow: 0 10px 40px rgba(27, 42, 74, 0.08) !important;
-            overflow: hidden !important;
-            border: 1px solid #E2E8F0 !important;
-            gap: 0px !important;
-            max-width: 1000px !important;
-            margin: 4% auto !important;
-        }
+        """<style>
+[data-testid="stSidebar"] {
+    display: none !important;
+}
+[data-testid="stSidebarCollapsedControl"] {
+    display: none !important;
+}
 
-        /* Left Column (Branded Indigo Hero) */
-        [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:nth-of-type(1) {
-            background-color: #3D3DE0 !important;
-            padding: 3.5rem 3rem !important;
-            color: #FFFFFF !important;
-            min-height: 590px !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: space-between !important;
-            position: relative !important;
-            overflow: hidden !important;
-        }
+.stApp {
+    background-color: #F8FAFC !important;
+}
 
-        /* Right Column (Centered Login Form) */
-        [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:nth-of-type(2) {
-            background-color: #FFFFFF !important;
-            padding: 3.5rem 3rem !important;
-            min-height: 590px !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: center !important;
-        }
+/* Layout Grid Container */
+[data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] {
+    background: #FFFFFF !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 40px rgba(27, 42, 74, 0.08) !important;
+    overflow: hidden !important;
+    border: 1px solid #E2E8F0 !important;
+    gap: 0px !important;
+    max-width: 1000px !important;
+    margin: 4% auto !important;
+}
 
-        /* Responsive styling for Mobile */
-        @media (max-width: 768px) {
-            [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] {
-                margin: 1rem !important;
-                border-radius: 16px !important;
-            }
-            [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:nth-of-type(1) {
-                display: none !important;
-            }
-            [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:nth-of-type(2) {
-                border-radius: 16px !important;
-                border-left: 1px solid #E2E8F0 !important;
-                padding: 2.25rem !important;
-            }
-        }
-        </style>
-        """,
+/* Left Column (Branded Indigo Hero) */
+[data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"]:nth-of-type(1) {
+    background-color: #3D3DE0 !important;
+    padding: 3.5rem 3rem !important;
+    color: #FFFFFF !important;
+    min-height: 590px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* Right Column (Centered Login Form) */
+[data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"]:nth-of-type(2) {
+    background-color: #FFFFFF !important;
+    padding: 3.5rem 3rem !important;
+    min-height: 590px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+
+/* Responsive styling for Mobile */
+@media (max-width: 768px) {
+    [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] {
+        margin: 1rem !important;
+        border-radius: 16px !important;
+    }
+    [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"]:nth-of-type(1) {
+        display: none !important;
+    }
+    [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"]:nth-of-type(2) {
+        border-radius: 16px !important;
+        border-left: 1px solid #E2E8F0 !important;
+        padding: 2.25rem !important;
+    }
+}
+</style>""",
         unsafe_allow_html=True
     )
 
@@ -85,54 +83,50 @@ def login_page():
     with col1:
         # Left Hero Panel Content
         st.markdown(
-            """
-            <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <!-- 8-pointed SVG asterisk logo -->
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">
-                        <line x1="12" y1="2" x2="12" y2="22"></line>
-                        <line x1="2" y1="12" x2="22" y2="12"></line>
-                        <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
-                        <line x1="4.93" y1="19.07" x2="19.07" y2="4.93"></line>
-                    </svg>
-                    <div style="font-size: 0.85rem; font-weight: 750; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.85; margin-bottom: 2rem;">
-                        AI Banking Customer Insights
-                    </div>
-                    <h1 style="color: #FFFFFF; font-size: 2.1rem; font-weight: 800; line-height: 1.25; margin-bottom: 1.25rem;">
-                        Welcome to AI Banking Customer Insights
-                    </h1>
-                    <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; line-height: 1.5; max-width: 360px;">
-                        Unlock deep retail banking customer insights with predictive ML pipelines, CLV forecasting, and risk analysis.
-                    </p>
-                </div>
-                
-                <!-- Background decorative lines -->
-                <div class="left-bg-lines">
-                    <svg width="100%" height="100%" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="160" cy="160" r="100" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
-                        <circle cx="160" cy="160" r="130" stroke="rgba(255,255,255,0.04)" stroke-width="1.5"/>
-                        <circle cx="160" cy="160" r="160" stroke="rgba(255,255,255,0.02)" stroke-width="1.5"/>
-                    </svg>
-                </div>
-                
-                <!-- Footer copyright -->
-                <div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.55); font-weight: 500; margin-top: 3rem;">
-                    © 2026 AI Banking Customer Insights. All rights reserved.
-                </div>
-            </div>
-            """,
+            """<div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+<div>
+<!-- 8-pointed SVG asterisk logo -->
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">
+<line x1="12" y1="2" x2="12" y2="22"></line>
+<line x1="2" y1="12" x2="22" y2="12"></line>
+<line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+<line x1="4.93" y1="19.07" x2="19.07" y2="4.93"></line>
+</svg>
+<div style="font-size: 0.85rem; font-weight: 750; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.85; margin-bottom: 2rem;">
+AI Banking Customer Insights
+</div>
+<h1 style="color: #FFFFFF; font-size: 2.1rem; font-weight: 800; line-height: 1.25; margin-bottom: 1.25rem;">
+Welcome to AI Banking Customer Insights
+</h1>
+<p style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; line-height: 1.5; max-width: 360px;">
+Unlock deep retail banking customer insights with predictive ML pipelines, CLV forecasting, and risk analysis.
+</p>
+</div>
+
+<!-- Background decorative lines -->
+<div class="left-bg-lines">
+<svg width="100%" height="100%" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="160" cy="160" r="100" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+<circle cx="160" cy="160" r="130" stroke="rgba(255,255,255,0.04)" stroke-width="1.5"/>
+<circle cx="160" cy="160" r="160" stroke="rgba(255,255,255,0.02)" stroke-width="1.5"/>
+</svg>
+</div>
+
+<!-- Footer copyright -->
+<div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.55); font-weight: 500; margin-top: 3rem;">
+© 2026 AI Banking Customer Insights. All rights reserved.
+</div>
+</div>""",
             unsafe_allow_html=True
         )
 
     with col2:
         # Right Form Panel Content
         st.markdown(
-            """
-            <div style="margin-bottom: 1.5rem;">
-                <h2 style="color: #1B2A4A; font-weight: 800; font-size: 1.75rem; margin: 0 0 0.25rem 0;">Welcome Back!</h2>
-                <p style="color: #64748B; font-size: 0.95rem; margin: 0;">Sign in to access your dashboard.</p>
-            </div>
-            """,
+            """<div style="margin-bottom: 1.5rem;">
+<h2 style="color: #1B2A4A; font-weight: 800; font-size: 1.75rem; margin: 0 0 0.25rem 0;">Welcome Back!</h2>
+<p style="color: #64748B; font-size: 0.95rem; margin: 0;">Sign in to access your dashboard.</p>
+</div>""",
             unsafe_allow_html=True
         )
         
@@ -191,42 +185,40 @@ def login_page():
         st.markdown('<div style="height: 12px;"></div>', unsafe_allow_html=True)
         with st.expander("🎯 View Demo Credentials", expanded=False):
             st.markdown(
-                """
-                <style>
-                .demo-card-item {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    border-bottom: 1px solid #F1F5F9;
-                    padding: 8px 0;
-                }
-                .demo-card-item:last-child {
-                    border-bottom: none;
-                }
-                .demo-role-badge {
-                    display: inline-block;
-                    padding: 2px 10px;
-                    border-radius: 12px;
-                    font-size: 0.75rem;
-                    font-weight: 600;
-                }
-                </style>
-                <div style="background: #FFFFFF; padding: 4px; font-size: 0.85rem;">
-                    <div style="margin-bottom: 8px; font-weight: 600; color: #64748B;">Test credentials with pre-configured roles:</div>
-                    <div class="demo-card-item">
-                        <span>👤 <code>admin</code> (admin123)</span>
-                        <span class="demo-role-badge" style="background:#FFEBEE; color:#C62828;">Admin</span>
-                    </div>
-                    <div class="demo-card-item">
-                        <span>👤 <code>manager</code> (manager123)</span>
-                        <span class="demo-role-badge" style="background:#E8F5E9; color:#2E7D32;">Manager</span>
-                    </div>
-                    <div class="demo-card-item">
-                        <span>👤 <code>analyst</code> (analyst123)</span>
-                        <span class="demo-role-badge" style="background:#E0F7FA; color:#006064;">Analyst</span>
-                    </div>
-                </div>
-                """,
+                """<style>
+.demo-card-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #F1F5F9;
+    padding: 8px 0;
+}
+.demo-card-item:last-child {
+    border-bottom: none;
+}
+.demo-role-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+</style>
+<div style="background: #FFFFFF; padding: 4px; font-size: 0.85rem;">
+    <div style="margin-bottom: 8px; font-weight: 600; color: #64748B;">Test credentials with pre-configured roles:</div>
+    <div class="demo-card-item">
+        <span>👤 <code>admin</code> (admin123)</span>
+        <span class="demo-role-badge" style="background:#FFEBEE; color:#C62828;">Admin</span>
+    </div>
+    <div class="demo-card-item">
+        <span>👤 <code>manager</code> (manager123)</span>
+        <span class="demo-role-badge" style="background:#E8F5E9; color:#2E7D32;">Manager</span>
+    </div>
+    <div class="demo-card-item">
+        <span>👤 <code>analyst</code> (analyst123)</span>
+        <span class="demo-role-badge" style="background:#E0F7FA; color:#006064;">Analyst</span>
+    </div>
+</div>""",
                 unsafe_allow_html=True
             )
             st.markdown(
