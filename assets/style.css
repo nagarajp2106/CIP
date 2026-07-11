@@ -587,3 +587,60 @@ label[data-testid="stWidgetLabel"] p {
     .kpi-card .kpi-value { font-size: 1.5rem; }
     .kpi-card { padding: 1rem; }
 }
+
+/* ── Split-Screen Login Redesign Overrides ── */
+.show-pass-container {
+    position: relative !important;
+    width: 100% !important;
+}
+
+.show-pass-toggle-wrapper {
+    position: absolute !important;
+    right: 12px !important;
+    top: 38px !important;
+    z-index: 99 !important;
+}
+
+/* Ensure checkbox overlay style is clean */
+.show-pass-toggle-wrapper [data-testid="stCheckbox"] {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+}
+
+/* Primary Dark Login Button Style Override */
+.login-btn-dark button {
+    background-color: #0D1B2A !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    padding: 0.65rem 1.5rem !important;
+    font-size: 0.95rem !important;
+    width: 100% !important;
+    box-shadow: 0 4px 12px rgba(13, 27, 42, 0.15) !important;
+    transition: var(--transition) !important;
+}
+
+.login-btn-dark button:hover {
+    background-color: var(--secondary) !important;
+    box-shadow: 0 6px 16px rgba(46, 134, 171, 0.25) !important;
+}
+
+/* Left panel decorative graphic positioning */
+.left-star-logo {
+    font-size: 3rem !important;
+    line-height: 1 !important;
+    margin-bottom: 2rem !important;
+}
+
+.left-bg-lines {
+    position: absolute !important;
+    bottom: -50px !important;
+    right: -50px !important;
+    width: 300px !important;
+    height: 300px !important;
+    pointer-events: none !important;
+    opacity: 0.6 !important;
+}

@@ -9,8 +9,8 @@ from config import PAGE_ACCESS, ROLES, DEMO_USERS, ASSETS_DIR
 
 
 def login_page():
-    """Render the login page with banking-themed UI and demo credentials panel."""
-    # Hide sidebar when not logged in
+    """Render the split-screen login page with left hero panel and centered right form."""
+    # Hide sidebar and default header components, configure full bleed split-screen
     st.markdown(
         """
         <style>
@@ -20,44 +20,158 @@ def login_page():
         [data-testid="stSidebarCollapsedControl"] {
             display: none !important;
         }
+        
+        .stApp {
+            background-color: #F8FAFC !important;
+        }
+        
+        /* Layout Grid Container */
+        [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] {
+            background: #FFFFFF !important;
+            border-radius: 16px !important;
+            box-shadow: 0 10px 40px rgba(27, 42, 74, 0.08) !important;
+            overflow: hidden !important;
+            border: 1px solid #E2E8F0 !important;
+            gap: 0px !important;
+            max-width: 1000px !important;
+            margin: 4% auto !important;
+        }
+
+        /* Left Column (Branded Indigo Hero) */
+        [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:nth-of-type(1) {
+            background-color: #3D3DE0 !important;
+            padding: 3.5rem 3rem !important;
+            color: #FFFFFF !important;
+            min-height: 590px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        /* Right Column (Centered Login Form) */
+        [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:nth-of-type(2) {
+            background-color: #FFFFFF !important;
+            padding: 3.5rem 3rem !important;
+            min-height: 590px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+        }
+
+        /* Responsive styling for Mobile */
+        @media (max-width: 768px) {
+            [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] {
+                margin: 1rem !important;
+                border-radius: 16px !important;
+            }
+            [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:nth-of-type(1) {
+                display: none !important;
+            }
+            [data-testid="stVerticalBlock"] > div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:nth-of-type(2) {
+                border-radius: 16px !important;
+                border-left: 1px solid #E2E8F0 !important;
+                padding: 2.25rem !important;
+            }
+        }
         </style>
         """,
         unsafe_allow_html=True
     )
 
-    # Center the login form
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
+    col1, col2 = st.columns([55, 45])
+    
+    with col1:
+        # Left Hero Panel Content
         st.markdown(
-            '<div style="text-align: center; padding: 2.5rem 0 1rem 0;">'
-            '<div style="font-size: 4.5rem; margin-bottom: 0.5rem; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.08));">🏦</div>'
-            '<h1 style="color: #1B2A4A; margin-bottom: 0.25rem; font-size: 2rem; font-weight: 800;">AI Banking Insights</h1>'
-            '<p style="color: #64748B; font-size: 1.05rem; font-weight: 500;">Customer Insights Platform v1.0</p>'
-            '</div>',
+            """
+            <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <!-- 8-pointed SVG asterisk logo -->
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">
+                        <line x1="12" y1="2" x2="12" y2="22"></line>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+                        <line x1="4.93" y1="19.07" x2="19.07" y2="4.93"></line>
+                    </svg>
+                    <div style="font-size: 0.85rem; font-weight: 750; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.85; margin-bottom: 2rem;">
+                        AI Banking Customer Insights
+                    </div>
+                    <h1 style="color: #FFFFFF; font-size: 2.1rem; font-weight: 800; line-height: 1.25; margin-bottom: 1.25rem;">
+                        Welcome to AI Banking Customer Insights
+                    </h1>
+                    <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; line-height: 1.5; max-width: 360px;">
+                        Unlock deep retail banking customer insights with predictive ML pipelines, CLV forecasting, and risk analysis.
+                    </p>
+                </div>
+                
+                <!-- Background decorative lines -->
+                <div class="left-bg-lines">
+                    <svg width="100%" height="100%" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="160" cy="160" r="100" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+                        <circle cx="160" cy="160" r="130" stroke="rgba(255,255,255,0.04)" stroke-width="1.5"/>
+                        <circle cx="160" cy="160" r="160" stroke="rgba(255,255,255,0.02)" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                
+                <!-- Footer copyright -->
+                <div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.55); font-weight: 500; margin-top: 3rem;">
+                    © 2026 AI Banking Customer Insights. All rights reserved.
+                </div>
+            </div>
+            """,
             unsafe_allow_html=True
         )
 
-        st.markdown('<div class="login-container">', unsafe_allow_html=True)
-        st.markdown('<h4 style="margin-top: 0; margin-bottom: 1.25rem; color: #1B2A4A; font-weight: 700;">🔐 Sign In</h4>', unsafe_allow_html=True)
+    with col2:
+        # Right Form Panel Content
+        st.markdown(
+            """
+            <div style="margin-bottom: 1.5rem;">
+                <h2 style="color: #1B2A4A; font-weight: 800; font-size: 1.75rem; margin: 0 0 0.25rem 0;">Welcome Back!</h2>
+                <p style="color: #64748B; font-size: 0.95rem; margin: 0;">Sign in to access your dashboard.</p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
         
+        # Username input + error block
         username = st.text_input("Username", placeholder="Enter your username", key="login_username")
+        username_error = st.empty()
         
-        # Show password toggle and input
-        show_pass = st.checkbox("👁️ Show password", key="show_pass")
+        # Password input + show password toggle overlay + error block
+        st.markdown('<div class="show-pass-container">', unsafe_allow_html=True)
+        show_pass = st.checkbox("👁️", key="show_pass", label_visibility="collapsed")
         pass_type = "default" if show_pass else "password"
         password = st.text_input("Password", type=pass_type, placeholder="Enter your password", key="login_password")
-        
-        error_placeholder = st.empty()
-        submitted = st.button("🔓 Login", use_container_width=True, type="primary", key="login_submit_btn")
         st.markdown('</div>', unsafe_allow_html=True)
-
+        password_error = st.empty()
+        
+        st.markdown('<div style="height: 12px;"></div>', unsafe_allow_html=True)
+        
+        # Dark navy submit button
+        st.markdown('<div class="login-btn-dark">', unsafe_allow_html=True)
+        submitted = st.button("Login Now", use_container_width=True, key="login_submit_btn")
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Form submission validation and authentication logic
         if submitted:
-            if not username or not password:
-                error_placeholder.markdown('<div class="login-inline-error">⚠️ Please enter both username and password.</div>', unsafe_allow_html=True)
-            else:
-                with st.spinner("🔒 Securing connection & authenticating..."):
+            has_error = False
+            username_error.empty()
+            password_error.empty()
+            
+            if not username:
+                username_error.markdown('<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600;">⚠️ Username is required.</div>', unsafe_allow_html=True)
+                has_error = True
+            if not password:
+                password_error.markdown('<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600;">⚠️ Password is required.</div>', unsafe_allow_html=True)
+                has_error = True
+                
+            if not has_error:
+                with st.spinner("Logging in..."):
                     import time
-                    time.sleep(0.6) # Subtle visual loading state
+                    time.sleep(0.5)
                     user = authenticate_user(username, password)
                     if user:
                         token = create_token(
@@ -69,50 +183,58 @@ def login_page():
                         st.session_state["jwt_token"] = token
                         st.session_state["user"] = user
                         log_activity(user["user_id"], user["username"], "LOGIN", "User logged in successfully")
-                        error_placeholder.markdown(f'<div class="login-inline-success">✅ Welcome back, {user["full_name"]}! Redirecting...</div>', unsafe_allow_html=True)
-                        time.sleep(0.4)
                         st.rerun()
                     else:
-                        error_placeholder.markdown('<div class="login-inline-error">❌ Invalid username or password.</div>', unsafe_allow_html=True)
+                        password_error.markdown('<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600;">❌ Invalid username or password.</div>', unsafe_allow_html=True)
 
-        # ── Demo Credentials Panel ──
-        st.markdown("<br><hr>", unsafe_allow_html=True)
-        st.markdown('<h5 style="color: #1B2A4A; font-weight: 700; margin-bottom: 0.5rem;">🎯 Demo Login Credentials</h5>', unsafe_allow_html=True)
-        st.markdown(
-            '<style>'
-            '.demo-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 10px; border-radius: 8px; overflow: hidden; border: 1px solid #E2E8F0; }'
-            '.demo-table th { background: #1B2A4A; color: #FFFFFF; padding: 10px 14px; text-align: left; font-weight: 600; }'
-            '.demo-table td { padding: 8px 14px; border-bottom: 1px solid #E2E8F0; color: #1B2A4A !important; background: #FFFFFF; }'
-            '.demo-table code { background: #F1F5F9 !important; color: #1B2A4A !important; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 0.85rem; }'
-            '.demo-table tr:hover td { background: #F8FAFC; }'
-            '.role-pill { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }'
-            '</style>',
-            unsafe_allow_html=True
-        )
-
-        role_colors = {
-            "admin": "background:#FFEBEE; color:#C62828;",
-            "bank_manager": "background:#E8F5E9; color:#2E7D32;",
-            "data_analyst": "background:#E0F7FA; color:#006064;",
-        }
-
-        table_rows = ""
-        for u in DEMO_USERS:
-            style_str = role_colors.get(u["role"], "background:#F1F5F9; color:#64748B;")
-            role_label = ROLES.get(u["role"], u["role"])
-            table_rows += f"<tr><td><code>{u['username']}</code></td><td><code>{u['password']}</code></td><td><span class=\"role-pill\" style=\"{style_str}\">{role_label}</span></td></tr>"
-
-        st.markdown(
-            f'<table class="demo-table"><thead><tr><th>Username</th><th>Password</th><th>Role</th></tr></thead><tbody>{table_rows}</tbody></table>',
-            unsafe_allow_html=True
-        )
-
-        st.markdown(
-            '<div style="margin-top: 1rem; padding: 0.75rem; background: #FFF3E0; border-radius: 8px; border-left: 4px solid #FF9800; font-size: 0.85rem; color: #E65100; font-weight: 500;">'
-            '💡 <strong>Tip:</strong> Each role has different page access. Try logging in with different roles to see the difference.'
-            '</div>',
-            unsafe_allow_html=True
-        )
+        # Demo Credentials Panel inside minimal card expander
+        st.markdown('<div style="height: 12px;"></div>', unsafe_allow_html=True)
+        with st.expander("🎯 View Demo Credentials", expanded=False):
+            st.markdown(
+                """
+                <style>
+                .demo-card-item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border-bottom: 1px solid #F1F5F9;
+                    padding: 8px 0;
+                }
+                .demo-card-item:last-child {
+                    border-bottom: none;
+                }
+                .demo-role-badge {
+                    display: inline-block;
+                    padding: 2px 10px;
+                    border-radius: 12px;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                }
+                </style>
+                <div style="background: #FFFFFF; padding: 4px; font-size: 0.85rem;">
+                    <div style="margin-bottom: 8px; font-weight: 600; color: #64748B;">Test credentials with pre-configured roles:</div>
+                    <div class="demo-card-item">
+                        <span>👤 <code>admin</code> (admin123)</span>
+                        <span class="demo-role-badge" style="background:#FFEBEE; color:#C62828;">Admin</span>
+                    </div>
+                    <div class="demo-card-item">
+                        <span>👤 <code>manager</code> (manager123)</span>
+                        <span class="demo-role-badge" style="background:#E8F5E9; color:#2E7D32;">Manager</span>
+                    </div>
+                    <div class="demo-card-item">
+                        <span>👤 <code>analyst</code> (analyst123)</span>
+                        <span class="demo-role-badge" style="background:#E0F7FA; color:#006064;">Analyst</span>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+            st.markdown(
+                '<div style="margin-top: 8px; padding: 0.75rem; background: #FFF3E0; border-radius: 8px; border-left: 4px solid #FF9800; font-size: 0.82rem; color: #E65100; font-weight: 500;">'
+                '💡 <strong>Tip:</strong> Log in with different roles to test different page permissions.'
+                '</div>',
+                unsafe_allow_html=True
+            )
 
 
 def render_sidebar(current_page: str = "Home"):
