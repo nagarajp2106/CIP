@@ -4,7 +4,8 @@ Settings Page — Theme, configuration, and preferences.
 import streamlit as st
 from authentication import check_auth, require_role
 from database import get_db_size
-from config import APP_NAME, APP_VERSION, DATABASE_PATH, JWT_EXPIRY_HOURS, ROLES
+from config import APP_NAME, APP_VERSION, DATABASE_PATH, JWT_EXPIRY_HOURS, ROLES, PAGE_ACCESS
+from utils.icons import render_html_icon
 
 # ── Auth ──
 user = check_auth()
@@ -88,8 +89,6 @@ with tab3:
         st.markdown("---")
         st.markdown("### Role Permissions")
 
-        from config import PAGE_ACCESS
-from utils.icons import render_html_icon
         role_matrix = {}
         for page, roles in PAGE_ACCESS.items():
             for role in roles:
