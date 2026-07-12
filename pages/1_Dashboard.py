@@ -19,7 +19,12 @@ if not user:
     st.switch_page("app.py")
 require_role("Dashboard")
 
-st.markdown(f"# {render_html_icon('dashboard', size='30px')} Executive Dashboard", unsafe_allow_html=True)
+st.markdown(f"""
+<h1 style="display: flex; align-items: center; gap: 10px; margin-top: 0; color: var(--primary); font-weight: 700; font-size: 2.2rem; line-height: 1.2;">
+    {render_html_icon('dashboard', size='36px', color='var(--primary)')}
+    <span>Executive Dashboard</span>
+</h1>
+""", unsafe_allow_html=True)
 st.markdown("Real-time banking KPIs and performance metrics")
 
 # ──────────────────────────────────────────────
@@ -137,9 +142,7 @@ with ch1:
         df_growth.rename(columns={"month": "Month", "cumulative": "Customers"}, inplace=True)
         fig = create_area_chart(df_growth, "Month", "Customers", "Customer Growth Over Time")
         # Dual-line visual style: px.area will show a nice transparent gradient fill under the line
-        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
         st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
-        st.markdown('</div>', unsafe_allow_html=True)
 
 with ch2:
     df_deposits = pd.read_sql(f"""
@@ -151,9 +154,7 @@ with ch2:
     if not df_deposits.empty:
         df_deposits.rename(columns={"month": "Month", "total_deposits": "Total Deposits ($)"}, inplace=True)
         fig = create_bar_chart(df_deposits, "Month", "Total Deposits ($)", "Monthly Deposits Trend")
-        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
         st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
-        st.markdown('</div>', unsafe_allow_html=True)
 
 # Row 2: Loan Trend & Revenue Trend
 ch3, ch4 = st.columns(2)
@@ -168,9 +169,7 @@ with ch3:
     if not df_loans.empty:
         df_loans.rename(columns={"loan_type": "Loan Type", "total_amount": "Total Value ($)"}, inplace=True)
         fig = create_bar_chart(df_loans, "Loan Type", "Total Value ($)", "Loan Distribution by Type")
-        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
         st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
-        st.markdown('</div>', unsafe_allow_html=True)
 
 with ch4:
     df_revenue = pd.read_sql(f"""
@@ -182,9 +181,7 @@ with ch4:
     if not df_revenue.empty:
         df_revenue.rename(columns={"month": "Month", "revenue": "Total Revenue ($)"}, inplace=True)
         fig = create_line_chart(df_revenue, "Month", "Total Revenue ($)", "Revenue Trend")
-        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
         st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
-        st.markdown('</div>', unsafe_allow_html=True)
 
 # Row 3: Customer Distribution & Regional Analysis
 ch5, ch6 = st.columns(2)
@@ -198,9 +195,7 @@ with ch5:
     if not df_region.empty:
         df_region.rename(columns={"region": "Region", "customers": "Customers"}, inplace=True)
         fig = create_pie_chart(df_region, "Region", "Customers", "Customer Distribution by Region")
-        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
         st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
-        st.markdown('</div>', unsafe_allow_html=True)
 
 with ch6:
     df_branch = pd.read_sql(f"""
@@ -211,9 +206,7 @@ with ch6:
     if not df_branch.empty:
         df_branch.rename(columns={"branch": "Branch", "customers": "Customers"}, inplace=True)
         fig = create_bar_chart(df_branch, "Branch", "Customers", "Top Branches by Customers")
-        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
         st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
-        st.markdown('</div>', unsafe_allow_html=True)
 
 # Row 4: Monthly Transactions & Product Distribution
 ch7, ch8 = st.columns(2)
@@ -228,9 +221,7 @@ with ch7:
     if not df_monthly.empty:
         df_monthly.rename(columns={"month": "Month", "count": "Transactions", "type": "Transaction Type"}, inplace=True)
         fig = create_bar_chart(df_monthly, "Month", "Transactions", "Monthly Transactions by Type", color="Transaction Type", barmode="stack")
-        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
         st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
-        st.markdown('</div>', unsafe_allow_html=True)
 
 with ch8:
     df_products = pd.read_sql(f"""
@@ -242,8 +233,6 @@ with ch8:
     if not df_products.empty:
         df_products.rename(columns={"account_type": "Account Type", "count": "Accounts"}, inplace=True)
         fig = create_donut_chart(df_products, "Account Type", "Accounts", "Product Distribution")
-        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
         st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
-        st.markdown('</div>', unsafe_allow_html=True)
 
 conn.close()

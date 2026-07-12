@@ -61,14 +61,12 @@ def kpi_card(title: str, value, icon: str = "", delta=None, delta_label="", colo
     if icon:
         icon_html = f'<div class="kpi-icon">{render_html_icon(icon, size="2.5rem")}</div>'
 
-    return f"""
-    <div class="kpi-card {color} animate-in">
-        {icon_html}
-        <div class="kpi-value">{value}</div>
-        <div class="kpi-label">{title}</div>
-        {delta_html}
-    </div>
-    """
+    return f"""<div class="kpi-card {color} animate-in">
+{icon_html}
+<div class="kpi-value">{value}</div>
+<div class="kpi-label">{title}</div>
+{delta_html}
+</div>"""
 
 
 # ──────────────────────────────────────────────
@@ -239,26 +237,22 @@ def create_radar_chart(categories, values, title="", height=400):
 
 def prediction_result_card(label: str, value: str, score: float, css_class: str = "") -> str:
     """Generate HTML for a prediction result display card."""
-    return f"""
-    <div class="prediction-result animate-in">
-        <div class="prediction-label">{label}</div>
-        <div class="prediction-value {css_class}">{value}</div>
-        <div class="prediction-score">Confidence: {score:.1%}</div>
-    </div>
-    """
+    return f"""<div class="prediction-result animate-in">
+<div class="prediction-label">{label}</div>
+<div class="prediction-value {css_class}">{value}</div>
+<div class="prediction-score">Confidence: {score:.1%}</div>
+</div>"""
 
 
 def progress_bar_html(value: float, max_val: float = 100, color: str = "#2E86AB", label: str = "") -> str:
     """Generate HTML for a styled progress bar."""
     pct = min((value / max_val) * 100, 100) if max_val > 0 else 0
-    return f"""
-    <div style="margin: 0.3rem 0;">
-        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
-            <span style="color: #1B2A4A; font-weight: 500;">{label}</span>
-            <span style="color: #6C757D;">{value:.1f}%</span>
-        </div>
-        <div class="progress-container">
-            <div class="progress-bar" style="width: {pct}%; background: {color};">{pct:.0f}%</div>
-        </div>
-    </div>
-    """
+    return f"""<div style="margin: 0.3rem 0;">
+<div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+<span style="color: #1B2A4A; font-weight: 500;">{label}</span>
+<span style="color: #6C757D;">{value:.1f}%</span>
+</div>
+<div class="progress-container">
+<div class="progress-bar" style="width: {pct}%; background: {color};">{pct:.0f}%</div>
+</div>
+</div>"""

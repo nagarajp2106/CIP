@@ -718,8 +718,24 @@ div[data-testid="stSidebarNav"] input {
     margin: 0 !important;
 }
 
-/* Avoid double borders and shadows when Plotly is inside a chart-card */
-.chart-card .js-plotly-plot {
+/* Style Streamlit Plotly Chart wrappers consistently as cards */
+div[data-testid="stPlotlyChart"] {
+    background: var(--card-bg) !important;
+    border-radius: var(--radius) !important;
+    padding: 1.5rem !important;
+    box-shadow: var(--card-shadow) !important;
+    border: 1px solid var(--border-color) !important;
+    transition: var(--transition) !important;
+    margin-bottom: 1.25rem !important;
+}
+
+div[data-testid="stPlotlyChart"]:hover {
+    box-shadow: var(--card-shadow-hover) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Ensure the inner Plotly plot itself is transparent and borderless */
+div[data-testid="stPlotlyChart"] .js-plotly-plot {
     border: none !important;
     box-shadow: none !important;
     border-radius: 0 !important;
