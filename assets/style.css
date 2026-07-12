@@ -774,3 +774,29 @@ div[data-testid="stFileUploadDropzone"]:focus-within {
     border-color: var(--secondary) !important;
     background-color: rgba(46, 134, 171, 0.04) !important;
 }
+
+/* ── Premium AI Insights Row Cards ── */
+.insight-row-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem !important;
+    border-radius: var(--radius) !important;
+    margin-bottom: 0.75rem !important;
+    box-shadow: 0 4px 15px rgba(27, 42, 74, 0.02) !important;
+    transition: var(--transition) !important;
+    border-left: 5px solid var(--border-color);
+}
+
+.insight-row-card:hover {
+    transform: translateX(5px) !important;
+    box-shadow: var(--card-shadow-hover) !important;
+}
+
+@media (max-width: 640px) {
+    .insight-row-card {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.5rem !important;
+    }
+}

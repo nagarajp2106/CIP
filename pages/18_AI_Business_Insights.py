@@ -15,8 +15,21 @@ if not user:
     st.switch_page("app.py")
 require_role("AI Business Insights")
 
-st.markdown(f"# {render_html_icon('smart_toy', size='30px')} AI Business Insights", unsafe_allow_html=True)
-st.markdown("Automatically generated data-driven insights for strategic decision making")
+# Page Header & Actions Layout
+col_head, col_btn = st.columns([4, 1])
+with col_head:
+    st.markdown(f"""<h1 style="display: flex; align-items: center; gap: 10px; margin: 0; color: var(--primary); font-weight: 700; font-size: 2.2rem; line-height: 1.2;">
+    {render_html_icon('smart_toy', size='36px', color='var(--primary)')}
+    <span>AI Business Insights</span>
+    </h1>""", unsafe_allow_html=True)
+    st.markdown("Automatically generated data-driven insights for strategic decision making")
+with col_btn:
+    st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
+    refresh_clicked = st.button("Refresh Insights", icon=":material/autorenew:", type="primary", use_container_width=True)
+    if refresh_clicked:
+        st.session_state.pop("insights_cache", None)
+        st.rerun()
+
 st.markdown("---")
 
 conn = get_connection()
@@ -163,10 +176,19 @@ def generate_insights() -> list[dict]:
     return insights
 
 
-# ── Generate and Display ──
-if st.button("Refresh Insights", icon=":material/autorenew:", type="primary"):
-    st.session_state.pop("insights_cache", None)
+def format_bold_text(text: str) -> str:
+    """Replace Markdown **bold** syntax with HTML <strong>bold</strong> syntax."""
+    parts = text.split("**")
+    formatted = []
+    for i, part in enumerate(parts):
+        if i % 2 == 1:
+            formatted.append(f"<strong>{part}</strong>")
+        else:
+            formatted.append(part)
+    return "".join(formatted)
 
+
+# ── Generate and Display ──
 if "insights_cache" not in st.session_state:
     with st.spinner("Analyzing data and generating insights..."):
         st.session_state["insights_cache"] = generate_insights()
@@ -182,38 +204,77 @@ for ins in insights:
 with s1:
     st.markdown(kpi_card("Total Insights", f"{len(insights)}", "smart_toy", color="blue"), unsafe_allow_html=True)
 with s2:
-    st.markdown(kpi_card("Categories", f"{len(categories)}", "folder", color="gold"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Categories", f"{len(categories)}", "category", color="gold"), unsafe_allow_html=True)
 with s3:
     warnings = sum(1 for i in insights if i["severity"] == "warning")
-    st.markdown(kpi_card("Warnings", f"{warnings}", "", color="orange"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Warnings", f"{warnings}", "warning", color="orange"), unsafe_allow_html=True)
 with s4:
     successes = sum(1 for i in insights if i["severity"] == "success")
-    st.markdown(kpi_card("Positive", f"{successes}", "", color="green"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Positive", f"{successes}", "check_circle", color="green"), unsafe_allow_html=True)
 
 st.markdown("---")
 
 # Category filter
-category_filter = st.selectbox("Filter by Category", ["All"] + list(categories.keys()))
+f1, f2 = st.columns([1, 2])
+with f1:
+    category_filter = st.selectbox("Filter by Category", ["All"] + list(categories.keys()))
+
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
 # Display insights
-severity_colors = {"success": "#28A745", "warning": "#FFC107", "info": "#2E86AB"}
-category_colors = {"Customer": "#2E86AB", "Revenue": "#28A745", "Risk": "#DC3545", "Operations": "#6F42C1"}
+severity_colors = {
+    "success": "var(--success)", 
+    "warning": "var(--warning)", 
+    "info": "var(--secondary)"
+}
+severity_bgs = {
+    "success": "var(--success-bg)", 
+    "warning": "var(--warning-bg)", 
+    "info": "var(--info-bg)"
+}
+category_colors = {
+    "Customer": "var(--secondary)", 
+    "Revenue": "var(--success)", 
+    "Risk": "var(--danger)", 
+    "Operations": "#6F42C1"
+}
 
 for insight in insights:
     if category_filter != "All" and insight["category"] != category_filter:
         continue
 
-    border_color = severity_colors.get(insight["severity"], "#6C757D")
-    cat_color = category_colors.get(insight["category"], "#6C757D")
+    border_color = severity_colors.get(insight["severity"], "var(--text-muted)")
+    bg_color = severity_bgs.get(insight["severity"], "var(--bg-light)")
+    cat_color = category_colors.get(insight["category"], "var(--text-muted)")
+
+    # Resolve icon
+    icon_name = insight.get("icon")
+    if not icon_name:
+        if insight["category"] == "Risk":
+            icon_name = "warning"
+        elif insight["category"] == "Revenue":
+            icon_name = "payments"
+        elif insight["category"] == "Operations":
+            icon_name = "settings"
+        else:
+            icon_name = "person"
+
+    # Format bold text syntax
+    formatted_text = format_bold_text(insight["text"])
 
     st.markdown(f"""
-    <div class="insight-card" style="border-left-color: {border_color};">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-            <div>
-                <span class="insight-icon" style="margin-right: 8px; vertical-align: middle;">{render_html_icon(insight['icon'] if insight['icon'] else ("warning" if insight['category'] == "Risk" else ("payments" if insight['category'] == "Revenue" else ("settings" if insight['category'] == "Operations" else "person"))), size="20px", color="var(--primary)")}</span>
-                <span class="insight-text">{insight['text']}</span>
-            </div>
-            <span class="insight-category" style="background: {cat_color}; color: white;">{insight['category']}</span>
+    <div class="insight-row-card" style="border-left-color: {border_color}; background-color: {bg_color};">
+        <div style="display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            {render_html_icon(icon_name, size="20px", color=border_color)}
+        </div>
+        <div style="flex-shrink: 0; min-width: 90px; text-align: center;">
+            <span style="display: inline-block; width: 90px; padding: 3px 8px; border-radius: 12px; background: {cat_color}; color: white; font-size: 0.75rem; font-weight: 600;">{insight['category']}</span>
+        </div>
+        <div style="flex-grow: 1; color: var(--text-main); font-size: 0.92rem; line-height: 1.4;">
+            {formatted_text}
         </div>
     </div>
     """, unsafe_allow_html=True)
+
+# Add spacer at bottom to prevent layout clipping
+st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
