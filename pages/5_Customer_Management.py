@@ -147,7 +147,7 @@ if selected_id:
     with p1:
         st.markdown(f"""
         <div class="kpi-card blue">
-            <h4 style="color:#1B2A4A; margin:0; display:flex; align-items:center; gap:8px;">' + render_html_icon('person', size='22px', color='var(--primary)') + f'{cust['name']}</h4>
+            <h4 style="color:#1B2A4A; margin:0; display:flex; align-items:center; gap:8px;">{render_html_icon('person', size='22px', color='var(--primary)')} {cust['name']}</h4>
             <p style="margin:0.25rem 0; color:#6C757D;">ID: {cust['customer_id']}</p>
             <p style="margin:0; color:#6C757D;">Gender: {cust.get('gender', 'N/A')} · Age: {cust.get('age', 'N/A')}</p>
         </div>

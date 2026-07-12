@@ -210,7 +210,7 @@ for insight in insights:
     <div class="insight-card" style="border-left-color: {border_color};">
         <div style="display: flex; justify-content: space-between; align-items: flex-start;">
             <div>
-                <span class="insight-icon" style="margin-right: 8px; vertical-align: middle;">' + render_html_icon(insight['icon'] if insight['icon'] else ("warning" if insight['category'] == "Risk" else ("payments" if insight['category'] == "Revenue" else ("settings" if insight['category'] == "Operations" else "person"))), size="20px", color="var(--primary)") + '</span>
+                <span class="insight-icon" style="margin-right: 8px; vertical-align: middle;">{render_html_icon(insight['icon'] if insight['icon'] else ("warning" if insight['category'] == "Risk" else ("payments" if insight['category'] == "Revenue" else ("settings" if insight['category'] == "Operations" else "person"))), size="20px", color="var(--primary)")}</span>
                 <span class="insight-text">{insight['text']}</span>
             </div>
             <span class="insight-category" style="background: {cat_color}; color: white;">{insight['category']}</span>

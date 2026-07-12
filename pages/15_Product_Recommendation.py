@@ -146,7 +146,7 @@ if recommendations:
         <div class="insight-card" style="border-left-color: {color};">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                    <span style="margin-right: 0.75rem; vertical-align: middle;">' + render_html_icon(rec['icon'], size='24px', color='var(--primary)') + '</span>
+                    <span style="margin-right: 0.75rem; vertical-align: middle;">{render_html_icon(rec['icon'], size='24px', color='var(--primary)')}</span>
                     <strong style="font-size: 1.1rem; color: #1B2A4A;">{rec['product']}</strong>
                 </div>
                 <span style="font-size: 1.2rem; font-weight: 700; color: {color};">{rec['score']}%</span>
