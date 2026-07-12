@@ -72,9 +72,23 @@ venv.bak/
 # Project database & backups
 database/banking.db
 database/backups/
+*.db
 
 # Machine Learning models (trained locally)
 models/*.pkl
+
+# User uploaded files & reports
+uploaded_files/*
+!uploaded_files/.gitkeep
+reports/*
+!reports/.gitkeep
+
+# IDE/Editor configurations
+.vscode/
+.idea/
+*.suo
+*.sln
+*.swp
 
 # OS files
 .DS_Store
