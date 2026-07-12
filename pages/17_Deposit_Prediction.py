@@ -15,7 +15,10 @@ if not user:
     st.switch_page("app.py")
 require_role("Deposit Prediction")
 
-st.markdown(f"# {render_html_icon('savings', size='30px')} Deposit Subscription Prediction", unsafe_allow_html=True)
+st.markdown(f"""<h1 style="display: flex; align-items: center; gap: 10px; margin-top: 0; color: var(--primary); font-weight: 700; font-size: 2.2rem; line-height: 1.2;">
+{render_html_icon('savings', size='36px', color='var(--primary)')}
+<span>Deposit Subscription Prediction</span>
+</h1>""", unsafe_allow_html=True)
 st.markdown("Predict whether a customer will subscribe to a term deposit")
 st.markdown("---")
 
@@ -36,16 +39,17 @@ model = model_data["model"]
 features = model_data["features"]
 metrics = model_data.get("metrics", {})
 
+# Model Performance Cards (Standardized)
 if metrics:
     m1, m2, m3, m4 = st.columns(4)
     with m1:
-        st.markdown(kpi_card("Accuracy", f"{metrics.get('accuracy', 0):.1%}", "track_changes", color="green"), unsafe_allow_html=True)
+        st.markdown(kpi_card("Accuracy", f"{metrics.get('accuracy', 0):.1%}", "track_changes", color="blue"), unsafe_allow_html=True)
     with m2:
-        st.markdown(kpi_card("Precision", f"{metrics.get('precision', 0):.1%}", "search", color="blue"), unsafe_allow_html=True)
+        st.markdown(kpi_card("Precision", f"{metrics.get('precision', 0):.1%}", "insights", color="blue"), unsafe_allow_html=True)
     with m3:
-        st.markdown(kpi_card("Recall", f"{metrics.get('recall', 0):.1%}", "", color="gold"), unsafe_allow_html=True)
+        st.markdown(kpi_card("Recall", f"{metrics.get('recall', 0):.1%}", "history", color="blue"), unsafe_allow_html=True)
     with m4:
-        st.markdown(kpi_card("F1 Score", f"{metrics.get('f1_score', 0):.1%}", "bolt", color="teal"), unsafe_allow_html=True)
+        st.markdown(kpi_card("F1 Score", f"{metrics.get('f1_score', 0):.1%}", "analytics", color="blue"), unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -54,20 +58,23 @@ tab1, tab2 = st.tabs([":material/change_circle: Individual Prediction", ":materi
 with tab1:
     st.markdown("### Predict Deposit Subscription")
 
-    selected_id = st.selectbox("Select Customer", customers_df["customer_id"].tolist(),
-        format_func=lambda x: f"{x} — {customers_df[customers_df['customer_id']==x]['name'].values[0]}")
+    selected_id = st.selectbox(
+        "Select Customer", 
+        customers_df["customer_id"].tolist(),
+        format_func=lambda x: f"{x} — {customers_df[customers_df['customer_id']==x]['name'].values[0]}"
+    )
 
     cust = customers_df[customers_df["customer_id"] == selected_id].iloc[0]
 
     ic1, ic2 = st.columns(2)
     with ic1:
-        age = st.number_input("Age", value=int(cust.get("age", 40)), key="dp_age")
-        income = st.number_input("Income", value=float(cust.get("income", 50000)), key="dp_income")
+        age = st.number_input("Age", min_value=18, max_value=120, value=int(cust.get("age", 40)), step=1, key="dp_age")
+        income = st.number_input("Income ($)", min_value=0.0, value=float(cust.get("income", 50000)), step=1000.0, key="dp_income")
     with ic2:
-        balance = st.number_input("Balance", value=float(cust.get("balance", 10000)), key="dp_balance")
-        credit_score = st.number_input("Credit Score", value=int(cust.get("credit_score", 700)), key="dp_cs")
+        balance = st.number_input("Balance ($)", min_value=-10000.0, value=float(cust.get("balance", 10000)), step=500.0, key="dp_balance")
+        credit_score = st.number_input("Credit Score", min_value=300, max_value=850, value=int(cust.get("credit_score", 700)), step=1, key="dp_cs")
 
-    if st.button("Predict", icon=":material/change_circle:", type="primary", use_container_width=True):
+    if st.button("Predict Subscription", icon=":material/savings:", type="primary", use_container_width=True):
         input_data = pd.DataFrame([{"age": age, "income": income, "balance": balance, "credit_score": credit_score}])
         input_features = input_data[[f for f in features if f in input_data.columns]]
 
@@ -81,12 +88,12 @@ with tab1:
         else:
             st.markdown(prediction_result_card("Deposit Subscription", "NO — Unlikely to Subscribe", 1 - yes_prob, "prediction-rejected"), unsafe_allow_html=True)
 
-        st.markdown(progress_bar_html(yes_prob * 100, label="Subscription Probability", color="#28A745" if prediction == 1 else "#DC3545"), unsafe_allow_html=True)
+        st.markdown(progress_bar_html(yes_prob * 100, label="Subscription Probability", color="var(--success)" if prediction == 1 else "var(--danger)"), unsafe_allow_html=True)
 
         importance_df = get_feature_importance(model, features)
         if not importance_df.empty:
             fig = create_horizontal_bar(importance_df, "importance", "feature", "Key Factors")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
 with tab2:
     st.markdown("### Campaign Targeting — Find Likely Subscribers")
@@ -105,22 +112,74 @@ with tab2:
             yes_count = (predictions == 1).sum()
             no_count = (predictions == 0).sum()
 
+            # Aligned Target Summary Cards (Likely=Green, Unlikely=Blue, Conv Rate=Blue)
             s1, s2, s3 = st.columns(3)
             with s1:
-                st.markdown(kpi_card("Likely Subscribers", f"{yes_count:,}", "", color="green"), unsafe_allow_html=True)
+                st.markdown(kpi_card("Likely Subscribers", f"{yes_count:,}", "check_circle", color="green"), unsafe_allow_html=True)
             with s2:
-                st.markdown(kpi_card("Unlikely", f"{no_count:,}", "cancel", color="red"), unsafe_allow_html=True)
+                st.markdown(kpi_card("Unlikely", f"{no_count:,}", "cancel", color="blue"), unsafe_allow_html=True)
             with s3:
                 conv_rate = round(yes_count / max(len(predictions), 1) * 100, 1)
-                st.markdown(kpi_card("Conversion Rate", f"{conv_rate}%", "", color="gold"), unsafe_allow_html=True)
+                st.markdown(kpi_card("Conversion Rate", f"{conv_rate}%", "trending_up", color="blue"), unsafe_allow_html=True)
 
+            # Subscription Donut Chart with strict green/red mapping
             dist = result_df["will_subscribe"].value_counts().reset_index()
             dist.columns = ["response", "count"]
-            fig = create_pie_chart(dist, "response", "count", "Subscription Prediction Distribution", hole=0.4)
-            st.plotly_chart(fig, use_container_width=True)
+            color_map = {"Yes": "#2E7D32", "No": "#C62828"} # Green and Red
+            fig = create_pie_chart(dist, "response", "count", "Subscription Prediction Distribution", hole=0.4, color_discrete_map=color_map)
+            st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
+            # Custom HTML targets table
             st.markdown(f"#### {render_html_icon('campaign', size='20px')} Top Campaign Targets", unsafe_allow_html=True)
-            st.dataframe(result_df[result_df["will_subscribe"] == "Yes"].head(30), use_container_width=True)
+            
+            targets_df = result_df[result_df["will_subscribe"] == "Yes"].head(30)
+            
+            def render_targets_table(df: pd.DataFrame) -> str:
+                html = """<table style="width: 100%; border-collapse: collapse; margin-top: 1rem; border-radius: 8px; overflow: hidden; font-size: 0.9rem;">
+<thead>
+<tr style="background-color: var(--primary); color: white; text-align: left; font-weight: 600;">
+<th style="padding: 12px;">Customer ID</th>
+<th style="padding: 12px;">Name</th>
+<th style="padding: 12px;">Age</th>
+<th style="padding: 12px;">Income</th>
+<th style="padding: 12px;">Balance</th>
+<th style="padding: 12px;">Will Subscribe</th>
+<th style="padding: 12px;">Probability</th>
+</tr>
+</thead>
+<tbody>"""
+                for idx, row in df.reset_index(drop=True).iterrows():
+                    # Zebra striping
+                    row_bg = "var(--card-bg)" if idx % 2 == 0 else "var(--bg-light)"
+                    
+                    # Will Subscribe badge
+                    badge_html = '<span class="status-pill success" style="padding: 2px 8px; font-size: 0.78rem;">Yes</span>'
+                    
+                    # Probability progress bar style
+                    prob = row["probability"]
+                    bar_color = "var(--success)" if prob >= 75 else "var(--secondary)" if prob >= 50 else "var(--warning)"
+                    progress_html = f"""<div style="display: flex; align-items: center; gap: 8px; width: 100%;">
+<div style="flex-grow: 1; background: #E2E8F0; border-radius: 4px; height: 6px; overflow: hidden;">
+<div style="background: {bar_color}; width: {prob}%; height: 100%;"></div>
+</div>
+<span style="font-weight: 600; width: 45px; text-align: right;">{prob:.1f}%</span>
+</div>"""
+                    
+                    html += f"""<tr style="background-color: {row_bg}; border-bottom: 1px solid var(--border-color); color: var(--text-main);">
+<td style="padding: 12px; font-weight: 600;">{row['customer_id']}</td>
+<td style="padding: 12px;">{row['name']}</td>
+<td style="padding: 12px;">{row['age']}</td>
+<td style="padding: 12px;">${row['income']:,.0f}</td>
+<td style="padding: 12px;">${row['balance']:,.0f}</td>
+<td style="padding: 12px;">{badge_html}</td>
+<td style="padding: 12px; min-width: 140px;">{progress_html}</td>
+</tr>"""
+                html += "</tbody></table>"
+                return html
+
+            st.markdown(render_targets_table(targets_df), unsafe_allow_html=True)
+            
+            st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
 
             csv = result_df.to_csv(index=False)
-            st.download_button("Download Target List", csv, "deposit_targets.csv", "text/csv", icon=":material/download:")
+            st.download_button("Download Target List", csv, "deposit_targets.csv", "text/csv", icon=":material/download:", use_container_width=True)

@@ -102,9 +102,12 @@ def create_horizontal_bar(df, x, y, title="", color=None, height=400):
     return apply_layout(fig, title, height)
 
 
-def create_pie_chart(df, names, values, title="", hole=0, height=400):
+def create_pie_chart(df, names, values, title="", hole=0, color_discrete_map=None, height=400):
     """Create a styled pie/donut chart."""
-    fig = px.pie(df, names=names, values=values, hole=hole)
+    if color_discrete_map is not None:
+        fig = px.pie(df, names=names, values=values, hole=hole, color=names, color_discrete_map=color_discrete_map)
+    else:
+        fig = px.pie(df, names=names, values=values, hole=hole)
     fig.update_traces(
         textposition="inside", textinfo="percent+label",
         marker=dict(line=dict(color="white", width=2))
