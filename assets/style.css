@@ -89,11 +89,21 @@ section[data-testid="stSidebar"] {
     border-right: none !important;
 }
 
-/* Hide standard Streamlit page navigation list */
+/* Hide standard Streamlit page navigation list and any auto-generated sidebar links */
 [data-testid="stSidebarNav"], 
 .stSidebarNav,
-[data-testid="stSidebarNavItems"] {
+[data-testid="stSidebarNavItems"],
+[data-testid="stSidebarNavLink"],
+ul[class*="stSidebarNav"],
+div[class*="stSidebarNav"],
+nav[class*="stSidebarNav"] {
     display: none !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
 }
 
 [data-testid="stSidebarUserContent"] {
