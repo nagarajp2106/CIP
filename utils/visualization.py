@@ -120,7 +120,7 @@ def create_donut_chart(df, names, values, title="", height=400):
 def create_histogram(df, x, title="", nbins=30, color=None, height=400):
     """Create a styled histogram."""
     fig = px.histogram(df, x=x, nbins=nbins, color=color, marginal="box")
-    fig.update_traces(marker=dict(cornerradius=4))
+    fig.update_traces(marker=dict(cornerradius=4), selector=dict(type="histogram"))
     return apply_layout(fig, title, height)
 
 
