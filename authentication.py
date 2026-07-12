@@ -137,52 +137,54 @@ Unlock deep retail banking customer insights with predictive ML pipelines, CLV f
             unsafe_allow_html=True
         )
         
-        # Username input + error block
-        username = st.text_input("Username", placeholder="Enter your username", key="login_username")
-        username_error = st.empty()
-        
-        # Password input + error block
-        password = st.text_input("Password", type="password", placeholder="Enter your password", key="login_password")
-        password_error = st.empty()
-        
-        st.markdown('<div style="height: 12px;"></div>', unsafe_allow_html=True)
-        
-        # Dark navy submit button
-        st.markdown('<div class="login-btn-dark">', unsafe_allow_html=True)
-        submitted = st.button("Login Now", use_container_width=True, key="login_submit_btn")
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-        # Form submission validation and authentication logic
-        if submitted:
-            has_error = False
-            username_error.empty()
-            password_error.empty()
+        # Login Form block for proper Tab order and Enter key submission support
+        with st.form(key="login_form", border=False):
+            # Username input + error block
+            username = st.text_input("Username", placeholder="Enter your username", key="login_username")
+            username_error = st.empty()
             
-            if not username:
-                username_error.markdown(f'<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600; display: flex; align-items: center; gap: 4px;">{render_html_icon("warning", size="16px", color="#C62828")} Username is required.</div>', unsafe_allow_html=True)
-                has_error = True
-            if not password:
-                password_error.markdown(f'<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600; display: flex; align-items: center; gap: 4px;">{render_html_icon("warning", size="16px", color="#C62828")} Password is required.</div>', unsafe_allow_html=True)
-                has_error = True
+            # Password input + error block
+            password = st.text_input("Password", type="password", placeholder="Enter your password", key="login_password")
+            password_error = st.empty()
+            
+            st.markdown('<div style="height: 12px;"></div>', unsafe_allow_html=True)
+            
+            # Dark navy submit button
+            st.markdown('<div class="login-btn-dark">', unsafe_allow_html=True)
+            submitted = st.form_submit_button("Login Now", use_container_width=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+            
+            # Form submission validation and authentication logic
+            if submitted:
+                has_error = False
+                username_error.empty()
+                password_error.empty()
                 
-            if not has_error:
-                with st.spinner("Logging in..."):
-                    import time
-                    time.sleep(0.5)
-                    user = authenticate_user(username, password)
-                    if user:
-                        token = create_token(
-                            user_id=user["user_id"],
-                            username=user["username"],
-                            role=user["role"],
-                            full_name=user["full_name"],
-                        )
-                        st.session_state["jwt_token"] = token
-                        st.session_state["user"] = user
-                        log_activity(user["user_id"], user["username"], "LOGIN", "User logged in successfully")
-                        st.rerun()
-                    else:
-                        password_error.markdown(f'<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600; display: flex; align-items: center; gap: 4px;">{render_html_icon("cancel", size="16px", color="#C62828")} Invalid username or password.</div>', unsafe_allow_html=True)
+                if not username:
+                    username_error.markdown(f'<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600; display: flex; align-items: center; gap: 4px;">{render_html_icon("warning", size="16px", color="#C62828")} Username is required.</div>', unsafe_allow_html=True)
+                    has_error = True
+                if not password:
+                    password_error.markdown(f'<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600; display: flex; align-items: center; gap: 4px;">{render_html_icon("warning", size="16px", color="#C62828")} Password is required.</div>', unsafe_allow_html=True)
+                    has_error = True
+                    
+                if not has_error:
+                    with st.spinner("Logging in..."):
+                        import time
+                        time.sleep(0.5)
+                        user = authenticate_user(username, password)
+                        if user:
+                            token = create_token(
+                                user_id=user["user_id"],
+                                username=user["username"],
+                                role=user["role"],
+                                full_name=user["full_name"],
+                            )
+                            st.session_state["jwt_token"] = token
+                            st.session_state["user"] = user
+                            log_activity(user["user_id"], user["username"], "LOGIN", "User logged in successfully")
+                            st.rerun()
+                        else:
+                            password_error.markdown(f'<div style="color: #C62828; font-size: 0.85rem; margin-top: 4px; margin-bottom: 8px; font-weight: 600; display: flex; align-items: center; gap: 4px;">{render_html_icon("cancel", size="16px", color="#C62828")} Invalid username or password.</div>', unsafe_allow_html=True)
 
         # Demo Credentials Panel inside minimal card expander
         st.markdown('<div style="height: 12px;"></div>', unsafe_allow_html=True)
