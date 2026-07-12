@@ -110,8 +110,8 @@ COLORS = {
 
 # Chart color sequence for Plotly
 CHART_COLORS = [
-    "#2E86AB", "#D4AF37", "#28A745", "#DC3545", "#FFC107",
-    "#17A2B8", "#6F42C1", "#FD7E14", "#20C997", "#E83E8C",
+    "#2E86AB", "#1B2A4A", "#D4AF37", "#5B6B8A", "#4B9CBE",
+    "#6CA6C1", "#8EBAD0", "#C1D5E0", "#A4B8C4",
 ]
 
 # ──────────────────────────────────────────────

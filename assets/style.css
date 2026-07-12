@@ -701,3 +701,27 @@ label[data-testid="stWidgetLabel"] p {
     color: #FFFFFF !important;
     box-shadow: 0 4px 12px rgba(198, 40, 40, 0.25) !important;
 }
+
+/* Hide Streamlit default header (Deploy button and Kebab menu) */
+div[data-testid="stHeader"], header {
+    display: none !important;
+    height: 0 !important;
+}
+
+/* Hide default page search/filter bar in sidebar navigation */
+[data-testid="stSidebarNav"] input,
+[data-testid="stSidebarNav"] .stTextInput,
+div[data-testid="stSidebarNav"] input {
+    display: none !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Avoid double borders and shadows when Plotly is inside a chart-card */
+.chart-card .js-plotly-plot {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+}

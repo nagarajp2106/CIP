@@ -21,7 +21,6 @@ require_role("Dashboard")
 
 st.markdown(f"# {render_html_icon('dashboard', size='30px')} Executive Dashboard", unsafe_allow_html=True)
 st.markdown("Real-time banking KPIs and performance metrics")
-st.markdown("---")
 
 # ──────────────────────────────────────────────
 # Interactive Filters Panel (Top Bar)
@@ -82,7 +81,7 @@ total_deposits = pd.read_sql(f"SELECT COALESCE(SUM(amount), 0) as s FROM transac
 total_loans_amt = pd.read_sql(f"SELECT COALESCE(SUM(loan_amount), 0) as s FROM loans JOIN customers ON loans.customer_id = customers.customer_id WHERE {where_clause_joined}", conn, params=params).iloc[0]["s"]
 avg_balance = pd.read_sql(f"SELECT COALESCE(AVG(balance), 0) as a FROM customers WHERE {where_clause_cust}", conn, params=params).iloc[0]["a"]
 total_revenue = pd.read_sql(f"SELECT COALESCE(SUM(amount), 0) as s FROM transactions JOIN customers ON transactions.customer_id = customers.customer_id WHERE {where_clause_joined}", conn, params=params).iloc[0]["s"]
-monthly_txns = pd.read_sql(f"SELECT COUNT(*) as c FROM transactions JOIN customers ON transactions.customer_id = customers.customer_id WHERE date >= date('now', '-30 days') AND {where_clause_joined}", conn, params=params).iloc[0]["c"]
+monthly_txns = pd.read_sql(f"SELECT COUNT(*) as c FROM transactions JOIN customers ON transactions.customer_id = customers.customer_id WHERE date >= date((SELECT MAX(date) FROM transactions), '-30 days') AND {where_clause_joined}", conn, params=params).iloc[0]["c"]
 churn_rate = round((1 - active_customers / max(total_customers, 1)) * 100, 1)
 
 # Row 1
@@ -90,35 +89,33 @@ r1c1, r1c2, r1c3, r1c4 = st.columns(4)
 with r1c1:
     st.markdown(kpi_card("Total Customers", f"{total_customers:,}", "", delta=3.2, delta_label="vs last quarter", color="blue"), unsafe_allow_html=True)
 with r1c2:
-    st.markdown(kpi_card("Total Accounts", f"{total_accounts:,}", "", delta=1.5, delta_label="vs last quarter", color="gold"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Total Accounts", f"{total_accounts:,}", "", delta=1.5, delta_label="vs last quarter", color="blue"), unsafe_allow_html=True)
 with r1c3:
-    st.markdown(kpi_card("Active Customers", f"{active_customers:,}", "", delta=2.1, delta_label="vs last quarter", color="green"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Active Customers", f"{active_customers:,}", "", delta=2.1, delta_label="vs last quarter", color="blue"), unsafe_allow_html=True)
 with r1c4:
-    st.markdown(kpi_card("Total Deposits", f"${total_deposits:,.0f}", "", delta=-0.8, delta_label="vs last quarter", color="teal"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Total Deposits", f"${total_deposits:,.0f}", "", delta=-0.8, delta_label="vs last quarter", color="blue"), unsafe_allow_html=True)
 
 # Row 2
 r2c1, r2c2, r2c3, r2c4 = st.columns(4)
 with r2c1:
-    st.markdown(kpi_card("Total Loans", f"${total_loans_amt:,.0f}", "", delta=4.6, delta_label="vs last quarter", color="purple"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Total Loan Volume", f"${total_loans_amt:,.0f}", "", delta=4.6, delta_label="vs last quarter", color="blue"), unsafe_allow_html=True)
 with r2c2:
     st.markdown(kpi_card("Avg Balance", f"${avg_balance:,.0f}", "", delta=0.5, delta_label="vs last quarter", color="blue"), unsafe_allow_html=True)
 with r2c3:
-    st.markdown(kpi_card("Monthly Transactions", f"{monthly_txns:,}", "", delta=6.2, delta_label="vs last month", color="orange"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Monthly Transactions", f"{monthly_txns:,}", "", delta=6.2, delta_label="vs last month", color="blue"), unsafe_allow_html=True)
 with r2c4:
     st.markdown(kpi_card("Churn Rate", f"{churn_rate}%", "", delta=-1.2, delta_label="vs last month", color="red"), unsafe_allow_html=True)
 
 # Row 3
 r3c1, r3c2, r3c3 = st.columns(3)
 with r3c1:
-    st.markdown(kpi_card("Total Revenue", f"${total_revenue:,.0f}", "", delta=8.4, delta_label="vs last quarter", color="green"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Total Revenue", f"${total_revenue:,.0f}", "", delta=8.4, delta_label="vs last quarter", color="blue"), unsafe_allow_html=True)
 with r3c2:
     total_loans_count = pd.read_sql(f"SELECT COUNT(*) as c FROM loans JOIN customers ON loans.customer_id = customers.customer_id WHERE {where_clause_joined}", conn, params=params).iloc[0]["c"]
-    st.markdown(kpi_card("Total Loans", f"{total_loans_count:,}", "", delta=2.3, delta_label="vs last quarter", color="purple"), unsafe_allow_html=True)
+    st.markdown(kpi_card("Total Loan Accounts", f"{total_loans_count:,}", "", delta=2.3, delta_label="vs last quarter", color="blue"), unsafe_allow_html=True)
 with r3c3:
     avg_credit = pd.read_sql(f"SELECT COALESCE(AVG(credit_score), 0) as a FROM customers WHERE {where_clause_cust}", conn, params=params).iloc[0]["a"]
-    st.markdown(kpi_card("Avg Credit Score", f"{avg_credit:.0f}", "⭐", delta=0.2, delta_label="vs last month", color="gold"), unsafe_allow_html=True)
-
-st.markdown("---")
+    st.markdown(kpi_card("Avg Credit Score", f"{avg_credit:.0f}", "", delta=0.2, delta_label="vs last month", color="blue"), unsafe_allow_html=True)
 
 # ──────────────────────────────────────────────
 # Dashboard Charts
@@ -137,9 +134,12 @@ with ch1:
     """, conn, params=params)
     if not df_growth.empty:
         df_growth["cumulative"] = df_growth["new_customers"].cumsum()
-        fig = create_area_chart(df_growth, "month", "cumulative", "Customer Growth Over Time")
+        df_growth.rename(columns={"month": "Month", "cumulative": "Customers"}, inplace=True)
+        fig = create_area_chart(df_growth, "Month", "Customers", "Customer Growth Over Time")
         # Dual-line visual style: px.area will show a nice transparent gradient fill under the line
-        st.plotly_chart(fig, use_container_width=True)
+        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
+        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        st.markdown('</div>', unsafe_allow_html=True)
 
 with ch2:
     df_deposits = pd.read_sql(f"""
@@ -149,8 +149,11 @@ with ch2:
         GROUP BY month ORDER BY month
     """, conn, params=params)
     if not df_deposits.empty:
-        fig = create_bar_chart(df_deposits, "month", "total_deposits", "Monthly Deposits Trend")
-        st.plotly_chart(fig, use_container_width=True)
+        df_deposits.rename(columns={"month": "Month", "total_deposits": "Total Deposits ($)"}, inplace=True)
+        fig = create_bar_chart(df_deposits, "Month", "Total Deposits ($)", "Monthly Deposits Trend")
+        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
+        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        st.markdown('</div>', unsafe_allow_html=True)
 
 # Row 2: Loan Trend & Revenue Trend
 ch3, ch4 = st.columns(2)
@@ -163,8 +166,11 @@ with ch3:
         GROUP BY loan_type ORDER BY total_amount DESC
     """, conn, params=params)
     if not df_loans.empty:
-        fig = create_bar_chart(df_loans, "loan_type", "total_amount", "Loan Distribution by Type")
-        st.plotly_chart(fig, use_container_width=True)
+        df_loans.rename(columns={"loan_type": "Loan Type", "total_amount": "Total Value ($)"}, inplace=True)
+        fig = create_bar_chart(df_loans, "Loan Type", "Total Value ($)", "Loan Distribution by Type")
+        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
+        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        st.markdown('</div>', unsafe_allow_html=True)
 
 with ch4:
     df_revenue = pd.read_sql(f"""
@@ -174,8 +180,11 @@ with ch4:
         GROUP BY month ORDER BY month
     """, conn, params=params)
     if not df_revenue.empty:
-        fig = create_line_chart(df_revenue, "month", "revenue", "Revenue Trend")
-        st.plotly_chart(fig, use_container_width=True)
+        df_revenue.rename(columns={"month": "Month", "revenue": "Total Revenue ($)"}, inplace=True)
+        fig = create_line_chart(df_revenue, "Month", "Total Revenue ($)", "Revenue Trend")
+        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
+        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        st.markdown('</div>', unsafe_allow_html=True)
 
 # Row 3: Customer Distribution & Regional Analysis
 ch5, ch6 = st.columns(2)
@@ -187,8 +196,11 @@ with ch5:
         GROUP BY region ORDER BY customers DESC
     """, conn, params=params)
     if not df_region.empty:
-        fig = create_pie_chart(df_region, "region", "customers", "Customer Distribution by Region")
-        st.plotly_chart(fig, use_container_width=True)
+        df_region.rename(columns={"region": "Region", "customers": "Customers"}, inplace=True)
+        fig = create_pie_chart(df_region, "Region", "Customers", "Customer Distribution by Region")
+        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
+        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        st.markdown('</div>', unsafe_allow_html=True)
 
 with ch6:
     df_branch = pd.read_sql(f"""
@@ -197,8 +209,11 @@ with ch6:
         GROUP BY branch ORDER BY customers DESC LIMIT 10
     """, conn, params=params)
     if not df_branch.empty:
-        fig = create_bar_chart(df_branch, "branch", "customers", "Top Branches by Customers")
-        st.plotly_chart(fig, use_container_width=True)
+        df_branch.rename(columns={"branch": "Branch", "customers": "Customers"}, inplace=True)
+        fig = create_bar_chart(df_branch, "Branch", "Customers", "Top Branches by Customers")
+        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
+        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        st.markdown('</div>', unsafe_allow_html=True)
 
 # Row 4: Monthly Transactions & Product Distribution
 ch7, ch8 = st.columns(2)
@@ -211,8 +226,11 @@ with ch7:
         GROUP BY month, type ORDER BY month
     """, conn, params=params)
     if not df_monthly.empty:
-        fig = create_bar_chart(df_monthly, "month", "count", "Monthly Transactions by Type", color="type", barmode="stack")
-        st.plotly_chart(fig, use_container_width=True)
+        df_monthly.rename(columns={"month": "Month", "count": "Transactions", "type": "Transaction Type"}, inplace=True)
+        fig = create_bar_chart(df_monthly, "Month", "Transactions", "Monthly Transactions by Type", color="Transaction Type", barmode="stack")
+        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
+        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        st.markdown('</div>', unsafe_allow_html=True)
 
 with ch8:
     df_products = pd.read_sql(f"""
@@ -222,7 +240,10 @@ with ch8:
         GROUP BY account_type ORDER BY count DESC
     """, conn, params=params)
     if not df_products.empty:
-        fig = create_donut_chart(df_products, "account_type", "count", "Product Distribution")
-        st.plotly_chart(fig, use_container_width=True)
+        df_products.rename(columns={"account_type": "Account Type", "count": "Accounts"}, inplace=True)
+        fig = create_donut_chart(df_products, "Account Type", "Accounts", "Product Distribution")
+        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
+        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        st.markdown('</div>', unsafe_allow_html=True)
 
 conn.close()

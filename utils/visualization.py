@@ -36,14 +36,14 @@ def apply_layout(fig, title="", height=400):
 
 from utils.icons import render_html_icon
 
-def kpi_card(title: str, value, icon: str = "dashboard", delta=None, delta_label="", color="blue") -> str:
+def kpi_card(title: str, value, icon: str = "", delta=None, delta_label="", color="blue") -> str:
     """
     Generate HTML for a styled KPI metric card.
 
     Args:
         title: Card title/label
         value: Display value (will be converted to string)
-        icon: Emoji icon or Material Symbol name
+        icon: Emoji icon or Material Symbol name (optional)
         delta: Optional delta value (shows green/red indicator)
         delta_label: Label for delta
         color: Card accent color (blue, gold, green, red, teal, purple, orange)
@@ -53,11 +53,17 @@ def kpi_card(title: str, value, icon: str = "dashboard", delta=None, delta_label
         delta_class = "positive" if delta >= 0 else "negative"
         delta_symbol = "↑" if delta >= 0 else "↓"
         delta_html = f'<div class="kpi-delta {delta_class}">{delta_symbol} {abs(delta):.1f}% {delta_label}</div>'
+    else:
+        # Invisible spacer of the same height to preserve vertical alignment across cards
+        delta_html = '<div class="kpi-delta" style="visibility: hidden; background: transparent;">&nbsp;</div>'
 
-    icon_html = render_html_icon(icon, size="2.5rem")
+    icon_html = ""
+    if icon:
+        icon_html = f'<div class="kpi-icon">{render_html_icon(icon, size="2.5rem")}</div>'
+
     return f"""
     <div class="kpi-card {color} animate-in">
-        <div class="kpi-icon">{icon_html}</div>
+        {icon_html}
         <div class="kpi-value">{value}</div>
         <div class="kpi-label">{title}</div>
         {delta_html}
