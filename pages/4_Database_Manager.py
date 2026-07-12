@@ -10,6 +10,7 @@ from utils.database_utils import (
     get_table_stats, get_distinct_values
 )
 from utils.auth import log_activity
+from utils.visualization import kpi_card
 
 # ── Auth ──
 user = check_auth()
@@ -17,7 +18,10 @@ if not user:
     st.switch_page("app.py")
 require_role("Database Manager")
 
-st.markdown(f"# {render_html_icon('database', size='30px')} Database Manager", unsafe_allow_html=True)
+st.markdown(f"""<h1 style="display: flex; align-items: center; gap: 10px; margin-top: 0; color: var(--primary); font-weight: 700; font-size: 2.2rem; line-height: 1.2;">
+{render_html_icon('database', size='36px', color='var(--primary)')}
+<span>Database Manager</span>
+</h1>""", unsafe_allow_html=True)
 st.markdown("Manage banking database tables with full CRUD operations")
 st.markdown("---")
 
@@ -33,25 +37,93 @@ tables = {
 selected_table = st.selectbox("Select Table", list(tables.keys()), format_func=lambda x: x.title())
 table_config = tables[selected_table]
 
-# ── Table Stats ──
+# ── Table Stats (KPI Cards) ──
 stats = get_table_stats(selected_table)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 s1, s2, s3 = st.columns(3)
 with s1:
-    st.metric("Total Records", f"{stats['row_count']:,}")
+    st.markdown(kpi_card("Total Records", f"{stats['row_count']:,}", "analytics", color="blue"), unsafe_allow_html=True)
 with s2:
-    st.metric("Columns", stats["column_count"])
+    st.markdown(kpi_card("Columns", f"{stats['column_count']}", "table_chart", color="blue"), unsafe_allow_html=True)
 with s3:
-    st.metric("Table", selected_table.title())
+    st.markdown(kpi_card("Table", selected_table.title(), "storage", color="blue"), unsafe_allow_html=True)
 
+st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
 st.markdown("---")
 
 # ── Tabs ──
-tab_read, tab_create, tab_update, tab_delete = st.tabs([":material/menu_book: Browse", ":material/add: Create", ":material/edit: Update", ":material/delete: Delete"])
+tab_read, tab_create, tab_update, tab_delete = st.tabs([
+    ":material/visibility: Browse", 
+    ":material/add_circle: Create", 
+    ":material/edit: Update", 
+    ":material/delete: Delete"
+])
+
+# ── Custom HTML Table Renderer ──
+def render_database_table(df: pd.DataFrame) -> str:
+    if df.empty:
+        return "<p style='color: var(--text-muted); font-size: 0.9rem; padding: 1.5rem; text-align: center;'>No records found.</p>"
+        
+    headers = [col.replace("_", " ").title() for col in df.columns]
+    
+    alignments = []
+    formatters = []
+    
+    for col in df.columns:
+        col_lower = col.lower()
+        if col_lower in ["balance", "amount", "income", "loan_amount"]:
+            alignments.append("right")
+            formatters.append(lambda x: f"${float(x):,.2f}" if pd.notna(x) and str(x) != "" else "")
+        elif col_lower in ["is_active", "status"]:
+            alignments.append("center")
+            def format_status(x):
+                if pd.isna(x) or str(x) == "":
+                    return ""
+                val = str(x)
+                if val in ["1", "Active", "active", "True", "Yes"]:
+                    label = "Active"
+                    cls = "success"
+                else:
+                    label = "Inactive"
+                    cls = "danger"
+                return f'<span class="status-pill {cls}" style="padding: 2px 8px; font-size: 0.78rem;">{label}</span>'
+            formatters.append(format_status)
+        else:
+            alignments.append("left")
+            formatters.append(lambda x: str(x) if pd.notna(x) else "")
+            
+    html = """<div style="width: 100%; border: 1px solid var(--border-color); border-radius: var(--radius); box-shadow: var(--card-shadow); overflow-x: auto; background-color: var(--card-bg);">
+<table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem; min-width: 800px;">
+<thead>
+<tr style="background-color: var(--primary); color: white; border-bottom: 2px solid var(--border-color); position: sticky; top: 0; z-index: 10;">"""
+    
+    for h, align in zip(headers, alignments):
+        padding_left = "24px" if align == "left" else "12px"
+        padding_right = "24px" if align == "right" else "12px"
+        html += f'<th style="padding: 12px {padding_right} 12px {padding_left}; text-align: {align}; font-weight: 600;">{h}</th>'
+        
+    html += """</tr>
+</thead>
+<tbody>"""
+    
+    for idx, row in df.reset_index(drop=True).iterrows():
+        row_bg = "var(--card-bg)" if idx % 2 == 0 else "var(--bg-light)"
+        html += f'<tr class="db-table-row" style="background-color: {row_bg}; border-bottom: 1px solid var(--border-color); transition: var(--transition); color: var(--text-main);">'
+        for col, align, fmt in zip(df.columns, alignments, formatters):
+            val = fmt(row[col])
+            padding_left = "24px" if align == "left" else "12px"
+            padding_right = "24px" if align == "right" else "12px"
+            html += f'<td style="padding: 12px {padding_right} 12px {padding_left}; text-align: {align};">{val}</td>'
+        html += '</tr>'
+        
+    html += "</tbody></table></div>"
+    return html
 
 # ── Read Tab ──
 with tab_read:
     # Search and filters
-    fc1, fc2 = st.columns([2, 1])
+    st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+    fc1, fc2 = st.columns([3, 1])
     with fc1:
         search = st.text_input("Search", placeholder="Search across key columns...", key="db_search")
     with fc2:
@@ -71,26 +143,36 @@ with tab_read:
 
     total_pages = max(1, (total + page_size - 1) // page_size)
 
-    st.dataframe(df, use_container_width=True, height=400)
+    # Ensure page is within range
+    if st.session_state["db_page"] > total_pages:
+        st.session_state["db_page"] = total_pages
+        st.rerun()
+
+    # Spacing and Table Render
+    st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+    st.markdown(render_database_table(df), unsafe_allow_html=True)
+    st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
     # Pagination controls
     pc1, pc2, pc3, pc4, pc5 = st.columns([1, 1, 2, 1, 1])
     with pc1:
-        if st.button("⏮️ First", disabled=st.session_state["db_page"] <= 1):
+        if st.button("First", icon=":material/first_page:", disabled=st.session_state["db_page"] <= 1, use_container_width=True):
             st.session_state["db_page"] = 1
             st.rerun()
     with pc2:
-        if st.button("◀️ Prev", disabled=st.session_state["db_page"] <= 1):
+        if st.button("Prev", icon=":material/chevron_left:", disabled=st.session_state["db_page"] <= 1, use_container_width=True):
             st.session_state["db_page"] -= 1
             st.rerun()
     with pc3:
-        st.markdown(f"<div style='text-align:center;padding:0.5rem;'>Page {st.session_state['db_page']} of {total_pages} ({total} records)</div>", unsafe_allow_html=True)
+        st.markdown(f"""<div style='text-align: center; padding: 6px 0; font-weight: 600; color: var(--text-main); font-size: 0.9rem;'>
+Page {st.session_state['db_page']} of {total_pages:,} <span style='font-weight: 500; color: var(--text-muted);'>({total:,} records)</span>
+</div>""", unsafe_allow_html=True)
     with pc4:
-        if st.button("Next ▶️", disabled=st.session_state["db_page"] >= total_pages):
+        if st.button("Next", icon=":material/chevron_right:", disabled=st.session_state["db_page"] >= total_pages, use_container_width=True):
             st.session_state["db_page"] += 1
             st.rerun()
     with pc5:
-        if st.button("Last ⏭️", disabled=st.session_state["db_page"] >= total_pages):
+        if st.button("Last", icon=":material/last_page:", disabled=st.session_state["db_page"] >= total_pages, use_container_width=True):
             st.session_state["db_page"] = total_pages
             st.rerun()
 
@@ -107,7 +189,6 @@ with tab_create:
                 new_record[col_name] = st.text_input(col_name.replace("_", " ").title(), key=f"create_{col_name}")
 
         if st.form_submit_button("Add Record", icon=":material/add:", type="primary", use_container_width=True):
-            # Remove empty values
             new_record = {k: v for k, v in new_record.items() if v}
             if new_record:
                 if insert_record(selected_table, new_record):
@@ -134,7 +215,8 @@ with tab_update:
             st.warning(f"No record found with {table_config['id_col']} = {record_id}")
         else:
             st.markdown("#### Current Values")
-            st.dataframe(df_record, use_container_width=True)
+            st.markdown(render_database_table(df_record), unsafe_allow_html=True)
+            st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
 
             with st.form("update_form"):
                 st.markdown("#### New Values")
@@ -175,11 +257,12 @@ with tab_delete:
             st.warning(f"No record found with {table_config['id_col']} = {del_id}")
         else:
             st.markdown("#### Record to Delete")
-            st.dataframe(df_record, use_container_width=True)
+            st.markdown(render_database_table(df_record), unsafe_allow_html=True)
+            st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
 
             confirm = st.checkbox("I confirm I want to delete this record", key="confirm_delete")
             if confirm:
-                if st.button("Delete Record", icon=":material/delete:", type="primary"):
+                if st.button("Delete Record", icon=":material/delete:", type="primary", use_container_width=True):
                     delete_record(selected_table, table_config["id_col"], del_id)
                     st.success(f"Record deleted from {selected_table}")
                     log_activity(user["user_id"], user["username"], "DELETE", f"Deleted {del_id} from {selected_table}")

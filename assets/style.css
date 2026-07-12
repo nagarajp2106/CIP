@@ -863,3 +863,17 @@ div[data-testid="stFileUploadDropzone"]:focus-within {
     color: var(--danger) !important;
     border: 1px solid rgba(198, 40, 40, 0.2);
 }
+
+/* Disabled button state styling */
+.stButton button:disabled {
+    opacity: 0.55 !important;
+    cursor: not-allowed !important;
+    background-color: var(--bg-light) !important;
+    color: var(--text-muted) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Hover style for database table rows */
+.db-table-row:hover {
+    background-color: rgba(46, 134, 171, 0.04) !important;
+}
