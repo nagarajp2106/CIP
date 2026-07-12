@@ -16,12 +16,10 @@ if not user:
 require_role("Data Upload")
 
 # Page Header
-st.markdown(f"""
-<h1 style="display: flex; align-items: center; gap: 10px; margin-top: 0; color: var(--primary); font-weight: 700; font-size: 2.2rem; line-height: 1.2;">
-    {render_html_icon('upload_file', size='36px', color='var(--primary)')}
-    <span>Data Upload</span>
-</h1>
-""", unsafe_allow_html=True)
+st.markdown(f"""<h1 style="display: flex; align-items: center; gap: 10px; margin-top: 0; color: var(--primary); font-weight: 700; font-size: 2.2rem; line-height: 1.2;">
+{render_html_icon('upload_file', size='36px', color='var(--primary)')}
+<span>Data Upload</span>
+</h1>""", unsafe_allow_html=True)
 st.markdown("Upload, validate, and store banking datasets")
 st.markdown("---")
 
@@ -67,19 +65,18 @@ if uploaded_file is None:
     g_col1, g_col2 = st.columns(2)
     
     with g_col1:
-        st.markdown(f"""
-        <div class="list-card animate-in" style="height: 100%;">
-            <h4 style="margin-top:0; color:var(--primary); font-weight:700; display:flex; align-items:center; gap:8px;">
-                {render_html_icon("info", size="22px", color="var(--secondary)")} Upload Guidelines
-            </h4>
-            <ul style="margin: 0; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
-                <li><strong>Format:</strong> Only comma-separated values (<code>.csv</code>) files are supported.</li>
-                <li><strong>Size Limit:</strong> Files must be smaller than 50 MB.</li>
-                <li><strong>Required Schema:</strong> Column names must match the expected columns listed under the selector dropdown (case-insensitive).</li>
-                <li><strong>Data Cleanliness:</strong> Empty or missing values in key columns might cause rows to be skipped.</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
+        guidelines_html = f"""<div class="list-card animate-in" style="height: 100%;">
+<h4 style="margin:0 0 12px 0; color:var(--primary); font-weight:700; display:flex; align-items:center; gap:8px;">
+{render_html_icon("info", size="22px", color="var(--secondary)")} Upload Guidelines
+</h4>
+<ul style="margin: 0; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+<li><strong>Format:</strong> Only comma-separated values (<code>.csv</code>) files are supported.</li>
+<li><strong>Size Limit:</strong> Files must be smaller than 50 MB.</li>
+<li><strong>Required Schema:</strong> Column names must match the expected columns listed under the selector dropdown (case-insensitive).</li>
+<li><strong>Data Cleanliness:</strong> Empty or missing values in key columns might cause rows to be skipped.</li>
+</ul>
+</div>"""
+        st.markdown(guidelines_html, unsafe_allow_html=True)
         
     with g_col2:
         conn = get_connection()
@@ -94,28 +91,25 @@ if uploaded_file is None:
             for _, row in recent_df.iterrows():
                 ts = row["timestamp"]
                 details = row["details"]
-                recent_html += f"""
-                <div style="padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); font-size: 0.88rem;">
-                    <div style="color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 6px;">
-                        {render_html_icon("check_circle", size="16px", color="var(--success)")} 
-                        <span>{details}</span>
-                    </div>
-                    <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">{ts}</div>
-                </div>
-                """
+                recent_html += f"""<div style="padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); font-size: 0.88rem;">
+<div style="color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 6px;">
+{render_html_icon("check_circle", size="16px", color="var(--success)")} 
+<span>{details}</span>
+</div>
+<div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">{ts}</div>
+</div>"""
         else:
             recent_html = "<p style='color: var(--text-muted); font-size: 0.9rem; margin: 0;'>No recent uploads recorded.</p>"
             
-        st.markdown(f"""
-        <div class="list-card animate-in" style="height: 100%;">
-            <h4 style="margin-top:0; color:var(--primary); font-weight:700; display:flex; align-items:center; gap:8px;">
-                {render_html_icon("schedule", size="22px", color="var(--secondary)")} Recent Uploads
-            </h4>
-            <div style="display: flex; flex-direction: column; gap: 4px;">
-                {recent_html}
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        uploads_card_html = f"""<div class="list-card animate-in" style="height: 100%;">
+<h4 style="margin:0 0 12px 0; color:var(--primary); font-weight:700; display:flex; align-items:center; gap:8px;">
+{render_html_icon("schedule", size="22px", color="var(--secondary)")} Recent Uploads
+</h4>
+<div style="display: flex; flex-direction: column; gap: 4px;">
+{recent_html}
+</div>
+</div>"""
+        st.markdown(uploads_card_html, unsafe_allow_html=True)
 
 else:
     # ── FILE LOADED: Validation, Preview & Commit ──
@@ -152,25 +146,22 @@ else:
             else:
                 st.markdown(f'<div class="status-pill danger" style="display:flex; align-items:center; gap:6px; justify-content:center; width:100%; text-align:center;">{render_html_icon("cancel", size="18px")} Schema mismatch</div>', unsafe_allow_html=True)
                 
-        # Data Preview Table Card
-        st.markdown('<div class="list-card animate-in" style="margin-top: 1rem;">', unsafe_allow_html=True)
-        st.markdown(f"<h4 style='margin-top:0; color:var(--primary); font-weight:700;'>Data Preview (First 5 Rows)</h4>", unsafe_allow_html=True)
+        # Data Preview
+        st.markdown("#### Data Preview (First 5 Rows)")
         st.dataframe(df.head(5), use_container_width=True)
         st.caption(f"Showing 5 of {rows_detected:,} rows · {len(df.columns)} columns")
-        st.markdown('</div>', unsafe_allow_html=True)
         
         # Validation Logs (if errors/warnings present)
         if report.get("errors") or report.get("warnings"):
-            st.markdown('<div class="list-card animate-in" style="margin-top: 1rem; border-left: 4px solid var(--danger);">', unsafe_allow_html=True)
-            if report.get("errors"):
-                st.markdown(f"<h5 style='margin-top:0; color:var(--danger);'>{render_html_icon('cancel', size='18px', color='var(--danger)')} Validation Errors</h5>", unsafe_allow_html=True)
-                for err in report["errors"]:
-                    st.markdown(f"- {err}")
-            if report.get("warnings"):
-                st.markdown(f"<h5 style='margin-top:0; color:var(--warning);'>{render_html_icon('warning', size='18px', color='var(--warning)')} Warnings</h5>", unsafe_allow_html=True)
-                for warn in report["warnings"]:
-                    st.markdown(f"- {warn}")
-            st.markdown('</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                if report.get("errors"):
+                    st.markdown(f"<h5 style='margin-top:0; color:var(--danger);'>{render_html_icon('cancel', size='18px', color='var(--danger)')} Validation Errors</h5>", unsafe_allow_html=True)
+                    for err in report["errors"]:
+                        st.markdown(f"- {err}")
+                if report.get("warnings"):
+                    st.markdown(f"<h5 style='margin-top:0; color:var(--warning);'>{render_html_icon('warning', size='18px', color='var(--warning)')} Warnings</h5>", unsafe_allow_html=True)
+                    for warn in report["warnings"]:
+                        st.markdown(f"- {warn}")
             
         # ── Confirm & Action block ──
         st.markdown("### Upload to Database")
@@ -240,13 +231,12 @@ else:
             st.success(f"Upload complete! {inserted} records added to **{target_table}**.", icon=":material/check_circle:")
             
             # Show summary stats
-            st.markdown('<div class="list-card animate-in" style="margin-top: 1rem;">', unsafe_allow_html=True)
-            st.markdown(f"<h4 style='margin-top:0; color:var(--primary); font-weight:700;'>Upload Summary</h4>", unsafe_allow_html=True)
-            s1, s2, s3 = st.columns(3)
-            s1.metric("Total Rows", total_rows)
-            s2.metric("Inserted", inserted)
-            s3.metric("Skipped", skipped)
-            st.markdown('</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown(f"#### Upload Summary")
+                s1, s2, s3 = st.columns(3)
+                s1.metric("Total Rows", total_rows)
+                s2.metric("Inserted", inserted)
+                s3.metric("Skipped", skipped)
             
     except Exception as e:
         st.error(f"Error processing CSV: {str(e)}", icon=":material/cancel:")
