@@ -713,7 +713,7 @@ label[data-testid="stWidgetLabel"] p {
 }
 
 /* Hide Streamlit default header (Deploy button and Kebab menu) */
-div[data-testid="stHeader"], header {
+div[data-testid="stHeader"] {
     display: none !important;
     height: 0 !important;
 }
@@ -728,28 +728,28 @@ div[data-testid="stSidebarNav"] input {
     margin: 0 !important;
 }
 
-/* Style Streamlit Plotly Chart wrappers consistently as cards */
+/* Reset the Streamlit parent Plotly container to prevent layout collapsing */
 div[data-testid="stPlotlyChart"] {
-    background: var(--card-bg) !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Style the actual Plotly canvas wrapper consistently as a card */
+.js-plotly-plot {
+    background-color: var(--card-bg) !important;
     border-radius: var(--radius) !important;
-    padding: 1.5rem !important;
-    box-shadow: var(--card-shadow) !important;
     border: 1px solid var(--border-color) !important;
+    box-shadow: var(--card-shadow) !important;
     transition: var(--transition) !important;
     margin-bottom: 1.25rem !important;
 }
 
-div[data-testid="stPlotlyChart"]:hover {
+.js-plotly-plot:hover {
     box-shadow: var(--card-shadow-hover) !important;
     transform: translateY(-2px) !important;
-}
-
-/* Ensure the inner Plotly plot itself is transparent and borderless */
-div[data-testid="stPlotlyChart"] .js-plotly-plot {
-    border: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-    background-color: transparent !important;
 }
 
 /* Style custom file uploader zone */

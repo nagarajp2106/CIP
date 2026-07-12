@@ -15,7 +15,7 @@ PLOTLY_LAYOUT = dict(
     font=dict(family="Inter, Segoe UI, -apple-system, sans-serif", size=12, color="#1B2A4A"),
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="#F8FAFC",
-    margin=dict(l=45, r=45, t=55, b=45),
+    margin=dict(l=55, r=55, t=75, b=55),
     colorway=CHART_COLORS,
     hoverlabel=dict(bgcolor="#FFFFFF", font_size=13, font_family="Inter", bordercolor="#E2E8F0"),
     legend=dict(orientation="h", yanchor="bottom", y=-0.25, xanchor="center", x=0.5),
