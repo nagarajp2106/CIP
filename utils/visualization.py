@@ -250,12 +250,12 @@ def prediction_result_card(label: str, value: str, score: float, css_class: str 
 def progress_bar_html(value: float, max_val: float = 100, color: str = "#2E86AB", label: str = "") -> str:
     """Generate HTML for a styled progress bar."""
     pct = min((value / max_val) * 100, 100) if max_val > 0 else 0
-    return f"""<div style="margin: 0.3rem 0;">
-<div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
-<span style="color: #1B2A4A; font-weight: 500;">{label}</span>
-<span style="color: #6C757D;">{value:.1f}%</span>
+    return f"""<div style="margin: 0.3rem 0; width: 100%;">
+<div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px;">
+<span style="color: var(--text-main); font-weight: 600; display: flex; align-items: center; gap: 4px;">{label}</span>
+<span style="color: var(--text-main); font-weight: 700;">{pct:.1f}%</span>
 </div>
-<div class="progress-container">
-<div class="progress-bar" style="width: {pct}%; background: {color};">{pct:.0f}%</div>
+<div style="background: #E2E8F0; border-radius: 6px; height: 8px; overflow: hidden; width: 100%;">
+<div style="background: {color}; width: {pct}%; height: 100%; border-radius: 6px;"></div>
 </div>
 </div>"""

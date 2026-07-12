@@ -4,10 +4,11 @@ Deposit Subscription Prediction Page — Random Forest Classifier.
 import streamlit as st
 from utils.icons import render_html_icon, get_symbol_name
 import pandas as pd
+import plotly.express as px
 from authentication import check_auth, require_role
 from database import get_connection
 from utils.prediction import load_model, train_deposit_model, get_feature_importance
-from utils.visualization import kpi_card, prediction_result_card, progress_bar_html, create_horizontal_bar, create_pie_chart
+from utils.visualization import kpi_card, prediction_result_card, progress_bar_html, create_horizontal_bar, create_pie_chart, apply_layout
 
 # ── Auth ──
 user = check_auth()
@@ -83,16 +84,68 @@ with tab1:
 
         yes_prob = probability[1] if len(probability) > 1 else probability[0]
 
+        # Determine the badge styling and icon color
         if prediction == 1:
-            st.markdown(prediction_result_card("Deposit Subscription", "YES — Likely to Subscribe", yes_prob, "prediction-approved"), unsafe_allow_html=True)
+            badge_html = f"""<div class="prediction-badge approved">
+{render_html_icon("check_circle", size="20px", color="var(--success)")}
+<span>YES — Likely to Subscribe</span>
+</div>"""
+            prob_color = "var(--success)" if yes_prob >= 0.70 else "var(--warning)"
         else:
-            st.markdown(prediction_result_card("Deposit Subscription", "NO — Unlikely to Subscribe", 1 - yes_prob, "prediction-rejected"), unsafe_allow_html=True)
+            badge_html = f"""<div class="prediction-badge rejected">
+{render_html_icon("cancel", size="20px", color="var(--danger)")}
+<span>NO — Unlikely to Subscribe</span>
+</div>"""
+            prob_color = "var(--danger)" if yes_prob < 0.30 else "var(--warning)"
 
-        st.markdown(progress_bar_html(yes_prob * 100, label="Subscription Probability", color="var(--success)" if prediction == 1 else "var(--danger)"), unsafe_allow_html=True)
+        # Render the unified prediction card
+        st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
+        st.markdown(f"""<div class="prediction-result-card animate-in">
+<div class="prediction-result-header">
+<span class="prediction-result-title">Prediction Result</span>
+<span class="prediction-result-confidence">Confidence: {yes_prob:.1%}</span>
+</div>
+<div class="prediction-result-badge-row">
+{badge_html}
+</div>
+<div style="height: 6px;"></div>
+{progress_bar_html(yes_prob * 100, label="Subscription Probability", color=prob_color)}
+</div>""", unsafe_allow_html=True)
+
+        # Spacing
+        st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
 
         importance_df = get_feature_importance(model, features)
         if not importance_df.empty:
-            fig = create_horizontal_bar(importance_df, "importance", "feature", "Key Factors")
+            # Map features to human-readable names
+            feature_map = {
+                "balance": "Balance",
+                "income": "Income",
+                "credit_score": "Credit Score",
+                "age": "Age"
+            }
+            importance_df["feature"] = importance_df["feature"].map(lambda x: feature_map.get(x, x.title()))
+            
+            fig = px.bar(
+                importance_df, 
+                x="importance", 
+                y="feature", 
+                orientation="h",
+                color_discrete_sequence=["#2E86AB"],
+                text="importance"
+            )
+            fig.update_traces(
+                texttemplate='%{text:.2f}', 
+                textposition='outside',
+                marker=dict(cornerradius=4)
+            )
+            fig.update_layout(
+                xaxis_title="Feature Importance",
+                yaxis_title="",
+                yaxis=dict(categoryorder="total ascending"),
+                bargap=0.35
+            )
+            fig = apply_layout(fig, "Key Factors", height=320)
             st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
 with tab2:
