@@ -741,3 +741,26 @@ div[data-testid="stPlotlyChart"] .js-plotly-plot {
     border-radius: 0 !important;
     background-color: transparent !important;
 }
+
+/* Style custom file uploader zone */
+div[data-testid="stFileUploader"] {
+    background-color: var(--card-bg) !important;
+    border-radius: var(--radius) !important;
+    padding: 1.25rem !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--card-shadow) !important;
+}
+
+div[data-testid="stFileUploadDropzone"] {
+    border: 2px dashed var(--border-color) !important;
+    border-radius: var(--radius) !important;
+    background-color: var(--bg-light) !important;
+    transition: var(--transition) !important;
+    padding: 1.5rem !important;
+}
+
+div[data-testid="stFileUploadDropzone"]:hover,
+div[data-testid="stFileUploadDropzone"]:focus-within {
+    border-color: var(--secondary) !important;
+    background-color: rgba(46, 134, 171, 0.04) !important;
+}
