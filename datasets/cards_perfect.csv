@@ -1,0 +1,4 @@
+card_number,customer_id,card_type,card_limit,outstanding_amount,status,issued_date,expiry_date
+4111222233334444,CUST99001,Credit,10000.0,1250.5,Active,2025-01-15,2030-01-15
+5555666677778888,CUST99002,Debit,5000.0,0.0,Active,2025-02-10,2030-02-10
+3333444455556666,CUST99003,Credit,15000.0,450.0,Active,2025-02-12,2030-02-12

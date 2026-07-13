@@ -1,0 +1,4 @@
+transaction_id,customer_id,account_number,amount,date,type,channel,merchant,description,is_fraud
+TXN99001,CUST99001,ACC99001,150.00,2025-06-01 10:30:00,Debit,Online,Amazon,Online Shopping,0
+TXN99002,CUST99002,ACC99002,50.25,2025-06-01 11:15:00,Debit,POS,Walmart,Grocery Shopping,0
+TXN99003,CUST99003,ACC99003,200.00,2025-06-01 12:00:00,Credit,ATM,,Salary Deposit,0
