@@ -227,11 +227,11 @@ def seed_demo_data(n_customers=5000):
     conn = get_connection()
     cursor = conn.cursor()
 
-    # Check if data already exists
-    cursor.execute("SELECT COUNT(*) FROM customers")
+    # Check if users already exist (indicates database has been initialized/seeded)
+    cursor.execute("SELECT COUNT(*) FROM users")
     if cursor.fetchone()[0] > 0:
         conn.close()
-        return  # Data already seeded
+        return  # Data already seeded or initialized
 
     random.seed(42)
     np.random.seed(42)
