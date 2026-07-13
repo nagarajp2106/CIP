@@ -1,7 +1,0 @@
-transaction_id,customer_id,amount,date,type,channel,merchant
-TXN10001,CUST001,150.00,2025-06-01 10:30:00,Debit,Online,Amazon
-TXN10002,CUST002,-50.25,2025-06-01 11:15:00,Debit,POS,Walmart
-TXN10002,CUST003,2000.00,2025-06-01 12:00:00,Credit,ATM,
-TXN10004,CUST004,invalid_amount,2025-06-01 14:45:00,Debit,Online,Netflix
-TXN10005,CUST005,,2025-06-02 09:00:00,Credit,Branch,
-TXN10006,CUST006,35.00,2025-06-02 09:30:00,Debit,,Starbucks

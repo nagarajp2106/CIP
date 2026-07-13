@@ -1,7 +1,0 @@
-account_number,customer_id,account_type,balance,status,opened_date
-ACC1001,CUST001,Savings,5000.00,Active,2025-01-15
-ACC1002,CUST002,Checking,1200.50,Active,2025-02-10
-ACC1002,CUST003,Savings,3400.00,Active,2025-02-12
-ACC1004,CUST004,Checking,abc,Active,2025-03-01
-ACC1005,CUST005,Savings,,Active,2025-03-05
-ACC1006,CUST006,Checking,750.00,,2025-03-08
