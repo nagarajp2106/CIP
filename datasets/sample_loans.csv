@@ -1,0 +1,7 @@
+loan_id,customer_id,loan_type,loan_amount,interest_rate,status,tenure_months
+LN20001,CUST001,Home,250000,3.5,Active,360
+LN20002,CUST002,Auto,35000,5.2,Active,60
+LN20002,CUST003,Personal,15000,twelve,Active,36
+LN20004,CUST004,Education,,4.8,Active,120
+LN20005,CUST005,Home,180000,3.8,,240
+LN20006,CUST006,Personal,10000,7.5,Active,
