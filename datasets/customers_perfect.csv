@@ -1,4 +1,0 @@
-customer_id,name,gender,age,occupation,income,region,branch,balance,credit_score,customer_since,email,phone,is_active,risk_level,churn_score,clv_score,segment
-CUST99001,John Doe,Male,35,Professional,85000.0,South,Tech Park,15000.50,780,2024-01-15,john.doe@email.com,+1-555-0199,1,Low,0.0,0.0,Regular
-CUST99002,Jane Smith,Female,28,Self-Employed,45000.0,North,Airport Road,3200.00,690,2024-02-10,jane.smith@email.com,+1-555-0200,1,Medium,0.0,0.0,Regular
-CUST99003,David Brown,Male,42,Government,62000.0,West,Mall Road,780.00,620,2024-03-01,david.brown@email.com,+1-555-0201,1,High,0.0,0.0,Regular
