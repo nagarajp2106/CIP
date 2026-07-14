@@ -412,3 +412,79 @@ def get_data_quality_report(df: pd.DataFrame) -> dict:
         }
 
     return report
+
+
+# ──────────────────────────────────────────────
+# Foreign Key Validation
+# ──────────────────────────────────────────────
+# Maps child table FK columns to their parent table + parent column.
+# Derived from the FOREIGN KEY constraints in database.py.
+
+FK_MAP = {
+    "accounts":     [{"column": "customer_id", "parent_table": "customers", "parent_column": "customer_id"}],
+    "transactions": [{"column": "customer_id", "parent_table": "customers", "parent_column": "customer_id"}],
+    "loans":        [{"column": "customer_id", "parent_table": "customers", "parent_column": "customer_id"}],
+    "cards":        [{"column": "customer_id", "parent_table": "customers", "parent_column": "customer_id"}],
+    "customers":    [],  # No FK — this is the root table
+}
+
+
+def check_foreign_keys(df: pd.DataFrame, table_name: str, db_connection) -> dict:
+    """
+    Check every foreign key column in df against its parent table in the database.
+
+    Args:
+        df: DataFrame with columns already lowercased/standardized.
+        table_name: Target table name (e.g. 'accounts').
+        db_connection: Active SQLite connection.
+
+    Returns:
+        dict with 'has_issues' bool and 'issues' list of dicts:
+        [{"column": "customer_id", "missing_count": 847,
+          "total_rows": 1000, "sample_values": ["CUST98001", ...],
+          "invalid_indices": [0, 1, 2, ...]}]
+    """
+    report = {"has_issues": False, "issues": []}
+
+    fk_refs = FK_MAP.get(table_name, [])
+    if not fk_refs:
+        return report
+
+    for ref in fk_refs:
+        fk_col = ref["column"]
+        parent_table = ref["parent_table"]
+        parent_col = ref["parent_column"]
+
+        if fk_col not in df.columns:
+            continue
+
+        # Get all valid parent IDs from the database
+        try:
+            parent_df = pd.read_sql(
+                f"SELECT DISTINCT {parent_col} FROM {parent_table}", db_connection
+            )
+            valid_ids = set(parent_df[parent_col].dropna().astype(str).tolist())
+        except Exception:
+            valid_ids = set()
+
+        # Find rows whose FK value doesn't exist in the parent table
+        df_fk_values = df[fk_col].astype(str).str.strip()
+        invalid_mask = ~df_fk_values.isin(valid_ids) & df[fk_col].notna()
+        invalid_indices = df.index[invalid_mask].tolist()
+        missing_count = len(invalid_indices)
+
+        if missing_count > 0:
+            # Collect up to 10 sample values for display
+            sample_vals = df_fk_values[invalid_mask].unique()[:10].tolist()
+            report["has_issues"] = True
+            report["issues"].append({
+                "column": fk_col,
+                "parent_table": parent_table,
+                "parent_column": parent_col,
+                "missing_count": missing_count,
+                "total_rows": len(df),
+                "sample_values": sample_vals,
+                "invalid_indices": invalid_indices,
+            })
+
+    return report
