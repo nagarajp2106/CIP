@@ -5,9 +5,167 @@ import pandas as pd
 import numpy as np
 
 
-def clean_data(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
+# ──────────────────────────────────────────────
+# Column Classification Registry
+# ──────────────────────────────────────────────
+# Derived from the actual SQLite schema in database.py.
+# Each column is classified so clean_data() can apply the
+# correct imputation strategy and classify_and_filter() can
+# exclude rows with missing primary-key / required-ID values.
+#
+# Categories:
+#   primary_key — table's own unique identifier, NEVER impute
+#   id_ref      — foreign-key reference to another table, NEVER impute
+#   numeric     — median-fill
+#   categorical — mode-fill
+#   date        — leave as-is (do not impute)
+#   flag        — integer 0/1 flag, fill with 0
+
+TABLE_COLUMN_METADATA = {
+    "customers": {
+        "customer_id":    "primary_key",
+        "name":           "categorical",
+        "gender":         "categorical",
+        "age":            "numeric",
+        "occupation":     "categorical",
+        "income":         "numeric",
+        "region":         "categorical",
+        "branch":         "categorical",
+        "balance":        "numeric",
+        "credit_score":   "numeric",
+        "customer_since": "date",
+        "email":          "categorical",
+        "phone":          "categorical",
+        "is_active":      "flag",
+        "risk_level":     "categorical",
+        "churn_score":    "numeric",
+        "clv_score":      "numeric",
+        "segment":        "categorical",
+    },
+    "accounts": {
+        "account_number": "primary_key",
+        "customer_id":    "id_ref",
+        "account_type":   "categorical",
+        "balance":        "numeric",
+        "status":         "categorical",
+        "opened_date":    "date",
+    },
+    "transactions": {
+        "transaction_id": "primary_key",
+        "customer_id":    "id_ref",
+        "account_number": "id_ref",
+        "amount":         "numeric",
+        "date":           "date",
+        "type":           "categorical",
+        "channel":        "categorical",
+        "merchant":       "categorical",
+        "description":    "categorical",
+        "is_fraud":       "flag",
+    },
+    "loans": {
+        "loan_id":        "primary_key",
+        "customer_id":    "id_ref",
+        "loan_type":      "categorical",
+        "loan_amount":    "numeric",
+        "interest_rate":  "numeric",
+        "tenure_months":  "numeric",
+        "emi":            "numeric",
+        "status":         "categorical",
+        "applied_date":   "date",
+        "approved_date":  "date",
+    },
+    "cards": {
+        "card_number":       "primary_key",
+        "customer_id":       "id_ref",
+        "card_type":         "categorical",
+        "card_limit":        "numeric",
+        "outstanding_amount": "numeric",
+        "status":            "categorical",
+        "issued_date":       "date",
+        "expiry_date":       "date",
+    },
+}
+
+
+def _get_column_type(table_name: str, col_name: str) -> str:
+    """Look up a column's classification. Falls back to heuristic."""
+    meta = TABLE_COLUMN_METADATA.get(table_name, {})
+    if col_name in meta:
+        return meta[col_name]
+    # Heuristic fallback for columns not in the registry
+    lower = col_name.lower()
+    if lower.endswith("_id") or lower.endswith("_number"):
+        return "id_ref"
+    if "date" in lower or "since" in lower:
+        return "date"
+    return "categorical"
+
+
+# ──────────────────────────────────────────────
+# Pre-Clean Classification & Filtering
+# ──────────────────────────────────────────────
+
+def classify_and_filter(df: pd.DataFrame, table_name: str) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
+    """
+    Pre-screen rows BEFORE auto-clean. Rows with missing primary-key
+    or required foreign-key values are separated into an 'invalid' set
+    so they are never mode-filled with a duplicate value.
+
+    Args:
+        df: DataFrame with columns already lowercased/standardized.
+        table_name: Target table name (e.g. 'accounts').
+
+    Returns:
+        (valid_df, invalid_df, classification_report)
+        classification_report contains 'excluded_rows' count and
+        'exclusion_reasons' list of (row_index, reason) tuples.
+    """
+    meta = TABLE_COLUMN_METADATA.get(table_name, {})
+    # Columns that must not be missing — PKs and required FK refs
+    critical_cols = [col for col, ctype in meta.items()
+                     if ctype in ("primary_key", "id_ref")]
+
+    report = {
+        "excluded_rows": 0,
+        "exclusion_reasons": [],  # list of (original_index, reason_string)
+    }
+
+    if not critical_cols:
+        return df.copy(), pd.DataFrame(columns=df.columns), report
+
+    # Identify rows where ANY critical column is null / empty-string / whitespace
+    invalid_mask = pd.Series(False, index=df.index)
+    for col in critical_cols:
+        if col not in df.columns:
+            continue
+        is_missing = df[col].isna()
+        # Also catch empty strings that slipped through as non-null
+        if df[col].dtype == object:
+            is_missing = is_missing | df[col].astype(str).str.strip().isin(["", "nan", "None"])
+        for idx in df.index[is_missing & ~invalid_mask]:
+            col_type = meta.get(col, "id_ref")
+            label = "primary key" if col_type == "primary_key" else "required ID"
+            report["exclusion_reasons"].append(
+                (int(idx), f"Missing {label}: '{col}'")
+            )
+        invalid_mask = invalid_mask | is_missing
+
+    valid_df = df[~invalid_mask].copy()
+    invalid_df = df[invalid_mask].copy()
+    report["excluded_rows"] = len(invalid_df)
+
+    return valid_df, invalid_df, report
+
+
+# ──────────────────────────────────────────────
+# Smart Data Cleaning
+# ──────────────────────────────────────────────
+
+def clean_data(df: pd.DataFrame, table_name: str = None) -> tuple[pd.DataFrame, dict]:
     """
     Perform automatic data cleaning on a DataFrame.
+    When table_name is provided, uses column-type-aware imputation
+    (skips PK/ID/date columns). Without it, falls back to legacy behavior.
 
     Returns:
         Tuple of (cleaned DataFrame, cleaning report dict)
@@ -24,22 +182,62 @@ def clean_data(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
         df = df.drop_duplicates()
         report["actions"].append(f"Removed {n_dupes} duplicate rows")
 
-    # 2. Handle missing values
+    # 2. Handle missing values — type-aware when table_name is given
     missing = df.isnull().sum()
     for col in df.columns:
-        if missing[col] > 0:
-            if df[col].dtype in ['float64', 'int64']:
-                median_val = df[col].median()
-                df[col] = df[col].fillna(median_val)
-                report["actions"].append(f"Filled {missing[col]} missing values in '{col}' with median ({median_val:.2f})")
+        if missing[col] == 0:
+            continue
+
+        col_type = _get_column_type(table_name, col) if table_name else None
+
+        # SKIP imputation for primary keys, ID refs, and dates
+        if col_type in ("primary_key", "id_ref"):
+            report["actions"].append(
+                f"Skipped {missing[col]} missing values in '{col}' (unique ID column — not imputed)"
+            )
+            continue
+        if col_type == "date":
+            report["actions"].append(
+                f"Skipped {missing[col]} missing values in '{col}' (date column — not imputed)"
+            )
+            continue
+
+        # Numeric columns → median-fill
+        if col_type == "numeric" or (col_type is None and df[col].dtype in ['float64', 'int64']):
+            numeric_series = pd.to_numeric(df[col], errors='coerce')
+            median_val = numeric_series.median()
+            if pd.notna(median_val):
+                df[col] = numeric_series.fillna(median_val)
+                report["actions"].append(
+                    f"Filled {missing[col]} missing values in '{col}' with median ({median_val:.2f})"
+                )
             else:
-                mode_val = df[col].mode()
-                if len(mode_val) > 0:
-                    df[col] = df[col].fillna(mode_val[0])
-                    report["actions"].append(f"Filled {missing[col]} missing values in '{col}' with mode ({mode_val[0]})")
-                else:
-                    df[col] = df[col].fillna("Unknown")
-                    report["actions"].append(f"Filled {missing[col]} missing values in '{col}' with 'Unknown'")
+                df[col] = numeric_series.fillna(0)
+                report["actions"].append(
+                    f"Filled {missing[col]} missing values in '{col}' with 0 (no valid median)"
+                )
+            continue
+
+        # Flag columns → fill with 0
+        if col_type == "flag":
+            df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0).astype(int)
+            report["actions"].append(
+                f"Filled {missing[col]} missing values in '{col}' with 0 (flag column)"
+            )
+            continue
+
+        # Categorical columns → mode-fill (default for object types)
+        mode_val = df[col].mode()
+        if len(mode_val) > 0:
+            df[col] = df[col].fillna(mode_val[0])
+            report["actions"].append(
+                f"Filled {missing[col]} missing values in '{col}' with mode ({mode_val[0]})"
+            )
+        else:
+            df[col] = df[col].fillna("Unknown")
+            report["actions"].append(
+                f"Filled {missing[col]} missing values in '{col}' with 'Unknown'"
+            )
 
     # 3. Fix negative values in balance/amount columns
     money_cols = [c for c in df.columns if any(kw in c.lower() for kw in ['balance', 'amount', 'income', 'salary'])]

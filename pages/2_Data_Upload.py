@@ -6,7 +6,7 @@ from utils.icons import render_html_icon
 import pandas as pd
 from authentication import check_auth, require_role
 from database import get_connection
-from utils.preprocessing import validate_upload, clean_data, get_data_quality_report
+from utils.preprocessing import validate_upload, clean_data, get_data_quality_report, classify_and_filter
 from utils.auth import log_activity
 
 # ── Auth ──
@@ -183,60 +183,144 @@ else:
             # Standardize columns
             upload_df.columns = [c.lower().replace(" ", "_") for c in upload_df.columns]
             
-            if auto_clean:
-                upload_df, clean_report = clean_data(upload_df)
+            # ── Step 1: Classify and filter rows with missing PKs/FKs ──
+            upload_df, excluded_df, filter_report = classify_and_filter(upload_df, target_table)
+            
+            excluded_count = filter_report["excluded_rows"]
+            if excluded_count > 0:
+                st.info(
+                    f"Excluded {excluded_count} row(s) with missing primary key or required ID fields.",
+                    icon=":material/filter_alt:"
+                )
+            
+            # ── Step 2: Auto-clean (type-aware — skips ID/date columns) ──
+            if auto_clean and len(upload_df) > 0:
+                upload_df, clean_report = clean_data(upload_df, target_table)
                 for action in clean_report["actions"]:
                     st.info(f"Clean action: {action}")
                     
-            # Insert into database with a progress bar
-            progress_bar = st.progress(0.0, text="Uploading records...")
+            # ── Step 3: Insert into database with skip-reason tracking ──
             total_rows = len(upload_df)
-            batch_size = max(1, total_rows // 20)
             
-            conn = get_connection()
-            inserted = 0
-            skipped = 0
-            
-            for idx, row in upload_df.iterrows():
-                try:
-                    row_dict = row.to_dict()
-                    cols = ", ".join(row_dict.keys())
-                    placeholders = ", ".join(["?"] * len(row_dict))
-                    conn.execute(
-                        f"INSERT OR IGNORE INTO {target_table} ({cols}) VALUES ({placeholders})",
-                        list(row_dict.values())
+            if total_rows == 0:
+                st.error(
+                    f"Upload failed — all {len(df)} rows were excluded due to missing IDs. "
+                    f"No records were inserted into **{target_table}**.",
+                    icon=":material/cancel:"
+                )
+                # Show exclusion reasons
+                if filter_report["exclusion_reasons"]:
+                    with st.expander(f"View {excluded_count} Excluded Rows", expanded=False):
+                        for row_idx, reason in filter_report["exclusion_reasons"][:50]:
+                            st.markdown(f"- **Row {row_idx + 1}**: {reason}")
+                        if len(filter_report["exclusion_reasons"]) > 50:
+                            st.caption(f"… and {len(filter_report['exclusion_reasons']) - 50} more.")
+            else:
+                progress_bar = st.progress(0.0, text="Uploading records...")
+                batch_size = max(1, total_rows // 20)
+                
+                conn = get_connection()
+                inserted = 0
+                skipped = 0
+                skip_reasons = []  # list of (row_number, reason_string)
+                
+                for i, (idx, row) in enumerate(upload_df.iterrows()):
+                    try:
+                        row_dict = row.to_dict()
+                        cols = ", ".join(row_dict.keys())
+                        placeholders = ", ".join(["?"] * len(row_dict))
+                        conn.execute(
+                            f"INSERT INTO {target_table} ({cols}) VALUES ({placeholders})",
+                            list(row_dict.values())
+                        )
+                        inserted += 1
+                    except Exception as e:
+                        skipped += 1
+                        err_msg = str(e)
+                        # Make common SQLite errors more readable
+                        if "UNIQUE constraint failed" in err_msg:
+                            field = err_msg.split("UNIQUE constraint failed: ")[-1].strip()
+                            skip_reasons.append((idx + 1, f"Duplicate {field}"))
+                        elif "NOT NULL constraint failed" in err_msg:
+                            field = err_msg.split("NOT NULL constraint failed: ")[-1].strip()
+                            skip_reasons.append((idx + 1, f"Missing required field: {field}"))
+                        else:
+                            skip_reasons.append((idx + 1, err_msg))
+                        
+                    # Update progress bar
+                    if (i + 1) % batch_size == 0 or (i + 1) == total_rows:
+                        progress_pct = float(i + 1) / total_rows
+                        progress_bar.progress(progress_pct, text=f"Processing: {i+1}/{total_rows} rows...")
+                
+                conn.commit()
+                conn.close()
+                progress_bar.empty()
+                
+                # ── Step 4: Result banners based on actual counts ──
+                total_original = len(df)
+                
+                if inserted == total_original and skipped == 0 and excluded_count == 0:
+                    # Perfect upload — green success
+                    st.toast(f"Successfully uploaded {inserted} records to {target_table.title()}!", icon="✅")
+                    st.success(
+                        f"Upload complete! {inserted} records added to **{target_table}**.",
+                        icon=":material/check_circle:"
                     )
-                    inserted += 1
-                except Exception:
-                    skipped += 1
-                    
-                # Update progress bar
-                if (idx + 1) % batch_size == 0 or (idx + 1) == total_rows:
-                    progress_pct = float(idx + 1) / total_rows
-                    progress_bar.progress(progress_pct, text=f"Processing: {idx+1}/{total_rows} rows uploaded...")
-            
-            conn.commit()
-            conn.close()
-            progress_bar.empty()
-            
-            # Log activity
-            log_activity(
-                user["user_id"], user["username"],
-                "DATA_UPLOAD",
-                f"Uploaded {inserted} records to {target_table} from {uploaded_file.name}"
-            )
-            
-            # Success alerts
-            st.toast(f"Successfully uploaded {inserted} records to {target_table.title()}!", icon="✅")
-            st.success(f"Upload complete! {inserted} records added to **{target_table}**.", icon=":material/check_circle:")
-            
-            # Show summary stats
-            with st.container(border=True):
-                st.markdown(f"#### Upload Summary")
-                s1, s2, s3 = st.columns(3)
-                s1.metric("Total Rows", total_rows)
-                s2.metric("Inserted", inserted)
-                s3.metric("Skipped", skipped)
+                    log_activity(
+                        user["user_id"], user["username"],
+                        "DATA_UPLOAD",
+                        f"Uploaded {inserted} records to {target_table} from {uploaded_file.name}"
+                    )
+                elif inserted == 0:
+                    # Total failure — red error
+                    st.error(
+                        f"Upload failed — 0 of {total_original} records were inserted into **{target_table}**. See reasons below.",
+                        icon=":material/cancel:"
+                    )
+                    log_activity(
+                        user["user_id"], user["username"],
+                        "DATA_UPLOAD",
+                        f"Upload FAILED: 0 of {total_original} records inserted to {target_table} from {uploaded_file.name}"
+                    )
+                else:
+                    # Partial success — amber warning
+                    total_not_inserted = skipped + excluded_count
+                    st.warning(
+                        f"Upload partially completed — {inserted} of {total_original} records added to **{target_table}**, "
+                        f"{total_not_inserted} skipped.",
+                        icon=":material/warning:"
+                    )
+                    log_activity(
+                        user["user_id"], user["username"],
+                        "DATA_UPLOAD",
+                        f"Partial upload: {inserted} of {total_original} records to {target_table} from {uploaded_file.name} ({total_not_inserted} skipped)"
+                    )
+                
+                # Upload Summary metrics
+                with st.container(border=True):
+                    st.markdown("#### Upload Summary")
+                    s1, s2, s3, s4 = st.columns(4)
+                    s1.metric("Total Rows", total_original)
+                    s2.metric("Inserted", inserted)
+                    s3.metric("Skipped (Insert)", skipped)
+                    s4.metric("Excluded (Invalid ID)", excluded_count)
+                
+                # Expandable skip reasons
+                all_reasons = filter_report["exclusion_reasons"] + skip_reasons
+                if all_reasons:
+                    with st.expander(f"View {len(all_reasons)} Skipped/Excluded Row Details", expanded=False):
+                        if filter_report["exclusion_reasons"]:
+                            st.markdown("**Excluded before insert (missing ID):**")
+                            for row_idx, reason in filter_report["exclusion_reasons"][:30]:
+                                st.markdown(f"- **Row {row_idx + 1}**: {reason}")
+                            if len(filter_report["exclusion_reasons"]) > 30:
+                                st.caption(f"… and {len(filter_report['exclusion_reasons']) - 30} more exclusions.")
+                        if skip_reasons:
+                            st.markdown("**Skipped during insert:**")
+                            for row_num, reason in skip_reasons[:30]:
+                                st.markdown(f"- **Row {row_num}**: {reason}")
+                            if len(skip_reasons) > 30:
+                                st.caption(f"… and {len(skip_reasons) - 30} more skips.")
             
     except Exception as e:
         st.error(f"Error processing CSV: {str(e)}", icon=":material/cancel:")
