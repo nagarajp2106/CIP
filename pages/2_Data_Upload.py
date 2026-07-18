@@ -26,7 +26,7 @@ st.markdown("---")
 
 # Schema helper mapping
 EXPECTED_SCHEMAS = {
-    "customers": "customer_id, name, gender, age, occupation, income, region, branch, balance, credit_score, customer_since, email, phone, is_active, risk_level, churn_score, clv_score, segment",
+    "customers": "customer_id, name, gender, age, occupation, income, region, branch, balance, credit_score, customer_since, email, phone, is_active",
     "accounts": "account_number, customer_id, account_type, balance, status, opened_date",
     "transactions": "transaction_id, customer_id, account_number, amount, date, type, channel, merchant, description, is_fraud",
     "loans": "loan_id, customer_id, loan_type, loan_amount, interest_rate, tenure_months, emi, status, applied_date, approved_date",

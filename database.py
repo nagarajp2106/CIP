@@ -140,6 +140,8 @@ def init_db():
     """)
 
     # Audit logs table
+    # NOTE: user_id intentionally has NO foreign key to users.id so that
+    # audit records survive user deletion/deactivation.  This is deliberate.
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS audit_logs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -101,6 +101,38 @@ def _get_column_type(table_name: str, col_name: str) -> str:
     return "categorical"
 
 
+def _coerce_flag_column(series: pd.Series) -> pd.Series:
+    """
+    Coerce a boolean/flag column to integer 0/1.
+
+    Handles numeric values as-is, plus common text representations:
+      1 / True / Yes / Active  → 1
+      0 / False / No / Inactive → 0
+    Unrecognised text values are set to NaN (so the caller can default
+    or emit a warning).
+    """
+    TRUE_VALS  = {"1", "true", "yes", "active", "1.0"}
+    FALSE_VALS = {"0", "false", "no", "inactive", "0.0"}
+
+    def _map(val):
+        if pd.isna(val):
+            return np.nan
+        s = str(val).strip().lower()
+        if s in TRUE_VALS:
+            return 1
+        if s in FALSE_VALS:
+            return 0
+        # Try numeric parse as last resort
+        try:
+            n = float(s)
+            return 1 if n != 0 else 0
+        except ValueError:
+            return np.nan  # genuinely unmappable — will default to 0
+
+    return series.map(_map)
+
+
+
 # ──────────────────────────────────────────────
 # Pre-Clean Classification & Filtering
 # ──────────────────────────────────────────────
@@ -218,9 +250,10 @@ def clean_data(df: pd.DataFrame, table_name: str = None) -> tuple[pd.DataFrame, 
                 )
             continue
 
-        # Flag columns → fill with 0
+        # Flag columns → coerce text to 0/1, then fill missing with 0
         if col_type == "flag":
-            df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0).astype(int)
+            df[col] = _coerce_flag_column(df[col])
+            df[col] = df[col].fillna(0).astype(int)
             report["actions"].append(
                 f"Filled {missing[col]} missing values in '{col}' with 0 (flag column)"
             )
@@ -272,10 +305,15 @@ def validate_upload(df: pd.DataFrame, table_name: str) -> dict:
     report = {"valid": True, "errors": [], "warnings": [], "info": []}
 
     # Expected schemas
+    # NOTE: For customers, risk_level/churn_score/clv_score/segment are
+    # system-computed columns with schema defaults.  They are NOT listed
+    # as required or recommended so a CSV that omits them still passes
+    # validation; SQLite defaults will fill them on insert.
     schemas = {
         "customers": {
             "required": ["customer_id", "name"],
             "recommended": ["gender", "age", "occupation", "income", "region", "branch", "balance", "credit_score"],
+            "optional_derived": ["risk_level", "churn_score", "clv_score", "segment"],
             "types": {"age": "numeric", "income": "numeric", "balance": "numeric", "credit_score": "numeric"}
         },
         "accounts": {
@@ -422,7 +460,10 @@ def get_data_quality_report(df: pd.DataFrame) -> dict:
 
 FK_MAP = {
     "accounts":     [{"column": "customer_id", "parent_table": "customers", "parent_column": "customer_id"}],
-    "transactions": [{"column": "customer_id", "parent_table": "customers", "parent_column": "customer_id"}],
+    "transactions": [
+        {"column": "customer_id",    "parent_table": "customers", "parent_column": "customer_id"},
+        {"column": "account_number", "parent_table": "accounts",  "parent_column": "account_number"},
+    ],
     "loans":        [{"column": "customer_id", "parent_table": "customers", "parent_column": "customer_id"}],
     "cards":        [{"column": "customer_id", "parent_table": "customers", "parent_column": "customer_id"}],
     "customers":    [],  # No FK — this is the root table
