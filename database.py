@@ -12,7 +12,9 @@ import bcrypt
 from config import (
     DATABASE_PATH, DATABASE_DIR, DEMO_USERS, REGIONS, BRANCHES,
     OCCUPATIONS, ACCOUNT_TYPES, LOAN_TYPES, CARD_TYPES,
-    TRANSACTION_TYPES, TRANSACTION_CHANNELS
+    TRANSACTION_TYPES, TRANSACTION_CHANNELS, PRODUCT_CATEGORIES,
+    ORDER_STATUSES, PAYMENT_METHODS, SHIPMENT_STATUSES,
+    DEFAULT_COMMISSION_RATE
 )
 
 # ──────────────────────────────────────────────
@@ -154,6 +156,278 @@ def init_db():
         )
     """)
 
+    # ──────────────────────────────────────────────
+    # Marketplace Tables
+    # ──────────────────────────────────────────────
+
+    # Vendors table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS vendors (
+            vendor_id TEXT PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            business_name TEXT NOT NULL,
+            owner_name TEXT NOT NULL,
+            email TEXT,
+            phone TEXT,
+            gst_number TEXT,
+            address TEXT,
+            city TEXT,
+            state TEXT,
+            commission_rate REAL DEFAULT 10.0,
+            status TEXT DEFAULT 'Pending',
+            created_at TEXT DEFAULT (datetime('now')),
+            updated_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        )
+    """)
+
+    # Categories table (hierarchical)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS categories (
+            category_id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            parent_id TEXT,
+            description TEXT,
+            icon TEXT,
+            is_active INTEGER DEFAULT 1,
+            created_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (parent_id) REFERENCES categories(category_id)
+        )
+    """)
+
+    # Products table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS products (
+            product_id TEXT PRIMARY KEY,
+            vendor_id TEXT NOT NULL,
+            category_id TEXT,
+            name TEXT NOT NULL,
+            description TEXT,
+            price REAL NOT NULL,
+            mrp REAL,
+            discount_pct REAL DEFAULT 0,
+            sku TEXT,
+            image_url TEXT,
+            status TEXT DEFAULT 'Active',
+            rating_avg REAL DEFAULT 0,
+            rating_count INTEGER DEFAULT 0,
+            created_at TEXT DEFAULT (datetime('now')),
+            updated_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (vendor_id) REFERENCES vendors(vendor_id),
+            FOREIGN KEY (category_id) REFERENCES categories(category_id)
+        )
+    """)
+
+    # Warehouses table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS warehouses (
+            warehouse_id TEXT PRIMARY KEY,
+            vendor_id TEXT NOT NULL,
+            name TEXT NOT NULL,
+            address TEXT,
+            city TEXT,
+            state TEXT,
+            pincode TEXT,
+            is_active INTEGER DEFAULT 1,
+            created_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (vendor_id) REFERENCES vendors(vendor_id)
+        )
+    """)
+
+    # Inventory table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS inventory (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            product_id TEXT NOT NULL,
+            warehouse_id TEXT NOT NULL,
+            quantity INTEGER DEFAULT 0,
+            reserved INTEGER DEFAULT 0,
+            reorder_level INTEGER DEFAULT 10,
+            last_restocked TEXT,
+            FOREIGN KEY (product_id) REFERENCES products(product_id),
+            FOREIGN KEY (warehouse_id) REFERENCES warehouses(warehouse_id)
+        )
+    """)
+
+    # Orders table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS orders (
+            order_id TEXT PRIMARY KEY,
+            customer_id TEXT NOT NULL,
+            total_amount REAL NOT NULL,
+            tax_amount REAL DEFAULT 0,
+            shipping_amount REAL DEFAULT 0,
+            discount_amount REAL DEFAULT 0,
+            net_amount REAL NOT NULL,
+            status TEXT DEFAULT 'Placed',
+            shipping_address TEXT,
+            shipping_city TEXT,
+            shipping_state TEXT,
+            shipping_pincode TEXT,
+            notes TEXT,
+            placed_at TEXT DEFAULT (datetime('now')),
+            updated_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+        )
+    """)
+
+    # Order Items table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS order_items (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            order_id TEXT NOT NULL,
+            product_id TEXT NOT NULL,
+            vendor_id TEXT NOT NULL,
+            quantity INTEGER NOT NULL DEFAULT 1,
+            unit_price REAL NOT NULL,
+            total_price REAL NOT NULL,
+            status TEXT DEFAULT 'Placed',
+            FOREIGN KEY (order_id) REFERENCES orders(order_id),
+            FOREIGN KEY (product_id) REFERENCES products(product_id),
+            FOREIGN KEY (vendor_id) REFERENCES vendors(vendor_id)
+        )
+    """)
+
+    # Cart table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS cart (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id TEXT NOT NULL,
+            product_id TEXT NOT NULL,
+            quantity INTEGER DEFAULT 1,
+            added_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+            FOREIGN KEY (product_id) REFERENCES products(product_id)
+        )
+    """)
+
+    # Wishlist table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS wishlist (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id TEXT NOT NULL,
+            product_id TEXT NOT NULL,
+            added_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+            FOREIGN KEY (product_id) REFERENCES products(product_id)
+        )
+    """)
+
+    # Reviews table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS reviews (
+            review_id TEXT PRIMARY KEY,
+            product_id TEXT NOT NULL,
+            customer_id TEXT NOT NULL,
+            rating INTEGER NOT NULL CHECK(rating BETWEEN 1 AND 5),
+            title TEXT,
+            comment TEXT,
+            is_approved INTEGER DEFAULT 0,
+            created_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (product_id) REFERENCES products(product_id),
+            FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+        )
+    """)
+
+    # Payments table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS payments (
+            payment_id TEXT PRIMARY KEY,
+            order_id TEXT NOT NULL,
+            amount REAL NOT NULL,
+            method TEXT NOT NULL,
+            status TEXT DEFAULT 'Pending',
+            transaction_ref TEXT,
+            paid_at TEXT,
+            created_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (order_id) REFERENCES orders(order_id)
+        )
+    """)
+
+    # Shipments table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS shipments (
+            shipment_id TEXT PRIMARY KEY,
+            order_id TEXT NOT NULL,
+            carrier TEXT,
+            tracking_number TEXT,
+            status TEXT DEFAULT 'Pending',
+            estimated_delivery TEXT,
+            shipped_at TEXT,
+            delivered_at TEXT,
+            created_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (order_id) REFERENCES orders(order_id)
+        )
+    """)
+
+    # Refunds table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS refunds (
+            refund_id TEXT PRIMARY KEY,
+            order_id TEXT NOT NULL,
+            payment_id TEXT NOT NULL,
+            amount REAL NOT NULL,
+            reason TEXT,
+            status TEXT DEFAULT 'Requested',
+            approved_at TEXT,
+            created_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (order_id) REFERENCES orders(order_id),
+            FOREIGN KEY (payment_id) REFERENCES payments(payment_id)
+        )
+    """)
+
+    # Notifications table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS notifications (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            title TEXT NOT NULL,
+            message TEXT,
+            type TEXT DEFAULT 'info',
+            is_read INTEGER DEFAULT 0,
+            created_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        )
+    """)
+
+    # Commission Ledger table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS commission_ledger (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            vendor_id TEXT NOT NULL,
+            order_id TEXT NOT NULL,
+            order_amount REAL NOT NULL,
+            commission_rate REAL NOT NULL,
+            commission_amount REAL NOT NULL,
+            status TEXT DEFAULT 'Pending',
+            created_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (vendor_id) REFERENCES vendors(vendor_id),
+            FOREIGN KEY (order_id) REFERENCES orders(order_id)
+        )
+    """)
+
+    # Tax Rates table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tax_rates (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            rate REAL NOT NULL,
+            description TEXT,
+            is_active INTEGER DEFAULT 1
+        )
+    """)
+
+    # Currencies table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS currencies (
+            code TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            symbol TEXT NOT NULL,
+            rate_to_usd REAL DEFAULT 1.0,
+            is_active INTEGER DEFAULT 1
+        )
+    """)
+
     # Create indexes for performance
     index_queries = [
         "CREATE INDEX IF NOT EXISTS idx_customers_region ON customers(region)",
@@ -167,6 +441,22 @@ def init_db():
         "CREATE INDEX IF NOT EXISTS idx_loans_status ON loans(status)",
         "CREATE INDEX IF NOT EXISTS idx_cards_customer ON cards(customer_id)",
         "CREATE INDEX IF NOT EXISTS idx_audit_timestamp ON audit_logs(timestamp)",
+        # Marketplace indexes
+        "CREATE INDEX IF NOT EXISTS idx_vendors_status ON vendors(status)",
+        "CREATE INDEX IF NOT EXISTS idx_products_vendor ON products(vendor_id)",
+        "CREATE INDEX IF NOT EXISTS idx_products_category ON products(category_id)",
+        "CREATE INDEX IF NOT EXISTS idx_products_status ON products(status)",
+        "CREATE INDEX IF NOT EXISTS idx_orders_customer ON orders(customer_id)",
+        "CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status)",
+        "CREATE INDEX IF NOT EXISTS idx_order_items_order ON order_items(order_id)",
+        "CREATE INDEX IF NOT EXISTS idx_cart_customer ON cart(customer_id)",
+        "CREATE INDEX IF NOT EXISTS idx_wishlist_customer ON wishlist(customer_id)",
+        "CREATE INDEX IF NOT EXISTS idx_reviews_product ON reviews(product_id)",
+        "CREATE INDEX IF NOT EXISTS idx_payments_order ON payments(order_id)",
+        "CREATE INDEX IF NOT EXISTS idx_shipments_order ON shipments(order_id)",
+        "CREATE INDEX IF NOT EXISTS idx_notifications_user ON notifications(user_id)",
+        "CREATE INDEX IF NOT EXISTS idx_commission_vendor ON commission_ledger(vendor_id)",
+        "CREATE INDEX IF NOT EXISTS idx_inventory_product ON inventory(product_id)",
     ]
     for q in index_queries:
         cursor.execute(q)
@@ -472,6 +762,9 @@ def seed_demo_data(n_customers=5000):
     # ── 8. Export sample dataset CSV ──
     _export_sample_csv()
 
+    # ── 9. Seed Marketplace Data ──
+    seed_marketplace_data()
+
 
 def _export_sample_csv():
     """Export customer data as a CSV for the datasets folder."""
@@ -480,6 +773,178 @@ def _export_sample_csv():
     csv_path = os.path.join(os.path.dirname(DATABASE_PATH), "..", "datasets", "bank_customers.csv")
     os.makedirs(os.path.dirname(csv_path), exist_ok=True)
     df.to_csv(csv_path, index=False)
+    conn.close()
+
+
+# ──────────────────────────────────────────────
+# Marketplace Seed Data
+# ──────────────────────────────────────────────
+
+def seed_marketplace_data():
+    """
+    Insert seed data for the marketplace extension.
+    Creates vendor user accounts, vendor records, categories, sample products,
+    warehouses, inventory, tax rates, and currencies.
+    Idempotent — skips if vendors already exist.
+    """
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    # Skip if already seeded
+    cursor.execute("SELECT COUNT(*) FROM vendors")
+    if cursor.fetchone()[0] > 0:
+        conn.close()
+        return
+
+    now = datetime.datetime.now().isoformat(timespec="seconds")
+
+    # ── 1. Create vendor user accounts ──
+    vendor_users = [
+        ("vendor_techworld",    "vendor123", "John Smith",    "john@techworld.com",         "vendor"),
+        ("vendor_fashionhub",   "vendor123", "Priya Sharma",  "priya@fashionhub.com",       "vendor"),
+        ("vendor_homestyle",    "vendor123", "Rahul Verma",   "rahul@homestyledecor.com",   "vendor"),
+        ("vendor_freshgrocers", "vendor123", "Anitha Reddy",  "anitha@freshgrocers.com",    "vendor"),
+        ("vendor_sportszone",   "vendor123", "Vikram Singh",  "vikram@sportszone.com",      "vendor"),
+    ]
+
+    vendor_user_ids = {}
+    for username, password, full_name, email, role in vendor_users:
+        pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+        try:
+            cursor.execute("""
+                INSERT INTO users (username, password_hash, full_name, email, role, created_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+            """, (username, pw_hash, full_name, email, role, now))
+            vendor_user_ids[username] = cursor.lastrowid
+        except sqlite3.IntegrityError:
+            # User already exists, fetch their id
+            cursor.execute("SELECT id FROM users WHERE username = ?", (username,))
+            vendor_user_ids[username] = cursor.fetchone()[0]
+
+    # ── 2. Insert 5 vendors ──
+    vendors_data = [
+        ("VND00001", vendor_user_ids["vendor_techworld"],    "Tech World",       "John Smith",    "john@techworld.com",       "9876543210", "29ABCDE1234F1Z5", "12 MG Road",        "Bangalore",  "Karnataka",   10.0, "Active"),
+        ("VND00002", vendor_user_ids["vendor_fashionhub"],   "Fashion Hub",      "Priya Sharma",  "priya@fashionhub.com",     "9123456780", "07FGHIJ5678K1Z2", "45 Connaught Place","New Delhi",  "Delhi",       12.0, "Active"),
+        ("VND00003", vendor_user_ids["vendor_homestyle"],    "HomeStyle Decor",  "Rahul Verma",   "rahul@homestyledecor.com", "9988776655", "27KLMNO9012P1Z8", "78 Andheri West",   "Mumbai",     "Maharashtra",  8.0, "Pending"),
+        ("VND00004", vendor_user_ids["vendor_freshgrocers"], "Fresh Grocers",    "Anitha Reddy",  "anitha@freshgrocers.com",  "9012345678", "36QRSTU3456V1Z4", "22 Jubilee Hills",  "Hyderabad",  "Telangana",    9.0, "Active"),
+        ("VND00005", vendor_user_ids["vendor_sportszone"],   "SportsZone",       "Vikram Singh",  "vikram@sportszone.com",    "9345678901", "08WXYZA6789B1Z6", "33 Civil Lines",    "Jaipur",     "Rajasthan",   11.0, "Suspended"),
+    ]
+
+    cursor.executemany("""
+        INSERT INTO vendors (vendor_id, user_id, business_name, owner_name, email, phone,
+            gst_number, address, city, state, commission_rate, status, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))
+    """, vendors_data)
+
+    # ── 3. Seed categories ──
+    categories = [
+        ("CAT001", "Electronics",        None,     "Electronic gadgets and devices",    "devices"),
+        ("CAT002", "Fashion",            None,     "Clothing and accessories",          "checkroom"),
+        ("CAT003", "Home & Decor",       None,     "Home furnishing and decor",         "chair"),
+        ("CAT004", "Groceries",          None,     "Fresh food and daily essentials",   "grocery"),
+        ("CAT005", "Sports & Fitness",   None,     "Sports equipment and accessories",  "fitness_center"),
+        ("CAT006", "Books & Stationery", None,     "Books, stationery, and supplies",   "menu_book"),
+        ("CAT007", "Health & Beauty",    None,     "Personal care and beauty products", "spa"),
+        ("CAT008", "Toys & Games",       None,     "Toys, games, and entertainment",    "toys"),
+        ("CAT009", "Automotive",         None,     "Vehicle parts and accessories",     "directions_car"),
+        ("CAT010", "Garden & Outdoors",  None,     "Garden tools and outdoor gear",     "yard"),
+        # Sub-categories
+        ("CAT011", "Smartphones",        "CAT001", "Mobile phones and accessories",     "smartphone"),
+        ("CAT012", "Laptops",            "CAT001", "Laptops and notebooks",             "laptop"),
+        ("CAT013", "Men's Clothing",     "CAT002", "Men's fashion wear",                "person"),
+        ("CAT014", "Women's Clothing",   "CAT002", "Women's fashion wear",              "person"),
+        ("CAT015", "Furniture",          "CAT003", "Home and office furniture",          "weekend"),
+    ]
+
+    cursor.executemany("""
+        INSERT INTO categories (category_id, name, parent_id, description, icon)
+        VALUES (?, ?, ?, ?, ?)
+    """, categories)
+
+    # ── 4. Seed sample products ──
+    products = [
+        ("PRD00001", "VND00001", "CAT011", "Galaxy Pro Max 5G",      "Latest flagship smartphone with 200MP camera", 69999.00, 79999.00, 12.5, "SKU-TW-001", None, "Active"),
+        ("PRD00002", "VND00001", "CAT012", "UltraBook Pro 15",       "15-inch ultralight laptop with M3 chip",      124999.00,149999.00, 16.7, "SKU-TW-002", None, "Active"),
+        ("PRD00003", "VND00001", "CAT001", "Wireless Earbuds ANC",   "Active noise cancelling wireless earbuds",      4999.00,  6999.00, 28.6, "SKU-TW-003", None, "Active"),
+        ("PRD00004", "VND00002", "CAT013", "Premium Cotton Shirt",   "100% cotton formal shirt, slim fit",            1899.00,  2999.00, 36.7, "SKU-FH-001", None, "Active"),
+        ("PRD00005", "VND00002", "CAT014", "Designer Silk Saree",    "Handwoven Banarasi silk saree",                 8499.00, 12999.00, 34.6, "SKU-FH-002", None, "Active"),
+        ("PRD00006", "VND00002", "CAT002", "Leather Wallet",         "Genuine leather bi-fold wallet",                 999.00,  1499.00, 33.4, "SKU-FH-003", None, "Active"),
+        ("PRD00007", "VND00003", "CAT015", "Ergonomic Office Chair", "Adjustable lumbar support mesh chair",          12999.00, 18999.00, 31.6, "SKU-HS-001", None, "Active"),
+        ("PRD00008", "VND00003", "CAT003", "Ceramic Dinner Set",     "24-piece premium ceramic dinner set",            3999.00,  5499.00, 27.3, "SKU-HS-002", None, "Active"),
+        ("PRD00009", "VND00004", "CAT004", "Organic Honey 500g",     "Pure organic multiflower honey",                  499.00,   699.00, 28.6, "SKU-FG-001", None, "Active"),
+        ("PRD00010", "VND00004", "CAT004", "Basmati Rice 5kg",       "Premium aged basmati rice",                       649.00,   799.00, 18.8, "SKU-FG-002", None, "Active"),
+        ("PRD00011", "VND00005", "CAT005", "Professional Cricket Bat","English willow grade-1 bat",                    5999.00,  7999.00, 25.0, "SKU-SZ-001", None, "Active"),
+        ("PRD00012", "VND00005", "CAT005", "Running Shoes Pro",      "Lightweight marathon running shoes",              3499.00,  4999.00, 30.0, "SKU-SZ-002", None, "Active"),
+    ]
+
+    cursor.executemany("""
+        INSERT INTO products (product_id, vendor_id, category_id, name, description,
+            price, mrp, discount_pct, sku, image_url, status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, products)
+
+    # ── 5. Seed warehouses ──
+    warehouses = [
+        ("WH001", "VND00001", "Tech World Warehouse",       "Electronic City",     "Bangalore", "Karnataka",   "560100"),
+        ("WH002", "VND00002", "Fashion Hub Warehouse",       "Karol Bagh",          "New Delhi", "Delhi",       "110005"),
+        ("WH003", "VND00003", "HomeStyle Storage",           "Bhiwandi",            "Mumbai",    "Maharashtra", "421302"),
+        ("WH004", "VND00004", "Fresh Grocers Cold Storage",  "Miyapur",             "Hyderabad", "Telangana",   "500049"),
+        ("WH005", "VND00005", "SportsZone Depot",            "Mansarovar",          "Jaipur",    "Rajasthan",   "302020"),
+    ]
+
+    cursor.executemany("""
+        INSERT INTO warehouses (warehouse_id, vendor_id, name, address, city, state, pincode)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    """, warehouses)
+
+    # ── 6. Seed inventory ──
+    inventory_items = []
+    product_ids = [p[0] for p in products]
+    warehouse_map = {
+        "VND00001": "WH001", "VND00002": "WH002", "VND00003": "WH003",
+        "VND00004": "WH004", "VND00005": "WH005",
+    }
+    for pid, vid, *_ in products:
+        wh = warehouse_map[vid]
+        qty = random.randint(20, 500)
+        reserved = random.randint(0, min(10, qty))
+        reorder = random.choice([10, 20, 25, 50])
+        inventory_items.append((pid, wh, qty, reserved, reorder, now))
+
+    cursor.executemany("""
+        INSERT INTO inventory (product_id, warehouse_id, quantity, reserved, reorder_level, last_restocked)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, inventory_items)
+
+    # ── 7. Seed tax rates ──
+    tax_entries = [
+        ("GST 5%",  5.0,  "Essential goods"),
+        ("GST 12%", 12.0, "Standard goods"),
+        ("GST 18%", 18.0, "Standard services & electronics"),
+        ("GST 28%", 28.0, "Luxury goods"),
+    ]
+    cursor.executemany("""
+        INSERT INTO tax_rates (name, rate, description) VALUES (?, ?, ?)
+    """, tax_entries)
+
+    # ── 8. Seed currencies ──
+    currency_entries = [
+        ("INR", "Indian Rupee",   "\u20b9", 0.012, 1),
+        ("USD", "US Dollar",      "$",      1.0,   1),
+        ("EUR", "Euro",           "\u20ac", 1.08,  1),
+        ("GBP", "British Pound",  "\u00a3", 1.27,  1),
+    ]
+    cursor.executemany("""
+        INSERT INTO currencies (code, name, symbol, rate_to_usd, is_active) VALUES (?, ?, ?, ?, ?)
+    """, currency_entries)
+
+    # ── 9. Log marketplace seed audit entry ──
+    cursor.execute("""
+        INSERT INTO audit_logs (username, action, details)
+        VALUES ('system', 'MARKETPLACE_SEED', 'Marketplace seed data generated: 5 vendors, 12 products, 15 categories')
+    """)
+
+    conn.commit()
     conn.close()
 
 

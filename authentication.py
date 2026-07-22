@@ -223,6 +223,14 @@ Unlock deep retail banking customer insights with predictive ML pipelines, CLV f
         <span style="display: flex; align-items: center; gap: 6px;">{render_html_icon("person", size="18px", color="#64748B")} <code>analyst</code> (analyst123)</span>
         <span class="demo-role-badge" style="background:#E0F7FA; color:#006064;">Analyst</span>
     </div>
+    <div class="demo-card-item">
+        <span style="display: flex; align-items: center; gap: 6px;">{render_html_icon("person", size="18px", color="#64748B")} <code>customer</code> (customer123)</span>
+        <span class="demo-role-badge" style="background:#E8F5E9; color:#1B5E20;">Customer</span>
+    </div>
+    <div class="demo-card-item">
+        <span style="display: flex; align-items: center; gap: 6px;">{render_html_icon("person", size="18px", color="#64748B")} <code>vendor</code> (vendor123)</span>
+        <span class="demo-role-badge" style="background:#FFF3E0; color:#E65100;">Vendor</span>
+    </div>
 </div>""",
                 unsafe_allow_html=True
             )
@@ -336,6 +344,68 @@ def render_sidebar(current_page: str = "Home"):
             st.markdown('<div class="sidebar-section-header">ADMINISTRATION</div>', unsafe_allow_html=True)
             for label, path, icon in allowed_admin_pages:
                 st.page_link(path, label=label, icon=icon)
+
+        # 8. Marketplace
+        marketplace_pages = [
+            ("Vendor Management", "pages/22_Vendor_Management.py", ":material/storefront:"),
+            ("Product Catalog", "pages/23_Product_Catalog.py", ":material/inventory_2:"),
+            ("Category Management", "pages/24_Category_Management.py", ":material/category:"),
+            ("Shop", "pages/25_Shop.py", ":material/shopping_bag:"),
+        ]
+        allowed_mkt_pages = [p for p in marketplace_pages if user["role"] in PAGE_ACCESS.get(p[0], [])]
+        if allowed_mkt_pages:
+            st.markdown('<div class="sidebar-section-header">MARKETPLACE</div>', unsafe_allow_html=True)
+            for label, path, icon in allowed_mkt_pages:
+                st.page_link(path, label=label, icon=icon)
+
+        # 9. Shopping
+        shopping_pages = [
+            ("Cart & Checkout", "pages/26_Cart_Checkout.py", ":material/shopping_cart:"),
+            ("Wishlist", "pages/27_Wishlist.py", ":material/favorite:"),
+            ("My Orders", "pages/28_My_Orders.py", ":material/receipt_long:"),
+        ]
+        allowed_shop_pages = [p for p in shopping_pages if user["role"] in PAGE_ACCESS.get(p[0], [])]
+        if allowed_shop_pages:
+            st.markdown('<div class="sidebar-section-header">SHOPPING</div>', unsafe_allow_html=True)
+            for label, path, icon in allowed_shop_pages:
+                st.page_link(path, label=label, icon=icon)
+
+        # 10. Order & Inventory Management
+        order_pages = [
+            ("Order Management", "pages/29_Order_Management.py", ":material/list_alt:"),
+            ("Inventory Management", "pages/30_Inventory_Management.py", ":material/warehouse:"),
+            ("Shipping & Logistics", "pages/31_Shipping_Logistics.py", ":material/local_shipping:"),
+            ("Returns & Refunds", "pages/32_Returns_Refunds.py", ":material/assignment_return:"),
+        ]
+        allowed_order_pages = [p for p in order_pages if user["role"] in PAGE_ACCESS.get(p[0], [])]
+        if allowed_order_pages:
+            st.markdown('<div class="sidebar-section-header">ORDER MANAGEMENT</div>', unsafe_allow_html=True)
+            for label, path, icon in allowed_order_pages:
+                st.page_link(path, label=label, icon=icon)
+
+        # 11. Reviews & Notifications
+        misc_pages = [
+            ("Reviews & Ratings", "pages/33_Reviews_Ratings.py", ":material/rate_review:"),
+            ("Notifications", "pages/34_Notifications.py", ":material/notifications:"),
+        ]
+        allowed_misc_pages = [p for p in misc_pages if user["role"] in PAGE_ACCESS.get(p[0], [])]
+        if allowed_misc_pages:
+            st.markdown('<div class="sidebar-section-header">ENGAGEMENT</div>', unsafe_allow_html=True)
+            for label, path, icon in allowed_misc_pages:
+                st.page_link(path, label=label, icon=icon)
+
+        # 12. Vendor Dashboards & Reports
+        vendor_report_pages = [
+            ("Vendor Dashboard", "pages/35_Vendor_Dashboard.py", ":material/space_dashboard:"),
+            ("Sales Analytics", "pages/36_Sales_Analytics.py", ":material/trending_up:"),
+            ("Commission Report", "pages/37_Commission_Report.py", ":material/payments:"),
+            ("Marketplace Reports", "pages/38_Marketplace_Reports.py", ":material/summarize:"),
+        ]
+        allowed_vr_pages = [p for p in vendor_report_pages if user["role"] in PAGE_ACCESS.get(p[0], [])]
+        if allowed_vr_pages:
+            st.markdown('<div class="sidebar-section-header">VENDOR TOOLS</div>', unsafe_allow_html=True)
+            for label, path, icon in allowed_vr_pages:
+                st.page_link(path, label=label, icon=icon)
                     
         st.markdown("---")
         
@@ -443,6 +513,9 @@ def get_role_badge_html(role: str) -> str:
         "admin": "#DC3545",
         "bank_manager": "#2E86AB",
         "data_analyst": "#6F42C1",
+        "customer": "#28A745",
+        "vendor": "#FF8C00",
+        "guest": "#6C757D",
     }
     color = role_colors.get(role, "#6C757D")
     label = ROLES.get(role, role)

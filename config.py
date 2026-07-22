@@ -1,5 +1,5 @@
 """
-Central Configuration for AI Banking Customer Insights Platform
+Central Configuration for AI Banking Customer Insights & Marketplace Platform
 """
 import os
 
@@ -39,21 +39,27 @@ ROLES = {
     "admin": "Admin",
     "bank_manager": "Manager",
     "data_analyst": "Analyst",
+    "customer": "Customer",
+    "vendor": "Vendor",
+    "guest": "Guest",
 }
 
 # ──────────────────────────────────────────────
 # Demo Login Credentials
 # ──────────────────────────────────────────────
 DEMO_USERS = [
-    {"username": "admin",   "password": "admin123",   "full_name": "System Administrator", "role": "admin",        "email": "admin@aibanking.com"},
-    {"username": "manager", "password": "manager123", "full_name": "Sarah Johnson",        "role": "bank_manager", "email": "sarah.johnson@aibanking.com"},
-    {"username": "analyst", "password": "analyst123", "full_name": "David Wilson",         "role": "data_analyst", "email": "david.wilson@aibanking.com"},
+    {"username": "admin",    "password": "admin123",    "full_name": "System Administrator", "role": "admin",        "email": "admin@aibanking.com"},
+    {"username": "manager",  "password": "manager123",  "full_name": "Sarah Johnson",        "role": "bank_manager", "email": "sarah.johnson@aibanking.com"},
+    {"username": "analyst",  "password": "analyst123",  "full_name": "David Wilson",         "role": "data_analyst", "email": "david.wilson@aibanking.com"},
+    {"username": "customer", "password": "customer123", "full_name": "Ravi Kumar",           "role": "customer",     "email": "ravi.kumar@marketplace.com"},
+    {"username": "vendor",   "password": "vendor123",   "full_name": "John Smith",           "role": "vendor",       "email": "john@techworld.com"},
 ]
 
 # ──────────────────────────────────────────────
 # Page Access Control (role → allowed pages)
 # ──────────────────────────────────────────────
 PAGE_ACCESS = {
+    # ── Banking Pages ──
     "Dashboard":              ["admin", "bank_manager", "data_analyst"],
     "Data Upload":            ["admin", "data_analyst"],
     "Data Preprocessing":     ["admin", "data_analyst"],
@@ -71,6 +77,24 @@ PAGE_ACCESS = {
     "Reports":                ["admin", "bank_manager", "data_analyst"],
     "Admin":                  ["admin"],
     "Settings":               ["admin", "bank_manager", "data_analyst"],
+    # ── Marketplace Pages ──
+    "Vendor Management":      ["admin"],
+    "Product Catalog":        ["admin", "vendor"],
+    "Category Management":    ["admin"],
+    "Shop":                   ["admin", "customer", "vendor", "guest"],
+    "Cart & Checkout":        ["customer"],
+    "Wishlist":               ["customer"],
+    "My Orders":              ["customer"],
+    "Order Management":       ["admin", "vendor"],
+    "Inventory Management":   ["admin", "vendor"],
+    "Shipping & Logistics":   ["admin", "vendor"],
+    "Returns & Refunds":      ["admin", "vendor", "customer"],
+    "Reviews & Ratings":      ["admin", "customer"],
+    "Notifications":          ["admin", "bank_manager", "data_analyst", "customer", "vendor"],
+    "Vendor Dashboard":       ["vendor"],
+    "Sales Analytics":        ["admin"],
+    "Commission Report":      ["admin", "vendor"],
+    "Marketplace Reports":    ["admin"],
 }
 
 # ──────────────────────────────────────────────
@@ -140,3 +164,49 @@ PRODUCT_LIST = [
 # Pagination
 # ──────────────────────────────────────────────
 DEFAULT_PAGE_SIZE = 20
+
+# ──────────────────────────────────────────────
+# Marketplace Configuration
+# ──────────────────────────────────────────────
+UPLOAD_DIR = os.path.join(BASE_DIR, "uploaded_files", "products")
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+PRODUCT_CATEGORIES = [
+    "Electronics", "Fashion", "Home & Decor", "Groceries", "Sports & Fitness",
+    "Books & Stationery", "Health & Beauty", "Toys & Games", "Automotive",
+    "Garden & Outdoors",
+]
+
+ORDER_STATUSES = [
+    "Placed", "Confirmed", "Processing", "Shipped",
+    "In Transit", "Delivered", "Cancelled", "Returned",
+]
+
+PAYMENT_METHODS = ["UPI", "Credit Card", "Debit Card", "Net Banking", "Wallet"]
+
+SHIPMENT_STATUSES = [
+    "Pending", "Packed", "Shipped", "In Transit", "Out for Delivery", "Delivered",
+]
+
+DEFAULT_COMMISSION_RATE = 10.0  # percentage
+
+TAX_RATES = {
+    "GST_5":  5.0,
+    "GST_12": 12.0,
+    "GST_18": 18.0,
+    "GST_28": 28.0,
+}
+
+CURRENCIES = {
+    "INR": {"name": "Indian Rupee",  "symbol": "\u20b9", "rate_to_usd": 0.012},
+    "USD": {"name": "US Dollar",     "symbol": "$",      "rate_to_usd": 1.0},
+    "EUR": {"name": "Euro",          "symbol": "\u20ac", "rate_to_usd": 1.08},
+    "GBP": {"name": "British Pound", "symbol": "\u00a3", "rate_to_usd": 1.27},
+}
+
+DEFAULT_CURRENCY = "INR"
+
+# FastAPI config (optional, disabled by default)
+API_ENABLED = False
+API_HOST = "127.0.0.1"
+API_PORT = 8000
